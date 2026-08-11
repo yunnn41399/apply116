@@ -8,6 +8,18 @@
 
     <h1>考生註冊</h1>
 
+    <?php if (isset($validation)): ?>
+        <div>
+            <?= $validation->listErrors() ?>
+        </div>
+    <?php endif; ?>
+
+    <?php if (isset($captchaError)): ?>
+        <div>
+            <?= esc($captchaError) ?>
+        </div>
+    <?php endif; ?>
+
     <form method="post" action="/register">
 
         <div>

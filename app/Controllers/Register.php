@@ -13,12 +13,70 @@ class Register extends BaseController
 
     public function register()
     {
-        $examNumber = $this->request->getPost('exam_number');
-        $idNumber = $this->request->getPost('id_number');
-        $password = $this->request->getPost('password');
-        $passwordConfirm = $this->request->getPost('password_confirm');
-        $captcha = $this->request->getPost('captcha');
+        $rules = [
+            'exam_number' => [
+                'label' => '學測應試號碼',
+                'rules' => 'required|alpha_numeric|min_length[6]|max_length[20]',
+                'errors' => [
+                    'required'      => '請輸入學測應試號碼。',
+                    'alpha_numeric' => '學測應試號碼只能包含英文字母及數字。',
+                    'min_length'    => '學測應試號碼至少需要 6 個字元。',
+                    'max_length'    => '學測應試號碼不可超過 20 個字元。',
+                ],
+            ],
 
-        return "收到註冊資料";
+            'id_number' => [
+                'label' => '身分證號碼',
+                'rules' => 'required|regex_match[/^[A-Z][12][0-9]{8}$/]',
+                'errors' => [
+                    'required'    => '請輸入身分證號碼。',
+                    'regex_match' => '身分證號碼格式不正確。',
+                ],
+            ],
+
+            'password' => [
+                'label' => '個人密碼',
+                'rules' => 'required|min_length[8]|max_length[255]',
+                'errors' => [
+                    'required'   => '請輸入個人密碼。',
+                    'min_length' => '密碼至少需要 8 個字元。',
+                    'max_length' => '密碼不可超過 255 個字元。',
+                ],
+            ],
+
+            'password_confirm' => [
+                'label' => '確認密碼',
+                'rules' => 'required|matches[password]',
+                'errors' => [
+                    'required' => '請再次輸入密碼。',
+                    'matches'  => '兩次輸入的密碼不一致。',
+                ],
+            ],
+
+            'captcha' => [
+                'label' => '驗證碼',
+                'rules' => 'required|exact_length[4]|numeric',
+                'errors' => [
+                    'required'     => '請輸入驗證碼。',
+                    'exact_length' => '驗證碼必須為 4 位數字。',
+                    'numeric'      => '驗證碼只能輸入數字。',
+                ],
+            ],
+        ];
+
+        // 執行資料驗證
+        if (! $this->validate($rules)) {
+            return view('register', [
+                'validation' => $this->validator,
+            ]);
+        }
+        if ($this->request->getPost('captcha') !== '1234') {
+            return view('register', [
+                'validation' => service('validation'),
+                'captchaError' => '驗證碼錯誤。',
+            ]);
+        }
+
+        return '資料驗證成功！';
     }
 }
