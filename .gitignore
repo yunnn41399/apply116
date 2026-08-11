@@ -126,6 +126,6 @@ _modules/*
 /phpunit.xml
 
 # Local SQLite database
-/database/*.sqlite
-/database/*.sqlite3
-/database/*.db
+/writable/*.sqlite
+/writable/*.sqlite3
+/writable/*.db
