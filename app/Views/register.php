@@ -20,6 +20,12 @@
         </div>
     <?php endif; ?>
 
+    <?php if (isset($error)): ?>
+        <div>
+            <?= esc($error) ?>
+        </div>
+    <?php endif; ?>
+
     <form method="post" action="/register">
 
         <div>

@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\CandidateModel;
 
 class Register extends BaseController
 {
@@ -77,6 +78,30 @@ class Register extends BaseController
             ]);
         }
 
-        return '資料驗證成功！';
+        $examNumber = $this->request->getPost('exam_number');
+        $idNumber = $this->request->getPost('id_number');
+        $password = $this->request->getPost('password');
+
+        $model = new CandidateModel();
+
+        if ($model->where('exam_number', $examNumber)->first()) {
+            return view('register', [
+                'error' => '此學測應試號碼已經註冊。',
+            ]);
+        }
+
+        if ($model->where('id_number', $idNumber)->first()) {
+            return view('register', [
+                'error' => '此身分證號碼已經註冊。',
+            ]);
+        }
+
+        $model->insert([
+            'exam_number' => $examNumber,
+            'id_number'   => $idNumber,
+            'password'    => password_hash($password, PASSWORD_DEFAULT),
+        ]);
+
+        return '註冊成功！';
     }
 }
