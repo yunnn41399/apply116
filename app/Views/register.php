@@ -79,9 +79,7 @@
         <div>
             <label for="captcha">驗證碼</label>
             <input type="text" id="captcha" name="captcha">
-            <span>
-                <?= esc($captcha) ?>
-            </span>
+            <img src="<?= base_url('captcha') ?>" alt="驗證碼">
         </div>
 
         <br>
