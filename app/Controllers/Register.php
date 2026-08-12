@@ -9,15 +9,27 @@ class Register extends BaseController
 {
     public function index()
     {
-        $captcha = (string) random_int(1000, 9999);
+        $captcha = session()->get('captcha');
 
-        session()->set('captcha', $captcha);
+        if (!$captcha) {
+            $captcha = (string) random_int(1000, 9999);
+            session()->set('captcha', $captcha);
+        }
 
         return view('register', [
             'captcha' => $captcha,
         ]);
     }
 
+    public function refreshCaptcha()
+    {
+        $captcha = (string) random_int(1000, 9999);
+
+        session()->set('captcha', $captcha);
+
+        return redirect()->to('/register');
+    }
+    
     public function register()
     {
         $rules = [
