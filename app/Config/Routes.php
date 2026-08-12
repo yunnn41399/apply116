@@ -7,8 +7,11 @@ $routes->get('/', 'Home::index');
 
 $routes->get('/register', 'Register::index');
 $routes->post('/register', 'Register::register');
+
 $routes->get('/login', 'LoginController::index');
-$routes->get('/login', 'LoginController::login');
+$routes->post('/login', 'LoginController::login');
+$routes->get('/logout', 'LoginController::logout');
+$routes->get('/registration', 'RegistrationController::index');
 
 
 
