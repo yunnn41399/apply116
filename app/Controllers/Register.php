@@ -9,7 +9,13 @@ class Register extends BaseController
 {
     public function index()
     {
-        return view('register');
+        $captcha = (string) random_int(1000, 9999);
+
+        session()->set('captcha', $captcha);
+
+        return view('register', [
+            'captcha' => $captcha,
+        ]);
     }
 
     public function register()
@@ -71,9 +77,15 @@ class Register extends BaseController
                 'validation' => $this->validator,
             ]);
         }
-        if ($this->request->getPost('captcha') !== '1234') {
+
+        //確認驗證碼是否輸入正確
+        $captcha = $this->request->getPost('captcha');
+        $sessionCaptcha = session()->get('captcha');
+
+        if ($captcha !== $sessionCaptcha) {
             return view('register', [
-                'validation' => service('validation'),
+                'validation' => $this->validator,
+                'captcha' => $sessionCaptcha,
                 'captchaError' => '驗證碼錯誤。',
             ]);
         }

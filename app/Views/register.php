@@ -77,14 +77,11 @@
         <br>
 
         <div>
-            <label for="captcha">驗證碼：</label>
-            <input
-                type="text"
-                id="captcha"
-                name="captcha"
-                required
-            >
-            <span>1234</span>
+            <label for="captcha">驗證碼</label>
+            <input type="text" id="captcha" name="captcha">
+            <span>
+                <?= esc($captcha) ?>
+            </span>
         </div>
 
         <br>
