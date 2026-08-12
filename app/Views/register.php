@@ -77,14 +77,12 @@
         <br>
 
         <div>
-            <label for="captcha">驗證碼：</label>
-            <input
-                type="text"
-                id="captcha"
-                name="captcha"
-                required
-            >
-            <span>1234</span>
+            <label for="captcha">驗證碼</label>
+            <input type="text" id="captcha" name="captcha">
+            <img src="<?= base_url('captcha') ?>" alt="驗證碼">
+            <a href="<?= base_url('register/refresh-captcha') ?>">
+                重新產生
+            </a>
         </div>
 
         <br>
