@@ -2,6 +2,14 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="<?= base_url('CSS/register.css') ?>">
+
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+    >
+
     <title>考生註冊</title>
 </head>
 <body>
@@ -61,24 +69,50 @@
 
         <div>
             <label for="password">個人密碼：</label>
-            <input
-                type="password"
-                id="password"
-                name="password"
-                required
-            >
+
+            <div class="password-wrapper">
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    required
+                >
+
+                <span
+                    class="password-toggle"
+                    onclick="togglePassword('password', this)"
+                    role="button"
+                    tabindex="0"
+                    aria-label="顯示密碼"
+                >
+                    <i class="bi bi-eye"></i>
+                </span>
+            </div>
         </div>
 
         <br>
 
         <div>
             <label for="password_confirm">確認密碼：</label>
-            <input
-                type="password"
-                id="password_confirm"
-                name="password_confirm"
-                required
-            >
+
+            <div class="password-wrapper">
+                <input
+                    type="password"
+                    id="password_confirm"
+                    name="password_confirm"
+                    required
+                >
+
+                <span
+                    class="password-toggle"
+                    onclick="togglePassword('password_confirm', this)"
+                    role="button"
+                    tabindex="0"
+                    aria-label="顯示確認密碼"
+                >
+                    <i class="bi bi-eye"></i>
+                </span>
+            </div>
         </div>
 
         <br>
@@ -86,7 +120,12 @@
         <div>
             <label for="captcha">驗證碼：</label>
             <input type="text" id="captcha" name="captcha" required>
-            <img src="<?= base_url('captcha') ?>" id="captcha-img" alt="驗證碼">
+            <img
+                src="<?= base_url('captcha') ?>"
+                id="captcha-img"
+                alt="驗證碼"
+                data-captcha-url="<?= base_url('captcha') ?>"
+            >
             
             <button type="button" onclick="refreshCaptcha()">重新產生</button>
         </div>
@@ -97,12 +136,6 @@
 
     </form>
 
-    <script>
-        function refreshCaptcha() {
-            // 透過加上時間戳記 (timestamp)，迫使瀏覽器向 Captcha 控制器發送請求並更新 Session 中的驗證碼
-            document.getElementById('captcha-img').src = '<?= base_url('captcha') ?>?' + new Date().getTime();
-        }
-    </script>
-
+    <script src="<?= base_url('JS/register.js') ?>"></script>
 </body>
 </html>
