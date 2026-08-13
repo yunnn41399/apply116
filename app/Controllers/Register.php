@@ -49,11 +49,12 @@ class Register extends BaseController
 
             'password' => [
                 'label' => '個人密碼',
-                'rules' => 'required|min_length[8]|max_length[255]',
+                'rules' => 'required|min_length[8]|max_length[255]|regex_match[/[A-Z]/]|regex_match[/[a-z]/]|regex_match[/[0-9]/]',
                 'errors' => [
-                    'required'   => '請輸入個人密碼。',
-                    'min_length' => '密碼至少需要 8 個字元。',
-                    'max_length' => '密碼不可超過 255 個字元。',
+                    'required'    => '請輸入個人密碼。',
+                    'min_length'  => '密碼至少需要 8 個字元。',
+                    'max_length'  => '密碼不可超過 255 個字元。',
+                    'regex_match' => '密碼必須包含至少一個大寫字母、一個小寫字母及一個數字。',
                 ],
             ],
 
