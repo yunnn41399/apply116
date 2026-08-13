@@ -78,6 +78,30 @@
                     <i class="bi bi-eye"></i>
                 </span>
             </div>
+
+            <div id="password-rules" class="password-rules">
+                <p>密碼規則：</p>
+
+                <div id="rule-length" class="password-rule">
+                    <span class="rule-icon">✗</span>
+                    至少 8 個字元
+                </div>
+
+                <div id="rule-uppercase" class="password-rule">
+                    <span class="rule-icon">✗</span>
+                    至少 1 個大寫英文字母
+                </div>
+
+                <div id="rule-lowercase" class="password-rule">
+                    <span class="rule-icon">✗</span>
+                    至少 1 個小寫英文字母
+                </div>
+
+                <div id="rule-number" class="password-rule">
+                    <span class="rule-icon">✗</span>
+                    至少 1 個數字
+                </div>
+            </div>
         </div>
 
         <br>
