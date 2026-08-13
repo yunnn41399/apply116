@@ -32,6 +32,19 @@
         <?= csrf_field() ?>
 
         <div>
+            <label for="name">姓名：</label>
+            <input
+                type="text"
+                id="name"
+                name="name"
+                value="<?= old('name') ?>"
+                required
+            >
+        </div>
+
+        <br>
+
+        <div>
             <label for="exam_number">學測應試號碼：</label>
             <input
                 type="text"

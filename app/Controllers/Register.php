@@ -26,6 +26,15 @@ class Register extends BaseController
     public function register()
     {
         $rules = [
+            'name' => [
+                'label' => '姓名',
+                'rules' => 'required|max_length[50]',
+                'errors' => [
+                    'required'   => '請輸入姓名。',
+                    'max_length' => '姓名不可超過 50 個字元。',
+                ],
+            ],
+
             'exam_number' => [
                 'label' => '學測應試號碼',
                 'rules' => 'required|alpha_numeric|min_length[6]|max_length[20]',
@@ -90,6 +99,7 @@ class Register extends BaseController
 
 
         // 取得使用者輸入資料
+        $name       = trim((string) $this->request->getPost('name'));
         $examNumber = trim((string) $this->request->getPost('exam_number'));
         $idNumber   = strtoupper(trim((string) $this->request->getPost('id_number')));
         $password   = (string) $this->request->getPost('password');
@@ -129,6 +139,7 @@ class Register extends BaseController
 
         // 5. 所有驗證都通過將資料寫入資料庫。
         $model->insert([
+            'name'        => $name,
             'exam_number' => $examNumber,
             'id_number'   => $idNumber,
             'password'    => password_hash($password, PASSWORD_DEFAULT),

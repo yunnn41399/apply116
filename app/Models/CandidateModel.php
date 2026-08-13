@@ -16,6 +16,7 @@ class CandidateModel extends Model
     protected $protectFields = true;
 
     protected $allowedFields = [
+        'name',
         'exam_number',
         'id_number',
         'password',
