@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,54 +24,41 @@
 
         <div>
             <label for="exam_number">學測應試號碼：</label>
-            <input
-                type="text"
-                id="exam_number"
-                name="exam_number"
-                value="<?= old('exam_number') ?>"
-                required
-            >
+            <input type="text" id="exam_number" name="exam_number"
+                value="<?= esc(session()->getFlashdata('old_exam_number') ?? '') ?>" required>
         </div>
 
         <br>
 
         <div>
-            <label for="id_number">身分證號碼：</label>
-            <input
-                type="text"
-                id="id_number"
-                name="id_number"
-                value="<?= old('id_number') ?>"
-                required
-            >
+            <label for="id_last_four">身分證號碼：</label>
+
+            <input type="text" id="id_last_four" name="id_last_four" value="<?= old('id_last_four') ?>" maxlength="4"
+                pattern="[0-9]{4}" inputmode="numeric" required>
+
+            <span>請輸入末四碼</span>
         </div>
 
         <br>
 
         <div>
             <label for="password">個人密碼：</label>
-            <input
-                type="password"
-                id="password"
-                name="password"
-                required
-            >
+            <input type="password" id="password" name="password" required>
         </div>
 
         <br>
 
         <div>
             <label for="captcha">驗證碼：</label>
-            <input
-                type="text"
-                id="captcha"
-                name="captcha"
-                required
-            >
+            <input type="text" id="captcha" name="captcha" required>
 
-            <span style="font-weight: bold; font-size: 20px;">
+            <span id="captchaText" style="font-weight: bold; font-size: 20px;">
                 <?= esc($captcha) ?>
             </span>
+
+            <button type="button" id="refreshCaptcha">
+                重新產生驗證碼
+            </button>
         </div>
 
         <br>
@@ -83,5 +71,37 @@
 
     <a href="#">忘記密碼？</a>
 
+    <script>
+
+        document
+            .getElementById('refreshCaptcha')
+            .addEventListener('click', function () {
+
+                fetch('<?= site_url('login/refresh-captcha') ?>')
+                    .then(response => response.json())
+                    .then(data => {
+
+                        if (data.success) {
+
+                            document.getElementById('captchaText').textContent
+                                = data.captcha;
+
+                            // 清空使用者原本輸入的驗證碼
+                            document.getElementById('captcha').value = '';
+
+                        }
+
+                    })
+                    .catch(error => {
+
+                        console.error('驗證碼重新產生失敗：', error);
+
+                    });
+
+            });
+
+    </script>
+
 </body>
+
 </html>
