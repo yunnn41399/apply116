@@ -17,23 +17,13 @@
     <h1>考生註冊</h1>
 
     <!-- 1. 顯示欄位驗證錯誤（包含密碼格式不合、密碼不一致、未填寫等） -->
-    <?php if (validation_list_errors()): ?>
-        <div style="color: red;">
-            <?= validation_list_errors() ?>
-        </div>
-    <?php endif; ?>
+    <?php $registerErrors = session()->getFlashdata('registerErrors'); ?>
 
-    <!-- 2. 顯示驗證碼錯誤 -->
-    <?php if (session('captchaError')): ?>
+    <?php if (! empty($registerErrors)): ?>
         <div style="color: red;">
-            <?= esc(session('captchaError')) ?>
-        </div>
-    <?php endif; ?>
-
-    <!-- 3. 顯示帳號/身分證重複註冊等自訂錯誤 -->
-    <?php if (session('error')): ?>
-        <div style="color: red;">
-            <?= esc(session('error')) ?>
+            <?php foreach ($registerErrors as $error): ?>
+                <p><?= esc($error) ?></p>
+            <?php endforeach; ?>
         </div>
     <?php endif; ?>
 
