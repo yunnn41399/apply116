@@ -8,14 +8,9 @@ class Captcha extends BaseController
 {
     public function index()
     {
-        // 從 Session 取得目前的驗證碼
-        $captcha = session()->get('captcha');
-
-        // 如果 Session 沒有驗證碼，就產生一組新的
-        if (!$captcha) {
-            $captcha = (string) random_int(1000, 9999);
-            session()->set('captcha', $captcha);
-        }
+        // 每次載入/刷新圖片時，直接產生新驗證碼並更新 Session
+        $captcha = (string) random_int(1000, 9999);
+        session()->set('captcha', $captcha);
 
         // 建立圖片
         $width = 120;
@@ -40,8 +35,9 @@ class Captcha extends BaseController
             $textColor
         );
 
-        // 告訴瀏覽器這是一張 PNG 圖片
+        // 防止圖片被瀏覽器快取
         $this->response->setHeader('Content-Type', 'image/png');
+        $this->response->setHeader('Cache-Control', 'no-cache, must-revalidate');
 
         // 將圖片輸出到記憶體
         ob_start();
@@ -52,7 +48,6 @@ class Captcha extends BaseController
         imagedestroy($image);
 
         // 回傳圖片
-        return $this->response
-            ->setBody($imageData);
+        return $this->response->setBody($imageData);
     }
 }
