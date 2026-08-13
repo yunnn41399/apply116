@@ -19,6 +19,13 @@
             <?= esc(session()->getFlashdata('error')) ?>
         </p>
     <?php endif; ?>
+    <?php if (session()->getFlashdata('success')): ?>
+
+        <p style="color: green;">
+            <?= esc(session()->getFlashdata('success')) ?>
+        </p>
+
+    <?php endif; ?>
 
     <form action="<?= site_url('login') ?>" method="post">
 
@@ -69,7 +76,9 @@
 
     <br>
 
-    <a href="#">忘記密碼？</a>
+    <a href="<?= base_url('forgot-password') ?>">
+        忘記密碼？
+    </a>
 
     <script>
 
