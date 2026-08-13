@@ -145,6 +145,8 @@ class Register extends BaseController
             'password'    => password_hash($password, PASSWORD_DEFAULT),
         ]);
 
-        return view('register_success');
+        return view('register_success', [
+            'name' => $name,
+        ]);
     }
 }
