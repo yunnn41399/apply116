@@ -39,10 +39,11 @@ class Register extends BaseController
 
             'id_number' => [
                 'label' => '身分證號碼',
-                'rules' => 'required|regex_match[/^[A-Z][12][0-9]{8}$/]',
+                'rules' => 'required|regex_match[/^[A-Z][12][0-9]{8}$/]|taiwan_id',
                 'errors' => [
-                    'required'    => '請輸入身分證號碼。',
+                    'required'  => '請輸入身分證號碼。',
                     'regex_match' => '身分證號碼格式不正確。',
+                    'taiwan_id' => '身分證號碼檢查碼不正確。',
                 ],
             ],
 
