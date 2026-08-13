@@ -7,6 +7,8 @@ use App\Models\CandidateModel;
 
 class Register extends BaseController
 {
+    protected $helpers = ['form'];
+    
     public function index()
     {
         $captcha = session()->get('captcha');
@@ -83,43 +85,35 @@ class Register extends BaseController
             ],
         ];
 
-        // 執行資料驗證
+        // 1. 執行基礎欄位驗證失敗時
         if (! $this->validate($rules)) {
-            return view('register', [
-                'validation' => $this->validator,
-            ]);
+            return redirect()->back()->withInput();
         }
 
-        //確認驗證碼是否輸入正確
+        // 2. 檢查驗證碼是否正確
         $captcha = $this->request->getPost('captcha');
         $sessionCaptcha = session()->get('captcha');
 
         if ($captcha !== $sessionCaptcha) {
-            return view('register', [
-                'validation' => $this->validator,
-                'captcha' => $sessionCaptcha,
-                'captchaError' => '驗證碼錯誤。',
-            ]);
+            return redirect()->back()->withInput()->with('captchaError', '驗證碼錯誤。');
         }
 
+        // 3. 檢查資料庫是否重複註冊
         $examNumber = $this->request->getPost('exam_number');
-        $idNumber = $this->request->getPost('id_number');
-        $password = $this->request->getPost('password');
+        $idNumber   = $this->request->getPost('id_number');
+        $password   = $this->request->getPost('password');
 
         $model = new CandidateModel();
 
         if ($model->where('exam_number', $examNumber)->first()) {
-            return view('register', [
-                'error' => '此學測應試號碼已經註冊。',
-            ]);
+            return redirect()->back()->withInput()->with('error', '此學測應試號碼已經註冊。');
         }
 
         if ($model->where('id_number', $idNumber)->first()) {
-            return view('register', [
-                'error' => '此身分證號碼已經註冊。',
-            ]);
+            return redirect()->back()->withInput()->with('error', '此身分證號碼已經註冊。');
         }
 
+        // 4. 全部驗證通過，寫入資料庫
         $model->insert([
             'exam_number' => $examNumber,
             'id_number'   => $idNumber,
