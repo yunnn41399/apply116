@@ -12,7 +12,7 @@ $routes->get('/login', 'LoginController::index');
 $routes->post('/login', 'LoginController::login');
 $routes->get('/login/refresh-captcha', 'LoginController::refreshCaptcha');
 $routes->get('/logout', 'LoginController::logout');
-$routes->get('/registration', 'RegistrationController::index');
+$routes->get('/apply', 'ApplyController::index');
 
 $routes->get('/forgot-password', 'PasswordController::forgot');
 $routes->post('/forgot-password/verify', 'PasswordController::verify');

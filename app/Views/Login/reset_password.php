@@ -4,120 +4,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link rel="stylesheet" href="<?= base_url('CSS/common.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('CSS/login.css') ?>">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <title>設定新密碼</title>
 </head>
 
 <body>
-
-    <h1>網路報名系統</h1>
-
-    <h2>設定新密碼</h2>
-
-
-    <!-- 顯示錯誤訊息 -->
-    <?php if (session()->getFlashdata('error')): ?>
-
-        <div style="color: red;">
-
-            <?= esc(session()->getFlashdata('error')) ?>
-
-        </div>
-
-    <?php endif; ?>
-
-
-    <!-- 設定新密碼 -->
-    <form
-        action="<?= site_url('reset-password/update') ?>"
-        method="post"
-    >
-
-        <?= csrf_field() ?>
-
-
-        <!-- 新密碼 -->
-        <div>
-
-            <label for="password">
-                新密碼：
-            </label>
-
-            <input
-                type="password"
-                id="password"
-                name="password"
-                required
-            >
-
-        </div>
-
-        <br>
-
-
-        <!-- 密碼規則 -->
-        <div>
-
-            <p>密碼規則：</p>
-
-            <ul>
-
-                <li>
+    <header class="page-header">
+        <h1>Apply116</h1>
+    </header>
+    <main class="form-container">
+        <h2>設定新密碼</h2>
+        <?php if (session()->getFlashdata('error')): ?>
+            <div class="error-message">
+                <?= esc(
+                    session()->getFlashdata('error')
+                ) ?>
+            </div>
+        <?php endif; ?>
+        <form action="<?= site_url('reset-password/update') ?>" method="post" id="resetPasswordForm">
+            <?= csrf_field() ?>
+            <div class="form-group">
+                <label for="password">
+                    新密碼：
+                </label>
+                <div class="password-wrapper">
+                    <input type="password" id="password" name="password" required>
+                    <button type="button" class="password-toggle" onclick="togglePassword('password', this)"
+                        aria-label="顯示新密碼">
+                        <i class="bi bi-eye"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="password-rules" class="password-rules">
+                <p>密碼規則：</p>
+                <div id="rule-length" class="password-rule rule-invalid">
+                    <span class="rule-icon">
+                        ✗
+                    </span>
                     至少 8 個字元
-                </li>
-
-                <li>
+                </div>
+                <div id="rule-uppercase" class="password-rule rule-invalid">
+                    <span class="rule-icon">
+                        ✗
+                    </span>
                     至少 1 個大寫英文字母
-                </li>
-
-                <li>
+                </div>
+                <div id="rule-lowercase" class="password-rule rule-invalid">
+                    <span class="rule-icon">
+                        ✗
+                    </span>
                     至少 1 個小寫英文字母
-                </li>
-
-                <li>
+                </div>
+                <div id="rule-number" class="password-rule rule-invalid">
+                    <span class="rule-icon">
+                        ✗
+                    </span>
                     至少 1 個數字
-                </li>
-
-            </ul>
-
+                </div>
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="password_confirm">
+                    確認新密碼：
+                </label>
+                <div class="password-wrapper">
+                    <input type="password" id="password_confirm" name="password_confirm" required>
+                    <button type="button" class="password-toggle" onclick="togglePassword('password_confirm', this)"
+                        aria-label="顯示確認密碼">
+                        <i class="bi bi-eye"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="password-match" class="password-match"></div>
+            <br>
+            <button type="submit" class="primary-button">
+                確認修改密碼
+            </button>
+        </form>
+        <div class="form-links">
+            <a href="<?= base_url('login') ?>">
+                返回登入
+            </a>
         </div>
-
-        <br>
-
-
-        <!-- 確認新密碼 -->
-        <div>
-
-            <label for="password_confirm">
-                確認新密碼：
-            </label>
-
-            <input
-                type="password"
-                id="password_confirm"
-                name="password_confirm"
-                required
-            >
-
-        </div>
-
-        <br>
-
-
-        <button type="submit">
-            確認修改密碼
-        </button>
-
-    </form>
-
-
-    <br>
-
-
-    <a href="<?= base_url('login') ?>">
-        返回登入
-    </a>
-
+    </main>
+    <script src="<?= base_url('JS/login.js') ?>"></script>
 </body>
 
 </html>
