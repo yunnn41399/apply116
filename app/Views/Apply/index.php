@@ -16,10 +16,11 @@
             網路報名系統
         </h1>
         <div class="apply-header-user">
-            學測應試號碼：
             <strong>
                 <?= esc(session()->get('exam_number')) ?>
+                <?= esc($candidate['name']) ?>
             </strong>
+            您好！ 
         </div>
     </header>
     <main class="apply-container">
@@ -74,7 +75,7 @@
                     登出系統
                 </div>
                 <div class="apply-card-description">
-                    安全登出網路報名系統
+                    登出網路報名系統
                 </div>
             </a>
         </div>
