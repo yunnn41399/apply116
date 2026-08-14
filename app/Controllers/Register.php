@@ -7,14 +7,34 @@ use App\Models\CandidateModel;
 
 class Register extends BaseController
 {
+    protected $helpers = ['form'];
+    
     public function index()
     {
         return view('register');
     }
 
+    public function refreshCaptcha()
+    {
+        $captcha = (string) random_int(1000, 9999);
+
+        session()->set('captcha', $captcha);
+
+        return redirect()->to('/register');
+    }
+    
     public function register()
     {
         $rules = [
+            'name' => [
+                'label' => '姓名',
+                'rules' => 'required|max_length[50]',
+                'errors' => [
+                    'required'   => '請輸入姓名。',
+                    'max_length' => '姓名不可超過 50 個字元。',
+                ],
+            ],
+
             'exam_number' => [
                 'label' => '學測應試號碼',
                 'rules' => 'required|alpha_numeric|min_length[6]|max_length[20]',
@@ -28,20 +48,22 @@ class Register extends BaseController
 
             'id_number' => [
                 'label' => '身分證號碼',
-                'rules' => 'required|regex_match[/^[A-Z][12][0-9]{8}$/]',
+                'rules' => 'required|regex_match[/^[A-Z][12][0-9]{8}$/]|taiwan_id',
                 'errors' => [
                     'required'    => '請輸入身分證號碼。',
                     'regex_match' => '身分證號碼格式不正確。',
+                    'taiwan_id'  => '身分證號碼檢查碼不正確。',
                 ],
             ],
 
             'password' => [
                 'label' => '個人密碼',
-                'rules' => 'required|min_length[8]|max_length[255]',
+                'rules' => 'required|min_length[8]|max_length[255]|regex_match[/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).+$/]',
                 'errors' => [
-                    'required'   => '請輸入個人密碼。',
-                    'min_length' => '密碼至少需要 8 個字元。',
-                    'max_length' => '密碼不可超過 255 個字元。',
+                    'required'    => '請輸入個人密碼。',
+                    'min_length'  => '密碼至少需要 8 個字元。',
+                    'max_length'  => '密碼不可超過 255 個字元。',
+                    'regex_match' => '密碼必須包含至少一個大寫字母、一個小寫字母及一個數字。',
                 ],
             ],
 
@@ -65,43 +87,66 @@ class Register extends BaseController
             ],
         ];
 
-        // 執行資料驗證
-        if (! $this->validate($rules)) {
-            return view('register', [
-                'validation' => $this->validator,
-            ]);
-        }
-        if ($this->request->getPost('captcha') !== '1234') {
-            return view('register', [
-                'validation' => service('validation'),
-                'captchaError' => '驗證碼錯誤。',
-            ]);
+        // 儲存所有錯誤
+        $errors = [];
+
+        // 1. 執行欄位格式驗證
+        $isValid = $this->validate($rules);
+
+        if (! $isValid) {
+            $errors = $this->validator->getErrors();
         }
 
-        $examNumber = $this->request->getPost('exam_number');
-        $idNumber = $this->request->getPost('id_number');
-        $password = $this->request->getPost('password');
 
+        // 取得使用者輸入資料
+        $name       = trim((string) $this->request->getPost('name'));
+        $examNumber = trim((string) $this->request->getPost('exam_number'));
+        $idNumber   = strtoupper(trim((string) $this->request->getPost('id_number')));
+        $password   = (string) $this->request->getPost('password');
+        $captcha    = trim((string) $this->request->getPost('captcha'));
+
+        // 2. 檢查 CAPTCHA
+        $sessionCaptcha = session()->get('captcha');
+
+        if (
+            empty($errors['captcha']) &&
+            $captcha !== $sessionCaptcha
+        ) {
+            $errors['captcha'] = '驗證碼錯誤。';
+        }
+
+        // 3. 檢查資料庫是否重複註冊
         $model = new CandidateModel();
 
-        if ($model->where('exam_number', $examNumber)->first()) {
-            return view('register', [
-                'error' => '此學測應試號碼已經註冊。',
-            ]);
+        if ($examNumber !== '') {
+            if ($model->where('exam_number', $examNumber)->first()) {
+                $errors['exam_number_duplicate'] = '此學測應試號碼已經註冊。';
+            }
         }
 
-        if ($model->where('id_number', $idNumber)->first()) {
-            return view('register', [
-                'error' => '此身分證號碼已經註冊。',
-            ]);
+        if ($idNumber !== '') {
+            if ($model->where('id_number', $idNumber)->first()) {
+                $errors['id_number_duplicate'] = '此身分證號碼已經註冊。';
+            }
         }
 
+        // 4. 如果有任何錯誤，一次把所有錯誤傳回註冊頁面。
+        if (! empty($errors)) {
+            return redirect()->back()
+                ->withInput()
+                ->with('registerErrors', $errors);
+        }
+
+        // 5. 所有驗證都通過將資料寫入資料庫。
         $model->insert([
+            'name'        => $name,
             'exam_number' => $examNumber,
             'id_number'   => $idNumber,
             'password'    => password_hash($password, PASSWORD_DEFAULT),
         ]);
 
-        return '註冊成功！';
+        return view('register_success', [
+            'name' => $name,
+        ]);
     }
 }

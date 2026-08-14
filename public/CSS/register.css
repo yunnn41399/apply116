@@ -1,0 +1,49 @@
+.password-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.password-wrapper input {
+    padding-right: 40px;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 18px;
+}
+
+
+.password-rules {
+    display: none;
+    margin-top: 8px;
+    font-size: 14px;
+}
+
+.password-rules.show {
+    display: block;
+}
+
+.password-rules p {
+    margin: 0 0 4px 0;
+}
+
+.password-rule {
+    margin: 3px 0;
+}
+
+.password-rule.valid {
+    color: green;
+}
+
+.password-rule.invalid {
+    color: red;
+}
+
+.rule-icon {
+    display: inline-block;
+    width: 20px;
+}
