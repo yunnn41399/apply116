@@ -41,12 +41,20 @@ class Announcement extends BaseController
             );
         }
 
-        // 如果公告類型是超連結，直接跳轉到外部網址
+        // 超連結公告：直接跳轉外部網址
         if (
             $announcement['type'] === '超連結'
             && !empty($announcement['external_url'])
         ) {
             return redirect()->to($announcement['external_url']);
+        }
+
+        // PDF公告：開啟PDF檔案
+        if (
+            $announcement['type'] === 'PDF文件'
+            && !empty($announcement['attachment'])
+        ) {
+            return redirect()->to(base_url($announcement['attachment']));
         }
 
         return view('announcement/detail', [
