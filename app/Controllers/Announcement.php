@@ -14,7 +14,7 @@ class Announcement extends BaseController
         $this->announcementModel = new AnnouncementModel();
     }
 
-    // 公告列表
+    // 前台公告列表
     public function index()
     {
         $announcements = $this->announcementModel
@@ -27,13 +27,22 @@ class Announcement extends BaseController
         ]);
     }
 
+    // 後臺公告列表
+    public function adminIndex()
+    {
+        $announcements = $this->announcementModel
+            ->orderBy('created_at', 'DESC')
+            ->findAll();
+
+        return view('admin/announcement/index', [
+            'announcements' => $announcements
+        ]);
+    }
+
     // 公告詳細內容
     public function detail($id)
     {
-        $announcement = $this->announcementModel
-            ->where('id', $id)
-            ->where('status', 'published')
-            ->first();
+        $announcement = $this->announcementModel->find($id);
 
         if (!$announcement) {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound(
@@ -41,22 +50,19 @@ class Announcement extends BaseController
             );
         }
 
-        // 超連結公告：直接跳轉外部網址
-        if (
-            $announcement['type'] === '超連結'
-            && !empty($announcement['external_url'])
-        ) {
+        // 超連結公告：直接跳轉到外部網址
+        if ($announcement['type'] === '超連結') {
             return redirect()->to($announcement['external_url']);
         }
 
-        // PDF公告：開啟PDF檔案
-        if (
-            $announcement['type'] === 'PDF文件'
-            && !empty($announcement['attachment'])
-        ) {
-            return redirect()->to(base_url($announcement['attachment']));
+        // PDF 公告：開啟 PDF
+        if ($announcement['type'] === 'PDF文件') {
+            return redirect()->to(
+                base_url($announcement['attachment'])
+            );
         }
 
+        // 純文字公告：顯示詳細內容
         return view('announcement/detail', [
             'announcement' => $announcement
         ]);

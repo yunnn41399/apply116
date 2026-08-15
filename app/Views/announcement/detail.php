@@ -9,24 +9,22 @@
 <h1><?= esc($announcement['title']) ?></h1>
 
 <p>
-    類別：<?= esc($announcement['category']) ?>
+    類別：
+    <?= esc($announcement['category']) ?>
 </p>
 
 <p>
-    發布日期：<?= esc($announcement['publish_date'] ?? '') ?>
+    發布日期：
+    <?= esc($announcement['publish_date'] ?? '') ?>
 </p>
 
 <hr>
 
-<?php if ($announcement['type'] === '純文字'): ?>
+<div>
+    <?= nl2br(esc($announcement['content'] ?? '')) ?>
+</div>
 
-    <div>
-        <?= nl2br(esc($announcement['content'] ?? '')) ?>
-    </div>
-
-<?php endif; ?>
-
-<br>
+<hr>
 
 <a href="<?= base_url('announcement') ?>">
     返回公告列表
