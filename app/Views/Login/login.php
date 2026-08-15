@@ -10,7 +10,7 @@
     <title>網路報名系統登入</title>
 </head>
 
-<body>
+<body>  
     <header class="page-header">
         <h1>Apply116</h1>
     </header>
@@ -78,15 +78,13 @@
                     </button>
                 </div>
             </div>
-            <div style="text-align: center;">
-                <button type="submit" class="primary-button">
-                    登入
-                </button>
-            </div>
+            <button type="submit" class="primary-button">
+                登入
+            </button>
         </form>
         <div class="form-links">
             <a href="<?= base_url('forgot-password') ?>">
-                忘記密碼 / 重設密碼
+                忘記密碼
             </a>
         </div>
     </main>
