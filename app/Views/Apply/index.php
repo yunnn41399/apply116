@@ -15,23 +15,31 @@
         <h1 class="apply-header-title">
             網路報名系統
         </h1>
-        <div class="apply-header-user">
-            <strong>
-                <?= esc(session()->get('exam_number')) ?>
-                <?= esc($candidate['name']) ?>
-            </strong>
-            您好！ 
+        <div class="apply-header-right">
+            <div class="apply-header-user">
+                <span class="apply-header-text">
+                    學測應試號碼：
+                    <?= esc($candidate['exam_number']) ?>
+                </span>
+                <span class="apply-header-text">
+                    姓名：
+                    <?= esc($candidate['name']) ?>
+                </span>
+            </div>
+            <a href="<?= site_url('logout') ?>" class="apply-logout-button">
+                <i class="bi bi-box-arrow-right"></i>
+                登出
+            </a>
         </div>
     </header>
     <main class="apply-container">
-        <!-- 歡迎區 -->
         <section class="apply-welcome">
             <h2>
                 歡迎您！
             </h2>
             <p>
                 <span class="exam-number">
-                    <?= esc(session()->get('exam_number')) ?>
+                    <?= esc($candidate['exam_number']) ?>
                 </span>
                 號
                 <span class="candidate-name">
@@ -40,9 +48,7 @@
                 考生，歡迎使用網路報名系統。
             </p>
         </section>
-        <!-- 功能區 -->
         <div class="apply-menu">
-            <!-- 查詢校系 -->
             <a href="<?= site_url('department') ?>" class="apply-card">
                 <div class="apply-card-icon">
                     <i class="bi bi-search"></i>
@@ -54,7 +60,6 @@
                     查詢各大學校系及相關招生資訊
                 </div>
             </a>
-            <!-- 立即報名 -->
             <a href="<?= site_url('apply/register') ?>" class="apply-card">
                 <div class="apply-card-icon">
                     <i class="bi bi-pencil-square"></i>
@@ -66,16 +71,15 @@
                     填寫報名資料並選擇欲報名的校系
                 </div>
             </a>
-            <!-- 登出 -->
-            <a href="<?= site_url('logout') ?>" class="apply-card">
+            <a href="<?= site_url('application-status') ?>" class="apply-card">
                 <div class="apply-card-icon">
-                    <i class="bi bi-box-arrow-right"></i>
+                    <i class="bi bi-clipboard-check"></i>
                 </div>
                 <div class="apply-card-title">
-                    登出系統
+                    報名狀態查詢
                 </div>
                 <div class="apply-card-description">
-                    登出網路報名系統
+                    查詢目前的報名資料及狀態
                 </div>
             </a>
         </div>

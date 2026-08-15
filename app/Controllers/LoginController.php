@@ -72,6 +72,7 @@ class LoginController extends BaseController
         session()->set([
             'candidate_id' => $candidate['id'],
             'exam_number' => $candidate['exam_number'],
+            'candidate_name' => $candidate['name'],
             'isLoggedIn' => true,
         ]);
         session()->remove('captcha');
