@@ -11,16 +11,28 @@ class Register extends BaseController
     
     public function index()
     {
-        return view('register');
+        $captcha = session()->get('captcha');
+
+        if ($captcha === null) {
+            $captcha = (string) random_int(1000, 9999); // 確保存入的是字串 (string)
+            session()->set('captcha', $captcha);
+        }
+
+        return view('register', [
+            'captcha' => (string) $captcha
+        ]);
     }
 
     public function refreshCaptcha()
     {
-        $captcha = (string) random_int(1000, 9999);
-
+        $captcha = (string) random_int(1000, 9999); // 確保存入的是字串 (string)
         session()->set('captcha', $captcha);
 
-        return redirect()->to('/register');
+        return $this->response->setJSON([
+            'success'   => true,
+            'captcha'   => $captcha,
+            'csrfHash'  => csrf_hash(),
+        ]);
     }
     
     public function register()
@@ -106,7 +118,7 @@ class Register extends BaseController
         $captcha    = trim((string) $this->request->getPost('captcha'));
 
         // 2. 檢查 CAPTCHA
-        $sessionCaptcha = session()->get('captcha');
+        $sessionCaptcha = (string) session()->get('captcha'); // 強制轉為字串再做嚴格比對
 
         if (
             empty($errors['captcha']) &&
