@@ -1,0 +1,183 @@
+/* ========================================
+   登入 / 忘記密碼 / 重設密碼專用
+   ======================================== */
+/* ========================================
+   1. 密碼欄位
+   ======================================== */
+.password-wrapper {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+}
+
+.password-wrapper input {
+    width: 250px;
+    padding-right: 40px;
+}
+
+/* ========================================
+   2. 顯示 / 隱藏密碼
+   ======================================== */
+.password-toggle {
+    position: absolute;
+    right: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: #5d748b;
+    font-size: 18px;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.password-toggle:hover {
+    color: #1877c9;
+}
+
+/* ========================================
+   3. 驗證碼
+   ======================================== */
+.captcha-group {
+    margin-top: 5px;
+}
+
+.captcha-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+/* 驗證碼輸入框 */
+.captcha-wrapper input {
+    width: 100px;
+    padding: 9px 10px;
+    border: 1px solid #b9c9d9;
+    border-radius: 5px;
+    font-family: inherit;
+    font-size: 15px;
+    transition:
+        border-color 0.2s,
+        box-shadow 0.2s;
+}
+
+.captcha-wrapper input:focus {
+    outline: none;
+    border-color: #2589d8;
+    box-shadow:
+        0 0 0 3px rgba(37, 137, 216, 0.15);
+}
+
+/* ========================================
+   4. 驗證碼 Canvas
+   ======================================== */
+.captcha-canvas {
+    display: inline-block;
+    width: 160px;
+    height: 50px;
+    border: 1px solid #9fb5c9;
+    border-radius: 5px;
+    background-color: #ffffff;
+    cursor: pointer;
+    box-shadow:
+        0 1px 3px rgba(0, 50, 90, 0.08);
+}
+
+/* ========================================
+   5. 重新產生驗證碼
+   ======================================== */
+.refresh-captcha {
+    padding: 7px 12px;
+    border: 1px solid #9fb5c9;
+    border-radius: 5px;
+    background-color: #f4f8fc;
+    color: #245273;
+    font-family: inherit;
+    font-size: 14px;
+    cursor: pointer;
+    transition:
+        background-color 0.2s,
+        border-color 0.2s,
+        color 0.2s;
+}
+
+.refresh-captcha:hover {
+    background-color: #e5f1fb;
+    border-color: #2589d8;
+    color: #1266ad;
+}
+
+/* ========================================
+   6. 密碼規則
+   ======================================== */
+.password-rules {
+    margin-top: 10px;
+    padding: 12px 14px;
+    width: 300px;
+    border: 1px solid #d3e1ed;
+    border-radius: 5px;
+    background-color: #f5f9fd;
+}
+
+.password-rules p {
+    margin-top: 0;
+    margin-bottom: 8px;
+    color: #234b70;
+    font-weight: 600;
+}
+
+.password-rule {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+/* 規則圖示 */
+.rule-icon {
+    display: inline-block;
+    width: 20px;
+    font-weight: 700;
+}
+
+/* 符合 */
+.rule-valid {
+    color: #16835a;
+}
+
+/* 不符合 */
+.rule-invalid {
+    color: #d64545;
+}
+
+/* ========================================
+   7. 密碼是否一致
+   ======================================== */
+.password-match {
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* ========================================
+   8. 手機版 (待修改)
+   ======================================== */
+@media (max-width: 600px) {
+    .captcha-wrapper {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .captcha-canvas {
+        width: 160px;
+        height: 50px;
+    }
+
+    .password-rules {
+        width: 100%;
+        max-width: 300px;
+    }
+}

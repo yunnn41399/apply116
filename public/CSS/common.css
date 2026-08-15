@@ -1,0 +1,238 @@
+/* ========================================
+   Apply116 - Common CSS
+   ======================================== */
+/* ========================================
+   1. 基本設定
+   ======================================== */
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family:
+        "Noto Sans TC",
+        "Microsoft JhengHei",
+        Arial,
+        sans-serif;
+    background-color: #eef4fb;
+    color: #26364a;
+    line-height: 1.7;
+    font-size: 16px;
+}
+
+/* ========================================
+   2. 頂部網站標題列
+   ======================================== */
+.page-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    background-color: #0d2b4d;
+    border-bottom: 3px solid #2589d8;
+    box-shadow: 0 2px 8px rgba(0, 40, 80, 0.18);
+    z-index: 1000;
+}
+
+.page-header h1 {
+    margin: 0;
+    padding-left: 32px;
+    font-size: 23px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #ffffff;
+}
+
+/* ========================================
+   3. 表單主要容器
+   ======================================== */
+.form-container {
+    width: 90%;
+    max-width: 500px;
+    margin: 105px auto 45px;
+    padding: 38px 42px;
+    background-color: #ffffff;
+    border: 1px solid #d7e2ee;
+    border-top: 4px solid #2589d8;
+    border-radius: 8px;
+    box-shadow:
+        0 4px 16px rgba(20, 70, 110, 0.10);
+}
+
+/* ========================================
+   4. 頁面標題
+   ======================================== */
+.form-container h2 {
+    margin: 0 0 30px;
+    text-align: center;
+    font-size: 27px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #173b63;
+}
+
+/* ========================================
+   5. 表單欄位
+   ======================================== */
+.form-group {
+    margin-bottom: 22px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #263f59;
+}
+
+/* 一般輸入框 */
+.form-group input {
+    width: 250px;
+    padding: 9px 11px;
+    border: 1px solid #b9c9d9;
+    border-radius: 5px;
+    font-family: inherit;
+    font-size: 15px;
+    color: #26364a;
+    background-color: #ffffff;
+    transition:
+        border-color 0.2s,
+        box-shadow 0.2s;
+}
+
+/* 輸入框取得焦點 */
+.form-group input:focus {
+    outline: none;
+    border-color: #2589d8;
+    box-shadow:
+        0 0 0 3px rgba(37, 137, 216, 0.15);
+}
+
+/* ========================================
+   6. 提示文字
+   ======================================== */
+.input-hint {
+    margin-left: 5px;
+    font-size: 14px;
+    color: #c62828;
+}
+
+/* ========================================
+   7. 主要按鈕
+   ======================================== */
+.primary-button {
+    padding: 9px 28px;
+    border: none;
+    border-radius: 5px;
+    background-color: #1877c9;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    box-shadow:
+        0 2px 5px rgba(24, 119, 201, 0.25);
+    transition:
+        background-color 0.2s,
+        transform 0.1s,
+        box-shadow 0.2s;
+}
+
+.primary-button:hover {
+    background-color: #1266ad;
+    box-shadow:
+        0 3px 8px rgba(24, 119, 201, 0.3);
+}
+
+.primary-button:active {
+    transform: translateY(1px);
+}
+
+/* ========================================
+   8. 錯誤訊息
+   ======================================== */
+.error-message {
+    margin-bottom: 20px;
+    padding: 10px 13px;
+    border-left: 4px solid #d93025;
+    border-radius: 4px;
+    background-color: #fff3f2;
+    color: #c62828;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+/* ========================================
+   9. 成功訊息
+   ======================================== */
+.success-message {
+    margin-bottom: 20px;
+    padding: 10px 13px;
+    border-left: 4px solid #198754;
+    border-radius: 4px;
+    background-color: #effaf4;
+    color: #147a4b;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+/* ========================================
+   10. 頁面連結
+   ======================================== */
+.form-links {
+    margin-top: 22px;
+    text-align: center;
+}
+
+.form-links a {
+    color: #1877c9;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.form-links a:hover {
+    color: #0d5fa8;
+    text-decoration: underline;
+}
+
+/* ========================================
+   11. 手機版 (待修改)
+   ======================================== */
+@media (max-width: 600px) {
+    .page-header {
+        height: 58px;
+    }
+
+    .page-header h1 {
+        padding-left: 20px;
+        font-size: 20px;
+    }
+
+    .form-container {
+        width: 92%;
+        margin-top: 80px;
+        padding: 28px 22px;
+    }
+
+    .form-container h2 {
+        font-size: 24px;
+    }
+
+    .form-group input {
+        width: 250px;
+        max-width: 100%;
+    }
+}
