@@ -39,6 +39,12 @@ class Announcement extends BaseController
         ]);
     }
 
+    // 新增公告頁面
+    public function create()
+    {
+        return view('admin/announcement/create');
+    }
+
     // 公告詳細內容
     public function detail($id)
     {
