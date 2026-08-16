@@ -39,13 +39,341 @@ class Announcement extends BaseController
         ]);
     }
 
-    // 新增公告頁面
+    // 新增公告（GET 顯示頁面 / POST 處理表單）
     public function create()
     {
-        return view('admin/announcement/create');
+        // GET：顯示新增公告頁面
+        if ($this->request->is('get')) {
+            return view('admin/announcement/create');
+        }
+
+        $type = $this->request->getPost('type');
+
+        // 基本驗證
+        $rules = [
+            'title'        => 'required|max_length[255]',
+            'category'     => 'required',
+            'type'         => 'required|in_list[一般公告,純檔案,超連結]',
+            'publish_date' => 'permit_empty|valid_date[Y-m-d\TH:i]',
+        ];
+
+        // 根據公告類型進行驗證
+        if ($type === '一般公告') {
+
+            // 一般公告：文字內容必填
+            $rules['content'] = 'required';
+
+            // 附件可有可無
+            $rules['attachment'] =
+                'permit_empty|ext_in[attachment,pdf,doc,docx,xls,xlsx,ppt,pptx,zip,rar,png,jpg,jpeg]|max_size[attachment,10240]';
+
+        } elseif ($type === '純檔案') {
+
+            // 純檔案：附件一定要有
+            $rules['attachment'] =
+                'uploaded[attachment]|ext_in[attachment,pdf,doc,docx,xls,xlsx,ppt,pptx,zip,rar,png,jpg,jpeg]|max_size[attachment,10240]';
+
+        } elseif ($type === '超連結') {
+
+            // 超連結：網址一定要有
+            $rules['external_url'] =
+                'required|valid_url_strict';
+        }
+
+        // 執行驗證
+        if (!$this->validate($rules)) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('errors', $this->validator->getErrors());
+        }
+
+        // =========================
+        // 處理附件上傳
+        // =========================
+
+        $attachmentPath = null;
+
+        $file = $this->request->getFile('attachment');
+
+        if ($file && $file->isValid() && !$file->hasMoved()) {
+
+            // 確保上傳資料夾存在
+            $uploadPath = FCPATH . 'uploads/announcements';
+
+            if (!is_dir($uploadPath)) {
+                mkdir($uploadPath, 0777, true);
+            }
+
+            // 產生隨機檔名
+            $newName = $file->getRandomName();
+
+            // 移動檔案
+            $file->move($uploadPath, $newName);
+
+            // 儲存相對路徑到資料庫
+            $attachmentPath = 'uploads/announcements/' . $newName;
+        }
+
+        // =========================
+        // 判斷暫存 / 發布
+        // =========================
+
+        $status = $this->request->getPost('status');
+
+        if (!in_array($status, ['draft', 'published'])) {
+            $status = 'draft';
+        }
+
+        // =========================
+        // 發布時間
+        // =========================
+
+        $inputPublishDate = $this->request->getPost('publish_date');
+
+        if (!empty($inputPublishDate)) {
+            $publishDate = $inputPublishDate;
+        } else {
+            $publishDate = ($status === 'published')
+                ? date('Y-m-d H:i:s')
+                : null;
+        }
+
+        // =========================
+        // 建立公告資料
+        // =========================
+
+        $data = [
+            'title'        => $this->request->getPost('title'),
+            'category'     => $this->request->getPost('category'),
+            'type'         => $type,
+            'content'      => ($type === '一般公告')
+                                ? $this->request->getPost('content')
+                                : null,
+            'attachment'   => $attachmentPath,
+            'external_url' => ($type === '超連結')
+                                ? $this->request->getPost('external_url')
+                                : null,
+            'publish_date' => $publishDate,
+            'status'       => $status,
+        ];
+
+        // =========================
+        // 寫入資料庫
+        // =========================
+
+        $result = $this->announcementModel->insert($data);
+
+        if ($result === false) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('errors', $this->announcementModel->errors());
+        }
+
+        return redirect()
+            ->to('/admin/announcement')
+            ->with('success', '公告新增成功');
     }
 
-    // 公告詳細內容
+    // 編輯公告
+    public function edit($id)
+    {
+        $announcement = $this->announcementModel->find($id);
+
+        if (!$announcement) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound(
+                '找不到該公告'
+            );
+        }
+
+        // GET：顯示編輯頁面
+        if ($this->request->is('get')) {
+            return view('admin/announcement/edit', [
+                'announcement' => $announcement
+            ]);
+        }
+
+        $type = $this->request->getPost('type');
+
+        // =========================
+        // 基本驗證
+        // =========================
+
+        $rules = [
+            'title'        => 'required|max_length[255]',
+            'category'     => 'required',
+            'type'         => 'required|in_list[一般公告,純檔案,超連結]',
+            'publish_date' => 'permit_empty|valid_date[Y-m-d\TH:i]',
+        ];
+
+        // =========================
+        // 根據公告類型驗證
+        // =========================
+
+        if ($type === '一般公告') {
+
+            // 一般公告：內容必填
+            $rules['content'] = 'required';
+
+            // 附件可以沒有
+            $rules['attachment'] =
+                'permit_empty|ext_in[attachment,pdf,doc,docx,xls,xlsx,ppt,pptx,zip,rar,png,jpg,jpeg]|max_size[attachment,10240]';
+
+        } elseif ($type === '純檔案') {
+
+            /*
+            * 編輯時有一個特殊情況：
+            *
+            * 如果原本已經有附件，
+            * 使用者沒有重新上傳檔案，
+            * 就應該允許保留原本的附件。
+            */
+
+            $file = $this->request->getFile('attachment');
+
+            if (!$announcement['attachment'] && (!$file || !$file->isValid())) {
+                $rules['attachment'] =
+                    'uploaded[attachment]|ext_in[attachment,pdf,doc,docx,xls,xlsx,ppt,pptx,zip,rar,png,jpg,jpeg]|max_size[attachment,10240]';
+            } else {
+                $rules['attachment'] =
+                    'permit_empty|ext_in[attachment,pdf,doc,docx,xls,xlsx,ppt,pptx,zip,rar,png,jpg,jpeg]|max_size[attachment,10240]';
+            }
+
+        } elseif ($type === '超連結') {
+
+            $rules['external_url'] =
+                'required|valid_url_strict';
+        }
+
+        // =========================
+        // 執行驗證
+        // =========================
+
+        if (!$this->validate($rules)) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('errors', $this->validator->getErrors());
+        }
+
+        // =========================
+        // 處理附件
+        // =========================
+
+        // 預設保留舊附件
+        $attachmentPath = $announcement['attachment'] ?? null;
+
+        $file = $this->request->getFile('attachment');
+
+        if ($file && $file->isValid() && !$file->hasMoved()) {
+
+            $uploadPath = FCPATH . 'uploads/announcements';
+
+            // 確保資料夾存在
+            if (!is_dir($uploadPath)) {
+                mkdir($uploadPath, 0777, true);
+            }
+
+            // 如果有舊檔案，先刪除
+            if (!empty($attachmentPath) &&
+                file_exists(FCPATH . $attachmentPath)) {
+
+                unlink(FCPATH . $attachmentPath);
+            }
+
+            // 新檔名
+            $newName = $file->getRandomName();
+
+            // 移動新檔案
+            $file->move($uploadPath, $newName);
+
+            // 儲存新路徑
+            $attachmentPath = 'uploads/announcements/' . $newName;
+        }
+
+        // =========================
+        // 狀態
+        // =========================
+
+        if ($announcement['status'] === 'published') {
+
+            // 已發布公告不能回到草稿
+            $status = 'published';
+
+        } else {
+
+            $status = $this->request->getPost('status');
+
+            if (!in_array($status, ['draft', 'published'])) {
+                $status = 'draft';
+            }
+        }
+
+        // =========================
+        // 發布時間
+        // =========================
+
+        $publishDate = ($status === 'published')
+            ? date('Y-m-d H:i:s')
+            : null;
+
+        // =========================
+        // 更新資料
+        // =========================
+
+        $data = [
+            'title'        => $this->request->getPost('title'),
+            'category'     => $this->request->getPost('category'),
+            'type'         => $type,
+            'content'      => ($type === '一般公告')
+                                ? $this->request->getPost('content')
+                                : null,
+            'attachment'   => ($type === '超連結')
+                                ? null
+                                : $attachmentPath,
+            'external_url' => ($type === '超連結')
+                                ? $this->request->getPost('external_url')
+                                : null,
+            'publish_date' => $publishDate,
+            'status'       => $status,
+        ];
+
+        $result = $this->announcementModel->update($id, $data);
+
+        if ($result === false) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('errors', $this->announcementModel->errors());
+        }
+
+        return redirect()
+            ->to('/admin/announcement')
+            ->with('success', '公告更新成功');
+    }
+
+    // 刪除公告
+    public function delete($id)
+    {
+        $announcement = $this->announcementModel->find($id);
+
+        if (!$announcement) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound('找不到該公告');
+        }
+
+        // 若公告有 PDF 附件，順便刪除實體檔案
+        if (!empty($announcement['attachment']) && file_exists(FCPATH . $announcement['attachment'])) {
+            unlink(FCPATH . $announcement['attachment']);
+        }
+
+        // 刪除資料庫紀錄
+        $this->announcementModel->delete($id);
+
+        return redirect()->to('/admin/announcement')->with('success', '公告已成功刪除');
+    }
+
+    // 公告詳細內容與外部跳轉
     public function detail($id)
     {
         $announcement = $this->announcementModel->find($id);
@@ -61,14 +389,21 @@ class Announcement extends BaseController
             return redirect()->to($announcement['external_url']);
         }
 
-        // PDF 公告：開啟 PDF
-        if ($announcement['type'] === 'PDF文件') {
+        // 純檔案公告：直接開啟檔案
+        if ($announcement['type'] === '純檔案') {
+
+            if (empty($announcement['attachment'])) {
+                throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound(
+                    '此公告沒有附件檔案'
+                );
+            }
+
             return redirect()->to(
                 base_url($announcement['attachment'])
             );
         }
 
-        // 純文字公告：顯示詳細內容
+        // 純文字公告：顯示詳細頁面
         return view('announcement/detail', [
             'announcement' => $announcement
         ]);
