@@ -11,44 +11,65 @@ class CreateDepartmentsTable extends Migration
                 'unsigned' => true,
                 'auto_increment' => true,
             ],
+            'university_code' => [
+                'type' => 'VARCHAR',
+                'constraint' => 10,
+            ],
             'university_name' => [
                 'type' => 'VARCHAR',
                 'constraint' => 100,
+            ],
+            'department_code' => [
+                'type' => 'VARCHAR',
+                'constraint' => 20,
             ],
             'department_name' => [
                 'type' => 'VARCHAR',
                 'constraint' => 100,
             ],
-            'public_private' => [
-                'type' => 'VARCHAR',
-                'constraint' => 20,
-            ],
-            'location' => [
-                'type' => 'VARCHAR',
-                'constraint' => 50,
-            ],
-            'college_group' => [
-                'type' => 'VARCHAR',
-                'constraint' => 50,
-            ],
             'admission_quota' => [
                 'type' => 'INT',
                 'unsigned' => true,
             ],
-            'description' => [
-                'type' => 'TEXT',
+            'chinese_requirement' => [
+                'type' => 'VARCHAR',
+                'constraint' => 20,
                 'null' => true,
             ],
-            'created_at' => [
-                'type' => 'DATETIME',
+            'english_requirement' => [
+                'type' => 'VARCHAR',
+                'constraint' => 20,
                 'null' => true,
             ],
-            'updated_at' => [
-                'type' => 'DATETIME',
+            'math_a_requirement' => [
+                'type' => 'VARCHAR',
+                'constraint' => 20,
+                'null' => true,
+            ],
+            'math_b_requirement' => [
+                'type' => 'VARCHAR',
+                'constraint' => 20,
+                'null' => true,
+            ],
+            'social_requirement' => [
+                'type' => 'VARCHAR',
+                'constraint' => 20,
+                'null' => true,
+            ],
+            'natural_requirement' => [
+                'type' => 'VARCHAR',
+                'constraint' => 20,
+                'null' => true,
+            ],
+            'english_listening_requirement' => [
+                'type' => 'VARCHAR',
+                'constraint' => 20,
                 'null' => true,
             ],
         ]);
         $this->forge->addKey('id', true);
+        $this->forge->addKey('university_code');
+        $this->forge->addKey('department_code');
         $this->forge->createTable('departments');
     }
     public function down()

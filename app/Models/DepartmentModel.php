@@ -10,13 +10,18 @@ class DepartmentModel extends Model
     protected $useSoftDeletes = false;
     protected $protectFields = true;
     protected $allowedFields = [
+        'university_code',
         'university_name',
+        'department_code',
         'department_name',
-        'public_private',
-        'location',
-        'college_group',
         'admission_quota',
-        'description',
+        'chinese_requirement',
+        'english_requirement',
+        'math_a_requirement',
+        'math_b_requirement',
+        'social_requirement',
+        'natural_requirement',
+        'english_listening_requirement',
     ];
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;

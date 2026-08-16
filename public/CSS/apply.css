@@ -406,3 +406,289 @@
     font-size: 13px;
     text-align: center;
 }
+
+/* ========================================
+   22. 校系查詢 - 搜尋區
+   ======================================== */
+.department-search-card {
+    padding: 0;
+    overflow: hidden;
+}
+
+/* 查詢條件標題 */
+.department-search-card .apply-section-title {
+    margin: 0;
+    padding: 18px 25px;
+    border-bottom: 1px solid #c9dced;
+    background: linear-gradient(135deg,
+            #0d2b4d,
+            #174f7d);
+    color: #ffffff;
+    font-size: 19px;
+}
+
+/* 查詢表單內容 */
+#departmentSearchForm {
+    padding: 25px 28px 28px;
+}
+
+/* ========================================
+   23. 搜尋欄位
+   ======================================== */
+.department-search-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.department-search-row label {
+    width: 85px;
+    flex-shrink: 0;
+    color: #173b63;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+/* 文字輸入框 */
+.department-search-row input[type="text"] {
+    flex: 1;
+    min-height: 42px;
+    padding: 9px 13px;
+    border: 1px solid #b8cde0;
+    border-radius: 6px;
+    background-color: #ffffff;
+    color: #173b63;
+    font-family: inherit;
+    font-size: 15px;
+    outline: none;
+    transition:
+        border-color 0.2s,
+        box-shadow 0.2s,
+        background-color 0.2s;
+}
+
+.department-search-row input[type="text"]::placeholder {
+    color: #9aaebe;
+}
+
+.department-search-row input[type="text"]:focus {
+    border-color: #2589d8;
+    background-color: #fafdff;
+    box-shadow:
+        0 0 0 3px rgba(37, 137, 216, 0.12);
+}
+
+/* ========================================
+   24. 下拉式選單
+   ======================================== */
+.department-search-row select {
+    flex: 1;
+    min-height: 42px;
+    padding: 8px 38px 8px 13px;
+    border: 1px solid #b8cde0;
+    border-radius: 6px;
+    background-color: #ffffff;
+    color: #173b63;
+    font-family: inherit;
+    font-size: 15px;
+    cursor: pointer;
+    outline: none;
+    transition:
+        border-color 0.2s,
+        box-shadow 0.2s,
+        background-color 0.2s;
+}
+
+.department-search-row select:focus {
+    border-color: #2589d8;
+    background-color: #fafdff;
+    box-shadow:
+        0 0 0 3px rgba(37, 137, 216, 0.12);
+}
+
+/* ========================================
+   25. 檢定科目區域
+   ======================================== */
+.department-requirement-section {
+    margin-top: 25px;
+    padding: 20px;
+    border: 1px solid #d2e2ef;
+    border-radius: 7px;
+    background-color: #f7fbff;
+}
+
+/* 檢定科目標題 */
+.department-requirement-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 5px;
+    color: #173b63;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.department-requirement-title i {
+    color: #2589d8;
+}
+
+/* 提示文字 */
+.department-requirement-hint {
+    margin: 0 0 18px;
+    color: #71859a;
+    font-size: 13px;
+}
+
+/* ========================================
+   26. 單一檢定科目
+   ======================================== */
+.requirement-row {
+    display: flex;
+    align-items: center;
+    min-height: 48px;
+    margin-bottom: 8px;
+    padding: 8px 12px;
+    border: 1px solid #dbe7f1;
+    border-radius: 6px;
+    background-color: #ffffff;
+    transition:
+        border-color 0.2s,
+        box-shadow 0.2s,
+        background-color 0.2s;
+}
+
+.requirement-row:last-child {
+    margin-bottom: 0;
+}
+
+.requirement-row:hover {
+    border-color: #9fc8e6;
+    background-color: #fbfdff;
+    box-shadow:
+        0 2px 7px rgba(20, 70, 110, 0.06);
+}
+
+/* 科目名稱 */
+.requirement-subject {
+    width: 75px;
+    flex-shrink: 0;
+    color: #173b63;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+/* Radio Label */
+.requirement-row label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-right: 22px;
+    color: #536b82;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* Radio Button */
+.requirement-row input[type="radio"] {
+    width: 15px;
+    height: 15px;
+    margin: 0;
+    accent-color: #2589d8;
+    cursor: pointer;
+}
+
+/* 選中的文字 */
+.requirement-row input[type="radio"]:checked+* {
+    color: #1877c9;
+}
+
+/* ========================================
+   27. 查詢按鈕區
+   ======================================== */
+.department-search-card .apply-actions {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid #dbe7f1;
+}
+
+/* ========================================
+   28. 查詢結果標題
+   ======================================== */
+.department-result-card {
+    margin-top: 25px;
+}
+
+.department-result-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.department-result-header .apply-section-title {
+    flex: 1;
+}
+
+.department-result-count {
+    color: #1877c9;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+/* ========================================
+   29. 查詢條件提示
+   ======================================== */
+.department-result-card .apply-info-message {
+    border-left-color: #2589d8;
+    background-color: #eef7ff;
+}
+
+/* ========================================
+   30. 校系資料表格
+   ======================================== */
+.department-table-wrapper {
+    overflow-x: auto;
+    margin-top: 10px;
+}
+
+.department-table-wrapper .apply-table {
+    min-width: 1100px;
+}
+
+/* ========================================
+   31. RWD - 平板
+   ======================================== */
+@media (max-width: 700px) {
+    #departmentSearchForm {
+        padding: 20px;
+    }
+
+    .department-search-row {
+        display: block;
+    }
+
+    .department-search-row label {
+        display: block;
+        width: auto;
+        margin-bottom: 7px;
+    }
+
+    .department-search-row input[type="text"],
+    .department-search-row select {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .requirement-row {
+        flex-wrap: wrap;
+        gap: 5px 0;
+    }
+
+    .requirement-subject {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+
+    .requirement-row label {
+        margin-right: 18px;
+    }
+}
