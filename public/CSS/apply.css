@@ -1,8 +1,8 @@
 /* ========================================
-   網路報名系統專用
+   網路報名系統專用樣式
    ======================================== */
 /* ========================================
-   1. 網路報名系統 Header
+   1. Header
    ======================================== */
 .apply-header {
     position: fixed;
@@ -27,6 +27,40 @@
     font-size: 22px;
     font-weight: 700;
     letter-spacing: 1px;
+}
+
+.apply-nav {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: 35px;
+}
+
+.apply-nav-link {
+    display: inline-flex;
+    align-items: center;
+    height: 64px;
+    padding: 0 15px;
+    border-bottom: 3px solid transparent;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    transition:
+        background-color 0.2s,
+        color 0.2s,
+        border-color 0.2s;
+}
+
+.apply-nav-link:hover {
+    background-color: rgba(37, 137, 216, 0.15);
+    color: #ffffff;
+}
+
+.apply-nav-link.active {
+    border-bottom-color: #66b8f0;
+    background-color: rgba(37, 137, 216, 0.18);
+    color: #ffffff;
 }
 
 /* ========================================
@@ -55,7 +89,7 @@
 }
 
 /* ========================================
-   3. Apply 主要內容區
+   3. 主要內容區
    ======================================== */
 .apply-container {
     width: 92%;
@@ -110,8 +144,7 @@
    ======================================== */
 .apply-menu {
     display: grid;
-    grid-template-columns:
-        repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
     margin-top: 25px;
 }
@@ -293,12 +326,12 @@
 }
 
 /* ========================================
-   15. 表格
+   15. 一般表格
    ======================================== */
 .apply-table {
     width: 100%;
-    border-collapse: collapse;
     margin-top: 10px;
+    border-collapse: collapse;
     font-size: 15px;
 }
 
@@ -407,8 +440,11 @@
     text-align: center;
 }
 
+/* =========================================================
+   校系查詢
+   ========================================================= */
 /* ========================================
-   22. 校系查詢 - 搜尋區
+   20. 校系查詢 - 搜尋區
    ======================================== */
 .department-search-card {
     padding: 0;
@@ -433,7 +469,7 @@
 }
 
 /* ========================================
-   23. 搜尋欄位
+   21. 搜尋欄位
    ======================================== */
 .department-search-row {
     display: flex;
@@ -479,7 +515,7 @@
 }
 
 /* ========================================
-   24. 下拉式選單
+   22. 下拉式選單
    ======================================== */
 .department-search-row select {
     flex: 1;
@@ -507,7 +543,7 @@
 }
 
 /* ========================================
-   25. 檢定科目區域
+   23. 檢定科目搜尋區域
    ======================================== */
 .department-requirement-section {
     margin-top: 25px;
@@ -540,7 +576,7 @@
 }
 
 /* ========================================
-   26. 單一檢定科目
+   24. 單一檢定科目搜尋條件
    ======================================== */
 .requirement-row {
     display: flex;
@@ -597,13 +633,8 @@
     cursor: pointer;
 }
 
-/* 選中的文字 */
-.requirement-row input[type="radio"]:checked+* {
-    color: #1877c9;
-}
-
 /* ========================================
-   27. 查詢按鈕區
+   25. 查詢按鈕區
    ======================================== */
 .department-search-card .apply-actions {
     margin-top: 25px;
@@ -611,13 +642,19 @@
     border-top: 1px solid #dbe7f1;
 }
 
+/* =========================================================
+   校系查詢結果
+   ========================================================= */
 /* ========================================
-   28. 查詢結果標題
+   26. 查詢結果卡片
    ======================================== */
 .department-result-card {
     margin-top: 25px;
 }
 
+/* ========================================
+   27. 查詢結果標題
+   ======================================== */
 .department-result-header {
     display: flex;
     align-items: center;
@@ -635,7 +672,7 @@
 }
 
 /* ========================================
-   29. 查詢條件提示
+   28. 查詢條件提示
    ======================================== */
 .department-result-card .apply-info-message {
     border-left-color: #2589d8;
@@ -643,7 +680,7 @@
 }
 
 /* ========================================
-   30. 校系資料表格
+   29. 校系資料表格
    ======================================== */
 .department-table-wrapper {
     overflow-x: auto;
@@ -651,44 +688,306 @@
 }
 
 .department-table-wrapper .apply-table {
-    min-width: 1100px;
+    min-width: 1000px;
 }
 
 /* ========================================
-   31. RWD - 平板
+   29-1. 校系資料表格欄寬
    ======================================== */
-@media (max-width: 700px) {
-    #departmentSearchForm {
-        padding: 20px;
-    }
+/* 學校代碼 */
+.department-table-wrapper .apply-table th:nth-child(1),
+.department-table-wrapper .apply-table td:nth-child(1) {
+    width: 30px;
+    white-space: nowrap;
+}
 
-    .department-search-row {
-        display: block;
-    }
+/* 學校名稱 */
+.department-table-wrapper .apply-table th:nth-child(2),
+.department-table-wrapper .apply-table td:nth-child(2) {
+    width: 150px;
+    white-space: nowrap;
+}
 
-    .department-search-row label {
-        display: block;
-        width: auto;
-        margin-bottom: 7px;
-    }
+/* 學系代碼 */
+.department-table-wrapper .apply-table th:nth-child(3),
+.department-table-wrapper .apply-table td:nth-child(3) {
+    width: 70px;
+    white-space: nowrap;
+}
 
-    .department-search-row input[type="text"],
-    .department-search-row select {
-        width: 100%;
-        box-sizing: border-box;
-    }
+/* 學系名稱 */
+.department-table-wrapper .apply-table th:nth-child(4),
+.department-table-wrapper .apply-table td:nth-child(4) {
+    width: 220px;
+    white-space: nowrap;
+}
 
-    .requirement-row {
-        flex-wrap: wrap;
-        gap: 5px 0;
-    }
+/* 招生名額 */
+.department-table-wrapper .apply-table th:nth-child(5),
+.department-table-wrapper .apply-table td:nth-child(5) {
+    width: 70px;
+    white-space: nowrap;
+    text-align: center;
+}
 
-    .requirement-subject {
-        width: 100%;
-        margin-bottom: 5px;
-    }
+/* 詳細資料 */
+.department-table-wrapper .apply-table th:nth-child(6),
+.department-table-wrapper .apply-table td:nth-child(6) {
+    width: 85px;
+    white-space: nowrap;
+    text-align: center;
+}
 
-    .requirement-row label {
-        margin-right: 18px;
-    }
+/* =========================================================
+   校系資料 - 詳細資訊展開
+   ========================================================= */
+/* ========================================
+   30. 校系主要資料列
+   ======================================== */
+.department-main-row {
+    transition:
+        background-color 0.2s ease;
+}
+
+.department-main-row:hover {
+    background-color: #f8fafc;
+}
+
+/* ========================================
+   31. 詳細資料按鈕
+   ======================================== */
+.department-detail-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 7px 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    background-color: #ffffff;
+    color: #374151;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.department-detail-button:hover {
+    background-color: #f1f5f9;
+    border-color: #94a3b8;
+    color: #1e3a5f;
+    box-shadow:
+        0 2px 5px rgba(0, 0, 0, 0.08);
+}
+
+.department-detail-button:active {
+    transform: translateY(1px);
+}
+
+/* ========================================
+   32. 詳細資料列
+   ======================================== */
+.department-detail-row {
+    background-color: #f8fafc;
+}
+
+.department-detail-row>td {
+    padding: 0 !important;
+}
+
+/* ========================================
+   33. 詳細資料內容
+   ======================================== */
+.department-detail-content {
+    padding: 20px 24px;
+    border-top: 1px solid #e5e7eb;
+    border-bottom: 1px solid #e5e7eb;
+    background-color: #f8fafc;
+}
+
+/* ========================================
+   34. 詳細資料標題
+   ======================================== */
+.department-detail-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+    color: #1e3a5f;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.department-detail-title i {
+    font-size: 18px;
+}
+
+/* ========================================
+   35. 檢定科目 Grid
+   ======================================== */
+.department-requirement-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* ========================================
+   36. 單一檢定科目資訊卡
+   ======================================== */
+.department-requirement-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 120px;
+    min-height: 44px;
+    padding: 8px 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    background-color: #ffffff;
+}
+
+/* ========================================
+   37. 科目名稱
+   ======================================== */
+.requirement-label {
+    color: #475569;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* ========================================
+   38. 檢定結果
+   ======================================== */
+.requirement-value {
+    color: #1877c9;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: right;
+}
+
+/* =========================================================
+   校系查詢 - 分頁
+   ========================================================= */
+/* ========================================
+   39. 分頁區域
+   ======================================== */
+.department-pagination {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid #d7e2ee;
+}
+
+.department-pagination-nav {
+    width: 100%;
+}
+
+/* ========================================
+   40. 頁碼區
+   ======================================== */
+.department-pagination-pages {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.department-pagination-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* ========================================
+   41. 分頁按鈕
+   ======================================== */
+.department-pagination-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 38px;
+    height: 38px;
+    padding: 0 12px;
+    box-sizing: border-box;
+    border: 1px solid #c6d8e8;
+    border-radius: 5px;
+    background-color: #ffffff;
+    color: #245273;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition:
+        background-color 0.2s,
+        border-color 0.2s,
+        color 0.2s,
+        box-shadow 0.2s;
+}
+
+/* Hover */
+.department-pagination-link:hover {
+    border-color: #2589d8;
+    background-color: #eef7ff;
+    color: #1266ad;
+    box-shadow:
+        0 2px 6px rgba(24, 119, 201, 0.12);
+}
+
+/* 目前頁數 */
+.department-pagination-link.active {
+    border-color: #1877c9;
+    background-color: #1877c9;
+    color: #ffffff;
+    box-shadow:
+        0 2px 6px rgba(24, 119, 201, 0.25);
+}
+
+/* 上一頁 / 下一頁 */
+.department-pagination-item:first-child .department-pagination-link,
+.department-pagination-item:last-child .department-pagination-link {
+    padding: 0 15px;
+}
+
+/* ========================================
+   42. 分頁 Icon
+   ======================================== */
+.department-pagination-link i {
+    font-size: 12px;
+}
+
+.department-pagination-link i.bi-chevron-left {
+    margin-right: 5px;
+}
+
+.department-pagination-link i.bi-chevron-right {
+    margin-left: 5px;
+}
+
+/* ========================================
+   43. 分頁省略號
+   ======================================== */
+.department-pagination-ellipsis {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 30px;
+    height: 38px;
+    color: #6c7f92;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* ========================================
+   44. 共幾頁
+   ======================================== */
+.department-pagination-total {
+    width: 100%;
+    margin-top: 10px;
+    text-align: right;
 }

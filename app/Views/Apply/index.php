@@ -15,15 +15,29 @@
         <h1 class="apply-header-title">
             網路報名系統
         </h1>
+        <nav class="apply-nav">
+            <a href="<?= site_url('apply') ?>" class="apply-nav-link active">
+                首頁
+            </a>
+            <a href="<?= site_url('department') ?>" class="apply-nav-link">
+                查詢校系資料
+            </a>
+            <a href="<?= site_url('apply/register') ?>" class="apply-nav-link">
+                立即報名
+            </a>
+            <a href="<?= site_url('application-status') ?>" class="apply-nav-link">
+                報名狀態查詢
+            </a>
+        </nav>
         <div class="apply-header-right">
             <div class="apply-header-user">
                 <span class="apply-header-text">
                     學測應試號碼：
-                    <?= esc($candidate['exam_number']) ?>
+                    <?= esc(session()->get('exam_number')) ?>
                 </span>
                 <span class="apply-header-text">
                     姓名：
-                    <?= esc($candidate['name']) ?>
+                    <?= esc(session()->get('candidate_name') ?? '') ?>
                 </span>
             </div>
             <a href="<?= site_url('logout') ?>" class="apply-logout-button">
