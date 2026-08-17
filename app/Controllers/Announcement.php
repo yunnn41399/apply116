@@ -30,12 +30,70 @@ class Announcement extends BaseController
     // 後臺公告列表
     public function adminIndex()
     {
-        $announcements = $this->announcementModel
-            ->orderBy('created_at', 'DESC')
-            ->findAll();
+        // 取得排序欄位
+        $sort = $this->request->getGet('sort');
+
+        // 取得排序方向
+        $direction = strtoupper($this->request->getGet('direction'));
+
+        // 允許排序的欄位
+        $allowedSorts = [
+            'id',
+            'title',
+            'updated_at',
+            'publish_date',
+            'status'
+        ];
+
+        // 防止使用者傳入不存在或不允許的欄位
+        if (!in_array($sort, $allowedSorts, true)) {
+            $sort = 'updated_at';
+        }
+
+        // 只允許 ASC / DESC
+        if (!in_array($direction, ['ASC', 'DESC'], true)) {
+            $direction = 'DESC';
+        }
+
+        // 建立查詢
+        $builder = $this->announcementModel;
+
+        // 發佈狀態特殊處理
+        if ($sort === 'status') {
+
+            if ($direction === 'DESC') {
+
+                // 已發布優先
+                $builder->orderBy(
+                    "CASE WHEN status = 'published' THEN 1 ELSE 0 END",
+                    'DESC',
+                    false
+                );
+
+            } else {
+
+                // 草稿優先
+                $builder->orderBy(
+                    "CASE WHEN status = 'published' THEN 0 ELSE 1 END",
+                    'DESC',
+                    false
+                );
+            }
+
+            // 同狀態時，以最後編輯時間排序
+            $builder->orderBy('updated_at', 'DESC');
+
+        } else {
+
+            $builder->orderBy($sort, $direction);
+        }
+
+        $announcements = $builder->findAll();
 
         return view('admin/announcement/index', [
-            'announcements' => $announcements
+            'announcements' => $announcements,
+            'sort' => $sort,
+            'direction' => $direction
         ]);
     }
 
