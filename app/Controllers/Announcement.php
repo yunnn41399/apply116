@@ -20,10 +20,11 @@ class Announcement extends BaseController
         $announcements = $this->announcementModel
             ->where('status', 'published')
             ->orderBy('publish_date', 'DESC')
-            ->findAll();
+            ->paginate(10);
 
         return view('announcement/index', [
-            'announcements' => $announcements
+            'announcements' => $announcements,
+            'pager' => $this->announcementModel->pager
         ]);
     }
 
