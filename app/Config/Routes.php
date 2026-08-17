@@ -21,7 +21,9 @@ $routes->post('/reset-password/update', 'PasswordController::update');
 
 $routes->get('/apply', 'ApplyController::index');
 $routes->get('/department', 'DepartmentController::index');
+$routes->get('/application', 'ApplicationController::index');
 
+$routes->post('/application/save', 'ApplicationController::save');
 
 
 $routes->get('/captcha', 'Captcha::index');

@@ -22,7 +22,7 @@
             <a href="<?= site_url('department') ?>" class="apply-nav-link active">
                 查詢校系資料
             </a>
-            <a href="<?= site_url('apply/register') ?>" class="apply-nav-link">
+            <a href="<?= site_url('/application') ?>" class="apply-nav-link">
                 立即報名
             </a>
             <a href="<?= site_url('application-status') ?>" class="apply-nav-link">

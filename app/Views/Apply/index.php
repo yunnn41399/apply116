@@ -22,7 +22,7 @@
             <a href="<?= site_url('department') ?>" class="apply-nav-link">
                 查詢校系資料
             </a>
-            <a href="<?= site_url('apply/register') ?>" class="apply-nav-link">
+            <a href="<?= site_url('/application') ?>" class="apply-nav-link">
                 立即報名
             </a>
             <a href="<?= site_url('application-status') ?>" class="apply-nav-link">
@@ -63,7 +63,7 @@
             </p>
         </section>
         <div class="apply-menu">
-            <a href="<?= site_url('department') ?>" class="apply-card">
+            <a href="<?= site_url('/department') ?>" class="apply-card">
                 <div class="apply-card-icon">
                     <i class="bi bi-search"></i>
                 </div>
@@ -74,7 +74,7 @@
                     查詢各大學校系及相關招生資訊
                 </div>
             </a>
-            <a href="<?= site_url('apply/register') ?>" class="apply-card">
+            <a href="<?= site_url('/application') ?>" class="apply-card">
                 <div class="apply-card-icon">
                     <i class="bi bi-pencil-square"></i>
                 </div>

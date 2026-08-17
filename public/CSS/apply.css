@@ -1,5 +1,5 @@
 /* ========================================
-   網路報名系統專用樣式
+   網路報名系統專用
    ======================================== */
 /* ========================================
    1. Header
@@ -990,4 +990,101 @@
     width: 100%;
     margin-top: 10px;
     text-align: right;
+}
+
+/* =========================================================
+   立即報名 - 基本資料
+   ========================================================= */
+/* ========================================
+   45. 自動帶入的考生資料
+   ======================================== */
+.application-readonly-info {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.application-info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    padding: 15px 17px;
+    border: 1px solid #d7e2ee;
+    border-radius: 6px;
+    background-color: #f7fbff;
+}
+
+.application-info-label {
+    color: #71859a;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.application-info-value {
+    color: #173b63;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+/* ========================================
+   46. 報名資料表單
+   ======================================== */
+.application-form-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.application-form-row label {
+    width: 120px;
+    flex-shrink: 0;
+    color: #173b63;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.application-required {
+    margin-left: 3px;
+    color: #d93025;
+    font-weight: 700;
+}
+
+/* 輸入欄位 */
+.application-form-row input {
+    width: 360px;
+    min-height: 42px;
+    padding: 9px 13px;
+    box-sizing: border-box;
+    border: 1px solid #b8cde0;
+    border-radius: 6px;
+    background-color: #ffffff;
+    color: #173b63;
+    font-family: inherit;
+    font-size: 15px;
+    outline: none;
+    transition:
+        border-color 0.2s,
+        box-shadow 0.2s,
+        background-color 0.2s;
+}
+
+.application-form-row input::placeholder {
+    color: #9aaebe;
+}
+
+.application-form-row input:focus {
+    border-color: #2589d8;
+    background-color: #fafdff;
+    box-shadow:
+        0 0 0 3px rgba(37, 137, 216, 0.12);
+}
+
+/* ========================================
+   47. 報名操作區
+   ======================================== */
+.application-actions {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #dbe7f1;
 }
