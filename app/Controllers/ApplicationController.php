@@ -3,14 +3,13 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\ApplicationModel;
 use App\Models\CandidateModel;
-use CodeIgniter\HTTP\ResponseInterface;
 class ApplicationController extends BaseController
 {
-    //顯示報名基本資料頁
     public function index()
     {
         if (!session()->get('isLoggedIn')) {
-            return redirect()->to('/login')
+            return redirect()
+                ->to('/login')
                 ->with(
                     'error',
                     '請先登入後再進入網路報名系統。'
@@ -19,7 +18,8 @@ class ApplicationController extends BaseController
         $candidateId = session()->get('candidate_id');
         if (empty($candidateId)) {
             session()->destroy();
-            return redirect()->to('/login')
+            return redirect()
+                ->to('/login')
                 ->with(
                     'error',
                     '登入資料已失效，請重新登入。'
@@ -31,7 +31,8 @@ class ApplicationController extends BaseController
             ->first();
         if (!$candidate) {
             session()->destroy();
-            return redirect()->to('/login')
+            return redirect()
+                ->to('/login')
                 ->with(
                     'error',
                     '找不到考生資料，請重新登入。'
@@ -47,18 +48,16 @@ class ApplicationController extends BaseController
         return view(
             'Apply/application',
             [
-                'candidate' =>
-                    $candidate,
-                'application' =>
-                    $application,
+                'candidate' => $candidate,
+                'application' => $application,
             ]
         );
     }
-    //儲存報名基本資料
     public function save()
     {
         if (!session()->get('isLoggedIn')) {
-            return redirect()->to('/login')
+            return redirect()
+                ->to('/login')
                 ->with(
                     'error',
                     '請先登入後再進行報名。'
@@ -67,7 +66,8 @@ class ApplicationController extends BaseController
         $candidateId = session()->get('candidate_id');
         if (empty($candidateId)) {
             session()->destroy();
-            return redirect()->to('/login')
+            return redirect()
+                ->to('/login')
                 ->with(
                     'error',
                     '登入資料已失效，請重新登入。'
@@ -82,44 +82,65 @@ class ApplicationController extends BaseController
         $address = trim(
             $this->request->getPost('address') ?? ''
         );
-        $currentSchool = trim(
-            $this->request->getPost('current_school') ?? ''
+        $email = trim(
+            $this->request->getPost('email') ?? ''
         );
         if ($birthDate === '') {
-            return redirect()->back()
+            return redirect()
+                ->back()
                 ->with(
                     'error',
                     '請輸入出生年月日。'
                 );
         }
         if ($phone === '') {
-
-            return redirect()->back()
+            return redirect()
+                ->back()
                 ->with(
                     'error',
                     '請輸入手機號碼。'
                 );
         }
-        if (!preg_match('/^09[0-9]{8}$/', $phone)) {
-
-            return redirect()->back()
+        if (
+            !preg_match(
+                '/^09[0-9]{8}$/',
+                $phone
+            )
+        ) {
+            return redirect()
+                ->back()
                 ->with(
                     'error',
                     '手機號碼格式錯誤，請輸入 10 位數手機號碼，例如 0912345678。'
                 );
         }
         if ($address === '') {
-            return redirect()->back()
+            return redirect()
+                ->back()
                 ->with(
                     'error',
                     '請輸入通訊地址。'
                 );
         }
-        if ($currentSchool === '') {
-            return redirect()->back()
+        if ($email === '') {
+            return redirect()
+                ->back()
                 ->with(
                     'error',
-                    '請輸入目前就讀學校。'
+                    '請輸入電子郵件。'
+                );
+        }
+        if (
+            !filter_var(
+                $email,
+                FILTER_VALIDATE_EMAIL
+            )
+        ) {
+            return redirect()
+                ->back()
+                ->with(
+                    'error',
+                    '電子郵件格式不正確，請輸入有效的 Email。'
                 );
         }
         $applicationModel = new ApplicationModel();
@@ -134,13 +155,21 @@ class ApplicationController extends BaseController
             'birth_date' => $birthDate,
             'phone' => $phone,
             'address' => $address,
-            'current_school' => $currentSchool,
+            'email' => $email,
         ];
         if ($application) {
-            $applicationModel->update(
+            $updated = $applicationModel->update(
                 $application['id'],
                 $data
             );
+            if (!$updated) {
+                return redirect()
+                    ->back()
+                    ->with(
+                        'error',
+                        '報名基本資料更新失敗，請稍後再試。'
+                    );
+            }
             return redirect()
                 ->to('/application')
                 ->with(
@@ -148,7 +177,17 @@ class ApplicationController extends BaseController
                     '報名基本資料已更新。'
                 );
         }
-        $applicationModel->insert($data);
+        $inserted = $applicationModel->insert(
+            $data
+        );
+        if (!$inserted) {
+            return redirect()
+                ->back()
+                ->with(
+                    'error',
+                    '報名基本資料儲存失敗，請稍後再試。'
+                );
+        }
         return redirect()
             ->to('/application')
             ->with(

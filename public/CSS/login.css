@@ -55,7 +55,7 @@
 
 /* 驗證碼輸入框 */
 .captcha-wrapper input {
-    width: 100px;
+    width: 150px;
     padding: 9px 10px;
     border: 1px solid #b9c9d9;
     border-radius: 5px;

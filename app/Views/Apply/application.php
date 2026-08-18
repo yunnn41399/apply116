@@ -57,7 +57,7 @@
                 立即報名
             </h2>
             <p>
-                請先確認您的基本資料，完成後即可進行後續的校系報名。
+                請先確認您的考生基本資料，並填寫報名資料（正式確認報名前可隨時更新），儲存完成後即可進行校系報名。
             </p>
         </section>
         <?php if (session()->getFlashdata('error')): ?>
@@ -170,24 +170,23 @@
                     <input type="text" id="address" name="address" value="<?= esc(
                         $application['address']
                         ?? ''
-                    ) ?>" maxlength="255" placeholder="請輸入通訊地址" required>
+                    ) ?>" maxlength="255" required>
                 </div>
                 <div class="application-form-row">
-                    <label for="current_school">
-                        目前就讀學校
+                    <label for="email">
+                        電子郵件
                         <span class="application-required">
                             *
                         </span>
                     </label>
-                    <input type="text" id="current_school" name="current_school" value="<?= esc(
-                        $application['current_school']
-                        ?? ''
-                    ) ?>" maxlength="100" placeholder="請輸入目前就讀學校" required>
+                    <input type="email" id="email" name="email" value="<?= esc(
+                        $application['email'] ?? ''
+                    ) ?>" maxlength="255" autocomplete="email" required>
                 </div>
                 <div class="apply-actions application-actions">
                     <button type="submit" class="apply-primary-button">
                         <i class="bi bi-check2"></i>
-                        儲存並繼續
+                        儲存報名資料
                     </button>
                     <a href="<?= site_url('apply') ?>" class="apply-secondary-button">
                         <i class="bi bi-arrow-left"></i>

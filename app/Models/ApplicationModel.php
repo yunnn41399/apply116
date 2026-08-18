@@ -17,7 +17,8 @@ class ApplicationModel extends Model
         'birth_date',
         'phone',
         'address',
-        'current_school',
+        'email',
+        'status',
     ];
 
     protected bool $allowEmptyInserts = false;

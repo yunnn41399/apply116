@@ -34,27 +34,24 @@
                 ) ?>" required>
             </div>
             <div class="form-group">
-                <label for="id_last_four">
+                <label for="id_number">
                     身分證號碼：
                 </label>
                 <div class="password-wrapper">
-                    <input type="password" id="id_last_four" name="id_last_four" maxlength="4" pattern="[0-9]{4}"
-                        inputmode="numeric" required>
-                    <button type="button" class="password-toggle" onclick="togglePassword('id_last_four', this)"
-                        aria-label="顯示身分證末四碼">
+                    <input type="password" id="id_number" name="id_number" maxlength="10" minlength="10"
+                        pattern="[A-Z][12][0-9]{8}" inputmode="text" autocomplete="off" required>
+                    <button type="button" class="password-toggle" onclick="togglePassword('id_number', this)"
+                        aria-label="顯示身分證號碼">
                         <i class="bi bi-eye"></i>
                     </button>
                 </div>
-                <span class="input-hint">
-                    （請輸入末四碼）
-                </span>
             </div>
             <div class="form-group captcha-group">
                 <label for="captcha">
                     驗證碼：
                 </label>
                 <div class="captcha-wrapper">
-                    <input type="text" id="captcha" name="captcha" maxlength="4" required>
+                    <input type="text" id="captcha" name="captcha" maxlength="4" placeholder="不分大小寫" required>
                     <canvas id="forgotCaptcha" class="captcha-canvas" width="160" height="50"
                         data-captcha="<?= esc($captcha) ?>" data-refresh-url="<?= site_url('login/refresh-captcha') ?>"
                         data-input-id="captcha"></canvas>
