@@ -175,6 +175,7 @@
                             </a>
                         </th>
 
+                        <th>操作</th>
                     </tr>
                 </thead>
 
@@ -204,6 +205,11 @@
                                 <?= esc($candidate['created_at'] ?? '') ?>
                             </td>
 
+                            <td>
+                                <a href="<?= site_url('admin/candidates/' . $candidate['id']) ?>">
+                                    查看
+                                </a>
+                            </td>
                         </tr>
 
                     <?php endforeach; ?>

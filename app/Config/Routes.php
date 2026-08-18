@@ -15,6 +15,7 @@ $routes->post('admin/logout', 'AdminAuth::logout');
 $routes->get('/admin', 'Admin::index');
 
 $routes->get('/admin/candidates', 'CandidateAdmin::index');
+$routes->get('/admin/candidates/(:num)', 'CandidateAdmin::detail/$1');
 
 
 // 前台公告

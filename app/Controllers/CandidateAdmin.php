@@ -101,4 +101,20 @@ class CandidateAdmin extends BaseController
             'pager' => $this->candidateModel->pager
         ]);
     }
+
+    // 查看考生詳細資料
+    public function detail($id)
+    {
+        $candidate = $this->candidateModel->find($id);
+
+        if (!$candidate) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound(
+                '找不到該考生資料'
+            );
+        }
+
+        return view('admin/candidates/detail', [
+            'candidate' => $candidate
+        ]);
+    }
 }
