@@ -28,7 +28,7 @@
             </li>
 
             <li>
-                <a href="#">
+                <a href="<?= site_url('admin/candidates') ?>">
                     考生資料
                 </a>
             </li>

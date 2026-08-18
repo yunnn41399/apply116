@@ -14,6 +14,8 @@ $routes->post('admin/logout', 'AdminAuth::logout');
 
 $routes->get('/admin', 'Admin::index');
 
+$routes->get('/admin/candidates', 'CandidateAdmin::index');
+
 
 // 前台公告
 $routes->get('/announcement', 'Announcement::index');
