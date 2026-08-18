@@ -5,6 +5,8 @@
         <title>後臺公告管理</title>
     </head>
     <body>
+        
+        <?php include APPPATH . 'Views/admin/header.php'; ?>
 
         <h1>公告管理</h1>
 
