@@ -85,9 +85,7 @@ class AdminAuth extends BaseController
             'admin_role'       => $admin['role'],
         ]);
 
-        return redirect()
-            ->to('/admin/announcement')
-            ->with('success', '管理員登入成功');
+        return redirect()->to('/admin');
     }
 
     // 管理員登出

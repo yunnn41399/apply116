@@ -12,6 +12,8 @@ $routes->get('admin/login', 'AdminAuth::login');
 $routes->post('admin/login', 'AdminAuth::attemptLogin');
 $routes->post('admin/logout', 'AdminAuth::logout');
 
+$routes->get('/admin', 'Admin::index');
+
 
 // 前台公告
 $routes->get('/announcement', 'Announcement::index');
