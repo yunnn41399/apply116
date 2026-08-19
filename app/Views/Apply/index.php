@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="<?= base_url('CSS/common.css') ?>">
     <link rel="stylesheet" href="<?= base_url('CSS/apply.css') ?>">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    <title>網路報名系統</title>
+    <title>網路報名系統 - 首頁</title>
 </head>
 
 <body>

@@ -1,0 +1,481 @@
+/* =========================================================
+   立即報名功能樣式
+   ========================================================= */
+/* =========================================================
+   1. 報名資料標題
+   ========================================================= */
+.application-section-title {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+}
+
+.application-section-title .apply-section-title {
+    flex: 1;
+    margin-bottom: 15px;
+}
+
+.application-section-hint {
+    margin-bottom: 15px;
+    color: #d64545;
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+/* =========================================================
+   2. 考生自動帶入資料
+   ========================================================= */
+.application-readonly-info {
+    display: grid;
+    grid-template-columns:
+        repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.application-info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    padding: 15px 17px;
+    border: 1px solid #d7e2ee;
+    border-radius: 6px;
+    background-color: #f7fbff;
+}
+
+.application-info-label {
+    color: #71859a;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.application-info-value {
+    color: #173b63;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+/* =========================================================
+   3. 報名基本資料表單
+   ========================================================= */
+.application-form-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.application-form-row label {
+    width: 120px;
+    flex-shrink: 0;
+    color: #173b63;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.application-required {
+    margin-left: 3px;
+    color: #d93025;
+    font-weight: 700;
+}
+
+.application-form-row input {
+    width: 400px;
+    min-height: 42px;
+    padding: 9px 13px;
+    box-sizing: border-box;
+    border: 1px solid #b8cde0;
+    border-radius: 6px;
+    background-color: #ffffff;
+    color: #173b63;
+    font-family: inherit;
+    font-size: 15px;
+    outline: none;
+    transition:
+        border-color 0.2s,
+        box-shadow 0.2s,
+        background-color 0.2s;
+}
+
+.application-form-row input::placeholder {
+    color: #9aaebe;
+}
+
+.application-form-row input:focus {
+    border-color: #2589d8;
+    background-color: #fafdff;
+    box-shadow:
+        0 0 0 3px rgba(37,
+            137,
+            216,
+            0.12);
+}
+
+/* =========================================================
+   4. 報名操作
+   ========================================================= */
+.application-actions {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #dbe7f1;
+}
+
+/* =========================================================
+   5. 基本資料確認模式
+   ========================================================= */
+.application-summary {
+    margin-top: 10px;
+    border: 1px solid #d7e2ee;
+    border-radius: 7px;
+    overflow: hidden;
+}
+
+.application-summary-row {
+    display: flex;
+    align-items: center;
+    min-height: 52px;
+    border-bottom: 1px solid #e5edf4;
+}
+
+.application-summary-row:last-child {
+    border-bottom: none;
+}
+
+.application-summary-label {
+    width: 140px;
+    flex-shrink: 0;
+    padding: 13px 16px;
+    background-color: #f7fbff;
+    color: #536b82;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.application-summary-value {
+    padding: 13px 16px;
+    color: #173b63;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.application-locked-message {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 20px;
+    padding: 12px 15px;
+    border-left: 4px solid #1877c9;
+    border-radius: 4px;
+    background-color: #eef7ff;
+    color: #245273;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* =========================================================
+   6. 我的校系清單
+   ========================================================= */
+.application-cart-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.application-cart-header .apply-section-title {
+    flex: 1;
+}
+
+.application-cart-count {
+    color: #1877c9;
+    font-size: 14px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.application-cart-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 45px 20px;
+    text-align: center;
+}
+
+.application-cart-empty-icon {
+    margin-bottom: 15px;
+    color: #9fb5c9;
+    font-size: 48px;
+}
+
+.application-cart-empty-title {
+    margin-bottom: 8px;
+    color: #173b63;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.application-cart-empty-text {
+    margin-bottom: 20px;
+    color: #71859a;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* =========================================================
+   7. 我的校系清單 - 表格
+   ========================================================= */
+.application-cart-quota {
+    text-align: center;
+}
+
+/* 移除 */
+.application-remove-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 6px 12px;
+    border: 1px solid #e0a7a3;
+    border-radius: 5px;
+    background-color: #ffffff;
+    color: #c62828;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+        background-color 0.2s,
+        border-color 0.2s,
+        color 0.2s;
+}
+
+.application-remove-button:hover {
+    border-color: #c62828;
+    background-color: #fff3f2;
+    color: #a61b16;
+}
+
+/* =========================================================
+   8. 我的校系清單操作
+   ========================================================= */
+.application-cart-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid #dbe7f1;
+}
+
+.application-cart-hint {
+    margin-top: 12px;
+    color: #71859a;
+    font-size: 13px;
+    text-align: right;
+}
+
+/* =========================================================
+   9. 選擇報名校系 - 頁面摘要
+   ========================================================= */
+.application-selection-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    padding: 16px 20px;
+    border: 1px solid #d7e2ee;
+    border-radius: 7px;
+    background-color: #ffffff;
+    box-shadow:
+        0 3px 12px rgba(20,
+            70,
+            110,
+            0.06);
+}
+
+.application-selection-summary-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.application-selection-summary-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 6px;
+    background-color: #eef7ff;
+    color: #1877c9;
+    font-size: 20px;
+}
+
+.application-selection-summary-title {
+    color: #173b63;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.application-selection-summary-text {
+    margin-top: 3px;
+    color: #71859a;
+    font-size: 13px;
+}
+
+.application-selection-summary-text strong {
+    color: #1877c9;
+    font-size: 15px;
+}
+
+/* =========================================================
+   10. 選擇報名校系 - 操作欄
+   ========================================================= */
+.application-department-actions {
+    width: 210px !important;
+    min-width: 210px !important;
+    max-width: 210px !important;
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+.application-department-actions>* {
+    vertical-align: middle;
+}
+
+.application-department-actions .application-add-form {
+    display: inline-flex;
+    align-items: center;
+    margin: 0;
+}
+
+.application-department-actions .department-detail-button,
+.application-department-actions .application-add-button,
+.application-department-actions .application-added-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    white-space: nowrap;
+}
+
+/* 加入 */
+.application-add-button {
+    gap: 5px;
+    padding: 7px 12px;
+    border: 1px solid #2589d8;
+    border-radius: 5px;
+    background-color: #ffffff;
+    color: #1877c9;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+        background-color 0.2s,
+        border-color 0.2s,
+        color 0.2s,
+        box-shadow 0.2s;
+}
+
+.application-add-button:hover {
+    background-color: #eef7ff;
+    border-color: #1266ad;
+    color: #1266ad;
+    box-shadow:
+        0 2px 6px rgba(24,
+            119,
+            201,
+            0.12);
+}
+
+/* 已加入 */
+.application-added-button {
+    gap: 5px;
+    padding: 7px 12px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    background-color: #e7f7ef;
+    color: #16835a;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.application-added-button i {
+    font-size: 14px;
+}
+
+/* =========================================================
+   11. 選校頁搜尋區
+   ========================================================= */
+.application-department-search-card {
+    padding: 0;
+    overflow: hidden;
+}
+
+/* 只有報名選校頁覆蓋標題 */
+.application-department-search-card .apply-section-title {
+    margin: 0;
+    padding: 18px 25px;
+    border-bottom: 1px solid #c9dced;
+    background: linear-gradient(135deg,
+            #0d2b4d,
+            #174f7d);
+    color: #ffffff;
+    font-size: 19px;
+}
+
+/* =========================================================
+   12. 選校表格欄寬
+   ========================================================= */
+.application-department-table {
+    width: 100%;
+    min-width: 1000px;
+    table-layout: fixed;
+}
+
+.application-department-table th:nth-child(1),
+.application-department-table td:nth-child(1) {
+    width: 70px;
+    white-space: nowrap;
+}
+
+.application-department-table th:nth-child(2),
+.application-department-table td:nth-child(2) {
+    width: 150px;
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    line-height: 1.5;
+}
+
+.application-department-table th:nth-child(3),
+.application-department-table td:nth-child(3) {
+    width: 70px;
+    white-space: nowrap;
+}
+
+.application-department-table th:nth-child(4),
+.application-department-table td:nth-child(4) {
+    width: 220px;
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    line-height: 1.5;
+}
+
+.application-department-table th:nth-child(5),
+.application-department-table td:nth-child(5) {
+    width: 70px;
+    white-space: nowrap;
+    text-align: center;
+}
+
+.application-department-table th:nth-child(6),
+.application-department-table td:nth-child(6) {
+    width: 210px;
+    white-space: nowrap;
+    text-align: center;
+}
