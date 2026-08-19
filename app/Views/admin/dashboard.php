@@ -34,7 +34,7 @@
             </li>
 
             <li>
-                <a href="#">
+                <a href="<?= site_url('admin/applications') ?>">
                     報名資料
                 </a>
             </li>

@@ -17,6 +17,10 @@ $routes->get('/admin', 'Admin::index');
 $routes->get('/admin/candidates', 'CandidateAdmin::index');
 $routes->get('/admin/candidates/(:num)', 'CandidateAdmin::detail/$1');
 
+$routes->get('/admin/applications', 'CandidateApplicationAdmin::index');
+
+$routes->get('/admin/applications', 'ApplicationAdmin::index');
+$routes->get('/admin/application/(:num)', 'ApplicationAdmin::detail/$1');
 
 // 前台公告
 $routes->get('/announcement', 'Announcement::index');
