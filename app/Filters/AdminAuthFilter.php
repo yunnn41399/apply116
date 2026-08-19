@@ -14,8 +14,10 @@ class AdminAuthFilter implements FilterInterface
     public function before(RequestInterface $request, $arguments = null)
     {
         // 檢查管理員是否已登入
-        if (!session()->get('admin_logged_in')) {
-
+        if (
+            !session()->get('admin_logged_in') ||
+            !session()->get('admin_id')
+        ) {
             return redirect()
                 ->to('/admin/login')
                 ->with('error', '請先登入管理員帳號');
