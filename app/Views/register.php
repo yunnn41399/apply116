@@ -56,7 +56,6 @@
                     name="name"
                     value="<?= old('name') ?>"
                     maxlength="50"
-                    placeholder="請輸入您的姓名"
                     required
                 >
             </div>
@@ -95,7 +94,6 @@
                     name="id_number"
                     value="<?= old('id_number') ?>"
                     maxlength="10"
-                    placeholder="首位請輸入英文大寫"
                     required
                 >
             </div>
@@ -170,7 +168,6 @@
                         type="password"
                         id="password_confirm"
                         name="password_confirm"
-                        placeholder="請再次輸入您設定的個人密碼"
                         required
                     >
 
