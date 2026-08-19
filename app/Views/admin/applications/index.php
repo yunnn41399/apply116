@@ -27,6 +27,8 @@
 
     <body>
 
+        <?php include APPPATH . 'Views/admin/header.php'; ?>
+        
         <h1>報名資料</h1>
 
         <p>

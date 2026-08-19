@@ -24,7 +24,9 @@
         </style>
     </head>
     <body>
-
+        
+        <?php include APPPATH . 'Views/admin/header.php'; ?>
+            
         <h1>考生資料</h1>
 
         <p>

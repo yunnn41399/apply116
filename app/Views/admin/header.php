@@ -18,14 +18,14 @@
         </a>
 
         <a
-            href="#"
+            href="<?= site_url('admin/candidates') ?>"
             style="margin-left: 15px;"
         >
             考生資料
         </a>
 
         <a
-            href="#"
+            href="<?= site_url('admin/applications') ?>"
             style="margin-left: 15px;"
         >
             報名資料
