@@ -28,11 +28,13 @@
     <body>
 
         <?php include APPPATH . 'Views/admin/header.php'; ?>
-        
+
         <h1>報名資料</h1>
 
         <p>
-            <a href="<?= site_url('admin') ?>">返回後臺首頁</a>
+            <a href="<?= site_url('admin') ?>">
+                返回後臺首頁
+            </a>
         </p>
 
 
@@ -154,6 +156,7 @@
                             </a>
                         </th>
 
+
                         <!-- 出生年月日 -->
                         <th>
                             <a href="<?= site_url(
@@ -200,6 +203,29 @@
                         </th>
 
 
+                        <!-- 最後更新 -->
+                        <th>
+                            <a href="<?= site_url(
+                                'admin/applications?sort=updated_at&direction=' .
+                                (($sort === 'updated_at' && $direction === 'DESC')
+                                    ? 'ASC'
+                                    : 'DESC') .
+                                (!empty($keyword)
+                                    ? '&keyword=' . urlencode($keyword)
+                                    : '')
+                            ) ?>">
+                                最後更新
+
+                                <?php if ($sort === 'updated_at'): ?>
+                                    <?= $direction === 'ASC' ? '▲' : '▼' ?>
+                                <?php else: ?>
+                                    ⮃
+                                <?php endif; ?>
+
+                            </a>
+                        </th>
+
+
                         <!-- 操作 -->
                         <th>
                             操作
@@ -237,6 +263,10 @@
                             </td>
 
                             <td>
+                                <?= esc($application['updated_at'] ?? '') ?>
+                            </td>
+
+                            <td>
                                 <a href="<?= site_url(
                                     'admin/application/' . $application['id']
                                 ) ?>">
@@ -258,6 +288,19 @@
             <?php
                 $currentPage = $pager->getCurrentPage();
                 $totalPages = $pager->getPageCount();
+
+                $queryParams = [
+                    'keyword' => $keyword,
+                    'sort' => $sort,
+                    'direction' => $direction,
+                ];
+
+                $queryString = http_build_query(
+                    array_filter(
+                        $queryParams,
+                        fn ($value) => $value !== null && $value !== ''
+                    )
+                );
             ?>
 
             <?php if ($totalPages > 1): ?>
@@ -268,7 +311,8 @@
 
                     <?php if ($currentPage > 1): ?>
 
-                        <a href="<?= $pager->getPageURI($currentPage - 1) ?>">
+                        <a href="<?= $pager->getPageURI($currentPage - 1) .
+                            ($queryString ? '&' . $queryString : '') ?>">
                             &lt;
                         </a>
 
@@ -341,7 +385,8 @@
 
                         <?php else: ?>
 
-                            <a href="<?= $pager->getPageURI($page) ?>">
+                            <a href="<?= $pager->getPageURI($page) .
+                                ($queryString ? '&' . $queryString : '') ?>">
                                 <?= $page ?>
                             </a>
 
@@ -354,7 +399,8 @@
 
                     <?php if ($currentPage < $totalPages): ?>
 
-                        <a href="<?= $pager->getPageURI($currentPage + 1) ?>">
+                        <a href="<?= $pager->getPageURI($currentPage + 1) .
+                            ($queryString ? '&' . $queryString : '') ?>">
                             &gt;
                         </a>
 
