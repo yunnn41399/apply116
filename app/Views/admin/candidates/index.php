@@ -29,11 +29,6 @@
             
         <h1>考生資料</h1>
 
-        <p>
-            <a href="<?= site_url('admin') ?>">返回後臺首頁</a>
-        </p>
-
-
         <!-- 搜尋區域 -->
         <form method="get" action="<?= site_url('admin/candidates') ?>">
 

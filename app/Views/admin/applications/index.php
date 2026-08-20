@@ -31,12 +31,6 @@
 
         <h1>報名資料</h1>
 
-        <p>
-            <a href="<?= site_url('admin') ?>">
-                返回後臺首頁
-            </a>
-        </p>
-
 
         <!-- 搜尋 -->
         <form method="get" action="<?= site_url('admin/applications') ?>">

@@ -3,19 +3,14 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>管理員管理</title>
+    <title>管理員帳號管理</title>
 </head>
 
 <body>
 
-    <h1>管理員管理</h1>
+    <?php include APPPATH . 'Views/admin/header.php'; ?>
 
-    <p>
-        <a href="<?= site_url('admin') ?>">
-            返回後臺首頁
-        </a>
-    </p>
-
+    <h1>管理員帳號管理</h1>
 
     <?php if (session()->has('success')): ?>
 
@@ -38,6 +33,12 @@
     <p>
         <a href="<?= site_url('admin/admins/create') ?>">
             新增管理員
+        </a>
+
+        |
+        
+        <a href="<?= site_url('admin/logs') ?>">
+            查看操作紀錄
         </a>
     </p>
 

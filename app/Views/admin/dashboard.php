@@ -21,6 +21,16 @@
         <h2>功能選單</h2>
 
         <ul>
+            <?php if (session()->get('admin_role') === 'super_admin'): ?>
+
+                <li>
+                    <a href="<?= site_url('admin/admins') ?>">
+                        管理員帳號管理
+                    </a>
+                </li>
+
+            <?php endif; ?>
+
             <li>
                 <a href="<?= site_url('admin/announcement') ?>">
                     公告管理

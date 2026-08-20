@@ -11,8 +11,26 @@
         <strong>後臺管理系統</strong>
 
         <a
+            href="<?= site_url('admin') ?>"
+            style="margin-left: 15px;"
+        >
+            後臺首頁
+        </a>
+
+        <?php if (session()->get('admin_role') === 'super_admin'): ?>
+
+            <a
+                href="<?= site_url('admin/admins') ?>"
+                style="margin-left: 15px;"
+            >
+                管理員帳號管理
+            </a>
+
+        <?php endif; ?>
+
+        <a
             href="<?= site_url('admin/announcement') ?>"
-            style="margin-left: 20px;"
+            style="margin-left: 15px;"
         >
             公告管理
         </a>

@@ -31,13 +31,6 @@
 
         <h1>管理員操作紀錄</h1>
 
-        <p>
-            <a href="<?= site_url('admin') ?>">
-                返回後臺首頁
-            </a>
-        </p>
-
-
         <!-- 搜尋 -->
         <form method="get" action="<?= site_url('admin/logs') ?>">
 
