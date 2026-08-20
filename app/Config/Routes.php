@@ -12,6 +12,17 @@ $routes->get('admin/login', 'AdminAuth::login');
 $routes->post('admin/login', 'AdminAuth::attemptLogin');
 $routes->post('admin/logout', 'AdminAuth::logout');
 
+// 管理員管理
+$routes->get(
+    '/admin/admins',
+    'AdminManagement::index',
+    [
+        'filter' => [
+            'adminAuth',
+            'adminRole:super_admin',
+        ],
+    ]
+);
 
 // 後臺管理功能，必須登入管理員帳號才能進入頁面
 $routes->group('admin', ['filter' => 'adminAuth'], function ($routes) {
