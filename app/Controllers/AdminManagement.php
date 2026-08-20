@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\AdminModel;
+use App\Services\AdminLogService;
 
 class AdminManagement extends BaseController
 {
@@ -117,9 +118,16 @@ class AdminManagement extends BaseController
 
         $this->adminModel->insert($data);
 
+        $logService = new AdminLogService();
+
+        $logService->log(
+            'create_admin',
+            '新增管理員：' . $username
+        );
+
         return redirect()
             ->to('/admin/admins')
-            ->with('success', '管理員帳號新增成功。');
+            ->with('success', '管理員新增成功。');
     }
 
     // 編輯管理員
@@ -251,6 +259,34 @@ class AdminManagement extends BaseController
         }
 
         $this->adminModel->update($id, $data);
+
+        // 建立操作紀錄
+        $logService = new AdminLogService();
+
+        // 記錄一般管理員資料修改
+        $logDescription = '修改管理員：' . $admin['username'];
+
+        if ($password !== '') {
+            $logDescription .= '（包含密碼）';
+        }
+
+        $logService->log(
+            'update_admin',
+            $logDescription
+        );
+
+        // 如果帳號狀態有變更，另外記錄啟用／停用
+        if ($admin['status'] !== $status) {
+
+            $statusText = $status === 'active'
+                ? '啟用'
+                : '停用';
+
+            $logService->log(
+                'update_admin_status',
+                $statusText . '管理員：' . $admin['username']
+            );
+        }
 
         return redirect()
             ->to('/admin/admins')
