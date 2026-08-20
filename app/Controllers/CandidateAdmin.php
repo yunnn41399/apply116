@@ -62,7 +62,8 @@ class CandidateAdmin extends BaseController
         // 建立查詢
         // =========================
 
-        $builder = $this->candidateModel;
+        $builder = $this->candidateModel
+            ->select('id, name, exam_number, id_number, created_at, updated_at');
 
         // =========================
         // 搜尋
@@ -105,7 +106,9 @@ class CandidateAdmin extends BaseController
     // 查看考生詳細資料
     public function detail($id)
     {
-        $candidate = $this->candidateModel->find($id);
+        $candidate = $this->candidateModel
+            ->select('id, name, exam_number, id_number, created_at, updated_at')
+            ->find($id);
 
         if (!$candidate) {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound(

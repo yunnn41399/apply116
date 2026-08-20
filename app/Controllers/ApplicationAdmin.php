@@ -58,10 +58,14 @@ class ApplicationAdmin extends BaseController
          */
         $builder = $this->applicationModel
             ->select(
-                'applications.*,
-                 candidates.name,
-                 candidates.exam_number,
-                 candidates.id_number'
+                'applications.id,
+                applications.candidate_id,
+                applications.birth_date,
+                applications.created_at,
+                applications.updated_at,
+                candidates.name,
+                candidates.exam_number,
+                candidates.id_number'
             )
             ->join(
                 'candidates',
@@ -112,7 +116,14 @@ class ApplicationAdmin extends BaseController
     {
         $application = $this->applicationModel
             ->select(
-                'applications.*,
+                'applications.id,
+                applications.candidate_id,
+                applications.birth_date,
+                applications.phone,
+                applications.address,
+                applications.current_school,
+                applications.created_at,
+                applications.updated_at,
                 candidates.name,
                 candidates.exam_number,
                 candidates.id_number'
