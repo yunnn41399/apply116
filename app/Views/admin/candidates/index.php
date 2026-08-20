@@ -199,8 +199,21 @@
                                 <?= esc($candidate['exam_number']) ?>
                             </td>
 
+                            <?php
+                                $idNumber = $candidate['id_number'] ?? '';
+
+                                if (strlen($idNumber) === 10) {
+                                    $maskedIdNumber =
+                                        substr($idNumber, 0, 5) .
+                                        '****' .
+                                        substr($idNumber, 9, 1);
+                                } else {
+                                    $maskedIdNumber = $idNumber;
+                                }
+                                ?>
+
                             <td>
-                                <?= esc($candidate['id_number']) ?>
+                                <?= esc($maskedIdNumber) ?>
                             </td>
 
                             <td>
