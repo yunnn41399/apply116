@@ -6,14 +6,8 @@ use App\Models\ApplicationModel;
 use App\Models\DepartmentModel;
 class ApplicationCartController extends BaseController
 {
-    // ========================================
-    // 我的校系清單
-    // ========================================
     public function index()
     {
-        // ========================================
-        // 1. 檢查是否已登入
-        // ========================================
         if (!session()->get('isLoggedIn')) {
             return redirect()
                 ->to('/login')
@@ -22,9 +16,6 @@ class ApplicationCartController extends BaseController
                     '請先登入後再進入網路報名系統。'
                 );
         }
-        // ========================================
-        // 2. 取得目前考生 ID
-        // ========================================
         $candidateId = session()->get(
             'candidate_id'
         );
@@ -37,9 +28,6 @@ class ApplicationCartController extends BaseController
                     '登入資料已失效，請重新登入。'
                 );
         }
-        // ========================================
-        // 3. 找到目前考生的 applications
-        // ========================================
         $applicationModel = new ApplicationModel();
         $application = $applicationModel
             ->where(
@@ -47,7 +35,6 @@ class ApplicationCartController extends BaseController
                 $candidateId
             )
             ->first();
-        // 如果還沒有建立報名資料
         if (!$application) {
             return redirect()
                 ->to('/application')
@@ -56,37 +43,38 @@ class ApplicationCartController extends BaseController
                     '請先完成報名基本資料。'
                 );
         }
-        // ========================================
-        // 4. 如果已正式確認報名
-        // ========================================
-        if (
-            $application['status']
-            === 'confirmed'
-        ) {
-            return view(
-                'Apply/application_cart',
-                [
-                    'application' =>
-                        $application,
-                    'cartItems' =>
-                        [],
-                    'isConfirmed' =>
-                        true,
-                ]
-            );
+        $hasBasicData =
+            !empty($application['birth_date'])
+            && !empty($application['phone'])
+            && !empty($application['address'])
+            && !empty($application['email']);
+        if (!$hasBasicData) {
+            return redirect()
+                ->to('/application')
+                ->with(
+                    'error',
+                    '請先完成報名基本資料，才能查看我的校系清單。'
+                );
         }
-        // ========================================
-        // 5. 取得購物車
-        // ========================================
+        $isConfirmed =
+            ($application['status'] ?? 'draft')
+            === 'confirmed';
         $cartModel = new ApplicationCartModel();
-        $cartItems = $cartModel
+        $cartModel
             ->select(
                 'application_cart.*, '
                 . 'departments.university_code, '
                 . 'departments.university_name, '
                 . 'departments.department_code, '
                 . 'departments.department_name, '
-                . 'departments.admission_quota'
+                . 'departments.admission_quota, '
+                . 'departments.chinese_requirement, '
+                . 'departments.english_requirement, '
+                . 'departments.math_a_requirement, '
+                . 'departments.math_b_requirement, '
+                . 'departments.social_requirement, '
+                . 'departments.natural_requirement, '
+                . 'departments.english_listening_requirement'
             )
             ->join(
                 'departments',
@@ -99,11 +87,13 @@ class ApplicationCartController extends BaseController
             ->orderBy(
                 'application_cart.created_at',
                 'ASC'
-            )
-            ->findAll();
-        // ========================================
-        // 6. 傳送給 View
-        // ========================================
+            );
+        $perPage = 30;
+        $cartItems = $cartModel->paginate(
+            $perPage,
+            'application_cart'
+        );
+        $pager = $cartModel->pager;
         return view(
             'Apply/application_cart',
             [
@@ -111,57 +101,35 @@ class ApplicationCartController extends BaseController
                     $application,
                 'cartItems' =>
                     $cartItems,
+                'pager' => $pager,
                 'isConfirmed' =>
-                    false,
+                    $isConfirmed,
             ]
         );
     }
-    // ========================================
-    // 加入校系
-    // ========================================
     public function add($departmentId = null)
     {
-        // ========================================
-        // 1. 檢查登入
-        // ========================================
         if (!session()->get('isLoggedIn')) {
-            return redirect()
-                ->to('/login')
-                ->with(
-                    'error',
-                    '請先登入後再進行此操作。'
-                );
+            return $this->ajaxOrRedirect(
+                '請先登入後再進行此操作。'
+            );
         }
-        // ========================================
-        // 2. 檢查 department ID
-        // ========================================
         if (empty($departmentId)) {
-            return redirect()
-                ->back()
-                ->with(
-                    'error',
-                    '無效的校系資料。'
-                );
+            return $this->ajaxOrRedirect(
+                '無效的校系資料。'
+            );
         }
-        // ========================================
-        // 3. 取得 candidate ID
-        // ========================================
         $candidateId = session()->get(
             'candidate_id'
         );
         if (empty($candidateId)) {
             session()->destroy();
-            return redirect()
-                ->to('/login')
-                ->with(
-                    'error',
-                    '登入資料已失效，請重新登入。'
-                );
+            return $this->ajaxOrRedirect(
+                '登入資料已失效，請重新登入。'
+            );
         }
-        // ========================================
-        // 4. 查詢 applications
-        // ========================================
-        $applicationModel = new ApplicationModel();
+        $applicationModel =
+            new ApplicationModel();
         $application = $applicationModel
             ->where(
                 'candidate_id',
@@ -169,31 +137,20 @@ class ApplicationCartController extends BaseController
             )
             ->first();
         if (!$application) {
-            return redirect()
-                ->to('/application')
-                ->with(
-                    'error',
-                    '請先完成報名基本資料。'
-                );
+            return $this->ajaxOrRedirect(
+                '請先完成報名基本資料。'
+            );
         }
-        // ========================================
-        // 5. 確認是否仍為 draft
-        // ========================================
         if (
-            $application['status']
+            ($application['status'] ?? 'draft')
             !== 'draft'
         ) {
-            return redirect()
-                ->back()
-                ->with(
-                    'error',
-                    '報名資料已確認送出，目前無法修改。'
-                );
+            return $this->ajaxOrRedirect(
+                '報名資料已確認送出，目前無法修改。'
+            );
         }
-        // ========================================
-        // 6. 確認校系是否存在
-        // ========================================
-        $departmentModel = new DepartmentModel();
+        $departmentModel =
+            new DepartmentModel();
         $department = $departmentModel
             ->where(
                 'id',
@@ -201,17 +158,12 @@ class ApplicationCartController extends BaseController
             )
             ->first();
         if (!$department) {
-            return redirect()
-                ->back()
-                ->with(
-                    'error',
-                    '找不到指定的校系資料。'
-                );
+            return $this->ajaxOrRedirect(
+                '找不到指定的校系資料。'
+            );
         }
-        // ========================================
-        // 7. 檢查是否已經加入
-        // ========================================
-        $cartModel = new ApplicationCartModel();
+        $cartModel =
+            new ApplicationCartModel();
         $existing = $cartModel
             ->where(
                 'application_id',
@@ -223,16 +175,10 @@ class ApplicationCartController extends BaseController
             )
             ->first();
         if ($existing) {
-            return redirect()
-                ->back()
-                ->with(
-                    'error',
-                    '此校系已經加入您的校系清單。'
-                );
+            return $this->ajaxOrRedirect(
+                '此校系已經加入您的校系清單。'
+            );
         }
-        // ========================================
-        // 8. 加入購物車
-        // ========================================
         $inserted = $cartModel->insert([
             'application_id' =>
                 $application['id'],
@@ -240,32 +186,33 @@ class ApplicationCartController extends BaseController
                 $departmentId,
         ]);
         if (!$inserted) {
-            return redirect()
-                ->back()
-                ->with(
-                    'error',
-                    '加入校系失敗，請稍後再試。'
-                );
+            return $this->ajaxOrRedirect(
+                '加入校系失敗，請稍後再試。'
+            );
+        }
+        $message =
+            '已將「'
+            . $department['university_name']
+            . ' '
+            . $department['department_name']
+            . '」加入校系清單。';
+        if ($this->request->isAJAX()) {
+            return $this->response->setJSON([
+                'success' => true,
+                'message' => $message,
+                'department_id' =>
+                    (int) $departmentId,
+            ]);
         }
         return redirect()
             ->back()
             ->with(
                 'success',
-                '已將「'
-                . $department['university_name']
-                . ' '
-                . $department['department_name']
-                . '」加入校系清單。'
+                $message
             );
     }
-    // ========================================
-    // 移除校系
-    // ========================================
     public function remove($departmentId = null)
     {
-        // ========================================
-        // 1. 檢查登入
-        // ========================================
         if (!session()->get('isLoggedIn')) {
             return redirect()
                 ->to('/login')
@@ -274,9 +221,6 @@ class ApplicationCartController extends BaseController
                     '請先登入後再進行此操作。'
                 );
         }
-        // ========================================
-        // 2. 檢查 department ID
-        // ========================================
         if (empty($departmentId)) {
             return redirect()
                 ->back()
@@ -285,9 +229,6 @@ class ApplicationCartController extends BaseController
                     '無效的校系資料。'
                 );
         }
-        // ========================================
-        // 3. 取得 candidate ID
-        // ========================================
         $candidateId = session()->get(
             'candidate_id'
         );
@@ -300,9 +241,6 @@ class ApplicationCartController extends BaseController
                     '登入資料已失效，請重新登入。'
                 );
         }
-        // ========================================
-        // 4. 找到 application
-        // ========================================
         $applicationModel = new ApplicationModel();
         $application = $applicationModel
             ->where(
@@ -318,11 +256,8 @@ class ApplicationCartController extends BaseController
                     '請先完成報名基本資料。'
                 );
         }
-        // ========================================
-        // 5. 確認仍為 draft
-        // ========================================
         if (
-            $application['status']
+            ($application['status'] ?? 'draft')
             !== 'draft'
         ) {
             return redirect()
@@ -332,17 +267,23 @@ class ApplicationCartController extends BaseController
                     '報名資料已確認送出，目前無法修改。'
                 );
         }
-        // ========================================
-        // 6. 找到購物車資料
-        // ========================================
         $cartModel = new ApplicationCartModel();
         $cartItem = $cartModel
+            ->select(
+                'application_cart.*, '
+                . 'departments.university_name, '
+                . 'departments.department_name'
+            )
+            ->join(
+                'departments',
+                'departments.id = application_cart.department_id'
+            )
             ->where(
-                'application_id',
+                'application_cart.application_id',
                 $application['id']
             )
             ->where(
-                'department_id',
+                'application_cart.department_id',
                 $departmentId
             )
             ->first();
@@ -354,25 +295,48 @@ class ApplicationCartController extends BaseController
                     '此校系不在您的校系清單中。'
                 );
         }
-        // ========================================
-        // 7. 移除
-        // ========================================
         $deleted = $cartModel->delete(
             $cartItem['id']
         );
         if (!$deleted) {
-            return redirect()
-                ->back()
-                ->with(
-                    'error',
-                    '移除校系失敗，請稍後再試。'
-                );
+            return $this->ajaxOrRedirect(
+                '移除校系失敗，請稍後再試。'
+            );
+        }
+        $message = '已從校系清單移除「'
+            . $cartItem['university_name']
+            . ' '
+            . $cartItem['department_name']
+            . '」。';
+        if ($this->request->isAJAX()) {
+            return $this->response->setJSON([
+                'success' => true,
+                'message' => $message,
+                'department_id' => (int) $departmentId,
+            ]);
         }
         return redirect()
             ->back()
             ->with(
                 'success',
-                '已從校系清單移除此校系。'
+                $message
+            );
+    }
+    private function ajaxOrRedirect(
+        string $message,
+        bool $success = false
+    ) {
+        if ($this->request->isAJAX()) {
+            return $this->response->setJSON([
+                'success' => $success,
+                'message' => $message,
+            ]);
+        }
+        return redirect()
+            ->back()
+            ->with(
+                $success ? 'success' : 'error',
+                $message
             );
     }
 }

@@ -13,6 +13,10 @@
 </head>
 
 <body>
+    <div id="applicationToast" class="application-toast" role="status" aria-live="polite">
+        <i class="bi bi-check-circle-fill"></i>
+        <span id="applicationToastMessage"></span>
+    </div>
     <header class="apply-header">
         <h1 class="apply-header-title">
             網路報名系統
@@ -26,6 +30,9 @@
             </a>
             <a href="<?= site_url('application') ?>" class="apply-nav-link active">
                 立即報名
+            </a>
+            <a href="<?= site_url('application/cart') ?>" class="apply-nav-link">
+                我的校系清單
             </a>
             <a href="<?= site_url('application-status') ?>" class="apply-nav-link">
                 報名狀態查詢
@@ -79,30 +86,6 @@
                 ) ?>
             </div>
         <?php endif; ?>
-        <!-- 我的校系清單 -->
-        <section class="application-selection-summary">
-            <div class="application-selection-summary-info">
-                <span class="application-selection-summary-icon">
-                    <i class="bi bi-bookmark-star"></i>
-                </span>
-                <div>
-                    <div class="application-selection-summary-title">
-                        我的校系清單
-                    </div>
-                    <div class="application-selection-summary-text">
-                        目前已加入
-                        <strong>
-                            <?= count($cartDepartmentIds) ?>
-                        </strong>
-                        個校系
-                    </div>
-                </div>
-            </div>
-            <a href="<?= site_url('application/cart') ?>" class="apply-secondary-button">
-                <i class="bi bi-bookmark-star"></i>
-                查看我的校系清單
-            </a>
-        </section>
         <!-- 搜尋區 -->
         <section class="apply-content-card department-search-card application-department-search-card">
             <h3 class="apply-section-title">
@@ -466,6 +449,9 @@
                                     招生名額
                                 </th>
                                 <th>
+                                    檢定科目
+                                </th>
+                                <th>
                                     操作
                                 </th>
                             </tr>
@@ -488,12 +474,14 @@
                                     <td>
                                         <?= esc($department['admission_quota']) ?>
                                     </td>
-                                    <td class="application-department-actions">
+                                    <td class="application-department-detail">
                                         <button type="button" class="department-detail-button"
                                             onclick="toggleDepartmentDetail(this)">
                                             <i class="bi bi-chevron-down"></i>
                                             查看詳細
                                         </button>
+                                    </td>
+                                    <td class="application-department-operation">
                                         <?php if (
                                             in_array(
                                                 (int) $department['id'],
@@ -520,7 +508,7 @@
                                     </td>
                                 </tr>
                                 <tr class="department-detail-row" style="display: none;">
-                                    <td colspan="6">
+                                    <td colspan="7">
                                         <div class="department-detail-content">
                                             <div class="department-detail-title">
                                                 <i class="bi bi-book"></i>
@@ -632,28 +620,8 @@
     <footer class="apply-footer">
         Apply116 網路報名系統
     </footer>
-    <script>
-        function toggleDepartmentDetail(button) {
-            const mainRow =
-                button.closest('tr');
-            const detailRow =
-                mainRow.nextElementSibling;
-            const isHidden =
-                detailRow.style.display === 'none'
-                || detailRow.style.display === '';
-            if (isHidden) {
-                detailRow.style.display =
-                    'table-row';
-                button.innerHTML =
-                    '<i class="bi bi-chevron-up"></i> 收起詳細';
-            } else {
-                detailRow.style.display =
-                    'none';
-                button.innerHTML =
-                    '<i class="bi bi-chevron-down"></i> 查看詳細';
-            }
-        }
-    </script>
+    <script src="<?= base_url('JS/department.js') ?>" defer></script>
+    <script src="<?= base_url('JS/application.js') ?>" defer></script>
 </body>
 
 </html>

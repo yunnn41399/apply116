@@ -26,6 +26,9 @@
             <a href="<?= site_url('/application') ?>" class="apply-nav-link">
                 立即報名
             </a>
+            <a href="<?= site_url('application/cart') ?>" class="apply-nav-link">
+                我的校系清單
+            </a>
             <a href="<?= site_url('application-status') ?>" class="apply-nav-link">
                 報名狀態查詢
             </a>
@@ -534,25 +537,7 @@
     <footer class="apply-footer">
         Apply116 網路報名系統
     </footer>
-    <script>
-        function toggleDepartmentDetail(button) {
-            const mainRow = button.closest('tr');
-            const detailRow = mainRow.nextElementSibling;
-            const icon = button.querySelector('i');
-            const isHidden =
-                detailRow.style.display === 'none'
-                || detailRow.style.display === '';
-            if (isHidden) {
-                detailRow.style.display = 'table-row';
-                button.innerHTML =
-                    '<i class="bi bi-chevron-up"></i> 收起詳細';
-            } else {
-                detailRow.style.display = 'none';
-                button.innerHTML =
-                    '<i class="bi bi-chevron-down"></i> 查看詳細';
-            }
-        }
-    </script>
+    <script src="<?= base_url('JS/department.js') ?>" defer></script>
 </body>
 
 </html>

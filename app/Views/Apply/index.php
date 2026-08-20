@@ -25,6 +25,9 @@
             <a href="<?= site_url('/application') ?>" class="apply-nav-link">
                 立即報名
             </a>
+            <a href="<?= site_url('application/cart') ?>" class="apply-nav-link">
+                我的校系清單
+            </a>
             <a href="<?= site_url('application-status') ?>" class="apply-nav-link">
                 報名狀態查詢
             </a>
@@ -82,7 +85,18 @@
                     立即報名
                 </div>
                 <div class="apply-card-description">
-                    填寫報名資料並選擇欲報名的校系
+                    填寫報名基本資料並選擇校系
+                </div>
+            </a>
+            <a href="<?= site_url('/application/cart') ?>" class="apply-card">
+                <div class="apply-card-icon">
+                    <i class="bi bi-bookmark-star"></i>
+                </div>
+                <div class="apply-card-title">
+                    我的校系清單
+                </div>
+                <div class="apply-card-description">
+                    查看與管理已加入的校系
                 </div>
             </a>
             <a href="<?= site_url('application-status') ?>" class="apply-card">

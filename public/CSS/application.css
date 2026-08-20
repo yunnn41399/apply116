@@ -328,37 +328,72 @@
 }
 
 /* =========================================================
-   10. 選擇報名校系 - 操作欄
+   10. 選擇報名校系 - 表格
    ========================================================= */
-.application-department-actions {
-    width: 210px !important;
-    min-width: 210px !important;
-    max-width: 210px !important;
-    padding-left: 8px !important;
-    padding-right: 8px !important;
-    text-align: center;
+.application-department-table {
+    width: 100%;
+    min-width: 1000px;
+    table-layout: fixed;
+}
+
+.application-department-table th:nth-child(1),
+.application-department-table td:nth-child(1) {
+    width: 70px;
     white-space: nowrap;
-    vertical-align: middle;
 }
 
-.application-department-actions>* {
-    vertical-align: middle;
+.application-department-table th:nth-child(2),
+.application-department-table td:nth-child(2) {
+    width: 150px;
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    line-height: 1.5;
 }
 
-.application-department-actions .application-add-form {
+.application-department-table th:nth-child(3),
+.application-department-table td:nth-child(3) {
+    width: 70px;
+    white-space: nowrap;
+}
+
+.application-department-table th:nth-child(4),
+.application-department-table td:nth-child(4) {
+    width: 220px;
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    line-height: 1.5;
+}
+
+.application-department-table th:nth-child(5),
+.application-department-table td:nth-child(5) {
+    width: 70px;
+    white-space: nowrap;
+    text-align: center;
+}
+
+.application-department-table th:nth-child(6),
+.application-department-table td:nth-child(6) {
+    width: 100px;
+    white-space: nowrap;
+    text-align: center;
+}
+
+.application-department-table th:nth-child(7),
+.application-department-table td:nth-child(7) {
+    width: 90px;
+    white-space: nowrap;
+    text-align: center;
+}
+
+/* =========================================================
+   11. 選擇報名校系 - 操作欄
+   ========================================================= */
+.application-add-form {
     display: inline-flex;
     align-items: center;
     margin: 0;
-}
-
-.application-department-actions .department-detail-button,
-.application-department-actions .application-add-button,
-.application-department-actions .application-added-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    flex: 0 0 auto;
-    white-space: nowrap;
 }
 
 /* 加入 */
@@ -408,7 +443,7 @@
 }
 
 /* =========================================================
-   11. 選校頁搜尋區
+   12. 選校頁搜尋區
    ========================================================= */
 .application-department-search-card {
     padding: 0;
@@ -428,22 +463,22 @@
 }
 
 /* =========================================================
-   12. 選校表格欄寬
+   13. 我的校系清單 - 表格
    ========================================================= */
-.application-department-table {
+.application-cart-table {
     width: 100%;
     min-width: 1000px;
     table-layout: fixed;
 }
 
-.application-department-table th:nth-child(1),
-.application-department-table td:nth-child(1) {
+.application-cart-table th:nth-child(1),
+.application-cart-table td:nth-child(1) {
     width: 70px;
     white-space: nowrap;
 }
 
-.application-department-table th:nth-child(2),
-.application-department-table td:nth-child(2) {
+.application-cart-table th:nth-child(2),
+.application-cart-table td:nth-child(2) {
     width: 150px;
     white-space: normal;
     overflow-wrap: break-word;
@@ -451,14 +486,14 @@
     line-height: 1.5;
 }
 
-.application-department-table th:nth-child(3),
-.application-department-table td:nth-child(3) {
+.application-cart-table th:nth-child(3),
+.application-cart-table td:nth-child(3) {
     width: 70px;
     white-space: nowrap;
 }
 
-.application-department-table th:nth-child(4),
-.application-department-table td:nth-child(4) {
+.application-cart-table th:nth-child(4),
+.application-cart-table td:nth-child(4) {
     width: 220px;
     white-space: normal;
     overflow-wrap: break-word;
@@ -466,16 +501,91 @@
     line-height: 1.5;
 }
 
-.application-department-table th:nth-child(5),
-.application-department-table td:nth-child(5) {
+.application-cart-table th:nth-child(5),
+.application-cart-table td:nth-child(5) {
     width: 70px;
     white-space: nowrap;
     text-align: center;
 }
 
-.application-department-table th:nth-child(6),
-.application-department-table td:nth-child(6) {
-    width: 210px;
+.application-cart-table th:nth-child(6),
+.application-cart-table td:nth-child(6) {
+    width: 100px;
     white-space: nowrap;
     text-align: center;
+}
+
+.application-cart-table th:nth-child(7),
+.application-cart-table td:nth-child(7) {
+    width: 90px;
+    white-space: nowrap;
+    text-align: center;
+}
+
+/* =========================================================
+   14. 我的校系清單 - 操作欄
+   ========================================================= */
+.application-remove-form {
+    display: inline-flex;
+    align-items: center;
+    margin: 0;
+}
+
+.application-cart-operation {
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+/* =========================================================
+   校系加入提示 Toast
+   ========================================================= */
+.application-toast {
+    position: fixed;
+    top: 84px;
+    right: 30px;
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 320px;
+    max-width: 480px;
+    padding: 14px 18px;
+    box-sizing: border-box;
+    border: 1px solid #b9dfc9;
+    border-radius: 7px;
+    background-color: #effaf4;
+    color: #147a4b;
+    font-size: 14px;
+    font-weight: 600;
+    box-shadow:
+        0 5px 18px rgba(20, 70, 110, 0.15);
+    opacity: 0;
+    transform: translateY(-12px);
+    pointer-events: none;
+    transition:
+        opacity 0.2s ease,
+        transform 0.2s ease;
+}
+
+.application-toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.application-toast i {
+    flex-shrink: 0;
+    font-size: 18px;
+}
+
+.application-toast.success {
+    border-color: #b9dfc9;
+    background-color: #effaf4;
+    color: #147a4b;
+}
+
+.application-toast.error {
+    border-color: #e6b8b5;
+    background-color: #fff3f2;
+    color: #c62828;
 }

@@ -26,6 +26,9 @@
             <a href="<?= site_url('application') ?>" class="apply-nav-link active">
                 立即報名
             </a>
+            <a href="<?= site_url('application/cart') ?>" class="apply-nav-link">
+                我的校系清單
+            </a>
             <a href="<?= site_url('application-status') ?>" class="apply-nav-link">
                 報名狀態查詢
             </a>
