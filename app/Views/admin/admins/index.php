@@ -16,6 +16,7 @@
         </a>
     </p>
 
+
     <?php if (session()->has('success')): ?>
 
         <p>
@@ -50,6 +51,7 @@
         <table border="1" cellpadding="8" cellspacing="0">
 
             <thead>
+
                 <tr>
                     <th>編號</th>
                     <th>管理員帳號</th>
@@ -59,11 +61,29 @@
                     <th>建立時間</th>
                     <th>操作</th>
                 </tr>
+
             </thead>
+
 
             <tbody>
 
                 <?php foreach ($admins as $admin): ?>
+
+                    <?php
+                        // 角色中文名稱
+                        $roleName = match ($admin['role']) {
+                            'super_admin' => '最高管理員',
+                            'admin'       => '一般管理員',
+                            default       => '未知角色',
+                        };
+
+                        // 狀態中文名稱
+                        $statusName = match ($admin['status']) {
+                            'active'   => '啟用',
+                            'inactive' => '停用',
+                            default    => '未知狀態',
+                        };
+                    ?>
 
                     <tr>
 
@@ -80,11 +100,11 @@
                         </td>
 
                         <td>
-                            <?= esc($admin['role']) ?>
+                            <?= esc($roleName) ?>
                         </td>
 
                         <td>
-                            <?= esc($admin['status']) ?>
+                            <?= esc($statusName) ?>
                         </td>
 
                         <td>
