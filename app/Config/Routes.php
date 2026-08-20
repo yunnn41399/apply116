@@ -14,8 +14,7 @@ $routes->post('admin/logout', 'AdminAuth::logout');
 
 // 管理員管理
 $routes->get(
-    '/admin/admins',
-    'AdminManagement::index',
+    '/admin/admins', 'AdminManagement::index',
     [
         'filter' => [
             'adminAuth',
@@ -23,6 +22,48 @@ $routes->get(
         ],
     ]
 );
+
+$routes->get(
+    '/admin/admins/create', 'AdminManagement::create',
+    [
+        'filter' => [
+            'adminAuth',
+            'adminRole:super_admin',
+        ],
+    ]
+);
+
+$routes->post(
+    '/admin/admins/create', 'AdminManagement::create',
+    [
+        'filter' => [
+            'adminAuth',
+            'adminRole:super_admin',
+        ],
+    ]
+);
+
+// 編輯管理員
+$routes->get(
+    '/admin/admins/edit/(:num)', 'AdminManagement::edit/$1',
+    [
+        'filter' => [
+            'adminAuth',
+            'adminRole:super_admin',
+        ],
+    ]
+);
+
+$routes->post(
+    '/admin/admins/edit/(:num)', 'AdminManagement::edit/$1',
+    [
+        'filter' => [
+            'adminAuth',
+            'adminRole:super_admin',
+        ],
+    ]
+);
+
 
 // 後臺管理功能，必須登入管理員帳號才能進入頁面
 $routes->group('admin', ['filter' => 'adminAuth'], function ($routes) {

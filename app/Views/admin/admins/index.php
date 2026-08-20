@@ -16,6 +16,31 @@
         </a>
     </p>
 
+    <?php if (session()->has('success')): ?>
+
+        <p>
+            <?= esc(session('success')) ?>
+        </p>
+
+    <?php endif; ?>
+
+
+    <?php if (session()->has('error')): ?>
+
+        <p>
+            <?= esc(session('error')) ?>
+        </p>
+
+    <?php endif; ?>
+
+
+    <p>
+        <a href="<?= site_url('admin/admins/create') ?>">
+            新增管理員
+        </a>
+    </p>
+
+
     <?php if (empty($admins)): ?>
 
         <p>目前沒有管理員資料。</p>
@@ -32,6 +57,7 @@
                     <th>角色</th>
                     <th>狀態</th>
                     <th>建立時間</th>
+                    <th>操作</th>
                 </tr>
             </thead>
 
@@ -63,6 +89,12 @@
 
                         <td>
                             <?= esc($admin['created_at'] ?? '') ?>
+                        </td>
+
+                        <td>
+                            <a href="<?= site_url('admin/admins/edit/' . $admin['id']) ?>">
+                                編輯
+                            </a>
                         </td>
 
                     </tr>
