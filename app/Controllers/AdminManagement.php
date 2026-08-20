@@ -121,7 +121,7 @@ class AdminManagement extends BaseController
         $logService = new AdminLogService();
 
         $logService->log(
-            'create_admin',
+            '新增管理員帳號',
             '新增管理員：' . $username
         );
 
@@ -263,30 +263,59 @@ class AdminManagement extends BaseController
         // 建立操作紀錄
         $logService = new AdminLogService();
 
-        // 記錄一般管理員資料修改
         $logDescription = '修改管理員：' . $admin['username'];
 
-        if ($password !== '') {
-            $logDescription .= '（包含密碼）';
+        $changes = [];
+
+        // 姓名有變更
+        if ($admin['name'] !== $name) {
+            $changes[] = '姓名：' . $admin['name'] . ' → ' . $name;
         }
 
-        $logService->log(
-            'update_admin',
-            $logDescription
-        );
+        // 角色有變更
+        if ($admin['role'] !== $role) {
 
-        // 如果帳號狀態有變更，另外記錄啟用／停用
+            $oldRoleText = $admin['role'] === 'super_admin'
+                ? '最高管理員'
+                : '一般管理員';
+
+            $newRoleText = $role === 'super_admin'
+                ? '最高管理員'
+                : '一般管理員';
+
+            $changes[] = '角色：' . $oldRoleText . ' → ' . $newRoleText;
+        }
+
+        // 狀態有變更
         if ($admin['status'] !== $status) {
 
-            $statusText = $status === 'active'
+            $oldStatusText = $admin['status'] === 'active'
                 ? '啟用'
                 : '停用';
 
+            $newStatusText = $status === 'active'
+                ? '啟用'
+                : '停用';
+
+            $changes[] = '狀態：' . $oldStatusText . ' → ' . $newStatusText;
+        }
+
+        // 密碼有變更
+        if ($password !== '') {
+            $changes[] = '已修改密碼';
+        }
+
+        // 如果有實際變更，將變更內容加入操作紀錄
+        if (!empty($changes)) {
+
+            $logDescription .= '（' . implode('、', $changes) . '）';
+
             $logService->log(
-                'update_admin_status',
-                $statusText . '管理員：' . $admin['username']
+                '更新管理員帳號資料',
+                $logDescription
             );
         }
+
 
         return redirect()
             ->to('/admin/admins')

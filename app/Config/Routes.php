@@ -67,6 +67,9 @@ $routes->post(
 
 // 後臺管理功能，必須登入管理員帳號才能進入頁面
 $routes->group('admin', ['filter' => 'adminAuth'], function ($routes) {
+    
+    // 管理員操作紀錄
+    $routes->get('logs', 'AdminLog::index');
 
     // 後臺首頁
     $routes->get('/', 'Admin::index');

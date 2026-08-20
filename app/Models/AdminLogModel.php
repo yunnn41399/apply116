@@ -22,6 +22,7 @@ class AdminLogModel extends Model
         'admin_id',
         'action',
         'description',
+        'created_at',
     ];
 
     protected $useTimestamps = false;
