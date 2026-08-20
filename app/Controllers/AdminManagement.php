@@ -206,6 +206,36 @@ class AdminManagement extends BaseController
         }
 
         /*
+        * 防止管理員修改自己的權限或停用自己的帳號
+        */
+        $currentAdminId = session()->get('admin_id');
+
+        if ((int) $admin['id'] === (int) $currentAdminId) {
+
+            // 不允許自己降級
+            if ($admin['role'] === 'super_admin' && $role !== 'super_admin') {
+                return redirect()
+                    ->back()
+                    ->withInput()
+                    ->with(
+                        'error',
+                        '無法將自己的最高管理員權限降為一般管理員。'
+                    );
+            }
+
+            // 不允許自己停用帳號
+            if ($status !== 'active') {
+                return redirect()
+                    ->back()
+                    ->withInput()
+                    ->with(
+                        'error',
+                        '無法停用目前正在使用的管理員帳號。'
+                    );
+            }
+        }
+
+        /*
         * 防止最後一個 super_admin 被降權或停用
         */
         if ($admin['role'] === 'super_admin') {
