@@ -537,6 +537,27 @@
     white-space: nowrap;
 }
 
+
+.application-cart-locked-message {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 20px;
+    padding: 12px 15px;
+    border-left: 4px solid #b26a00;
+    border-radius: 4px;
+    background-color: #fff7e6;
+    color: #7a5200;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.application-cart-locked-message i {
+    flex-shrink: 0;
+    color: #b26a00;
+    font-size: 16px;
+}
 /* =========================================================
    校系加入提示 Toast
    ========================================================= */
@@ -588,4 +609,182 @@
     border-color: #e6b8b5;
     background-color: #fff3f2;
     color: #c62828;
+}
+
+/* =========================================================
+   15. 選擇正式報名校系
+   ========================================================= */
+.application-selection-highlight {
+    color: #c62828;
+    font-weight: 700;
+}
+
+.department-selection-checkbox {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    cursor: pointer;
+    accent-color: #1877c9;
+}
+
+.application-selection-table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+.application-selection-table th:nth-child(1),
+.application-selection-table td:nth-child(1) {
+    width: 15%;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.application-selection-table th:nth-child(2),
+.application-selection-table td:nth-child(2) {
+    width: 25%;
+}
+
+.application-selection-table th:nth-child(3),
+.application-selection-table td:nth-child(3) {
+    width: 35%;
+}
+
+.application-selection-table th:nth-child(4),
+.application-selection-table td:nth-child(4) {
+    width: 10%;
+    text-align: center;
+}
+
+.application-selection-table th:nth-child(5),
+.application-selection-table td:nth-child(5) {
+    width: 15%;
+    text-align: center;
+}
+
+/* =========================================================
+   16. 報名資料核對
+   ========================================================= */
+.application-confirm-department-table {
+    width: 100%;
+    margin-top: 10px;
+    border: 1px solid #d7e2ee;
+    border-radius: 7px;
+    border-spacing: 0;
+    overflow: hidden;
+    background-color: #ffffff;
+}
+
+.application-confirm-department-table tr {
+    height: 52px;
+}
+
+.application-confirm-department-table tr:last-child td {
+    border-bottom: none;
+}
+
+.application-confirm-department-table td {
+    padding: 13px 16px;
+    border: none;
+    border-bottom: 1px solid #e5edf4;
+    vertical-align: middle;
+    font-size: 15px;
+}
+
+.application-confirm-department-label {
+    width: 140px;
+    background-color: #f7fbff;
+    color: #536b82;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.application-confirm-department-value {
+    background-color: #ffffff;
+    color: #173b63;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.application-confirm-edit-hint {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 18px;
+    padding: 11px 14px;
+    border-left: 4px solid #2589d8;
+    border-radius: 4px;
+    background-color: #eef7ff;
+    color: #536b82;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.application-confirm-edit-hint i {
+    flex-shrink: 0;
+    color: #2589d8;
+    font-size: 16px;
+}
+
+.application-confirm-warning {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-top: 20px;
+    padding: 15px 18px;
+    border: 1px solid #e6b8b5;
+    border-left: 4px solid #d93025;
+    border-radius: 6px;
+    background-color: #fff8f7;
+    color: #5f3a38;
+}
+
+.application-confirm-warning>i {
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: #d93025;
+    font-size: 19px;
+}
+
+.application-confirm-warning strong {
+    display: block;
+    margin-bottom: 4px;
+    color: #b42318;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.application-confirm-warning p {
+    margin: 0;
+    color: #6d4a47;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.application-confirm-agreement {
+    margin-top: 20px;
+    padding: 15px 18px;
+    border: 1px solid #d7e2ee;
+    border-radius: 6px;
+    background-color: #f7fbff;
+}
+
+.application-confirm-agreement label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #173b63;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.application-confirm-agreement input[type="checkbox"] {
+    width: 19px;
+    height: 19px;
+    margin: 0;
+    flex-shrink: 0;
+    accent-color: #1877c9;
+    cursor: pointer;
 }

@@ -18,13 +18,20 @@ $routes->post('/reset-password/update', 'PasswordController::update');
 $routes->get('/apply', 'ApplyController::index');
 $routes->get('/department', 'DepartmentController::index');
 $routes->get('/application', 'ApplicationController::index');
-$routes->post('/application/save', 'ApplicationController::save');
+$routes->post('application/save', 'ApplicationController::save');
 $routes->get('application/edit', 'ApplicationController::edit');
-
 $routes->get('application/departments', 'ApplicationDepartmentController::index');
+
 $routes->get('application/cart', 'ApplicationCartController::index');
 $routes->post('application/cart/add/(:num)', 'ApplicationCartController::add/$1');
 $routes->post('application/cart/remove/(:num)', 'ApplicationCartController::remove/$1');
+
+$routes->get('application/selection', 'ApplicationSelectionController::index');
+$routes->post('application/selection/toggle', 'ApplicationSelectionController::toggleSelection');
+$routes->post('application/selection/save', 'ApplicationSelectionController::saveSelection');
+
+$routes->get('application/confirm', 'ApplicationConfirmController::index');
+$routes->post('application/confirm/submit', 'ApplicationConfirmController::submit');
 
 $routes->get('/captcha', 'Captcha::index');
 $routes->get('/register/refresh-captcha', 'Register::refreshCaptcha');

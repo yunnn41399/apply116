@@ -222,3 +222,178 @@ document.addEventListener(
         });
     }
 );
+document.addEventListener('DOMContentLoaded', () => {
+    const selectionForm =
+        document.getElementById(
+            'applicationSelectionForm'
+        );
+    if (!selectionForm) {
+        return;
+    }
+    const checkboxes =
+        document.querySelectorAll(
+            '.department-selection-checkbox'
+        );
+    const countElement =
+        document.getElementById(
+            'selectedDepartmentCount'
+        );
+    const submitButton =
+        document.getElementById(
+            'applicationSelectionSubmit'
+        );
+    const toggleUrl =
+        selectionForm.dataset.selectionToggleUrl;
+    if (!toggleUrl) {
+        console.error(
+            '找不到 application selection toggle URL。'
+        );
+        return;
+    }
+    function updateSelectionUI(selectedCount) {
+        if (countElement) {
+            countElement.textContent =
+                `${selectedCount} / 6`;
+        }
+        if (submitButton) {
+            submitButton.disabled =
+                selectedCount < 1;
+        }
+        checkboxes.forEach((checkbox) => {
+            if (
+                !checkbox.checked
+                && selectedCount >= 6
+            ) {
+                checkbox.disabled = true;
+            } else {
+                checkbox.disabled = false;
+            }
+        });
+    }
+    async function syncSelection(checkbox) {
+        const formData =
+            new FormData();
+        const csrfInput =
+            selectionForm.querySelector(
+                'input[type="hidden"][name]'
+            );
+        if (csrfInput) {
+            formData.append(
+                csrfInput.name,
+                csrfInput.value
+            );
+        }
+        formData.append(
+            'department_id',
+            checkbox.value
+        );
+        formData.append(
+            'checked',
+            checkbox.checked
+                ? '1'
+                : '0'
+        );
+        try {
+            const response =
+                await fetch(
+                    toggleUrl,
+                    {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'X-Requested-With':
+                                'XMLHttpRequest',
+                            'Accept':
+                                'application/json'
+                        }
+                    }
+                );
+            const data =
+                await response.json();
+            if (
+                !response.ok
+                || !data.success
+            ) {
+                throw new Error(
+                    data.message
+                    || '更新選擇失敗。'
+                );
+            }
+            updateSelectionUI(
+                data.selectedCount
+            );
+        } catch (error) {
+            console.error(
+                '正式報名校系選擇失敗：',
+                error
+            );
+            checkbox.checked =
+                !checkbox.checked;
+            updateSelectionUI(
+                countElement
+                    ? parseInt(
+                        countElement.textContent,
+                        10
+                    ) || 0
+                    : 0
+            );
+            if (
+                typeof showApplicationToast
+                === 'function'
+            ) {
+                showApplicationToast(
+                    error.message
+                    || '更新選擇失敗。',
+                    'error'
+                );
+            } else {
+                alert(
+                    error.message
+                    || '更新選擇失敗。'
+                );
+            }
+        }
+    }
+    checkboxes.forEach((checkbox) => {
+        checkbox.addEventListener(
+            'change',
+            () => {
+                syncSelection(
+                    checkbox
+                );
+            }
+        );
+    });
+    selectionForm.addEventListener(
+        'submit',
+        (event) => {
+            const checkedOnPage =
+                document.querySelectorAll(
+                    '.department-selection-checkbox:checked'
+                );
+            if (
+                checkedOnPage.length === 0
+            ) {
+                return;
+            }
+        }
+    );
+    let initialCount = 0;
+    if (countElement) {
+        const text =
+            countElement.textContent
+                .trim();
+        const match =
+            text.match(/^(\d+)/);
+        if (match) {
+            initialCount =
+                parseInt(
+                    match[1],
+                    10
+                );
+        }
+    }
+    updateSelectionUI(
+        initialCount
+    );
+});

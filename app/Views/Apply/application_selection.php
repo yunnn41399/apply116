@@ -4,7 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>網路報名系統 - 我的校系清單</title>
+    <title>
+        網路報名系統 - 選擇正式報名校系
+    </title>
     <link rel="stylesheet" href="<?= base_url('CSS/common.css') ?>">
     <link rel="stylesheet" href="<?= base_url('CSS/apply.css') ?>">
     <link rel="stylesheet" href="<?= base_url('CSS/department.css') ?>">
@@ -13,10 +15,6 @@
 </head>
 
 <body>
-    <div id="applicationToast" class="application-toast" role="status" aria-live="polite">
-        <i class="bi bi-check-circle-fill"></i>
-        <span id="applicationToastMessage"></span>
-    </div>
     <header class="apply-header">
         <h1 class="apply-header-title">
             網路報名系統
@@ -28,10 +26,10 @@
             <a href="<?= site_url('department') ?>" class="apply-nav-link">
                 查詢校系資料
             </a>
-            <a href="<?= site_url('application') ?>" class="apply-nav-link">
+            <a href="<?= site_url('application') ?>" class="apply-nav-link active">
                 立即報名
             </a>
-            <a href="<?= site_url('application/cart') ?>" class="apply-nav-link active">
+            <a href="<?= site_url('application/cart') ?>" class="apply-nav-link">
                 我的校系清單
             </a>
             <a href="<?= site_url('application-status') ?>" class="apply-nav-link">
@@ -64,12 +62,15 @@
     <main class="apply-container">
         <section class="apply-welcome">
             <h2>
-                <i class="bi bi-bookmark-star"></i>
-                我的校系清單
+                <i class="bi bi-check2-square"></i>
+                選擇正式報名校系
             </h2>
             <p>
-                您可以先將有興趣的校系加入清單，
-                再選擇最多 6 個校系進行正式報名。
+                請從您已加入的校系中選擇
+                <strong class="application-selection-highlight">
+                    1~6 個
+                </strong>
+                進行正式報名。
             </p>
         </section>
         <?php if (
@@ -78,72 +79,48 @@
             <div class="apply-error-message">
                 <i class="bi bi-exclamation-circle"></i>
                 <?= esc(
-                    session()->getFlashdata(
-                        'error'
-                    )
+                    session()->getFlashdata('error')
                 ) ?>
             </div>
         <?php endif; ?>
-        <?php if (
-            session()->getFlashdata('success')
-        ): ?>
-            <div class="apply-success-message">
-                <i class="bi bi-check-circle"></i>
-                <?= esc(
-                    session()->getFlashdata(
-                        'success'
-                    )
-                ) ?>
-            </div>
-        <?php endif; ?>
-        <?php if ($isConfirmed): ?>
-            <div class="application-cart-locked-message">
-                <i class="bi bi-lock-fill"></i>
+        <section class="application-selection-counter">
+            <div>
                 <span>
-                    報名已正式送出，目前校系清單僅供查看，無法再新增、移除或修改。
+                    目前已選：
                 </span>
+                <strong id="selectedDepartmentCount" class="application-selection-highlight">
+                    <?= $selectedCount ?> / 6
+                </strong>
             </div>
-        <?php endif; ?>
+            <span class="application-selection-counter-hint">
+                至少選擇 1 個，最多選擇 6 個
+            </span>
+        </section>
         <section class="apply-content-card">
             <div class="application-cart-header">
                 <h3 class="apply-section-title">
-                    <i class="bi bi-bookmark-star"></i>
-                    已加入的校系
+                    <i class="bi bi-list-check"></i>
+                    候選的校系
                 </h3>
                 <span class="application-cart-count">
-                    共 <?= $pager->getTotal('application_cart') ?> 筆
+                    共 <?= $pager->getTotal('application_selection') ?> 筆
                 </span>
             </div>
-            <?php if (empty($cartItems)): ?>
-                <div class="application-cart-empty">
-                    <div class="application-cart-empty-icon">
-                        <i class="bi bi-bookmark-x"></i>
-                    </div>
-                    <div class="application-cart-empty-title">
-                        目前尚未加入任何校系
-                    </div>
-                    <div class="application-cart-empty-text">
-                        您可以先瀏覽校系資料，
-                        將有興趣的校系加入清單。
-                    </div>
-                    <a href="<?= site_url('application/departments') ?>" class="apply-primary-button">
-                        <i class="bi bi-search"></i>
-                        前往選擇校系
-                    </a>
-                </div>
-            <?php else: ?>
+            <form action="<?= site_url(
+                'application/selection/save'
+            ) ?>" method="post" id="applicationSelectionForm" data-selection-toggle-url="<?= site_url(
+                 'application/selection/toggle'
+             ) ?>">
+                <?= csrf_field() ?>
                 <div class="department-table-wrapper">
-                    <table class="apply-table application-cart-table">
+                    <table class="apply-table application-selection-table">
                         <thead>
                             <tr>
                                 <th>
-                                    學校代碼
+                                    選擇
                                 </th>
                                 <th>
                                     學校名稱
-                                </th>
-                                <th>
-                                    學系代碼
                                 </th>
                                 <th>
                                     學系名稱
@@ -154,9 +131,6 @@
                                 <th>
                                     檢定科目
                                 </th>
-                                <th>
-                                    操作
-                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -165,30 +139,25 @@
                                 as $cartItem
                             ): ?>
                                 <tr class="department-main-row">
-                                    <td>
-                                        <?= esc(
-                                            $cartItem['university_code']
-                                        ) ?>
+                                    <td class="application-selection-checkbox-cell">
+                                        <input type="checkbox" name="department_ids[]"
+                                            value="<?= esc($cartItem['department_id']) ?>"
+                                            class="department-selection-checkbox" <?= in_array(
+                                                (int) $cartItem['department_id'],
+                                                $selectedDepartmentIds,
+                                                true
+                                            )
+                                                ? 'checked'
+                                                : '' ?>>
                                     </td>
                                     <td>
-                                        <?= esc(
-                                            $cartItem['university_name']
-                                        ) ?>
+                                        <?= esc($cartItem['university_name']) ?>
                                     </td>
                                     <td>
-                                        <?= esc(
-                                            $cartItem['department_code']
-                                        ) ?>
-                                    </td>
-                                    <td>
-                                        <?= esc(
-                                            $cartItem['department_name']
-                                        ) ?>
+                                        <?= esc($cartItem['department_name']) ?>
                                     </td>
                                     <td class="application-cart-quota">
-                                        <?= esc(
-                                            $cartItem['admission_quota']
-                                        ) ?>
+                                        <?= esc($cartItem['admission_quota']) ?>
                                     </td>
                                     <td class="application-department-detail">
                                         <button type="button" class="department-detail-button"
@@ -197,29 +166,9 @@
                                             查看詳細
                                         </button>
                                     </td>
-                                    <td class="application-cart-operation">
-                                        <?php if (!$isConfirmed): ?>
-                                            <form action="<?= site_url(
-                                                'application/cart/remove/'
-                                                . $cartItem['department_id']
-                                            ) ?>" method="post" class="application-remove-form">
-                                                <?= csrf_field() ?>
-
-                                                <button type="submit" class="application-remove-button">
-                                                    <i class="bi bi-trash"></i>
-                                                    移除
-                                                </button>
-                                            </form>
-                                        <?php else: ?>
-                                            <span class="apply-status apply-status-warning">
-                                                <i class="bi bi-lock-fill"></i>
-                                                已鎖定
-                                            </span>
-                                        <?php endif; ?>
-                                    </td>
                                 </tr>
                                 <tr class="department-detail-row" style="display: none;">
-                                    <td colspan="7">
+                                    <td colspan="5">
                                         <div class="department-detail-content">
                                             <div class="department-detail-title">
                                                 <i class="bi bi-book"></i>
@@ -271,7 +220,9 @@
                                                         自然
                                                     </span>
                                                     <span class="requirement-value">
-                                                        <?= esc($cartItem['natural_requirement']) ?>
+                                                        <?= esc(
+                                                            $cartItem['natural_requirement']
+                                                        ) ?>
                                                     </span>
                                                 </div>
                                                 <div class="department-requirement-item">
@@ -290,34 +241,32 @@
                         </tbody>
                     </table>
                 </div>
-                <?php if (!empty($cartItems)): ?>
-                    <div class="department-pagination">
-                        <?= $pager->links(
-                            'application_cart',
-                            'department'
-                        ) ?>
-                    </div>
-                <?php endif; ?>
-            <?php endif; ?>
-            <?php if (
-                !empty($cartItems)
-                && !$isConfirmed
-            ): ?>
+                <div class="department-pagination">
+                    <?= $pager->links(
+                        'application_selection',
+                        'department'
+                    ) ?>
+                </div>
                 <div class="application-cart-actions">
-                    <a href="<?= site_url('application/departments') ?>" class="apply-secondary-button">
-                        <i class="bi bi-search"></i>
-                        繼續選擇校系
+                    <a href="<?= site_url(
+                        'application/cart'
+                    ) ?>" class="apply-secondary-button">
+                        <i class="bi bi-arrow-left"></i>
+                        返回我的校系清單
                     </a>
-                    <a href="<?= site_url('application/selection') ?>" class="apply-primary-button">
-                        <i class="bi bi-check2-circle"></i>
-                        選擇正式報名校系
-                    </a>
+                    <button type="submit" class="apply-primary-button" id="applicationSelectionSubmit" <?= $selectedCount < 1
+                        ? 'disabled'
+                        : '' ?>>
+                        <i class="bi bi-arrow-right"></i>
+                        確認選擇
+                    </button>
                 </div>
                 <div class="application-cart-hint">
                     <i class="bi bi-info-circle"></i>
-                    下一步將從候選校系中選擇最多 6 個進行正式報名。
+                    確認選擇後將進入正式報名確認頁，
+                    尚未正式送出前仍可修改。
                 </div>
-            <?php endif; ?>
+            </form>
         </section>
     </main>
     <footer class="apply-footer">
