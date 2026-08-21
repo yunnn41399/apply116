@@ -12,6 +12,10 @@ $routes->get('admin/login', 'AdminAuth::login');
 $routes->post('admin/login', 'AdminAuth::attemptLogin');
 $routes->post('admin/logout', 'AdminAuth::logout');
 
+// 第一次登入管理員帳號需更改密碼
+$routes->get('admin/change-password', 'AdminPassword::changePassword'); 
+$routes->post('admin/change-password', 'AdminPassword::updatePassword');
+
 // 管理員管理
 $routes->get(
     '/admin/admins', 'AdminManagement::index',
@@ -76,7 +80,7 @@ $routes->get('admin/logs', 'AdminLog::index',
 
 // 後臺管理功能，必須登入管理員帳號才能進入頁面
 $routes->group('admin', ['filter' => 'adminAuth'], function ($routes) {
-
+    
     // 後臺首頁
     $routes->get('/', 'Admin::index');
 

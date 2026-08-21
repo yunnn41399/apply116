@@ -21,6 +21,7 @@ class AdminModel extends Model
         'name',
         'role',
         'status',
+        'must_change_password',
     ];
 
     protected $useTimestamps = true;
