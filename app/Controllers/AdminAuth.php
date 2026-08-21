@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\AdminModel;
+use App\Services\AdminLogService;
 
 class AdminAuth extends BaseController
 {
@@ -17,9 +18,16 @@ class AdminAuth extends BaseController
     // 管理員登入頁面
     public function login()
     {
-        // 如果已經登入，就直接進入後臺
+
+        // 若第一次登入未更改密碼，會跳轉到更改密碼的頁面
+        // 否則會直接進入後臺首頁
         if (session()->get('admin_logged_in')) {
-            return redirect()->to('/admin/announcement');
+
+            if (session()->get('admin_must_change_password')) {
+                return redirect()->to('/admin/change-password');
+            }
+
+            return redirect()->to('/admin');
         }
 
         return view('admin/login');
@@ -83,7 +91,20 @@ class AdminAuth extends BaseController
             'admin_username'   => $admin['username'],
             'admin_name'       => $admin['name'],
             'admin_role'       => $admin['role'],
+            'admin_must_change_password' => $admin['must_change_password'],
         ]);
+
+        // 建立登入操作紀錄
+        $logService = new AdminLogService();
+
+        $logService->log(
+            '管理員登入',
+            '管理員登入：' . $admin['username']
+        );
+
+        if ((int) $admin['must_change_password'] === 1) {
+            return redirect()->to('/admin/change-password');
+        }
 
         return redirect()->to('/admin');
     }
@@ -91,12 +112,25 @@ class AdminAuth extends BaseController
     // 管理員登出
     public function logout()
     {
+        // 先建立登出操作紀錄
+        // 必須在清除 Session 前執行
+        $logService = new AdminLogService();
+
+        $adminUsername = session()->get('admin_username');
+
+        $logService->log(
+            '管理員登出',
+            '管理員登出：' . ($adminUsername ?? '未知管理員')
+        );
+
+        // 清除管理員 Session
         session()->remove([
             'admin_logged_in',
             'admin_id',
             'admin_username',
             'admin_name',
             'admin_role',
+            'admin_must_change_password',
         ]);
 
         session()->regenerate(true);
