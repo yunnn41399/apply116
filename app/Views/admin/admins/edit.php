@@ -61,11 +61,7 @@
                 管理員帳號
             </label>
 
-            <input
-                type="text"
-                value="<?= esc($admin['username']) ?>"
-                readonly
-            >
+            <span><?= esc($admin['username']) ?></span>
 
         </div>
 
