@@ -18,12 +18,60 @@ class AdminManagement extends BaseController
     // 管理員列表
     public function index()
     {
-        $admins = $this->adminModel
-            ->orderBy('id', 'ASC')
-            ->findAll();
+        // 取得搜尋關鍵字
+        $keyword = trim($this->request->getGet('keyword'));
 
+        // 取得排序欄位
+        $sort = $this->request->getGet('sort');
+
+        // 取得排序方向
+        $direction = strtoupper($this->request->getGet('direction'));
+        
+        // 允許排序的欄位
+        $allowedSorts = [
+            'id',
+            'username',
+            'name',
+            'role',
+            'status',
+            'created_at',
+        ];
+
+        // 如果沒有指定或指定了不允許的欄位，預設依編號由小到大
+        if (!in_array($sort, $allowedSorts, true)) {
+            $sort = 'id';
+        }
+
+        // 只允許 ASC / DESC
+        if (!in_array($direction, ['ASC', 'DESC'], true)) {
+            $direction = 'ASC';
+        }
+
+        // 建立查詢
+        $builder = $this->adminModel;
+
+        // 搜尋
+        if ($keyword !== '') {
+
+            $builder->groupStart()
+                ->like('username', $keyword)
+                ->orLike('name', $keyword)
+                ->groupEnd();
+        }
+
+        // 排序
+        $builder->orderBy($sort, $direction);
+
+        // 分頁
+        $admins = $builder->paginate(10);
+
+        // 傳送資料給 View
         return view('admin/admins/index', [
             'admins' => $admins,
+            'keyword' => $keyword,
+            'sort' => $sort,
+            'direction' => $direction,
+            'pager' => $this->adminModel->pager,
         ]);
     }
 
