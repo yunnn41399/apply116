@@ -3,6 +3,25 @@
     <head>
         <meta charset="UTF-8">
         <title>後臺公告管理</title>
+
+        <style>
+            .pagination {
+                display: flex;
+                gap: 8px;
+                align-items: center;
+                margin-top: 20px;
+            }
+
+            .pagination a,
+            .pagination span {
+                padding: 4px 8px;
+                text-decoration: none;
+            }
+
+            .pagination .active {
+                font-weight: bold;
+            }
+        </style>
     </head>
     <body>
         
@@ -131,6 +150,126 @@
                 <?php endif; ?>
             </tbody>
         </table>
+
+        <!-- 分頁 -->
+        <?php
+            $currentPage = $pager->getCurrentPage();
+            $totalPages = $pager->getPageCount();
+        ?>
+
+        <?php if ($totalPages > 1): ?>
+
+            <div class="pagination">
+
+                <!-- 上一頁 -->
+                <?php if ($currentPage > 1): ?>
+
+                    <a href="<?= site_url(
+                        'admin/announcement?sort=' . urlencode($sort) .
+                        '&direction=' . urlencode($direction) .
+                        '&page=' . ($currentPage - 1)
+                    ) ?>">
+                        &lt;
+                    </a>
+
+                <?php endif; ?>
+
+
+                <?php
+
+                $pages = [];
+
+                if ($totalPages <= 7) {
+
+                    for ($i = 1; $i <= $totalPages; $i++) {
+                        $pages[] = $i;
+                    }
+
+                } elseif ($currentPage <= 5) {
+
+                    for ($i = 1; $i <= 5; $i++) {
+                        $pages[] = $i;
+                    }
+
+                    $pages[] = '...';
+                    $pages[] = $totalPages;
+
+                } elseif ($currentPage >= $totalPages - 4) {
+
+                    $pages[] = 1;
+                    $pages[] = '...';
+
+                    for (
+                        $i = $totalPages - 4;
+                        $i <= $totalPages;
+                        $i++
+                    ) {
+                        $pages[] = $i;
+                    }
+
+                } else {
+
+                    $pages[] = 1;
+                    $pages[] = '...';
+
+                    for (
+                        $i = $currentPage - 1;
+                        $i <= $currentPage + 1;
+                        $i++
+                    ) {
+                        $pages[] = $i;
+                    }
+
+                    $pages[] = '...';
+                    $pages[] = $totalPages;
+                }
+
+                ?>
+
+
+                <?php foreach ($pages as $page): ?>
+
+                    <?php if ($page === '...'): ?>
+
+                        <span>...</span>
+
+                    <?php elseif ($page == $currentPage): ?>
+
+                        <span class="active">
+                            <?= $page ?>
+                        </span>
+
+                    <?php else: ?>
+
+                        <a href="<?= site_url(
+                            'admin/announcement?sort=' . urlencode($sort) .
+                            '&direction=' . urlencode($direction) .
+                            '&page=' . $page
+                        ) ?>">
+                            <?= $page ?>
+                        </a>
+
+                    <?php endif; ?>
+
+                <?php endforeach; ?>
+
+
+                <!-- 下一頁 -->
+                <?php if ($currentPage < $totalPages): ?>
+
+                    <a href="<?= site_url(
+                        'admin/announcement?sort=' . urlencode($sort) .
+                        '&direction=' . urlencode($direction) .
+                        '&page=' . ($currentPage + 1)
+                    ) ?>">
+                        &gt;
+                    </a>
+
+                <?php endif; ?>
+
+            </div>
+
+        <?php endif; ?>
 
     </body>
 </html>

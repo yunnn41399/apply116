@@ -89,12 +89,13 @@ class Announcement extends BaseController
             $builder->orderBy($sort, $direction);
         }
 
-        $announcements = $builder->findAll();
+        $announcements = $builder->paginate(10);
 
         return view('admin/announcement/index', [
             'announcements' => $announcements,
             'sort' => $sort,
-            'direction' => $direction
+            'direction' => $direction,
+            'pager' => $this->announcementModel->pager
         ]);
     }
 
