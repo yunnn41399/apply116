@@ -72,12 +72,16 @@
             <?= esc(session()->get('admin_name') ?? session()->get('admin_username')) ?>
         </span>
 
+        <a href="<?= site_url('admin/profile') ?>">
+            我的帳號
+        </a>
+
         <form
             action="<?= site_url('admin/logout') ?>"
             method="post"
             style="display: inline;"
         >
-
+        
             <?= csrf_field() ?>
 
             <button

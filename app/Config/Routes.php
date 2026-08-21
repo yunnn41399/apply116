@@ -84,7 +84,10 @@ $routes->group('admin', ['filter' => 'adminAuth'], function ($routes) {
     // 後臺首頁
     $routes->get('/', 'Admin::index');
 
-
+    // 我的帳號
+    $routes->get('profile', 'AdminProfile::index');
+    $routes->post('profile', 'AdminProfile::update');
+    
     // 考生資料
     $routes->get('candidates', 'CandidateAdmin::index');
     $routes->get('candidates/(:num)', 'CandidateAdmin::detail/$1');

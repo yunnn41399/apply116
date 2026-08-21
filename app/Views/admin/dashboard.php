@@ -21,6 +21,12 @@
         <h2>功能選單</h2>
 
         <ul>
+            <li>
+                <a href="<?= site_url('admin/profile') ?>">
+                    我的帳號
+                </a>
+            </li>
+
             <?php if (session()->get('admin_role') === 'super_admin'): ?>
 
                 <li>
