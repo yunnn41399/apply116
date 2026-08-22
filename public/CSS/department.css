@@ -1,0 +1,515 @@
+/* =========================================================
+   校系資料功能樣式
+   ========================================================= */
+/* =========================================================
+   1. 查詢區
+   ========================================================= */
+.department-search-card {
+    padding: 0;
+    overflow: hidden;
+}
+
+.department-search-card .apply-section-title {
+    margin: 0;
+    padding: 18px 25px;
+    border-bottom: 1px solid #c9dced;
+    background: linear-gradient(135deg,
+            #0d2b4d,
+            #174f7d);
+    color: #ffffff;
+    font-size: 19px;
+}
+
+/* =========================================================
+   2. 查詢表單
+   ========================================================= */
+#departmentSearchForm,
+#applicationDepartmentSearchForm {
+    padding: 25px 28px 28px;
+}
+
+.department-search-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.department-search-row label {
+    width: 85px;
+    flex-shrink: 0;
+    color: #173b63;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+/* 文字輸入 */
+.department-search-row input[type="text"] {
+    flex: 1;
+    min-height: 42px;
+    padding: 9px 13px;
+    box-sizing: border-box;
+    border: 1px solid #b8cde0;
+    border-radius: 6px;
+    background-color: #ffffff;
+    color: #173b63;
+    font-family: inherit;
+    font-size: 15px;
+    outline: none;
+    transition:
+        border-color 0.2s,
+        box-shadow 0.2s,
+        background-color 0.2s;
+}
+
+.department-search-row input[type="text"]::placeholder {
+    color: #9aaebe;
+}
+
+.department-search-row input[type="text"]:focus {
+    border-color: #2589d8;
+    background-color: #fafdff;
+    box-shadow:
+        0 0 0 3px rgba(37,
+            137,
+            216,
+            0.12);
+}
+
+/* 下拉 */
+.department-search-row select {
+    flex: 1;
+    min-height: 42px;
+    padding: 8px 38px 8px 13px;
+    box-sizing: border-box;
+    border: 1px solid #b8cde0;
+    border-radius: 6px;
+    background-color: #ffffff;
+    color: #173b63;
+    font-family: inherit;
+    font-size: 15px;
+    cursor: pointer;
+    outline: none;
+    transition:
+        border-color 0.2s,
+        box-shadow 0.2s,
+        background-color 0.2s;
+}
+
+.department-search-row select:focus {
+    border-color: #2589d8;
+    background-color: #fafdff;
+    box-shadow:
+        0 0 0 3px rgba(37,
+            137,
+            216,
+            0.12);
+}
+
+/* =========================================================
+   3. 學測檢定科目搜尋
+   ========================================================= */
+.department-requirement-section {
+    margin-top: 25px;
+    padding: 20px;
+    box-sizing: border-box;
+    border: 1px solid #d2e2ef;
+    border-radius: 7px;
+    background-color: #f7fbff;
+}
+
+.department-requirement-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 5px;
+    color: #173b63;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.department-requirement-title i {
+    color: #2589d8;
+}
+
+.department-requirement-hint {
+    margin: 0 0 18px;
+    color: #71859a;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+/* 單一科目 */
+.requirement-row {
+    display: flex;
+    align-items: center;
+    min-height: 48px;
+    margin-bottom: 8px;
+    padding: 8px 12px;
+    box-sizing: border-box;
+    border: 1px solid #dbe7f1;
+    border-radius: 6px;
+    background-color: #ffffff;
+    transition:
+        border-color 0.2s,
+        box-shadow 0.2s,
+        background-color 0.2s;
+}
+
+.requirement-row:last-child {
+    margin-bottom: 0;
+}
+
+.requirement-row:hover {
+    border-color: #9fc8e6;
+    background-color: #fbfdff;
+    box-shadow:
+        0 2px 7px rgba(20,
+            70,
+            110,
+            0.06);
+}
+
+.requirement-subject {
+    width: 75px;
+    flex-shrink: 0;
+    color: #173b63;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.requirement-row label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-right: 22px;
+    color: #536b82;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.requirement-row input[type="radio"] {
+    width: 15px;
+    height: 15px;
+    margin: 0;
+    accent-color: #2589d8;
+    cursor: pointer;
+}
+
+/* =========================================================
+   4. 查詢按鈕
+   ========================================================= */
+.department-search-card .apply-actions {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid #dbe7f1;
+}
+
+/* =========================================================
+   5. 查詢條件提示
+   ========================================================= */
+.department-result-card .apply-info-message {
+    border-left-color: #2589d8;
+    background-color: #eef7ff;
+}
+
+/* =========================================================
+   6. 結果區
+   ========================================================= */
+.department-result-card {
+    margin-top: 25px;
+}
+
+.department-result-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.department-result-header .apply-section-title {
+    flex: 1;
+}
+
+.department-result-count {
+    color: #1877c9;
+    font-size: 14px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+/* =========================================================
+   7. 表格
+   ========================================================= */
+.department-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    margin-top: 10px;
+}
+
+.department-result-table {
+    width: 100%;
+    min-width: 1000px;
+}
+
+.department-result-table th:nth-child(1),
+.department-result-table td:nth-child(1) {
+    width: 70px;
+    white-space: nowrap;
+}
+
+.department-result-table th:nth-child(2),
+.department-result-table td:nth-child(2) {
+    width: 150px;
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    line-height: 1.5;
+}
+
+.department-result-table th:nth-child(3),
+.department-result-table td:nth-child(3) {
+    width: 70px;
+    white-space: nowrap;
+}
+
+.department-result-table th:nth-child(4),
+.department-result-table td:nth-child(4) {
+    width: 220px;
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    line-height: 1.5;
+}
+
+.department-result-table th:nth-child(5),
+.department-result-table td:nth-child(5) {
+    width: 70px;
+    white-space: nowrap;
+    text-align: center;
+}
+
+.department-result-table th:nth-child(6),
+.department-result-table td:nth-child(6) {
+    width: 90px;
+    white-space: nowrap;
+    text-align: center;
+}
+
+/* =========================================================
+   8. 校系詳細資料
+   ========================================================= */
+.department-main-row {
+    transition:
+        background-color 0.2s ease;
+}
+
+.department-main-row:hover {
+    background-color: #f8fafc;
+}
+
+/* 詳細按鈕 */
+.department-detail-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 7px 12px;
+    box-sizing: border-box;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    background-color: #ffffff;
+    color: #374151;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+    cursor: pointer;
+    transition:
+        background-color 0.2s,
+        border-color 0.2s,
+        color 0.2s,
+        box-shadow 0.2s;
+}
+
+.department-detail-button:hover {
+    background-color: #f1f5f9;
+    border-color: #94a3b8;
+    color: #1e3a5f;
+    box-shadow:
+        0 2px 5px rgba(0,
+            0,
+            0,
+            0.08);
+}
+
+.department-detail-button:active {
+    transform: translateY(1px);
+}
+
+/* 詳細資料列 */
+.department-detail-row {
+    background-color: #f8fafc;
+}
+
+.department-detail-row>td {
+    padding: 0 !important;
+}
+
+/* 詳細內容 */
+.department-detail-content {
+    padding: 20px 24px;
+    border-top: 1px solid #e5e7eb;
+    border-bottom: 1px solid #e5e7eb;
+    background-color: #f8fafc;
+}
+
+.department-detail-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+    color: #1e3a5f;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.department-detail-title i {
+    font-size: 18px;
+}
+
+/* =========================================================
+   9. 檢定詳細卡片
+   ========================================================= */
+.department-requirement-grid {
+    display: grid;
+    grid-template-columns:
+        repeat(7, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.department-requirement-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 0;
+    min-height: 44px;
+    padding: 8px 10px;
+    box-sizing: border-box;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    background-color: #ffffff;
+}
+
+.requirement-label {
+    color: #475569;
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.requirement-value {
+    color: #1877c9;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: right;
+    white-space: nowrap;
+    margin-left: 8px;
+}
+
+/* =========================================================
+   10. 分頁
+   ========================================================= */
+.department-pagination {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid #d7e2ee;
+}
+
+.department-pagination-nav {
+    width: 100%;
+}
+
+.department-pagination-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.department-pagination-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 38px;
+    height: 38px;
+    padding: 0 12px;
+    box-sizing: border-box;
+    border: 1px solid #c6d8e8;
+    border-radius: 5px;
+    background-color: #ffffff;
+    color: #245273;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition:
+        background-color 0.2s,
+        border-color 0.2s,
+        color 0.2s,
+        box-shadow 0.2s;
+}
+
+.department-pagination-link:hover {
+    border-color: #2589d8;
+    background-color: #eef7ff;
+    color: #1266ad;
+    box-shadow:
+        0 2px 6px rgba(24,
+            119,
+            201,
+            0.12);
+}
+
+.department-pagination-link.active {
+    border-color: #1877c9;
+    background-color: #1877c9;
+    color: #ffffff;
+    box-shadow:
+        0 2px 6px rgba(24,
+            119,
+            201,
+            0.25);
+}
+
+.department-pagination-ellipsis {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 30px;
+    height: 38px;
+    color: #6c7f92;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.department-pagination-total {
+    width: 100%;
+    margin-top: 10px;
+    color: #536b82;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: right;
+}
+
+.department-pagination-link i {
+    font-size: 12px;
+}
+
+.department-pagination-link i.bi-chevron-left {
+    margin-right: 5px;
+}
+
+.department-pagination-link i.bi-chevron-right {
+    margin-left: 5px;
+}

@@ -52,6 +52,18 @@ body {
     color: #ffffff;
 }
 
+.page-header-link {
+    display: flex;
+    align-items: center;
+    height: 64px;
+    color: inherit;
+    text-decoration: none;
+}
+
+.page-header-link:hover {
+    color: inherit;
+}
+
 /* ========================================
    3. 表單主要容器
    ======================================== */

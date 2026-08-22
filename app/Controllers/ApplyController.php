@@ -5,6 +5,9 @@ use App\Models\CandidateModel;
 use CodeIgniter\HTTP\ResponseInterface;
 class ApplyController extends BaseController
 {
+    // ========================================
+    // 網路報名系統首頁
+    // ========================================
     public function index()
     {
         // 檢查是否已登入
