@@ -10,9 +10,11 @@
     <title>網路報名系統登入</title>
 </head>
 
-<body>  
+<body>
     <header class="page-header">
-        <h1>Apply116</h1>
+        <a href="<?= base_url('/') ?>" class="page-header-link">
+            <h1>Apply 116</h1>
+        </a>
     </header>
     <main class="form-container">
         <h2>考生登入</h2>
