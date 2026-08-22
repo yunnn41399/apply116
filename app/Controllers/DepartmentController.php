@@ -4,6 +4,9 @@ use App\Controllers\BaseController;
 use App\Models\DepartmentModel;
 class DepartmentController extends BaseController
 {
+    // ========================================
+    // 查詢校系資料頁面
+    // ========================================    
     public function index()
     {
         // 檢查是否已登入

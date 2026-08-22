@@ -21,6 +21,7 @@ $routes->get('/application', 'ApplicationController::index');
 $routes->post('application/save', 'ApplicationController::save');
 $routes->get('application/edit', 'ApplicationController::edit');
 $routes->get('application/departments', 'ApplicationDepartmentController::index');
+$routes->get('application-status', 'ApplicationStatusController::index');
 
 $routes->get('application/cart', 'ApplicationCartController::index');
 $routes->post('application/cart/add/(:num)', 'ApplicationCartController::add/$1');

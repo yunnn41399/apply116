@@ -537,7 +537,6 @@
     white-space: nowrap;
 }
 
-
 .application-cart-locked-message {
     display: flex;
     align-items: center;
@@ -558,6 +557,7 @@
     color: #b26a00;
     font-size: 16px;
 }
+
 /* =========================================================
    校系加入提示 Toast
    ========================================================= */
@@ -787,4 +787,139 @@
     flex-shrink: 0;
     accent-color: #1877c9;
     cursor: pointer;
+}
+
+/* =========================================================
+   17. 報名狀態查詢
+   ========================================================= */
+.application-status-confirmed {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 25px;
+    padding: 16px 18px;
+    border: 1px solid #b9dfc9;
+    border-left: 4px solid #198754;
+    border-radius: 7px;
+    background-color: #effaf4;
+    color: #147a4b;
+}
+
+.application-status-confirmed-icon {
+    flex-shrink: 0;
+    font-size: 21px;
+    color: #198754;
+}
+
+.application-status-confirmed-content strong {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.application-status-confirmed-content p {
+    margin: 0;
+    color: #356b53;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.application-status-time {
+    margin-top: 8px;
+    color: #5d7d6c;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.application-status-draft {
+    display: flex;
+    align-items: flex-start;
+    gap: 13px;
+    margin-bottom: 25px;
+    padding: 16px 18px;
+    border: 1px solid #d7e2ee;
+    border-left: 4px solid #2589d8;
+    border-radius: 7px;
+    background-color: #eef7ff;
+    color: #245273;
+}
+
+.application-status-draft-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+    font-size: 21px;
+    color: #2589d8;
+}
+
+.application-status-draft-content strong {
+    display: block;
+    margin-bottom: 4px;
+    color: #173b63;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.application-status-draft-content p {
+    margin: 0 0 12px;
+    color: #536b82;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.application-status-no-department {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 15px;
+    border-left: 4px solid #2589d8;
+    border-radius: 4px;
+    background-color: #eef7ff;
+    color: #536b82;
+    font-size: 14px;
+}
+
+.application-status-empty {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 20px;
+    border: 1px solid #d2e2ef;
+    border-left: 4px solid #2589d8;
+    border-radius: 7px;
+    background-color: #f7fbff;
+}
+
+.application-status-empty-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    border-radius: 6px;
+    background-color: #eef7ff;
+    color: #2589d8;
+    font-size: 20px;
+}
+
+.application-status-empty-content {
+    flex: 1;
+}
+
+.application-status-empty-title {
+    margin-bottom: 4px;
+    color: #173b63;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.application-status-empty-text {
+    color: #71859a;
+    font-size: 14px;
+    line-height: 1.6;
 }

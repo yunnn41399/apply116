@@ -7,6 +7,9 @@ use App\Models\CandidateModel;
 use App\Models\ApplicationDepartmentModel;
 class ApplicationConfirmController extends BaseController
 {
+    // ========================================
+    // 報名資料核對頁面
+    // ========================================
     public function index()
     {
         if (!session()->get('isLoggedIn')) {
@@ -295,6 +298,9 @@ class ApplicationConfirmController extends BaseController
         try {
             $applicationDepartmentModel =
                 new ApplicationDepartmentModel();
+            $confirmedAt = date(
+                'Y-m-d H:i:s'
+            );
             foreach (
                 $selectedDepartmentIds
                 as $departmentId
@@ -304,6 +310,8 @@ class ApplicationConfirmController extends BaseController
                         $application['id'],
                     'department_id' =>
                         $departmentId,
+                    'confirmed_at' =>
+                        $confirmedAt,
                 ]);
             }
             $updated =

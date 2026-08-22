@@ -6,6 +6,9 @@ use App\Models\ApplicationModel;
 use App\Models\DepartmentModel;
 class ApplicationCartController extends BaseController
 {
+    // ========================================
+    // 我的校系清單
+    // ========================================    
     public function index()
     {
         if (!session()->get('isLoggedIn')) {

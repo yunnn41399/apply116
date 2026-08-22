@@ -5,6 +5,9 @@ use App\Models\ApplicationCartModel;
 use App\Models\ApplicationModel;
 class ApplicationSelectionController extends BaseController
 {
+    // ========================================
+    // 選擇正式報名校系
+    // ========================================
     public function index()
     {
         if (!session()->get('isLoggedIn')) {

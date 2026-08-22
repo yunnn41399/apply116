@@ -6,6 +6,9 @@ use App\Models\ApplicationModel;
 use App\Models\DepartmentModel;
 class ApplicationDepartmentController extends BaseController
 {
+    // ========================================
+    // 選擇報名校系頁面
+    // ========================================
     public function index()
     {
         if (!session()->get('isLoggedIn')) {

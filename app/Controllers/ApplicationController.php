@@ -5,6 +5,9 @@ use App\Models\ApplicationModel;
 use App\Models\CandidateModel;
 class ApplicationController extends BaseController
 {
+    // ========================================
+    // 立即報名頁面
+    // ========================================    
     public function index()
     {
         if (!session()->get('isLoggedIn')) {
