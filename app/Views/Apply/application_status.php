@@ -282,7 +282,7 @@
                 === 'confirmed'
             ): ?>
                 <div class="apply-actions">
-                    <a href="<?= site_url('apply') ?>" class="apply-secondary-button">
+                    <a href="<?= site_url('apply') ?>" class="apply-primary-button">
                         <i class="bi bi-house"></i>
                         返回首頁
                     </a>
