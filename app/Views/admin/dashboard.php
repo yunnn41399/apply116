@@ -27,7 +27,7 @@
         </section>
 
         <!-- 功能選單卡片網格 -->
-        <div class="apply-menu">
+        <div class="admin-menu">
             <a href="<?= site_url('admin/profile') ?>" class="apply-card">
                 <div class="apply-card-icon">
                     <i class="bi bi-person-gear"></i>
