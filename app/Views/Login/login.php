@@ -10,9 +10,11 @@
     <title>網路報名系統登入</title>
 </head>
 
-<body>  
+<body>
     <header class="page-header">
-        <h1>Apply116</h1>
+        <a href="<?= base_url('/') ?>" class="page-header-link">
+            <h1>Apply 116</h1>
+        </a>
     </header>
     <main class="form-container">
         <h2>考生登入</h2>
@@ -42,7 +44,7 @@
                 </label>
                 <div class="password-wrapper">
                     <input type="password" id="id_last_four" name="id_last_four" value="<?= old('id_last_four') ?>"
-                        maxlength="4" pattern="[0-9]{4}" inputmode="numeric" required>
+                        maxlength="4" pattern="[0-9]{4}" inputmode="numeric" placeholder="證號末四碼" required>
                     <button type="button" class="password-toggle" onclick="togglePassword('id_last_four', this)"
                         aria-label="顯示身分證末四碼">
                         <i class="bi bi-eye"></i>
@@ -69,7 +71,7 @@
                     驗證碼：
                 </label>
                 <div class="captcha-wrapper">
-                    <input type="text" id="captcha" name="captcha" maxlength="4" required>
+                    <input type="text" id="captcha" name="captcha" maxlength="4" placeholder="不分大小寫" required>
                     <canvas id="loginCaptcha" class="captcha-canvas" width="160" height="50"
                         data-captcha="<?= esc($captcha) ?>" data-refresh-url="<?= site_url('login/refresh-captcha') ?>"
                         data-input-id="captcha"></canvas>

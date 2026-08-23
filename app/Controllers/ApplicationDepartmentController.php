@@ -1,23 +1,77 @@
 <?php
 namespace App\Controllers;
 use App\Controllers\BaseController;
+use App\Models\ApplicationCartModel;
+use App\Models\ApplicationModel;
 use App\Models\DepartmentModel;
-class DepartmentController extends BaseController
+class ApplicationDepartmentController extends BaseController
 {
     // ========================================
-    // 查詢校系資料頁面
-    // ========================================    
+    // 選擇報名校系頁面
+    // ========================================
     public function index()
     {
-        // 檢查是否已登入
         if (!session()->get('isLoggedIn')) {
-            return redirect()->to('/login')
+            return redirect()
+                ->to('/login')
                 ->with(
                     'error',
                     '請先登入後再進入網路報名系統。'
                 );
         }
-        // 取得搜尋條件
+        $candidateId = session()->get('candidate_id');
+        if (empty($candidateId)) {
+            session()->destroy();
+            return redirect()
+                ->to('/login')
+                ->with(
+                    'error',
+                    '登入資料已失效，請重新登入。'
+                );
+        }
+        // 查詢目前考生的報名資料
+        $applicationModel = new ApplicationModel();
+        $application = $applicationModel
+            ->where(
+                'candidate_id',
+                $candidateId
+            )
+            ->first();
+        // 沒有報名資料 → 返回 /application
+        if (!$application) {
+            return redirect()
+                ->to('/application')
+                ->with(
+                    'error',
+                    '請先完成報名基本資料，才能開始選擇校系。'
+                );
+        }
+        // 檢查基本資料是否完整
+        $hasBasicData =
+            !empty($application['birth_date'])
+            && !empty($application['phone'])
+            && !empty($application['address'])
+            && !empty($application['email']);
+        if (!$hasBasicData) {
+            return redirect()
+                ->to('/application')
+                ->with(
+                    'error',
+                    '請先完成報名基本資料，才能開始選擇校系。'
+                );
+        }
+        // 已正式確認 → 不允許再修改
+        if (
+            ($application['status'] ?? 'draft')
+            === 'confirmed'
+        ) {
+            return redirect()
+                ->to('/application')
+                ->with(
+                    'error',
+                    '您的報名資料已確認送出，目前無法再選擇或修改校系。'
+                );
+        }
         $keyword = trim(
             $this->request->getGet('keyword') ?? ''
         );
@@ -33,9 +87,7 @@ class DepartmentController extends BaseController
         if (!is_array($requirementsStatus)) {
             $requirementsStatus = [];
         }
-        // Model
         $departmentModel = new DepartmentModel();
-        // 取得所有學校
         $universities = (new DepartmentModel())
             ->select(
                 'university_code, university_name'
@@ -46,7 +98,6 @@ class DepartmentController extends BaseController
                 'ASC'
             )
             ->findAll();
-        // 關鍵字搜尋
         if ($keyword !== '') {
             $departmentModel
                 ->groupStart()
@@ -60,45 +111,43 @@ class DepartmentController extends BaseController
                 )
                 ->groupEnd();
         }
-        // 學校篩選
         if ($university !== '') {
             $departmentModel->where(
                 'university_code',
                 $university
             );
         }
-        // 檢定科目設定
         $requirementFields = [
             'chinese' => [
                 'field' => 'chinese_requirement',
-                'name' => '國文'
+                'name' => '國文',
             ],
             'english' => [
                 'field' => 'english_requirement',
-                'name' => '英文'
+                'name' => '英文',
             ],
             'math_a' => [
                 'field' => 'math_a_requirement',
-                'name' => '數學A'
+                'name' => '數學A',
             ],
             'math_b' => [
                 'field' => 'math_b_requirement',
-                'name' => '數學B'
+                'name' => '數學B',
             ],
             'social' => [
                 'field' => 'social_requirement',
-                'name' => '社會'
+                'name' => '社會',
             ],
             'natural' => [
                 'field' => 'natural_requirement',
-                'name' => '自然'
+                'name' => '自然',
             ],
         ];
-        // 套用各科檢定條件
         foreach (
             $requirementFields as $key => $info
         ) {
-            $status = $requirementsStatus[$key]
+            $status =
+                $requirementsStatus[$key]
                 ?? 'any';
             if ($status === 'any') {
                 continue;
@@ -140,7 +189,6 @@ class DepartmentController extends BaseController
                     ->groupEnd();
             }
         }
-        // 英聽篩選
         if (
             $englishListening === 'required'
         ) {
@@ -178,7 +226,6 @@ class DepartmentController extends BaseController
                 )
                 ->groupEnd();
         }
-        // 分頁設定
         $perPage = 30;
         $departments = $departmentModel
             ->orderBy(
@@ -191,15 +238,31 @@ class DepartmentController extends BaseController
             )
             ->paginate(
                 $perPage,
-                'department'
+                'application_department'
             );
         $pager = $departmentModel->pager;
-        // 建立查詢條件提示
+        // 取得目前已加入候選清單的校系
+        $cartModel = new ApplicationCartModel();
+        $cartItems = $cartModel
+            ->select('department_id')
+            ->where(
+                'application_id',
+                $application['id']
+            )
+            ->findAll();
+        $cartDepartmentIds = array_map(
+            'intval',
+            array_column(
+                $cartItems,
+                'department_id'
+            )
+        );
         $conditionTexts = [];
         foreach (
             $requirementFields as $key => $info
         ) {
-            $status = $requirementsStatus[$key]
+            $status =
+                $requirementsStatus[$key]
                 ?? 'any';
             if ($status === 'required') {
                 $conditionTexts[] =
@@ -211,7 +274,6 @@ class DepartmentController extends BaseController
                     $info['name'] . '不參採';
             }
         }
-        // 英聽條件
         if (
             $englishListening === 'required'
         ) {
@@ -223,26 +285,29 @@ class DepartmentController extends BaseController
             $conditionTexts[] =
                 '英聽不參採';
         }
-        // 傳送資料給 View
         return view(
-            'Apply/department',
+            'Apply/application_departments',
             [
+                'application' =>
+                    $application,
                 'departments' =>
                     $departments,
                 'pager' =>
                     $pager,
+                'universities' =>
+                    $universities,
                 'keyword' =>
                     $keyword,
                 'university' =>
                     $university,
-                'universities' =>
-                    $universities,
                 'englishListening' =>
                     $englishListening,
                 'requirementsStatus' =>
                     $requirementsStatus,
                 'conditionTexts' =>
                     $conditionTexts,
+                'cartDepartmentIds' =>
+                    $cartDepartmentIds,
             ]
         );
     }

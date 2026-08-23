@@ -4,14 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>網路報名系統 - 查詢校系資料</title>
+    <title>網路報名系統 - 選擇報名校系</title>
     <link rel="stylesheet" href="<?= base_url('CSS/common.css') ?>">
     <link rel="stylesheet" href="<?= base_url('CSS/apply.css') ?>">
     <link rel="stylesheet" href="<?= base_url('CSS/department.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('CSS/application.css') ?>">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 </head>
 
 <body>
+    <div id="applicationToast" class="application-toast" role="status" aria-live="polite">
+        <i class="bi bi-check-circle-fill"></i>
+        <span id="applicationToastMessage"></span>
+    </div>
     <header class="apply-header">
         <h1 class="apply-header-title">
             網路報名系統
@@ -20,10 +25,10 @@
             <a href="<?= site_url('apply') ?>" class="apply-nav-link">
                 首頁
             </a>
-            <a href="<?= site_url('department') ?>" class="apply-nav-link active">
+            <a href="<?= site_url('department') ?>" class="apply-nav-link">
                 查詢校系資料
             </a>
-            <a href="<?= site_url('/application') ?>" class="apply-nav-link">
+            <a href="<?= site_url('application') ?>" class="apply-nav-link active">
                 立即報名
             </a>
             <a href="<?= site_url('application/cart') ?>" class="apply-nav-link">
@@ -53,19 +58,40 @@
     <main class="apply-container">
         <section class="apply-welcome">
             <h2>
-                <i class="bi bi-search"></i>
-                查詢校系資料
+                <i class="bi bi-list-check"></i>
+                選擇報名校系
             </h2>
             <p>
-                可透過關鍵字、學校名稱、英聽檢定及學測檢定科目查詢校系資料。
+                請先從校系資料中選擇您有興趣的校系，
+                加入「我的校系清單」，再從清單中選擇最多 6 個校系進行正式報名。
             </p>
         </section>
+        <?php if (
+            session()->getFlashdata('error')
+        ): ?>
+            <div class="apply-error-message">
+                <i class="bi bi-exclamation-circle"></i>
+                <?= esc(
+                    session()->getFlashdata('error')
+                ) ?>
+            </div>
+        <?php endif; ?>
+        <?php if (
+            session()->getFlashdata('success')
+        ): ?>
+            <div class="apply-success-message">
+                <i class="bi bi-check-circle"></i>
+                <?= esc(
+                    session()->getFlashdata('success')
+                ) ?>
+            </div>
+        <?php endif; ?>
         <!-- 搜尋區 -->
-        <section class="apply-content-card department-search-card">
+        <section class="apply-content-card department-search-card application-department-search-card">
             <h3 class="apply-section-title">
                 查詢條件
             </h3>
-            <form action="<?= site_url('department') ?>" method="get" id="departmentSearchForm">
+            <form action="<?= site_url('application/departments') ?>" method="get" id="applicationDepartmentSearchForm">
                 <div class="department-search-row">
                     <label for="keyword">
                         關鍵字：
@@ -275,13 +301,13 @@
                         </label>
                     </div>
                 </div>
-                <!-- 按鈕 -->
+                <!-- 搜尋按鈕 -->
                 <div class="apply-actions">
                     <button type="submit" class="apply-primary-button">
                         <i class="bi bi-search"></i>
                         開始查詢
                     </button>
-                    <a href="<?= site_url('department') ?>" class="apply-secondary-button">
+                    <a href="<?= site_url('application/departments') ?>" class="apply-secondary-button">
                         <i class="bi bi-arrow-counterclockwise"></i>
                         清除條件
                     </a>
@@ -308,9 +334,14 @@
                     ?>
                 <?php endif; ?>
                 <?php if ($university !== ''): ?>
-                    <?php foreach ($universities as $universityItem): ?>
+                    <?php foreach (
+                        $universities
+                        as $universityItem
+                    ): ?>
                         <?php if (
-                            $universityItem['university_code']
+                            $universityItem[
+                                'university_code'
+                            ]
                             === $university
                         ): ?>
                             <?php
@@ -321,14 +352,16 @@
                     <?php endforeach; ?>
                 <?php endif; ?>
                 <?php if (
-                    $englishListening === 'required'
+                    $englishListening
+                    === 'required'
                 ): ?>
                     <?php
                     $displayConditions[] =
                         '英聽參採';
                     ?>
                 <?php elseif (
-                    $englishListening === 'not_required'
+                    $englishListening
+                    === 'not_required'
                 ): ?>
                     <?php
                     $displayConditions[] =
@@ -336,7 +369,8 @@
                     ?>
                 <?php endif; ?>
                 <?php foreach (
-                    $requirementsStatus as $key => $status
+                    $requirementsStatus
+                    as $key => $status
                 ): ?>
                     <?php
                     $subjectNames = [
@@ -349,10 +383,13 @@
                     ];
                     ?>
                     <?php if (
-                        isset($subjectNames[$key])
+                        isset(
+                        $subjectNames[$key]
+                    )
                     ): ?>
                         <?php if (
-                            $status === 'required'
+                            $status
+                            === 'required'
                         ): ?>
                             <?php
                             $displayConditions[] =
@@ -360,7 +397,8 @@
                                 . '參採';
                             ?>
                         <?php elseif (
-                            $status === 'not_required'
+                            $status
+                            === 'not_required'
                         ): ?>
                             <?php
                             $displayConditions[] =
@@ -382,17 +420,17 @@
                     校系資料
                 </h3>
                 <span class="department-result-count">
-                    共 <?= $pager->getTotal('department') ?> 筆
+                    共 <?= $pager->getTotal('application_department') ?> 筆
                 </span>
             </div>
             <?php if (empty($departments)): ?>
                 <div class="apply-info-message">
                     <i class="bi bi-search"></i>
-                    找不到符合條件的校系資料，請嘗試調整查詢條件。
+                    找不到符合條件的校系資料， 請嘗試調整查詢條件。
                 </div>
             <?php else: ?>
                 <div class="department-table-wrapper">
-                    <table class="apply-table department-result-table">
+                    <table class="apply-table application-department-table">
                         <thead>
                             <tr>
                                 <th>
@@ -412,6 +450,9 @@
                                 </th>
                                 <th>
                                     檢定科目
+                                </th>
+                                <th>
+                                    操作
                                 </th>
                             </tr>
                         </thead>
@@ -433,20 +474,45 @@
                                     <td>
                                         <?= esc($department['admission_quota']) ?>
                                     </td>
-                                    <td>
+                                    <td class="application-department-detail">
                                         <button type="button" class="department-detail-button"
                                             onclick="toggleDepartmentDetail(this)">
                                             <i class="bi bi-chevron-down"></i>
                                             查看詳細
                                         </button>
                                     </td>
+                                    <td class="application-department-operation">
+                                        <?php if (
+                                            in_array(
+                                                (int) $department['id'],
+                                                $cartDepartmentIds,
+                                                true
+                                            )
+                                        ): ?>
+                                            <span class="application-added-button">
+                                                <i class="bi bi-check-circle-fill"></i>
+                                                已加入
+                                            </span>
+                                        <?php else: ?>
+                                            <form action="<?= site_url(
+                                                'application/cart/add/'
+                                                . $department['id']
+                                            ) ?>" method="post" class="application-add-form">
+                                                <?= csrf_field() ?>
+                                                <button type="submit" class="application-add-button">
+                                                    <i class="bi bi-bookmark-plus"></i>
+                                                    加入
+                                                </button>
+                                            </form>
+                                        <?php endif; ?>
+                                    </td>
                                 </tr>
                                 <tr class="department-detail-row" style="display: none;">
-                                    <td colspan="6">
+                                    <td colspan="7">
                                         <div class="department-detail-content">
                                             <div class="department-detail-title">
                                                 <i class="bi bi-book"></i>
-                                                學測檢定科目門檻
+                                                檢定科目要求
                                             </div>
                                             <div class="department-requirement-grid">
                                                 <div class="department-requirement-item">
@@ -455,7 +521,9 @@
                                                     </span>
                                                     <span class="requirement-value">
                                                         <?= esc(
-                                                            $department['chinese_requirement']
+                                                            $department[
+                                                                'chinese_requirement'
+                                                            ]
                                                         ) ?>
                                                     </span>
                                                 </div>
@@ -465,7 +533,9 @@
                                                     </span>
                                                     <span class="requirement-value">
                                                         <?= esc(
-                                                            $department['english_requirement']
+                                                            $department[
+                                                                'english_requirement'
+                                                            ]
                                                         ) ?>
                                                     </span>
                                                 </div>
@@ -475,7 +545,9 @@
                                                     </span>
                                                     <span class="requirement-value">
                                                         <?= esc(
-                                                            $department['math_a_requirement']
+                                                            $department[
+                                                                'math_a_requirement'
+                                                            ]
                                                         ) ?>
                                                     </span>
                                                 </div>
@@ -485,7 +557,9 @@
                                                     </span>
                                                     <span class="requirement-value">
                                                         <?= esc(
-                                                            $department['math_b_requirement']
+                                                            $department[
+                                                                'math_b_requirement'
+                                                            ]
                                                         ) ?>
                                                     </span>
                                                 </div>
@@ -495,7 +569,9 @@
                                                     </span>
                                                     <span class="requirement-value">
                                                         <?= esc(
-                                                            $department['social_requirement']
+                                                            $department[
+                                                                'social_requirement'
+                                                            ]
                                                         ) ?>
                                                     </span>
                                                 </div>
@@ -505,7 +581,9 @@
                                                     </span>
                                                     <span class="requirement-value">
                                                         <?= esc(
-                                                            $department['natural_requirement']
+                                                            $department[
+                                                                'natural_requirement'
+                                                            ]
                                                         ) ?>
                                                     </span>
                                                 </div>
@@ -515,7 +593,9 @@
                                                     </span>
                                                     <span class="requirement-value">
                                                         <?= esc(
-                                                            $department['english_listening_requirement']
+                                                            $department[
+                                                                'english_listening_requirement'
+                                                            ]
                                                         ) ?>
                                                     </span>
                                                 </div>
@@ -529,7 +609,10 @@
                 </div>
                 <!-- 分頁 -->
                 <div class="department-pagination">
-                    <?= $pager->links('department', 'department') ?>
+                    <?= $pager->links(
+                        'application_department',
+                        'department'
+                    ) ?>
                 </div>
             <?php endif; ?>
         </section>
@@ -538,6 +621,7 @@
         Apply116 網路報名系統
     </footer>
     <script src="<?= base_url('JS/department.js') ?>" defer></script>
+    <script src="<?= base_url('JS/application.js') ?>" defer></script>
 </body>
 
 </html>
