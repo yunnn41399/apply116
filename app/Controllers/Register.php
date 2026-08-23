@@ -40,21 +40,22 @@ class Register extends BaseController
         $rules = [
             'name' => [
                 'label' => '姓名',
-                'rules' => 'required|max_length[50]',
+                'rules' => 'required|max_length[50]|regex_match[/^[\x{4e00}-\x{9fff}A-Za-z]+$/u]',
                 'errors' => [
                     'required'   => '請輸入姓名。',
                     'max_length' => '姓名不可超過 50 個字元。',
+                    'regex_match'  => '姓名不可輸入數字或特殊字元。',
                 ],
             ],
 
             'exam_number' => [
                 'label' => '學測應試號碼',
-                'rules' => 'required|alpha_numeric|min_length[6]|max_length[20]',
+                'rules' => 'required|regex_match[/^[0-9]{8}$/]|min_length[8]|max_length[8]',
                 'errors' => [
                     'required'      => '請輸入學測應試號碼。',
-                    'alpha_numeric' => '學測應試號碼只能包含英文字母及數字。',
-                    'min_length'    => '學測應試號碼至少需要 6 個字元。',
-                    'max_length'    => '學測應試號碼不可超過 20 個字元。',
+                    'regex_match'   => '學測應試號碼只能包含數字。',
+                    'min_length'    => '學測應試號碼至少需要 8 個字元。',
+                    'max_length'    => '學測應試號碼不可超過 8 個字元。',
                 ],
             ],
 

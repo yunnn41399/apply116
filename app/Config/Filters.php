@@ -34,6 +34,8 @@ class Filters extends BaseFilters
         'forcehttps'    => ForceHTTPS::class,
         'pagecache'     => PageCache::class,
         'performance'   => PerformanceMetrics::class,
+        'adminAuth' => \App\Filters\AdminAuthFilter::class,
+        'adminRole' => \App\Filters\AdminRoleFilter::class,
     ];
 
     /**

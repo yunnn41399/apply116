@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="<?= base_url('CSS/apply.css') ?>">
     <link rel="stylesheet" href="<?= base_url('CSS/admin.css') ?>">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    <title>新增公告 - 後臺管理系統</title>
+    <title>編輯公告 - 後臺管理系統</title>
 </head>
 
 <body>
@@ -19,8 +19,8 @@
 
             <!-- 頁面標題列 -->
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; border-bottom: 2px solid #ddd6fe; padding-bottom: 0.75rem;">
-                <h2 class="section-title" style="border: none; margin: 0; padding: 0;">
-                    <i class="bi bi-plus-circle"></i> 新增公告
+                <h2 class="section-title">
+                    <i class="bi bi-pencil-square"></i> 編輯公告
                 </h2>
                 <a href="<?= site_url('admin/announcement') ?>" id="btnBack" class="secondary-button" style="text-decoration: none; padding: 0.5rem 1rem; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 0.3rem;">
                     <i class="bi bi-arrow-left"></i> 返回公告列表
@@ -42,7 +42,7 @@
             <?php endif; ?>
 
             <!-- 表單內容 -->
-            <form id="createForm" action="<?= site_url('admin/announcement/create') ?>" method="post" enctype="multipart/form-data" style="display: flex; flex-direction: column; gap: 1.25rem;">
+            <form id="editForm" action="<?= site_url('admin/announcement/edit/' . $announcement['id']) ?>" method="post" enctype="multipart/form-data" style="display: flex; flex-direction: column; gap: 1.25rem;">
 
                 <?= csrf_field() ?>
 
@@ -55,7 +55,7 @@
                         type="text" 
                         id="title" 
                         name="title" 
-                        value="<?= old('title') ?>"
+                        value="<?= old('title', $announcement['title']) ?>"
                         placeholder="請輸入公告標題"
                         required
                         style="padding: 0.6rem 0.8rem; border: 1px solid #ddd6fe; border-radius: 0.375rem; outline: none; font-size: 0.95rem; transition: border-color 0.2s;"
@@ -70,15 +70,13 @@
                             公告類別 <span style="color: #ef4444;">*</span>
                         </label>
                         <select id="category" name="category" style="padding: 0.6rem 0.8rem; border: 1px solid #ddd6fe; border-radius: 0.375rem; outline: none; font-size: 0.95rem; background-color: #fff;">
-                            <option value="">請選擇公告類別</option>
-                            <option value="簡章訊息事項" <?= old('category') === '簡章訊息事項' ? 'selected' : '' ?>>簡章訊息事項</option>
-                            <option value="招生試務" <?= old('category') === '招生試務' ? 'selected' : '' ?>>招生試務</option>
-                            <option value="甄選資訊" <?= old('category') === '甄選資訊' ? 'selected' : '' ?>>甄選資訊</option>
-                            <option value="會議簡報" <?= old('category') === '會議簡報' ? 'selected' : '' ?>>會議簡報</option>
-                            <option value="其他事項" <?= old('category') === '其他事項' ? 'selected' : '' ?>>其他事項</option>
-                            <option value="系統公告" <?= old('category') === '系統公告' ? 'selected' : '' ?>>系統公告</option>
-                            <option value="師資保送甄試" <?= old('category') === '師資保送甄試' ? 'selected' : '' ?>>師資保送甄試</option>
-                            <option value="醫事人員養成計畫" <?= old('category') === '醫事人員養成計畫' ? 'selected' : '' ?>>醫事人員養成計畫</option>
+                            <?php 
+                                $categories = ['簡章訊息事項', '招生試務', '甄選資訊', '會議簡報', '其他事項', '系統公告', '師資保送甄試', '醫事人員養成計畫'];
+                                $currentCategory = old('category', $announcement['category']);
+                            ?>
+                            <?php foreach ($categories as $cat): ?>
+                                <option value="<?= $cat ?>" <?= $currentCategory === $cat ? 'selected' : '' ?>><?= $cat ?></option>
+                            <?php endforeach; ?>
                         </select>
                     </div>
 
@@ -88,10 +86,13 @@
                             公告類型 <span style="color: #ef4444;">*</span>
                         </label>
                         <select id="type" name="type" style="padding: 0.6rem 0.8rem; border: 1px solid #ddd6fe; border-radius: 0.375rem; outline: none; font-size: 0.95rem; background-color: #fff;">
-                            <option value="">請選擇公告類型</option>
-                            <option value="一般公告" <?= old('type') === '一般公告' ? 'selected' : '' ?>>一般公告</option>
-                            <option value="純檔案" <?= old('type') === '純檔案' ? 'selected' : '' ?>>純檔案</option>
-                            <option value="超連結" <?= old('type') === '超連結' ? 'selected' : '' ?>>超連結</option>
+                            <?php 
+                                $types = ['一般公告', '純檔案', '超連結'];
+                                $currentType = old('type', $announcement['type']);
+                            ?>
+                            <?php foreach ($types as $t): ?>
+                                <option value="<?= $t ?>" <?= $currentType === $t ? 'selected' : '' ?>><?= $t ?></option>
+                            <?php endforeach; ?>
                         </select>
                     </div>
                 </div>
@@ -105,7 +106,7 @@
                         rows="8" 
                         placeholder="請輸入公告詳細內容..."
                         style="padding: 0.6rem 0.8rem; border: 1px solid #ddd6fe; border-radius: 0.375rem; outline: none; font-size: 0.95rem; font-family: inherit; resize: vertical;"
-                    ><?= old('content') ?></textarea>
+                    ><?= old('content', $announcement['content']) ?></textarea>
                 </div>
 
                 <!-- 附件上傳 -->
@@ -113,6 +114,15 @@
                     <label for="attachment" style="font-weight: 600; color: #4c1d95; font-size: 0.95rem;">
                         <i class="bi bi-paperclip"></i> 附件上傳
                     </label>
+
+                    <?php if (!empty($announcement['attachment'])): ?>
+                        <div style="margin-bottom: 0.3rem; font-size: 0.9rem; color: #6d28d9;">
+                            <i class="bi bi-file-earmark-check"></i> 目前附件：
+                            <a href="<?= base_url($announcement['attachment']) ?>" target="_blank" class="admin-announcement-file">
+                                點此預覽舊檔
+                            </a>
+                        </div>
+                    <?php endif; ?>
 
                     <input
                         type="file"
@@ -136,22 +146,39 @@
                         type="url" 
                         id="external_url" 
                         name="external_url" 
-                        value="<?= old('external_url') ?>"
+                        value="<?= old('external_url', $announcement['external_url']) ?>"
                         placeholder="https://example.com"
                         style="padding: 0.6rem 0.8rem; border: 1px solid #ddd6fe; border-radius: 0.375rem; outline: none; font-size: 0.95rem;"
                     >
                 </div>
 
+                <!-- 上次發布時間提示 -->
+                <?php if (!empty($announcement['publish_date'])): ?>
+                    <div style="font-size: 0.875rem; color: #6b5b95; background-color: #f3e8ff; padding: 0.5rem 0.8rem; border-radius: 0.375rem; display: flex; align-items: center; gap: 0.4rem;">
+                        <i class="bi bi-clock-history"></i> 上次發布時間：<strong><?= esc($announcement['publish_date']) ?></strong>
+                        <span>（更新發布後將自動更新為最新時間）</span>
+                    </div>
+                <?php endif; ?>
+
                 <hr style="border: 0; border-top: 1px solid #ddd6fe; margin: 0.5rem 0;">
 
                 <!-- 操作按鈕區塊 -->
                 <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
-                    <button type="submit" name="status" value="draft" class="secondary-button" style="padding: 0.6rem 1.25rem; font-size: 0.95rem;">
-                        <i class="bi bi-file-earmark-memory"></i> 暫存草稿
-                    </button>
-                    <button type="submit" name="status" value="published" class="primary-button" style="padding: 0.6rem 1.25rem; font-size: 0.95rem;">
-                        <i class="bi bi-send-fill"></i> 發布公告
-                    </button>
+                    <?php if ($announcement['status'] === 'published'): ?>
+                        <button type="submit" name="status" value="published" class="primary-button" style="padding: 0.6rem 1.25rem; font-size: 0.95rem;">
+                            <i class="bi bi-send-check"></i> 更新並發布
+                        </button>
+                        <span style="color: #6b5b95; font-size: 0.875rem; display: flex; align-items: center; gap: 0.2rem;">
+                            <i class="bi bi-info-circle"></i> 已發布之公告無法變更回草稿狀態
+                        </span>
+                    <?php else: ?>
+                        <button type="submit" name="status" value="draft" class="secondary-button" style="padding: 0.6rem 1.25rem; font-size: 0.95rem;">
+                            <i class="bi bi-file-earmark-memory"></i> 儲存草稿
+                        </button>
+                        <button type="submit" name="status" value="published" class="primary-button" style="padding: 0.6rem 1.25rem; font-size: 0.95rem;">
+                            <i class="bi bi-send-fill"></i> 發布公告
+                        </button>
+                    <?php endif; ?>
                 </div>
 
             </form>
@@ -166,7 +193,7 @@
     <!-- 變更偵測與提示語句指令碼 -->
     <script>
         let isFormDirty = false;
-        const form = document.getElementById('createForm');
+        const form = document.getElementById('editForm');
         const btnBack = document.getElementById('btnBack');
 
         // 監聽表單內部輸入項，只要有修改就標記為已變更

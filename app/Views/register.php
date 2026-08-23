@@ -47,7 +47,7 @@
             <!-- 考生姓名 -->
             <div class="form-group">
                 <label for="name">
-                    考生姓名：
+                    考生姓名（Name）：
                 </label>
 
                 <input
@@ -64,7 +64,7 @@
             <!-- 學測應試號碼 -->
             <div class="form-group">
                 <label for="exam_number">
-                    學測應試號碼：
+                    學測應試號碼（Registration Number）：
                 </label>
 
                 <input
@@ -72,6 +72,11 @@
                     id="exam_number"
                     name="exam_number"
                     value="<?= old('exam_number') ?>"
+                    maxlength="8"
+                    minlength="8"
+                    pattern="[0-9]{8}"
+                    inputmode="numeric"
+                    placeholder="共 8 碼、純數字"
                     required
                 >
             </div>
@@ -80,7 +85,7 @@
             <!-- 身分證號碼 -->
             <div class="form-group">
                 <label for="id_number">
-                    身分證號碼：
+                    身分證號碼（National ID Number）：
                 </label>
 
                 <input
@@ -97,7 +102,7 @@
             <!-- 個人密碼 -->
             <div class="form-group">
                 <label for="password">
-                    個人密碼：
+                    個人密碼（Password）：
                 </label>
 
                 <div class="password-wrapper">
@@ -106,6 +111,7 @@
                         type="password"
                         id="password"
                         name="password"
+                        placeholder="至少 8 碼、大小寫英數混合"
                         required
                     >
 
@@ -153,7 +159,7 @@
             <!-- 確認密碼 -->
             <div class="form-group">
                 <label for="password_confirm">
-                    確認密碼：
+                    確認密碼（Confirm Password）：
                 </label>
 
                 <div class="password-wrapper">
@@ -184,7 +190,7 @@
             <div class="form-group captcha-group">
 
                 <label for="captcha">
-                    驗證碼：
+                    驗證碼（Verification code）：
                 </label>
 
                 <div class="captcha-wrapper">
@@ -195,6 +201,7 @@
                         name="captcha"
                         maxlength="4"
                         inputmode="numeric"
+                        placeholder="共 4 碼"
                         required
                     >
 

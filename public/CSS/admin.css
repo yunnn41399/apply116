@@ -1,0 +1,255 @@
+/* =========================================================
+   後臺系統專用主題配色：深紫灰
+   ========================================================= */
+
+/* 全局背景與外觀 */
+body {
+    background-color: #f3f0f7;
+}
+
+/* 頁面 Header 與 登入頁 Header */
+.page-header,
+.apply-header {
+    background-color: #2e1065 !important; /* 深紫灰主色 */
+    border-bottom: 3px solid #8b5cf6 !important; /* 紫色亮線 */
+    box-shadow: 0 2px 8px rgba(46, 16, 101, 0.25) !important;
+}
+
+/* 登入頁面與容器外框、標題顏色 */
+.form-container {
+    border: 1px solid #e2d9f3 !important;
+    border-top: 4px solid #8b5cf6 !important;
+    box-shadow: 0 4px 16px rgba(46, 16, 101, 0.06) !important;
+}
+
+.form-container h2,
+.apply-section-title {
+    color: #2e1065 !important;
+}
+
+.form-group label,
+.form-group input,
+.password-toggle {
+    color: #3b1e70 !important;
+    border-color:#3b1e70 !important;
+}
+
+/* 輸入框 Focus */
+.form-group input:focus,
+.captcha-wrapper input:focus {
+    border-color: #8b5cf6 !important;
+    box-shadow: 0 0 0 0.1875rem rgba(139, 92, 246, 0.2) !important;
+}
+
+.password-toggle:hover {
+    color: #8b5cf6 !important;
+}
+
+/* 導覽列 Hover 與 Active 狀態 */
+.apply-nav-link:hover {
+    background-color: rgba(139, 92, 246, 0.18) !important;
+}
+
+.apply-nav-link.active {
+    border-bottom-color: #a78bfa !important;
+    background-color: rgba(139, 92, 246, 0.25) !important;
+}
+
+/* 右上角按鈕 (我的帳號 / 登出) Hover 狀態 */
+.apply-logout-button:hover {
+    background-color: #ffffff !important;
+    border-color: #ffffff !important;
+    color: #2e1065 !important;
+}
+
+/* 主要按鈕 (Primary Button) */
+.primary-button,
+.apply-primary-button {
+    background-color: #6d28d9 !important;
+    box-shadow: 0 2px 5px rgba(109, 40, 217, 0.25) !important;
+}
+
+.primary-button:hover,
+.apply-primary-button:hover {
+    background-color: #5b21b6 !important;
+    box-shadow: 0 3px 8px rgba(109, 40, 217, 0.35) !important;
+}
+
+/* 歡迎區塊配色 */
+.apply-welcome {
+    border-left: 5px solid #8b5cf6 !important;
+}
+
+.apply-welcome h2,
+.apply-welcome .exam-number {
+    color: #2e1065 !important;
+}
+
+.apply-welcome .candidate-name,
+.form-links a {
+    color: #6d28d9 !important;
+}
+
+.apply-card {
+    border: 1px solid #e2d9f3 !important;
+    box-shadow: 0 3px 12px rgba(46, 16, 101, 0.06) !important;
+}
+
+/* 首頁卡片內容顏色*/
+.apply-card-icon {
+    color: #6d28d9 !important;
+}
+
+.apply-card-title {
+    color: #2e1065 !important;
+}
+
+.apply-card-description,
+.apply-footer {
+    color: #6b5b95 !important;
+}
+
+.apply-card:hover {
+    border-color: #8b5cf6 !important;
+    box-shadow: 0 6px 18px rgba(109, 40, 217, 0.15) !important;
+}
+
+/* 表格配色 */
+.apply-table th {
+    background-color: #f3e8ff !important;
+    color: #2e1065 !important;
+    border-color: #ddd6fe !important;
+}
+
+.apply-section-title {
+    border-bottom: 2px solid #ddd6fe !important;
+    font-size: 1.5rem !important;
+}
+
+.apply-content-card {
+    border: 1px solid #e2d9f3 !important; /* 柔和淡紫色邊框 */
+    border-top: 4px solid #8b5cf6 !important;
+    box-shadow: 0 4px 12px rgba(46, 16, 101, 0.06) !important; /* 紫色調微陰影 */
+}
+
+.apply-footer {
+    border-top: 1px solid #e2d9f3 !important;
+}
+
+/* 次要按鈕樣式 (取消按鈕) */
+.secondary-button {
+    background-color: #ffffff !important;
+    border: 1px solid #8b5cf6 !important;
+    color: #6d28d9 !important;
+    border-radius: 0.375rem !important;
+    cursor: pointer !important;
+    font-weight: 500 !important;
+    transition: all 0.2s ease !important;
+}
+
+.secondary-button:hover {
+    background-color: #f3e8ff !important;
+    border-color: #6d28d9 !important;
+    color: #4c1d95 !important;
+}
+
+.section-title {
+    border: none;
+    font-size: 1.5rem;
+    color: #2e1065;
+    font-weight: 700;
+}
+
+.admin-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+}
+.admin-pagination a, .admin-pagination span {
+    padding: 0.375rem 0.75rem;
+    border-radius: 0.375rem;
+    text-decoration: none;
+    font-size: 0.9rem;
+    color: #6d28d9;
+    border: 1px solid #ddd6fe;
+    background-color: #ffffff;
+    transition: all 0.2s ease;
+}
+.admin-pagination a:hover {
+    background-color: #f3e8ff;
+    border-color: #8b5cf6;
+}
+.admin-pagination .active {
+    background-color: #6d28d9;
+    color: #ffffff;
+    border-color: #6d28d9;
+    font-weight: 600;
+}
+
+.admin-table {
+    width: 100%;
+    margin-top: 10px;
+    border-collapse: collapse;
+    font-size: 15px;
+    table-layout: fixed;
+}
+
+.admin-table th {
+    padding: 11px 12px;
+    background-color: #eeeafc;
+    border: 1px solid #d6cbea;
+    color: #341763;
+    font-weight: 700;
+    text-align: center;
+}
+
+.admin-table td {
+    padding: 11px 12px;
+    border: 1px solid #e2d9f3;
+    color: #543d67;
+    background-color: #ffffff;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.admin-table tr:hover td {
+    background-color: #fbf5ff;
+}
+
+.admin-announcement-container {
+    width: 92%;
+    max-width: 1100px;
+    margin: 25px auto 50px;
+}
+
+.custom-file-input::file-selector-button {
+    background-color: #f3e8ff;
+    color: #6d28d9;
+    border: 1px solid #ddd6fe;
+    padding: 0.4rem 0.8rem;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-right: 0.75rem;
+    transition: all 0.2s ease;
+}
+.custom-file-input::file-selector-button:hover {
+    background-color: #8b5cf6;
+    color: #ffffff;
+    border-color: #8b5cf6;
+}
+
+.admin-announcement-file {
+    color: #6d28d9;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.admin-announcement-file:hover {
+    color: #8b5cf6;
+}
