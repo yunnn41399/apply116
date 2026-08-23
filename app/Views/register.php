@@ -76,7 +76,7 @@
                     minlength="8"
                     pattern="[0-9]{8}"
                     inputmode="numeric"
-                    placeholder="共8碼、純數字"
+                    placeholder="共 8 碼、純數字"
                     required
                 >
             </div>
@@ -111,7 +111,7 @@
                         type="password"
                         id="password"
                         name="password"
-                        placeholder="至少8碼、大小寫英數混合"
+                        placeholder="至少 8 碼、大小寫英數混合"
                         required
                     >
 
@@ -201,7 +201,7 @@
                         name="captcha"
                         maxlength="4"
                         inputmode="numeric"
-                        placeholder="共4碼"
+                        placeholder="共 4 碼"
                         required
                     >
 

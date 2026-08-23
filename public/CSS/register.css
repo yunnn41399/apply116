@@ -4,29 +4,25 @@
 
 
 /* ========================================
-   1. 註冊表單容器
+   註冊表單容器
    ======================================== */
-
 .register-container {
     max-width: 560px;
 }
 
 
 /* ========================================
-   2. 表單欄位
+   表單欄位
    ======================================== */
-
 .register-container .form-group {
     margin-bottom: 22px;
 }
 
 
 /* ========================================
-   3. 輸入框
+   輸入框
    ======================================== */
-
 .register-container .form-group input {
-    width: 100%;
     padding: 10px 12px;
     border: 1px solid #b9c9d9;
     border-radius: 5px;
@@ -34,15 +30,12 @@
     font-size: 15px;
     color: #26364a;
     background-color: #ffffff;
-
     transition:
         border-color 0.2s,
         box-shadow 0.2s;
 }
 
-
 /* 輸入框取得焦點 */
-
 .register-container .form-group input:focus {
     outline: none;
     border-color: #2589d8;
@@ -53,236 +46,173 @@
 
 
 /* ========================================
-   4. 密碼欄位
+   密碼欄位
    ======================================== */
-
 .password-wrapper {
+    display: inline-flex;
+    align-items: center;
     position: relative;
-    display: block;
-    width: 100%;
 }
 
-
-/* 預留右側眼睛圖示空間 */
-
-.password-wrapper input {
-    padding-right: 42px !important;
-}
 
 
 /* ========================================
-   5. 顯示 / 隱藏密碼
+   顯示 / 隱藏密碼
    ======================================== */
-
 .password-toggle {
     position: absolute;
-
     /* 垂直置中 */
     top: 50%;
     right: 8px;
-
     transform: translateY(-50%);
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     width: 30px;
     height: 30px;
-
     margin: 0;
     padding: 0;
-
     /* 移除按鈕外觀 */
     border: none;
     outline: none;
     background: transparent;
-
     color: #5d748b;
     font-size: 18px;
-
     cursor: pointer;
-
     transition: color 0.2s;
 }
 
-
 /* 滑鼠移到眼睛 */
-
 .password-toggle:hover {
     color: #1877c9;
 }
 
-
 /* 點擊後不要出現框線 */
-
 .password-toggle:focus {
     outline: none;
     border: none;
     box-shadow: none;
 }
 
-/* ========================================
-   6. 密碼規則
-   ======================================== */
 
+/* ========================================
+   密碼規則
+   ======================================== */
 .password-rules {
     display: none;
-
     margin-top: 10px;
     padding: 12px 14px;
-
     width: 100%;
-
     border: 1px solid #d3e1ed;
     border-radius: 5px;
-
     background-color: #f5f9fd;
-
     font-size: 14px;
 }
 
-
 /* 密碼規則顯示 */
-
 .password-rules.show {
     display: block;
 }
 
-
 /* 密碼規則標題 */
-
 .password-rules p {
     margin: 0 0 8px;
-
     color: #234b70;
     font-weight: 600;
 }
 
-
 /* 每一項規則 */
-
 .password-rule {
     margin: 5px 0;
 }
 
-
 /* 規則圖示 */
-
 .rule-icon {
     display: inline-block;
-
     width: 20px;
-
     font-weight: 700;
 }
 
-
 /* 符合 */
-
 .rule-valid {
     color: #16835a;
 }
 
-
 /* 不符合 */
-
 .rule-invalid {
     color: #d64545;
 }
 
 
 /* ========================================
-   7. 密碼是否一致
+   密碼是否一致
    ======================================== */
-
 .password-match {
     min-height: 21px;
-
     margin-top: 8px;
-
     font-size: 14px;
     font-weight: 500;
 }
 
 
 /* ========================================
-   8. 驗證碼區域
+   驗證碼區域
    ======================================== */
-
 .captcha-group {
     margin-top: 5px;
 }
 
-
 .captcha-wrapper {
     display: flex;
     align-items: center;
-
     gap: 10px;
-
     flex-wrap: wrap;
 }
 
 
 /* ========================================
-   9. 驗證碼輸入框
+   驗證碼輸入框
    ======================================== */
-
 .captcha-wrapper input {
     width: 100px !important;
 }
 
 
 /* ========================================
-   10. 驗證碼 Canvas
+   驗證碼 Canvas
    ======================================== */
-
 .captcha-canvas {
     display: inline-block;
-
     width: 160px;
     height: 50px;
-
     border: 1px solid #9fb5c9;
     border-radius: 5px;
-
     background-color: #ffffff;
-
     cursor: pointer;
-
     box-shadow:
         0 1px 3px rgba(0, 50, 90, 0.08);
 }
 
 
 /* ========================================
-   11. 重新產生驗證碼
+   重新產生驗證碼
    ======================================== */
-
 .refresh-captcha {
     padding: 7px 12px;
-
     border: 1px solid #9fb5c9;
     border-radius: 5px;
-
     background-color: #f4f8fc;
     color: #245273;
-
     font-family: inherit;
     font-size: 14px;
-
     cursor: pointer;
-
     transition:
         background-color 0.2s,
         border-color 0.2s,
         color 0.2s;
 }
 
-
 /* 滑鼠移到重新產生 */
-
 .refresh-captcha:hover {
     background-color: #e5f1fb;
     border-color: #2589d8;
@@ -291,24 +221,20 @@
 
 
 /* ========================================
-   12. 註冊按鈕區域
+   註冊按鈕區域
    ======================================== */
-
 .form-actions {
     margin-top: 30px;
-
     text-align: center;
 }
 
 
 /* ========================================
-   13. 錯誤訊息
+   錯誤訊息
    ======================================== */
-
 .register-container .error-message {
     margin-bottom: 25px;
 }
-
 
 .register-container .error-message p {
     margin: 3px 0;
@@ -316,47 +242,35 @@
 
 
 /* ========================================
-   14. 手機版
+   手機版
    ======================================== */
-
 @media (max-width: 600px) {
-
     .register-container {
         width: 92%;
         max-width: none;
-
         margin-top: 80px;
-
         padding: 28px 22px;
     }
 
-
     .register-container h2 {
         margin-bottom: 25px;
-
         font-size: 24px;
     }
 
-
     /* 驗證碼改為垂直排列 */
-
     .captcha-wrapper {
         align-items: flex-start;
-
         flex-direction: column;
     }
-
 
     .captcha-wrapper input {
         width: 100px !important;
     }
 
-
     .captcha-canvas {
         width: 160px;
         height: 50px;
     }
-
 
     .refresh-captcha {
         width: auto;
