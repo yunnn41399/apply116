@@ -91,6 +91,13 @@ class ApplicationAdmin extends BaseController
                 $direction
             );
 
+        } elseif ($sort === 'exam_number') {
+
+            $builder->orderBy(
+                'candidates.exam_number',
+                $direction
+            );
+
         } else {
 
             $builder->orderBy(
@@ -98,7 +105,7 @@ class ApplicationAdmin extends BaseController
                 $direction
             );
         }
-
+        
         // 每頁 10 筆
         $applications = $builder->paginate(10);
 
