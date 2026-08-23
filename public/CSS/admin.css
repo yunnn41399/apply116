@@ -219,3 +219,37 @@ body {
 .admin-table tr:hover td {
     background-color: #fbf5ff;
 }
+
+.admin-announcement-container {
+    width: 92%;
+    max-width: 1100px;
+    margin: 25px auto 50px;
+}
+
+.custom-file-input::file-selector-button {
+    background-color: #f3e8ff;
+    color: #6d28d9;
+    border: 1px solid #ddd6fe;
+    padding: 0.4rem 0.8rem;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-right: 0.75rem;
+    transition: all 0.2s ease;
+}
+.custom-file-input::file-selector-button:hover {
+    background-color: #8b5cf6;
+    color: #ffffff;
+    border-color: #8b5cf6;
+}
+
+.admin-announcement-file {
+    color: #6d28d9;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.admin-announcement-file:hover {
+    color: #8b5cf6;
+}
