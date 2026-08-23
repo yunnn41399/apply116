@@ -22,6 +22,33 @@ class AdminLog extends BaseController
             $this->request->getGet('keyword') ?? ''
         );
 
+        // 取得排序欄位
+        $sort = $this->request->getGet('sort');
+
+        // 取得排序方向
+        $direction = strtoupper(
+            $this->request->getGet('direction') ?? ''
+        );
+
+        // 允許排序的欄位
+        $allowedSorts = [
+            'id',
+            'username',
+            'admin_name',
+            'action',
+            'description',
+            'created_at',
+        ];
+
+        if (!in_array($sort, $allowedSorts, true)) {
+            $sort = 'id';
+        }
+
+        // 只允許 ASC / DESC
+        if (!in_array($direction, ['ASC', 'DESC'], true)) {
+            $direction = 'DESC';
+        }
+
         /*
          * admin_logs 與 admins JOIN
          *
@@ -52,19 +79,38 @@ class AdminLog extends BaseController
                 ->groupEnd();
         }
 
-        // 最新紀錄顯示在最前面
-        $builder->orderBy(
-            'admin_logs.created_at',
-            'DESC'
-        );
+
+        if ($sort === 'username') {
+
+            $builder->orderBy(
+                'admins.username',
+                $direction
+            );
+
+        } elseif ($sort === 'admin_name') {
+
+            $builder->orderBy(
+                'admins.name',
+                $direction
+            );
+
+        } else {
+
+            $builder->orderBy(
+                'admin_logs.' . $sort,
+                $direction
+            );
+        }
 
         // 每頁 20 筆
         $logs = $builder->paginate(20);
 
         return view('admin/logs/index', [
-            'logs' => $logs,
-            'keyword' => $keyword,
-            'pager' => $this->adminLogModel->pager,
+            'logs'      => $logs,
+            'keyword'   => $keyword,
+            'sort'      => $sort,
+            'direction' => $direction,
+            'pager'     => $this->adminLogModel->pager,
         ]);
     }
 }
