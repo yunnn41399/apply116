@@ -90,14 +90,28 @@
                     身分證號碼（National ID Number）：
                 </label>
 
-                <input
-                    type="text"
-                    id="id_number"
-                    name="id_number"
-                    value="<?= old('id_number') ?>"
-                    maxlength="10"
-                    required
-                >
+                <div class="password-wrapper">
+
+                    <input
+                        type="password"
+                        id="id_number"
+                        name="id_number"
+                        value="<?= old('id_number') ?>"
+                        maxlength="10"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="password-toggle"
+                        onclick="togglePassword('id_number', this)"
+                        aria-label="顯示身份證號碼"
+                    >
+                        <i class="bi bi-eye"></i>
+                    </button>
+
+                </div>
+
             </div>
 
 
@@ -192,7 +206,7 @@
             <div class="form-group captcha-group">
 
                 <label for="captcha">
-                    驗證碼（Verification code）：
+                    驗證碼（Verification Code）：
                 </label>
 
                 <div class="captcha-wrapper">
