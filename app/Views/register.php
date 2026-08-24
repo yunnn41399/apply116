@@ -202,8 +202,9 @@
                         id="captcha"
                         name="captcha"
                         maxlength="4"
-                        inputmode="numeric"
-                        placeholder="共 4 碼"
+                        minlength="4"
+                        autocomplete="off"
+                        placeholder="不分大小寫"
                         required
                     >
 

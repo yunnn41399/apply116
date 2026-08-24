@@ -8,8 +8,15 @@ class Captcha extends BaseController
 {
     public function index()
     {
-        // 每次載入/刷新圖片時，直接產生新驗證碼並更新 Session
-        $captcha = (string) random_int(1000, 9999);
+        // 產生 4 碼英數驗證碼
+        $characters = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+        $captcha = '';
+
+        for ($i = 0; $i < 4; $i++) {
+            $captcha .= $characters[random_int(0, strlen($characters) - 1)];
+        }
+
+        // 儲存到 Session
         session()->set('captcha', $captcha);
 
         // 建立圖片
@@ -37,7 +44,10 @@ class Captcha extends BaseController
 
         // 防止圖片被瀏覽器快取
         $this->response->setHeader('Content-Type', 'image/png');
-        $this->response->setHeader('Cache-Control', 'no-cache, must-revalidate');
+        $this->response->setHeader(
+            'Cache-Control',
+            'no-cache, must-revalidate'
+        );
 
         // 將圖片輸出到記憶體
         ob_start();
