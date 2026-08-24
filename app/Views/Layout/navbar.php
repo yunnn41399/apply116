@@ -9,16 +9,22 @@
             首頁
         </a>
         <a href="#" class="home-nav-link">
-            招生資訊
+            校系分則查詢
         </a>
         <a href="#" class="home-nav-link">
-            招生校系
-        </a>
-        <a href="#"  class="home-nav-link">
-            網路報名
+            網路報名系統
         </a>
         <a href="#" class="home-nav-link">
-            公告資訊
+            篩選結果查詢
+        </a>
+        <a href="#" class="home-nav-link">
+            審查資料上傳系統
+        </a>
+        <a href="#" class="home-nav-link">
+            網路登記志願
+        </a>
+        <a href="#" class="home-nav-link">
+            分發結果查詢
         </a>
     </nav>
     <div class="home-header-right">
