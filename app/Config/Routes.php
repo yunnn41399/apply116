@@ -36,3 +36,9 @@ $routes->post('application/confirm/submit', 'ApplicationConfirmController::submi
 
 $routes->get('/captcha', 'Captcha::index');
 $routes->get('/register/refresh-captcha', 'Register::refreshCaptcha');
+
+$routes->get('application-info', 'ApplicationInfoController::index');
+$routes->get('filter-result', 'SystemInfoController::filterResult');
+$routes->get('review-upload', 'SystemInfoController::reviewUpload');
+$routes->get('online-selection', 'SystemInfoController::onlineSelection');
+$routes->get('distribution-result', 'SystemInfoController::distributionResult');

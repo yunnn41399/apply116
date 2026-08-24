@@ -1,0 +1,531 @@
+/* =========================================================
+   Apply 116 - 系統功能資訊頁
+   ========================================================= */
+/* =========================================================
+   1. 頁面標題
+   ========================================================= */
+.system-info-header {
+    margin-bottom: 25px;
+    padding: 25px 28px;
+    background-color: #ffffff;
+    border: 1px solid #d7e2ee;
+    border-left: 5px solid #2589d8;
+    border-radius: 7px;
+    box-shadow:
+        0 3px 12px rgba(20, 70, 110, 0.07);
+}
+
+/* 標題 */
+.system-info-header h2 {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin: 0 0 8px;
+    color: #173b63;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+}
+
+/* 標題 Icon */
+.system-info-header h2 i {
+    color: #1877c9;
+    font-size: 23px;
+}
+
+/* 標題說明 */
+.system-info-header p {
+    margin: 0;
+    color: #536b82;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+/* =========================================================
+   2. 主要資訊卡片
+   ========================================================= */
+.system-info-card {
+    padding: 8px 28px;
+    background-color: #ffffff;
+    border: 1px solid #d7e2ee;
+    border-radius: 7px;
+    box-shadow:
+        0 3px 12px rgba(20, 70, 110, 0.07);
+}
+
+/* =========================================================
+   3. 單一資訊區塊
+   ========================================================= */
+.system-info-section {
+    padding: 22px 0;
+    border-bottom: 1px solid #e3ebf2;
+}
+
+.system-info-section:last-child {
+    border-bottom: none;
+}
+
+/* =========================================================
+   4. 資訊區塊標題
+   ========================================================= */
+.system-info-section h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 10px;
+    color: #173b63;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+/* =========================================================
+   5. 資訊區塊編號
+   ========================================================= */
+.system-info-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 27px;
+    height: 27px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background-color: #eaf4fc;
+    color: #1877c9;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+/* =========================================================
+   6. 一般文字
+   ========================================================= */
+.system-info-section p {
+    margin: 0 0 8px;
+    color: #536b82;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.system-info-section p:last-child {
+    margin-bottom: 0;
+}
+
+/* =========================================================
+   7. 一般資訊提示
+   ========================================================= */
+.system-info-highlight {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    margin-top: 12px;
+    padding: 12px 14px;
+    border-left: 4px solid #2589d8;
+    border-radius: 5px;
+    background-color: #eef7ff;
+    color: #245273;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* 資訊 Icon */
+.system-info-highlight i {
+    flex-shrink: 0;
+    color: #2589d8;
+    font-size: 17px;
+}
+
+/* =========================================================
+   8. Warning / 重要提醒
+   ========================================================= */
+.system-info-warning {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 12px;
+    padding: 13px 15px;
+    border: 1px solid #ead6aa;
+    border-left: 4px solid #b26a00;
+    border-radius: 5px;
+    background-color: #fff7e6;
+    color: #7a5200;
+}
+
+/* Warning Icon */
+.system-info-warning>i {
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: #b26a00;
+    font-size: 18px;
+}
+
+/* Warning 標題 */
+.system-info-warning strong {
+    display: block;
+    margin-bottom: 3px;
+    color: #8a5a00;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+/* Warning 文字 */
+.system-info-warning p {
+    margin: 0;
+    color: #7a6540;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+/* =========================================================
+   9. 錯誤／注意提示
+   ========================================================= */
+.system-info-error {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 12px;
+    padding: 13px 15px;
+    border: 1px solid #e6b8b5;
+    border-left: 4px solid #d93025;
+    border-radius: 5px;
+    background-color: #fff3f2;
+    color: #a61b16;
+}
+
+/* Error Icon */
+.system-info-error>i {
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: #d93025;
+    font-size: 18px;
+}
+
+/* Error 標題 */
+.system-info-error strong {
+    display: block;
+    margin-bottom: 3px;
+    color: #b42318;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+/* Error 文字 */
+.system-info-error p {
+    margin: 0;
+    color: #8f3833;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+/* =========================================================
+   10. 尚無資料
+   ========================================================= */
+.system-info-empty {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 18px 20px;
+    border: 1px solid #d2e2ef;
+    border-left: 4px solid #2589d8;
+    border-radius: 7px;
+    background-color: #f7fbff;
+}
+
+/* 尚無資料 Icon */
+.system-info-empty>i {
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: #2589d8;
+    font-size: 20px;
+}
+
+/* 尚無資料內容 */
+.system-info-empty-content {
+    flex: 1;
+    min-width: 0;
+}
+
+/* 尚無資料標題 */
+.system-info-empty strong {
+    display: block;
+    margin-bottom: 4px;
+    color: #173b63;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+/* 尚無資料文字 */
+.system-info-empty p {
+    margin: 0;
+    color: #71859a;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* =========================================================
+   11. 頁面底部操作區
+   ========================================================= */
+.system-info-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 25px;
+    padding: 18px 20px;
+    border: 1px solid #d7e2ee;
+    border-radius: 7px;
+    background-color: #ffffff;
+    box-shadow:
+        0 3px 12px rgba(20, 70, 110, 0.06);
+}
+
+/* 操作區文字 */
+.system-info-actions-text {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    color: #536b82;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+/* 操作區文字 Icon */
+.system-info-actions-text i {
+    flex-shrink: 0;
+    color: #1877c9;
+    font-size: 18px;
+}
+
+/* =========================================================
+   12. 主要操作按鈕
+   ========================================================= */
+.system-info-primary-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    flex-shrink: 0;
+    min-height: 42px;
+    padding: 0 22px;
+    border: 1px solid #1877c9;
+    border-radius: 5px;
+    background-color: #1877c9;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow:
+        0 2px 6px rgba(24, 119, 201, 0.20);
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.1s ease;
+}
+
+/* Hover */
+.system-info-primary-button:hover {
+    border-color: #1266ad;
+    background-color: #1266ad;
+    box-shadow:
+        0 4px 10px rgba(24, 119, 201, 0.25);
+}
+
+/* Active */
+.system-info-primary-button:active {
+    transform: translateY(1px);
+}
+
+/* =========================================================
+   13. 次要操作按鈕
+   ========================================================= */
+.system-info-secondary-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    flex-shrink: 0;
+    min-height: 42px;
+    padding: 0 22px;
+    border: 1px solid #9fb5c9;
+    border-radius: 5px;
+    background-color: #ffffff;
+    color: #245273;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease;
+}
+
+/* Hover */
+.system-info-secondary-button:hover {
+    border-color: #2589d8;
+    background-color: #eef7ff;
+    color: #1266ad;
+}
+
+/* =========================================================
+   14. 操作區雙按鈕
+   ========================================================= */
+.system-info-action-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+/* =========================================================
+   15. 一般條列資訊
+   ========================================================= */
+.system-info-list {
+    margin: 10px 0 0;
+    padding-left: 22px;
+    color: #536b82;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.system-info-list li {
+    margin-bottom: 5px;
+}
+
+.system-info-list li:last-child {
+    margin-bottom: 0;
+}
+
+/* =========================================================
+   16. 強調文字
+   ========================================================= */
+.system-info-emphasis {
+    color: #173b63;
+    font-weight: 700;
+}
+
+/* =========================================================
+   17. 紅色重要文字
+   ========================================================= */
+.system-info-danger-text {
+    color: #c62828;
+    font-weight: 700;
+}
+
+/* =========================================================
+   18. 橘色警示文字
+   ========================================================= */
+.system-info-warning-text {
+    color: #b26a00;
+    font-weight: 700;
+}
+
+/* =========================================================
+   19. 藍色資訊文字
+   ========================================================= */
+.system-info-primary-text {
+    color: #1877c9;
+    font-weight: 700;
+}
+
+/* =========================================================
+   20. 響應式 - 800px
+   ========================================================= */
+@media (max-width: 800px) {
+    .system-info-header {
+        padding: 22px;
+    }
+
+    .system-info-card {
+        padding: 5px 20px;
+    }
+
+    .system-info-header h2 {
+        font-size: 22px;
+    }
+
+    .system-info-actions {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .system-info-actions-text {
+        justify-content: center;
+        text-align: center;
+    }
+
+    .system-info-action-buttons {
+        width: 100%;
+        justify-content: stretch;
+    }
+
+    .system-info-primary-button,
+    .system-info-secondary-button {
+        flex: 1;
+    }
+}
+
+/* =========================================================
+   21. 響應式 - 600px
+   ========================================================= */
+@media (max-width: 600px) {
+    .system-info-header {
+        margin-bottom: 20px;
+        padding: 20px;
+    }
+
+    .system-info-header h2 {
+        font-size: 20px;
+    }
+
+    .system-info-header h2 i {
+        font-size: 20px;
+    }
+
+    .system-info-header p {
+        font-size: 14px;
+    }
+
+    .system-info-card {
+        padding: 3px 16px;
+    }
+
+    .system-info-section {
+        padding: 18px 0;
+    }
+
+    .system-info-section h3 {
+        font-size: 16px;
+    }
+
+    .system-info-section p {
+        font-size: 13px;
+        line-height: 1.7;
+    }
+
+    .system-info-highlight,
+    .system-info-warning,
+    .system-info-error,
+    .system-info-empty {
+        padding: 12px 13px;
+    }
+
+    .system-info-actions {
+        padding: 16px;
+    }
+
+    .system-info-action-buttons {
+        flex-direction: column;
+    }
+
+    .system-info-primary-button,
+    .system-info-secondary-button {
+        width: 100%;
+        flex: none;
+    }
+}

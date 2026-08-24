@@ -1,3 +1,6 @@
+<?php
+$currentUri = trim(uri_string(), '/');
+?>
 <aside class="home-sidebar">
     <div class="home-sidebar-group">
         <button type="button" class="home-sidebar-toggle active">
