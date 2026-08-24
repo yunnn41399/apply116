@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\ApplicationModel;
 use App\Models\CandidateModel;
+use App\Models\ApplicationDepartmentModel;
 
 class ApplicationAdmin extends BaseController
 {
@@ -34,7 +35,7 @@ class ApplicationAdmin extends BaseController
             'id',
             'name',
             'exam_number',
-            'birth_date',
+            'dept_count',
             'created_at',
             'updated_at'
         ];
@@ -57,21 +58,27 @@ class ApplicationAdmin extends BaseController
          * candidates.id
          */
         $builder = $this->applicationModel
-            ->select(
-                'applications.id,
-                applications.candidate_id,
-                applications.birth_date,
-                applications.created_at,
-                applications.updated_at,
-                candidates.name,
-                candidates.exam_number,
-                candidates.id_number'
-            )
-            ->join(
-                'candidates',
-                'candidates.id = applications.candidate_id',
-                'inner'
-            );
+        ->select(
+            'applications.id,
+            applications.candidate_id,
+            applications.created_at,
+            applications.updated_at,
+            candidates.name,
+            candidates.exam_number,
+            candidates.id_number,
+            COUNT(application_departments.id) as dept_count'
+        )
+        ->join(
+            'candidates',
+            'candidates.id = applications.candidate_id',
+            'inner'
+        )
+        ->join(
+            'application_departments',
+            'application_departments.application_id = applications.id',
+            'left'
+        )
+        ->groupBy('applications.id');
 
         // 搜尋
         if ($keyword !== '') {
@@ -98,6 +105,13 @@ class ApplicationAdmin extends BaseController
                 $direction
             );
 
+        } elseif ($sort === 'dept_count') {
+            
+            $builder->orderBy(
+                'dept_count',
+                $direction
+            );
+            
         } else {
 
             $builder->orderBy(
@@ -128,7 +142,7 @@ class ApplicationAdmin extends BaseController
                 applications.birth_date,
                 applications.phone,
                 applications.address,
-                applications.current_school,
+                applications.email,
                 applications.created_at,
                 applications.updated_at,
                 candidates.name,
@@ -149,8 +163,24 @@ class ApplicationAdmin extends BaseController
             );
         }
 
+        // 查詢該筆報名的選填校系清單
+        $applicationDepartmentModel = new ApplicationDepartmentModel();
+        $departments = $applicationDepartmentModel
+            ->select(
+                'application_departments.*, 
+                departments.university_code, 
+                departments.university_name, 
+                departments.department_code, 
+                departments.department_name'
+            )
+            ->join('departments', 'departments.id = application_departments.department_id')
+            ->where('application_departments.application_id', $id)
+            ->orderBy('application_departments.id', 'ASC')
+            ->findAll();
+
         return view('admin/applications/detail', [
-            'application' => $application
+            'application' => $application,
+            'departments' => $departments
         ]);
     }
 }
