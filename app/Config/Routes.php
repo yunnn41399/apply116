@@ -93,7 +93,7 @@ $routes->group('admin', ['filter' => 'adminAuth'], function ($routes) {
 
     // 報名資料
     $routes->get('applications', 'ApplicationAdmin::index');
-    $routes->get('application/(:num)', 'ApplicationAdmin::detail/$1');
+    $routes->get('applications/(:num)', 'ApplicationAdmin::detail/$1');
 
     // 公告管理
     $routes->get('announcement', 'Announcement::adminIndex');
