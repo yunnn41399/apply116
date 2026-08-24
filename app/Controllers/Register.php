@@ -8,30 +8,39 @@ use App\Models\CandidateModel;
 class Register extends BaseController
 {
     protected $helpers = ['form'];
-    
-    public function index()
+    private function generateCaptcha(): string
     {
-        $captcha = session()->get('captcha');
+        $characters = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+        $captcha = '';
 
-        if ($captcha === null) {
-            $captcha = (string) random_int(1000, 9999); // 確保存入的是字串 (string)
-            session()->set('captcha', $captcha);
+        for ($i = 0; $i < 4; $i++) {
+            $captcha .= $characters[random_int(0, strlen($characters) - 1)];
         }
 
+        return $captcha;
+    }
+
+    public function index()
+    {
+        // 每次進入註冊頁面，都產生新的驗證碼
+        $captcha = $this->generateCaptcha();
+
+        session()->set('captcha', $captcha);
+
         return view('register', [
-            'captcha' => (string) $captcha
+            'captcha' => $captcha
         ]);
     }
 
     public function refreshCaptcha()
     {
-        $captcha = (string) random_int(1000, 9999); // 確保存入的是字串 (string)
+        $captcha = $this->generateCaptcha();
         session()->set('captcha', $captcha);
 
         return $this->response->setJSON([
-            'success'   => true,
-            'captcha'   => $captcha,
-            'csrfHash'  => csrf_hash(),
+            'success'  => true,
+            'captcha'  => $captcha,
+            'csrfHash' => csrf_hash(),
         ]);
     }
     
@@ -91,19 +100,17 @@ class Register extends BaseController
 
             'captcha' => [
                 'label' => '驗證碼',
-                'rules' => 'required|exact_length[4]|numeric',
+                'rules' => 'required|exact_length[4]|regex_match[/^[A-Za-z0-9]{4}$/]',
                 'errors' => [
                     'required'     => '請輸入驗證碼。',
-                    'exact_length' => '驗證碼必須為 4 位數字。',
-                    'numeric'      => '驗證碼只能輸入數字。',
+                    'exact_length' => '驗證碼必須為 4 碼。',
+                    'regex_match'  => '驗證碼只能包含英文字母和數字。',
                 ],
             ],
         ];
 
-        // 儲存所有錯誤
         $errors = [];
 
-        // 1. 執行欄位格式驗證
         $isValid = $this->validate($rules);
 
         if (! $isValid) {
@@ -111,15 +118,13 @@ class Register extends BaseController
         }
 
 
-        // 取得使用者輸入資料
         $name       = trim((string) $this->request->getPost('name'));
         $examNumber = trim((string) $this->request->getPost('exam_number'));
         $idNumber   = strtoupper(trim((string) $this->request->getPost('id_number')));
         $password   = (string) $this->request->getPost('password');
-        $captcha    = trim((string) $this->request->getPost('captcha'));
+        $captcha = strtoupper(trim((string) $this->request->getPost('captcha')));
 
-        // 2. 檢查 CAPTCHA
-        $sessionCaptcha = (string) session()->get('captcha'); // 強制轉為字串再做嚴格比對
+        $sessionCaptcha = strtoupper((string) session()->get('captcha'));
 
         if (
             empty($errors['captcha']) &&
@@ -128,7 +133,6 @@ class Register extends BaseController
             $errors['captcha'] = '驗證碼錯誤。';
         }
 
-        // 3. 檢查資料庫是否重複註冊
         $model = new CandidateModel();
 
         if ($examNumber !== '') {
@@ -143,20 +147,21 @@ class Register extends BaseController
             }
         }
 
-        // 4. 如果有任何錯誤，一次把所有錯誤傳回註冊頁面。
         if (! empty($errors)) {
             return redirect()->back()
                 ->withInput()
                 ->with('registerErrors', $errors);
         }
 
-        // 5. 所有驗證都通過將資料寫入資料庫。
         $model->insert([
             'name'        => $name,
             'exam_number' => $examNumber,
             'id_number'   => $idNumber,
             'password'    => password_hash($password, PASSWORD_DEFAULT),
         ]);
+
+        // 註冊成功後清除舊驗證碼
+        session()->remove('captcha');
 
         return view('register_success', [
             'name' => $name,

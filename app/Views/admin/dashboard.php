@@ -27,7 +27,7 @@
         </section>
 
         <!-- 功能選單卡片網格 -->
-        <div class="apply-menu">
+        <div class="admin-menu">
             <a href="<?= site_url('admin/profile') ?>" class="apply-card">
                 <div class="apply-card-icon">
                     <i class="bi bi-person-gear"></i>
@@ -42,7 +42,7 @@
                         <i class="bi bi-people-fill"></i>
                     </div>
                     <div class="apply-card-title">管理員帳號管理</div>
-                    <div class="apply-card-description">管理後臺管理員帳號與權限</div>
+                    <div class="apply-card-description">管理所有管理員帳號與權限</div>
                 </a>
             <?php endif; ?>
 
@@ -51,7 +51,7 @@
                     <i class="bi bi-megaphone"></i>
                 </div>
                 <div class="apply-card-title">公告管理</div>
-                <div class="apply-card-description">新增與修改前台系統公告內容</div>
+                <div class="apply-card-description">新增與修改前台首頁公告內容</div>
             </a>
 
             <a href="<?= site_url('admin/candidates') ?>" class="apply-card">
@@ -59,7 +59,7 @@
                     <i class="bi bi-person-lines-fill"></i>
                 </div>
                 <div class="apply-card-title">考生資料</div>
-                <div class="apply-card-description">查詢與管理考生基本資料</div>
+                <div class="apply-card-description">查詢考生基本資料</div>
             </a>
 
             <a href="<?= site_url('admin/applications') ?>" class="apply-card">
@@ -67,7 +67,7 @@
                     <i class="bi bi-file-earmark-text"></i>
                 </div>
                 <div class="apply-card-title">報名資料</div>
-                <div class="apply-card-description">審核與查詢考生報名紀錄</div>
+                <div class="apply-card-description">查詢考生報名資料</div>
             </a>
 
             <a href="#" class="apply-card">

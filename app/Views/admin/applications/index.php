@@ -103,9 +103,9 @@
                             </th>
 
                             <th style="width: 15%;">
-                                <a href="<?= site_url('admin/applications?sort=birth_date&direction=' . (($sort === 'birth_date' && $direction === 'DESC') ? 'ASC' : 'DESC') . (!empty($keyword) ? '&keyword=' . urlencode($keyword) : '')) ?>" style="color: inherit; text-decoration: none;">
-                                    出生年月日
-                                    <?php if ($sort === 'birth_date'): ?>
+                                <a href="<?= site_url('admin/applications?sort=dept_count&direction=' . (($sort === 'dept_count' && $direction === 'DESC') ? 'ASC' : 'DESC') . (!empty($keyword) ? '&keyword=' . urlencode($keyword) : '')) ?>" style="color: inherit; text-decoration: none;">
+                                    志願選填狀態
+                                    <?php if ($sort === 'dept_count'): ?>
                                         <?= $direction === 'ASC' ? '▲' : '▼' ?>
                                     <?php else: ?>
                                         <i class="bi bi-arrow-down-up" style="opacity: 0.4;"></i>
@@ -151,9 +151,19 @@
                                 <td title="<?= esc($application['exam_number']) ?>">
                                     <?= esc($application['exam_number']) ?>
                                 </td>
-                                <td title="<?= esc($application['birth_date']) ?>">
-                                    <?= esc($application['birth_date']) ?>
+
+                                <td>
+                                    <?php if (!empty($application['dept_count']) && $application['dept_count'] > 0): ?>
+                                        <span style="color: #16835a; font-weight: bold;">
+                                            <i class="bi bi-check-circle-fill"></i> 已選填 (<?= $application['dept_count'] ?> 校)
+                                        </span>
+                                    <?php else: ?>
+                                        <span style="color: #d64545; font-weight: bold;">
+                                            <i class="bi bi-x-circle-fill"></i> 未選填
+                                        </span>
+                                    <?php endif; ?>
                                 </td>
+
                                 <td title="<?= esc($application['created_at'] ?? '') ?>">
                                     <?= esc($application['created_at'] ?? '') ?>
                                 </td>
@@ -161,7 +171,7 @@
                                     <?= esc($application['updated_at'] ?? '') ?>
                                 </td>
                                 <td>
-                                    <a href="<?= site_url('admin/application/' . $application['id']) ?>" class="secondary-button" style="text-decoration: none; padding: 0.25rem 0.6rem; font-size: 0.875rem; display: inline-block;">
+                                    <a href="<?= site_url('admin/applications/' . $application['id']) ?>" class="secondary-button" style="text-decoration: none; padding: 0.25rem 0.6rem; font-size: 0.875rem; display: inline-block;">
                                         <i class="bi bi-eye"></i> 查看
                                     </a>
                                 </td>
