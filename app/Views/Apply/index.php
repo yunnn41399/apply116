@@ -19,9 +19,6 @@
             <a href="<?= site_url('apply') ?>" class="apply-nav-link active">
                 首頁
             </a>
-            <a href="<?= site_url('department') ?>" class="apply-nav-link">
-                查詢校系資料
-            </a>
             <a href="<?= site_url('/application') ?>" class="apply-nav-link">
                 立即報名
             </a>
@@ -66,17 +63,6 @@
             </p>
         </section>
         <div class="apply-menu">
-            <a href="<?= site_url('/department') ?>" class="apply-card">
-                <div class="apply-card-icon">
-                    <i class="bi bi-search"></i>
-                </div>
-                <div class="apply-card-title">
-                    查詢校系資料
-                </div>
-                <div class="apply-card-description">
-                    查詢各大學校系及相關招生資訊
-                </div>
-            </a>
             <a href="<?= site_url('/application') ?>" class="apply-card">
                 <div class="apply-card-icon">
                     <i class="bi bi-pencil-square"></i>
@@ -85,7 +71,7 @@
                     立即報名
                 </div>
                 <div class="apply-card-description">
-                    填寫報名基本資料並選擇校系
+                    填寫報名基本資料並選擇報名校系
                 </div>
             </a>
             <a href="<?= site_url('/application/cart') ?>" class="apply-card">
@@ -96,7 +82,7 @@
                     我的校系清單
                 </div>
                 <div class="apply-card-description">
-                    查看與管理已加入的校系
+                    查看與管理已加入清單的校系
                 </div>
             </a>
             <a href="<?= site_url('application-status') ?>" class="apply-card">

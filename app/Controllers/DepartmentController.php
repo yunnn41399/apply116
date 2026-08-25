@@ -5,19 +5,10 @@ use App\Models\DepartmentModel;
 class DepartmentController extends BaseController
 {
     // ========================================
-    // 查詢校系資料頁面
-    // ========================================    
+    // 校系分則查詢
+    // ========================================
     public function index()
     {
-        // 檢查是否已登入
-        if (!session()->get('isLoggedIn')) {
-            return redirect()->to('/login')
-                ->with(
-                    'error',
-                    '請先登入後再進入網路報名系統。'
-                );
-        }
-        // 取得搜尋條件
         $keyword = trim(
             $this->request->getGet('keyword') ?? ''
         );
@@ -25,28 +16,30 @@ class DepartmentController extends BaseController
             $this->request->getGet('university') ?? ''
         );
         $englishListening = trim(
-            $this->request->getGet('english_listening') ?? ''
+            $this->request->getGet(
+                'english_listening'
+            ) ?? ''
         );
-        $requirementsStatus = $this->request->getGet(
-            'requirements_status'
-        );
+        $requirementsStatus =
+            $this->request->getGet(
+                'requirements_status'
+            );
         if (!is_array($requirementsStatus)) {
             $requirementsStatus = [];
         }
-        // Model
-        $departmentModel = new DepartmentModel();
-        // 取得所有學校
-        $universities = (new DepartmentModel())
-            ->select(
-                'university_code, university_name'
-            )
-            ->distinct()
-            ->orderBy(
-                'university_code',
-                'ASC'
-            )
-            ->findAll();
-        // 關鍵字搜尋
+        $departmentModel =
+            new DepartmentModel();
+        $universities =
+            (new DepartmentModel())
+                ->select(
+                    'university_code, university_name'
+                )
+                ->distinct()
+                ->orderBy(
+                    'university_code',
+                    'ASC'
+                )
+                ->findAll();
         if ($keyword !== '') {
             $departmentModel
                 ->groupStart()
@@ -60,50 +53,56 @@ class DepartmentController extends BaseController
                 )
                 ->groupEnd();
         }
-        // 學校篩選
         if ($university !== '') {
             $departmentModel->where(
                 'university_code',
                 $university
             );
         }
-        // 檢定科目設定
         $requirementFields = [
             'chinese' => [
-                'field' => 'chinese_requirement',
-                'name' => '國文'
+                'field' =>
+                    'chinese_requirement',
+                'name' => '國文',
             ],
             'english' => [
-                'field' => 'english_requirement',
-                'name' => '英文'
+                'field' =>
+                    'english_requirement',
+                'name' => '英文',
             ],
             'math_a' => [
-                'field' => 'math_a_requirement',
-                'name' => '數學A'
+                'field' =>
+                    'math_a_requirement',
+                'name' => '數學A',
             ],
             'math_b' => [
-                'field' => 'math_b_requirement',
-                'name' => '數學B'
+                'field' =>
+                    'math_b_requirement',
+                'name' => '數學B',
             ],
             'social' => [
-                'field' => 'social_requirement',
-                'name' => '社會'
+                'field' =>
+                    'social_requirement',
+                'name' => '社會',
             ],
             'natural' => [
-                'field' => 'natural_requirement',
-                'name' => '自然'
+                'field' =>
+                    'natural_requirement',
+                'name' => '自然',
             ],
         ];
-        // 套用各科檢定條件
         foreach (
-            $requirementFields as $key => $info
+            $requirementFields
+            as $key => $info
         ) {
-            $status = $requirementsStatus[$key]
+            $status =
+                $requirementsStatus[$key]
                 ?? 'any';
             if ($status === 'any') {
                 continue;
             }
-            $field = $info['field'];
+            $field =
+                $info['field'];
             if ($status === 'required') {
                 $departmentModel
                     ->where(
@@ -115,7 +114,8 @@ class DepartmentController extends BaseController
                         ''
                     )
                     ->where(
-                        $field . ' IS NOT NULL',
+                        $field
+                        . ' IS NOT NULL',
                         null,
                         false
                     );
@@ -133,14 +133,14 @@ class DepartmentController extends BaseController
                         ''
                     )
                     ->orWhere(
-                        $field . ' IS NULL',
+                        $field
+                        . ' IS NULL',
                         null,
                         false
                     )
                     ->groupEnd();
             }
         }
-        // 英聽篩選
         if (
             $englishListening === 'required'
         ) {
@@ -178,40 +178,43 @@ class DepartmentController extends BaseController
                 )
                 ->groupEnd();
         }
-        // 分頁設定
         $perPage = 30;
-        $departments = $departmentModel
-            ->orderBy(
-                'university_code',
-                'ASC'
-            )
-            ->orderBy(
-                'department_code',
-                'ASC'
-            )
-            ->paginate(
-                $perPage,
-                'department'
-            );
-        $pager = $departmentModel->pager;
-        // 建立查詢條件提示
+        $departments =
+            $departmentModel
+                ->orderBy(
+                    'university_code',
+                    'ASC'
+                )
+                ->orderBy(
+                    'department_code',
+                    'ASC'
+                )
+                ->paginate(
+                    $perPage,
+                    'department'
+                );
+        $pager =
+            $departmentModel->pager;
         $conditionTexts = [];
         foreach (
-            $requirementFields as $key => $info
+            $requirementFields
+            as $key => $info
         ) {
-            $status = $requirementsStatus[$key]
+            $status =
+                $requirementsStatus[$key]
                 ?? 'any';
             if ($status === 'required') {
                 $conditionTexts[] =
-                    $info['name'] . '參採';
+                    $info['name']
+                    . '參採';
             } elseif (
                 $status === 'not_required'
             ) {
                 $conditionTexts[] =
-                    $info['name'] . '不參採';
+                    $info['name']
+                    . '不參採';
             }
         }
-        // 英聽條件
         if (
             $englishListening === 'required'
         ) {
@@ -223,9 +226,8 @@ class DepartmentController extends BaseController
             $conditionTexts[] =
                 '英聽不參採';
         }
-        // 傳送資料給 View
         return view(
-            'Apply/department',
+            'Department/index',
             [
                 'departments' =>
                     $departments,

@@ -22,9 +22,6 @@
             <a href="<?= site_url('apply') ?>" class="apply-nav-link">
                 首頁
             </a>
-            <a href="<?= site_url('department') ?>" class="apply-nav-link">
-                查詢校系資料
-            </a>
             <a href="<?= site_url('application') ?>" class="apply-nav-link">
                 立即報名
             </a>
