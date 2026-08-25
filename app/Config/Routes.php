@@ -11,6 +11,16 @@ $routes->get('admin/login', 'AdminAuth::login');
 $routes->post('admin/login', 'AdminAuth::attemptLogin');
 $routes->post('admin/logout', 'AdminAuth::logout');
 
+// 管理員忘記密碼
+$routes->get('admin/forgot-password', 'AdminForgotPassword::index');
+$routes->post('admin/forgot-password', 'AdminForgotPassword::sendResetLink');
+$routes->get('admin/forgot-password/refresh-captcha', 'AdminForgotPassword::refreshCaptcha');
+
+// 管理員重設密碼
+$routes->get('admin/reset-password', 'AdminResetPassword::index');
+$routes->post('admin/reset-password', 'AdminResetPassword::update');
+$routes->get('admin/reset-password/refresh-captcha', 'AdminResetPassword::refreshCaptcha');
+
 // 第一次登入管理員帳號需更改密碼
 $routes->get('admin/change-password', 'AdminPassword::changePassword'); 
 $routes->post('admin/change-password', 'AdminPassword::updatePassword');

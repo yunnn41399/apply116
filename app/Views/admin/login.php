@@ -70,10 +70,20 @@
                 </div>
             </div>
 
-            <button type="submit" class="primary-button">
-                登入
-            </button>
+            <div class="form-actions">
+                <button type="submit" class="primary-button">
+                    登入
+                </button>
+            </div>
+
         </form>
+
+        <div class="form-links">
+            <a href="<?= site_url('admin/forgot-password') ?>">
+                忘記密碼
+            </a>
+        </div>
+
     </main>
 
     <script src="<?= base_url('JS/register.js') ?>"></script>

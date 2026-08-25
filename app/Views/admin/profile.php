@@ -58,7 +58,7 @@
 
                 <!-- 管理員姓名 -->
                 <div class="form-group" style="margin-bottom: 1.25rem;">
-                    <label for="name">管理員姓名：</label>
+                    <label for="name">管理員姓名： <span style="color: #ef4444;">*</span></label>
                     <input 
                         type="text" 
                         id="name" 
@@ -66,7 +66,22 @@
                         value="<?= esc(old('name', $admin['name'])) ?>" 
                         maxlength="50" 
                         required
-                        style="font-size: 1rem; padding: 0.5rem 0.75rem;"
+                        style="width: 100%; font-size: 1rem; padding: 0.5rem 0.75rem;"
+                    >
+                </div>
+
+                <!-- 電子郵件 Email -->
+                <div class="form-group" style="margin-bottom: 1.25rem;">
+                    <label for="email">電子郵件： <span style="color: #ef4444;">*</span></label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        value="<?= esc(old('email', $admin['email'] ?? '')) ?>" 
+                        placeholder="請輸入 Email (例: admin@example.com)"
+                        maxlength="255" 
+                        required
+                        style="width: 100%; font-size: 1rem; padding: 0.5rem 0.75rem;"
                     >
                 </div>
 

@@ -14,7 +14,7 @@ class AdminLogService
     }
 
     /**
-     * 建立管理員操作紀錄
+     * 建立目前登入管理員的操作紀錄
      */
     public function log(
         string $action,
@@ -25,6 +25,30 @@ class AdminLogService
 
         // 沒有管理員 Session 時不建立紀錄
         if (empty($adminId)) {
+            return false;
+        }
+
+        return $this->logByAdminId(
+            $adminId,
+            $action,
+            $description
+        );
+    }
+
+
+    /**
+     * 指定管理員 ID 建立操作紀錄
+     *
+     * 用於尚未登入的流程，例如：
+     * 忘記密碼 → Email → 重設密碼
+     */
+    public function logByAdminId(
+        int $adminId,
+        string $action,
+        string $description
+    ): bool {
+
+        if ($adminId <= 0) {
             return false;
         }
 

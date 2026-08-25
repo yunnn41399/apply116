@@ -92,6 +92,22 @@
                     </div>
                 </div>
 
+                <!-- 電子郵件 Email -->
+                <div style="display: flex; flex-direction: column; gap: 0.4rem;">
+                    <label for="email" style="font-weight: 600; color: #4c1d95; font-size: 0.95rem;">
+                        電子郵件 <span style="color: #ef4444;">*</span>
+                    </label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value="<?= old('email') ?>"
+                        placeholder="請輸入 Email (例: admin@example.com)"
+                        required
+                        style="padding: 0.6rem 0.8rem; border: 1px solid #ddd6fe; border-radius: 0.375rem; outline: none; font-size: 0.95rem;"
+                    >
+                </div>
+
                 <!-- 密碼與確認密碼 (併排展示) -->
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;">
                     <!-- 密碼 -->

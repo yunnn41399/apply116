@@ -52,7 +52,6 @@
                 </div>
             <?php endif; ?>
 
-
             <!-- 表單內容 -->
             <form id="editAdminForm" method="post" action="<?= site_url('admin/admins/edit/' . $admin['id']) ?>" style="display: flex; flex-direction: column; gap: 1.25rem;">
 
@@ -68,7 +67,6 @@
                         <?= esc($admin['username']) ?>
                     </div>
                 </div>
-
 
                 <!-- 姓名 -->
                 <div style="display: flex; flex-direction: column; gap: 0.4rem;">
@@ -86,6 +84,21 @@
                     >
                 </div>
 
+                <!-- 電子郵件 Email -->
+                <div style="display: flex; flex-direction: column; gap: 0.4rem;">
+                    <label for="email" style="font-weight: 600; color: #4c1d95; font-size: 0.95rem;">
+                        電子郵件 <span style="color: #ef4444;">*</span>
+                    </label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value="<?= old('email', $admin['email'] ?? '') ?>"
+                        placeholder="請輸入 Email (例: admin@example.com)"
+                        required
+                        style="padding: 0.6rem 0.8rem; border: 1px solid #ddd6fe; border-radius: 0.375rem; outline: none; font-size: 0.95rem;"
+                    >
+                </div>
 
                 <!-- 角色與狀態 -->
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;">
@@ -98,53 +111,28 @@
 
                         <?php if ($isSelf): ?>
                             <!-- 編輯自己的帳號：唯讀 -->
-                            <div style="padding: 0.6rem 0.8rem;
-                                    background-color: #f3f4f6;
-                                    border: 1px solid #e5e7eb;
-                                    border-radius: 0.375rem;
-                                    color: #4b5563;
-                                    font-size: 0.95rem;"
-                            >
-
+                            <div style="padding: 0.6rem 0.8rem; background-color: #f3f4f6; border: 1px solid #e5e7eb; border-radius: 0.375rem; color: #4b5563; font-size: 0.95rem;">
                                 <?= ($admin['role'] === 'super_admin') ? '最高管理員' : '一般管理員' ?>
-
                             </div>
-
                         <?php else: ?>
-
                             <!-- 編輯其他管理員：最高管理員可以修改 -->
                             <select
                                 id="role"
                                 name="role"
                                 required
-                                style="
-                                    padding: 0.6rem 0.8rem;
-                                    border: 1px solid #ddd6fe;
-                                    border-radius: 0.375rem;
-                                    outline: none;
-                                    font-size: 0.95rem;
-                                    background-color: #fff;"
+                                style="padding: 0.6rem 0.8rem; border: 1px solid #ddd6fe; border-radius: 0.375rem; outline: none; font-size: 0.95rem; background-color: #fff;"
                             >
-
                                 <option value="admin" <?= old('role', $admin['role']) === 'admin' ? 'selected' : '' ?>>
                                     一般管理員
                                 </option>
-
                                 <option value="super_admin" <?= old('role', $admin['role']) === 'super_admin' ? 'selected' : '' ?>>
                                     最高管理員
                                 </option>
-
                             </select>
-
                         <?php endif; ?>
-
                     </div>
 
-
-                    <!-- ===================================== -->
                     <!-- 帳號狀態 -->
-                    <!-- ===================================== -->
-
                     <div style="display: flex; flex-direction: column; gap: 0.4rem;">
                         <label for="status" style="font-weight: 600; color: #4c1d95; font-size: 0.95rem;">
                             帳號狀態 <span style="color: #ef4444;">*</span>
@@ -152,49 +140,25 @@
 
                         <?php if ($isSelf): ?>
                             <!-- 編輯自己的帳號：狀態唯讀 -->
-                            <div
-                                style="
-                                    padding: 0.6rem 0.8rem;
-                                    background-color: #f3f4f6;
-                                    border: 1px solid #e5e7eb;
-                                    border-radius: 0.375rem;
-                                    color: #4b5563;
-                                    font-size: 0.95rem;"
-                            >
-
+                            <div style="padding: 0.6rem 0.8rem; background-color: #f3f4f6; border: 1px solid #e5e7eb; border-radius: 0.375rem; color: #4b5563; font-size: 0.95rem;">
                                 <?= ($admin['status'] === 'active') ? '🟢 啟用' : '🔴 停用' ?>
-
                             </div>
-
                         <?php else: ?>
-
                             <!-- 編輯其他管理員：最高管理員可以修改 -->
                             <select
                                 id="status"
                                 name="status"
                                 required
-                                style="
-                                    padding: 0.6rem 0.8rem;
-                                    border: 1px solid #ddd6fe;
-                                    border-radius: 0.375rem;
-                                    outline: none;
-                                    font-size: 0.95rem;
-                                    background-color: #fff;
-                                "
+                                style="padding: 0.6rem 0.8rem; border: 1px solid #ddd6fe; border-radius: 0.375rem; outline: none; font-size: 0.95rem; background-color: #fff;"
                             >
-
                                 <option value="active" <?= old('status', $admin['status']) === 'active' ? 'selected' : '' ?>>
                                     🟢啟用
                                 </option>
-
                                 <option value="inactive" <?= old('status', $admin['status']) === 'inactive' ? 'selected' : '' ?>>
                                     🔴停用
                                 </option>
-
                             </select>
-
                         <?php endif; ?>
-
                     </div>
 
                 </div>

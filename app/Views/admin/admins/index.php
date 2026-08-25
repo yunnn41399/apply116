@@ -57,7 +57,7 @@
                         id="keyword"
                         name="keyword"
                         value="<?= esc($keyword ?? '') ?>"
-                        placeholder="管理員帳號或姓名"
+                        placeholder="管理員帳號、姓名或 Email"
                         style="width: 100%; padding: 0.5rem 0.75rem 0.5rem 2.25rem; border: 1px solid #ddd6fe; border-radius: 0.375rem; outline: none; font-size: 0.95rem;"
                     >
                 </div>
@@ -90,7 +90,7 @@
                 <table class="admin-table">
                     <thead>
                         <tr>
-                            <!-- 透過 width 固定各欄位寬度比例 -->
+
                             <th style="width: 8%;">
                                 <a href="<?= site_url('admin/admins?keyword=' . urlencode($keyword ?? '') . '&sort=id&direction=' . (($sort === 'id' && $direction === 'DESC') ? 'ASC' : 'DESC')) ?>" style="color: inherit; text-decoration: none;">
                                     編號

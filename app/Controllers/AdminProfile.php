@@ -52,19 +52,26 @@ class AdminProfile extends BaseController
 
         // 取得表單資料
         $name = trim($this->request->getPost('name'));
-
+        $email = trim($this->request->getPost('email'));
         $password = $this->request->getPost('password');
         $passwordConfirm = $this->request->getPost('password_confirm');
 
         // 基本驗證
         $rules = [
             'name' => 'required|max_length[50]',
+            'email' => "required|valid_email|is_unique[admins.email,id,{$adminId}]",
         ];
 
         $messages = [
             'name' => [
                 'required'   => '請輸入管理員姓名。',
                 'max_length' => '管理員姓名不可超過 50 個字元。',
+            ],
+            
+            'email' => [
+                'required' => '請輸入管理員電子信箱。',
+                'valid_email' => '請輸入有效電子信箱。',
+                'is_unique' => '此電子信箱已有管理員使用。',
             ],
         ];
 
@@ -103,6 +110,7 @@ class AdminProfile extends BaseController
 
         $data = [
             'name' => $name,
+            'email' => $email,
         ];
 
         // 如果有輸入新密碼，才更新密碼
@@ -144,6 +152,12 @@ class AdminProfile extends BaseController
         if ($admin['name'] !== $name) {
             $changes[] =
                 '姓名：' . $admin['name'] . ' → ' . $name;
+        }
+
+        // 電子信箱有變更
+        if ($admin['email'] !== $email) {
+            $changes[] =
+                'Email：' . $admin['email'] . ' → ' . $email;
         }
 
         // 密碼變更
