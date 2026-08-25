@@ -11,11 +11,11 @@ class SystemInfoController extends BaseController
                 'title' => '篩選結果查詢',
                 'icon' => 'bi bi-funnel',
                 'description' =>
-                    '查詢目前的篩選結果及相關資訊。',
+                    '查詢第一階段篩選結果及相關資訊。',
                 'emptyMessage' =>
-                    '目前尚無篩選結果資料。',
+                    '系統尚未開放',
                 'emptyHint' =>
-                    '相關功能開放後，將於此顯示您的篩選結果。',
+                    '目前尚無資料。',
             ]
         );
     }
@@ -27,11 +27,11 @@ class SystemInfoController extends BaseController
                 'title' => '審查資料上傳系統',
                 'icon' => 'bi bi-cloud-upload',
                 'description' =>
-                    '辦理審查資料相關文件的上傳作業。',
+                    '辦理第二階段指定項目甄試審查資料上傳作業。',
                 'emptyMessage' =>
-                    '目前尚無審查資料上傳資訊。',
+                    '系統尚未開放',
                 'emptyHint' =>
-                    '相關功能開放後，將於此提供審查資料上傳作業。',
+                    '目前尚無資料。',
             ]
         );
     }
@@ -45,9 +45,9 @@ class SystemInfoController extends BaseController
                 'description' =>
                     '辦理網路登記志願相關作業。',
                 'emptyMessage' =>
-                    '目前尚無志願登記資料。',
+                    '系統尚未開放',
                 'emptyHint' =>
-                    '相關功能開放後，將於此提供網路登記志願功能。',
+                    '目前尚無資料。',
             ]
         );
     }
@@ -59,11 +59,11 @@ class SystemInfoController extends BaseController
                 'title' => '分發結果查詢',
                 'icon' => 'bi bi-bar-chart',
                 'description' =>
-                    '查詢您的分發結果及相關資訊。',
+                    '查詢統一分發結果及相關資訊。',
                 'emptyMessage' =>
-                    '目前尚無分發結果資料。',
+                    '系統尚未開放',
                 'emptyHint' =>
-                    '分發結果公布後，將於此顯示相關結果。',
+                    '目前尚無資料。',
             ]
         );
     }

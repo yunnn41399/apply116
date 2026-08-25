@@ -36,8 +36,7 @@
                         報名資格與時間
                     </h3>
                     <p>
-                        請依照當年度招生簡章所公告之報名資格及時間辦理網路報名。
-                        實際報名起訖時間及相關規定，請以正式公告內容為準。
+                        請依照當年度招生簡章所公告之報名資格及時間辦理網路報名，實際報名起訖時間及相關規定，請以正式公告內容為準。
                     </p>
                 </div>
                 <div class="system-info-section">
@@ -45,11 +44,32 @@
                         <span class="system-info-number">
                             2
                         </span>
+                        報名帳號
+                    </h3>
+                    <p>
+                        報名參加申請入學招生的每一考生，請點選右上角「考生註冊」進行帳號註冊。
+                    </p>
+                    <div class="system-info-warning">
+                        <i class="bi bi-exclamation-triangle-fill"></i>
+                        <div>
+                            <strong>
+                                請注意
+                            </strong>
+                            <p>
+                                帳號密碼僅限個人使用，請妥善保管，切勿將帳密告知他人。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="system-info-section">
+                    <h3>
+                        <span class="system-info-number">
+                            3
+                        </span>
                         報名基本資料
                     </h3>
                     <p>
-                        登入後請先確認並填寫報名基本資料，包括出生年月日、
-                        手機號碼、通訊地址及電子郵件等資訊。
+                        登入後請先確認並填寫報名基本資料，包括出生年月日、手機號碼、通訊地址及電子郵件等資訊。
                     </p>
                     <p>
                         請務必確認所填資料正確，以免影響後續報名及相關通知。
@@ -58,26 +78,24 @@
                 <div class="system-info-section">
                     <h3>
                         <span class="system-info-number">
-                            3
+                            4
                         </span>
                         選擇報名校系
                     </h3>
                     <p>
-                        考生可以先將有興趣的校系加入「我的校系清單」，
-                        再從候選校系中選擇正式報名的校系。
+                        考生可以先將有興趣的校系加入「我的校系清單」，再從候選校系中選擇正式報名的校系。
                     </p>
                     <div class="system-info-highlight">
                         <i class="bi bi-info-circle"></i>
                         <span>
-                            正式報名時至少選擇 1 個、最多選擇 6 個校系，
-                            且本系統正式報名校系不分志願序。
+                            正式報名時至少選擇 1 個、最多選擇 6 個校系，且本系統正式報名校系不分志願序。
                         </span>
                     </div>
                 </div>
                 <div class="system-info-section">
                     <h3>
                         <span class="system-info-number">
-                            4
+                            5
                         </span>
                         正式送出報名
                     </h3>
@@ -88,11 +106,10 @@
                         <i class="bi bi-exclamation-triangle-fill"></i>
                         <div>
                             <strong>
-                                請特別注意
+                                請注意
                             </strong>
                             <p>
-                                正式送出報名後，報名資料及正式報名校系將無法再修改、
-                                新增或移除，請務必在送出前仔細核對所有資料。
+                                正式送出報名後，報名資料及正式報名校系將無法再修改、新增或移除，請務必在送出前仔細核對所有資料。
                             </p>
                         </div>
                     </div>
@@ -100,30 +117,26 @@
                 <div class="system-info-section">
                     <h3>
                         <span class="system-info-number">
-                            5
+                            6
                         </span>
                         資料確認與權益
                     </h3>
                     <p>
-                        正式送出前，系統會提供最後確認頁面供考生核對。
-                        請確認學測應試號碼、身分證號碼、姓名、
-                        報名資料及正式報名校系皆正確無誤。
+                        正式送出前，系統會提供最後確認頁面供考生核對，請確認學測應試號碼、身分證號碼、姓名、報名資料及正式報名校系皆正確無誤。
                     </p>
                     <p>
-                        若因考生提供錯誤或不完整資料而影響相關權益，
-                        概由考生自行負責。
+                        若因考生提供錯誤或不完整資料而影響相關權益，概由考生自行負責。
                     </p>
                 </div>
                 <div class="system-info-section">
                     <h3>
                         <span class="system-info-number">
-                            6
+                            7
                         </span>
                         系統使用提醒
                     </h3>
                     <p>
-                        建議使用穩定的網路環境進行報名，並於完成正式送出後，
-                        前往「報名狀態查詢」確認報名是否成功。
+                        建議使用穩定的網路環境進行報名，並於完成正式送出後，前往「報名狀態查詢」確認報名是否成功。
                     </p>
                 </div>
             </section>
@@ -135,7 +148,8 @@
                     </span>
                 </div>
                 <div class="system-info-action-buttons">
-                    <a href="<?= base_url('login') ?>" class="system-info-primary-button">
+                    <a href="<?= base_url('login') ?>" class="system-info-primary-button" target="_blank"
+                        rel="noopener noreferrer">
                         <i class="bi bi-box-arrow-in-right"></i>
                         前往考生登入
                     </a>
@@ -143,6 +157,7 @@
             </section>
         </div>
     </main>
+    <script src="<?= base_url('JS/sidebar.js') ?>"></script>
 </body>
 
 </html>

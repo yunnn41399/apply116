@@ -546,6 +546,7 @@
         </div>
     </main>
     <script src="<?= base_url('JS/department.js') ?>" defer></script>
+    <script src="<?= base_url('JS/sidebar.js') ?>"></script>
 </body>
 
 </html>

@@ -42,3 +42,12 @@ $routes->get('filter-result', 'SystemInfoController::filterResult');
 $routes->get('review-upload', 'SystemInfoController::reviewUpload');
 $routes->get('online-selection', 'SystemInfoController::onlineSelection');
 $routes->get('distribution-result', 'SystemInfoController::distributionResult');
+
+$routes->get('admission/schedule', 'AdmissionController::schedule');
+$routes->get('admission/brochure', 'AdmissionController::brochure');
+$routes->get('admission/regulations', 'AdmissionController::regulations');
+$routes->get('admission/statistics', 'AdmissionController::statistics');
+$routes->get('related/organizations', 'RelatedController::organizations');
+$routes->get('related/exams', 'RelatedController::exams');
+$routes->get('related/other', 'RelatedController::other');
+$routes->get('contact', 'ContactController::index');

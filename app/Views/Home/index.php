@@ -18,6 +18,6 @@
             </h2>
         </div>
     </main>
-    <script src="<?= base_url('JS/home.js') ?>"></script>
+    <script src="<?= base_url('JS/sidebar.js') ?>"></script>
 </body>
 </html>

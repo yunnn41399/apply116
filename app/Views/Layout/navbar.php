@@ -37,10 +37,10 @@ $currentUri = trim(uri_string(), '/');
         </a>
     </nav>
     <div class="home-header-right">
-        <a href="<?= base_url('register') ?>" class="home-login-button">
+        <a href="<?= base_url('register') ?>" class="home-login-button" target="_blank" rel="noopener noreferrer">
             考生註冊
         </a>
-        <a href="<?= base_url('login') ?>" class="home-register-button">
+        <a href="<?= base_url('login') ?>" class="home-register-button" target="_blank" rel="noopener noreferrer">
             考生登入
         </a>
     </div>
