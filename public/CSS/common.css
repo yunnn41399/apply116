@@ -14,6 +14,10 @@ body {
     padding: 0;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family:
         "Noto Sans TC",
@@ -24,6 +28,7 @@ body {
     color: #26364a;
     line-height: 1.7;
     font-size: 16px;
+    -webkit-text-size-adjust: 100%;
 }
 
 /* ========================================
@@ -33,23 +38,24 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 64px;
+    z-index: 1000;
     display: flex;
     align-items: center;
+    width: 100%;
+    height: 64px;
     background-color: #0d2b4d;
     border-bottom: 3px solid #2589d8;
-    box-shadow: 0 2px 8px rgba(0, 40, 80, 0.18);
-    z-index: 1000;
+    box-shadow:
+        0 2px 8px rgba(0, 40, 80, 0.18);
 }
 
 .page-header h1 {
     margin: 0;
     padding-left: 32px;
+    color: #ffffff;
     font-size: 23px;
     font-weight: 700;
     letter-spacing: 1px;
-    color: #ffffff;
 }
 
 .page-header-link {
@@ -85,11 +91,11 @@ body {
    ======================================== */
 .form-container h2 {
     margin: 0 0 30px;
-    text-align: center;
+    color: #173b63;
     font-size: 27px;
     font-weight: 700;
     letter-spacing: 1px;
-    color: #173b63;
+    text-align: center;
 }
 
 /* ========================================
@@ -102,27 +108,29 @@ body {
 .form-group label {
     display: block;
     margin-bottom: 8px;
+    color: #263f59;
     font-size: 16px;
     font-weight: 600;
-    color: #263f59;
 }
 
 /* 一般輸入框 */
 .form-group input {
     width: 250px;
+    max-width: 100%;
+    min-height: 42px;
     padding: 9px 11px;
     border: 1px solid #b9c9d9;
     border-radius: 5px;
+    background-color: #ffffff;
+    color: #26364a;
     font-family: inherit;
     font-size: 15px;
-    color: #26364a;
-    background-color: #ffffff;
     transition:
-        border-color 0.2s,
-        box-shadow 0.2s;
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
-/* 輸入框取得焦點 */
+/* 輸入框 Focus */
 .form-group input:focus {
     outline: none;
     border-color: #2589d8;
@@ -135,14 +143,18 @@ body {
    ======================================== */
 .input-hint {
     margin-left: 5px;
-    font-size: 14px;
     color: #c62828;
+    font-size: 14px;
 }
 
 /* ========================================
    7. 主要按鈕
    ======================================== */
 .primary-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
     padding: 9px 28px;
     border: none;
     border-radius: 5px;
@@ -156,9 +168,9 @@ body {
     box-shadow:
         0 2px 5px rgba(24, 119, 201, 0.25);
     transition:
-        background-color 0.2s,
-        transform 0.1s,
-        box-shadow 0.2s;
+        background-color 0.2s ease,
+        transform 0.1s ease,
+        box-shadow 0.2s ease;
 }
 
 .primary-button:hover {
@@ -183,6 +195,7 @@ body {
     color: #c62828;
     font-size: 15px;
     font-weight: 500;
+    overflow-wrap: anywhere;
 }
 
 /* ========================================
@@ -197,6 +210,7 @@ body {
     color: #147a4b;
     font-size: 15px;
     font-weight: 500;
+    overflow-wrap: anywhere;
 }
 
 /* ========================================
@@ -209,10 +223,11 @@ body {
 
 .form-links a {
     color: #1877c9;
-    text-decoration: none;
     font-size: 15px;
     font-weight: 500;
-    transition: color 0.2s;
+    text-decoration: none;
+    transition:
+        color 0.2s ease;
 }
 
 .form-links a:hover {
@@ -220,31 +235,164 @@ body {
     text-decoration: underline;
 }
 
-/* ========================================
-   11. 手機版 (待修改)
-   ======================================== */
-@media (max-width: 600px) {
+/* =========================================================
+   11. Tablet
+   ========================================================= */
+@media (max-width: 900px) {
     .page-header {
-        height: 58px;
+        height: 60px;
     }
 
     .page-header h1 {
-        padding-left: 20px;
-        font-size: 20px;
+        padding-left: 24px;
+        font-size: 21px;
+    }
+
+    .page-header-link {
+        height: 60px;
     }
 
     .form-container {
         width: 92%;
-        margin-top: 80px;
-        padding: 28px 22px;
+        margin-top: 90px;
+        padding: 32px 30px;
     }
 
     .form-container h2 {
-        font-size: 24px;
+        margin-bottom: 26px;
+        font-size: 25px;
+    }
+}
+
+/* =========================================================
+   12. Mobile
+   ========================================================= */
+@media (max-width: 600px) {
+    body {
+        font-size: 15px;
     }
 
+    /* ----------------------------------------
+       頂部標題列
+       ---------------------------------------- */
+    .page-header {
+        position: fixed;
+        height: 58px;
+        border-bottom-width: 2px;
+    }
+
+    .page-header h1 {
+        padding-left: 18px;
+        font-size: 19px;
+        letter-spacing: 0.5px;
+    }
+
+    .page-header-link {
+        height: 58px;
+    }
+
+    /* ----------------------------------------
+       表單容器
+       ---------------------------------------- */
+    .form-container {
+        width: calc(100% - 28px);
+        max-width: none;
+        margin: 78px 14px 30px;
+        padding: 26px 20px;
+        border-radius: 7px;
+    }
+
+    /* ----------------------------------------
+       表單標題
+       ---------------------------------------- */
+    .form-container h2 {
+        margin-bottom: 24px;
+        font-size: 23px;
+        letter-spacing: 0.5px;
+    }
+
+    /* ----------------------------------------
+       表單欄位
+       ---------------------------------------- */
+    .form-group {
+        margin-bottom: 19px;
+    }
+
+    .form-group label {
+        margin-bottom: 7px;
+        font-size: 15px;
+    }
+
+    /* ----------------------------------------
+       Input
+       ---------------------------------------- */
     .form-group input {
-        width: 250px;
-        max-width: 100%;
+        width: 100%;
+        min-height: 44px;
+        padding: 10px 12px;
+        font-size: 16px;
+    }
+
+    /* ----------------------------------------
+       提示文字
+       ---------------------------------------- */
+    .input-hint {
+        display: block;
+        margin-top: 5px;
+        margin-left: 0;
+        font-size: 13px;
+        line-height: 1.5;
+    }
+
+    /* ----------------------------------------
+       主要按鈕
+       ---------------------------------------- */
+    .primary-button {
+        width: 100%;
+        min-height: 44px;
+        padding: 10px 18px;
+        font-size: 15px;
+    }
+
+    /* ----------------------------------------
+       錯誤 / 成功訊息
+       ---------------------------------------- */
+    .error-message,
+    .success-message {
+        padding: 10px 12px;
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    /* ----------------------------------------
+       頁面連結
+       ---------------------------------------- */
+    .form-links {
+        margin-top: 19px;
+    }
+
+    .form-links a {
+        font-size: 14px;
+    }
+}
+
+/* =========================================================
+   13. Very Small Mobile
+   ========================================================= */
+@media (max-width: 380px) {
+    .page-header h1 {
+        padding-left: 15px;
+        font-size: 18px;
+    }
+
+    .form-container {
+        width: calc(100% - 20px);
+        margin-right: 10px;
+        margin-left: 10px;
+        padding: 23px 16px;
+    }
+
+    .form-container h2 {
+        font-size: 21px;
     }
 }

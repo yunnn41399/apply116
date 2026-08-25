@@ -1,6 +1,5 @@
 /* =========================================================
    Apply 116 - 校系分則查詢
-   公開查詢頁面
    ========================================================= */
 /* =========================================================
    1. 頁面標題
@@ -15,6 +14,7 @@
     box-shadow:
         0 3px 12px rgba(20, 70, 110, 0.07);
 }
+
 .department-page-header h2 {
     display: flex;
     align-items: center;
@@ -25,16 +25,19 @@
     font-weight: 700;
     letter-spacing: 0.5px;
 }
+
 .department-page-header h2 i {
     color: #1877c9;
     font-size: 23px;
 }
+
 .department-page-header p {
     margin: 0;
     color: #536b82;
     font-size: 15px;
     line-height: 1.6;
 }
+
 /* =========================================================
    2. 查詢條件卡片
    ========================================================= */
@@ -47,6 +50,7 @@
     box-shadow:
         0 3px 12px rgba(20, 70, 110, 0.07);
 }
+
 /* =========================================================
    3. 查詢條件標題
    ========================================================= */
@@ -54,21 +58,21 @@
     margin: 0;
     padding: 17px 24px;
     border-bottom: 1px solid #c9dced;
-    background: linear-gradient(
-        135deg,
-        #0d2b4d,
-        #174f7d
-    );
+    background: linear-gradient(135deg,
+            #0d2b4d,
+            #174f7d);
     color: #ffffff;
     font-size: 18px;
     font-weight: 700;
 }
+
 /* =========================================================
    4. 查詢表單
    ========================================================= */
 #departmentSearchForm {
     padding: 25px 28px 28px;
 }
+
 /* =========================================================
    5. 一般搜尋欄位
    ========================================================= */
@@ -78,6 +82,7 @@
     gap: 0;
     margin-bottom: 17px;
 }
+
 .department-search-row label {
     width: 95px;
     flex-shrink: 0;
@@ -85,6 +90,7 @@
     font-size: 15px;
     font-weight: 700;
 }
+
 /* =========================================================
    6. 文字輸入
    ========================================================= */
@@ -106,15 +112,18 @@
         box-shadow 0.2s ease,
         background-color 0.2s ease;
 }
+
 .department-search-row input[type="text"]::placeholder {
     color: #9aaebe;
 }
+
 .department-search-row input[type="text"]:focus {
     border-color: #2589d8;
     background-color: #fafdff;
     box-shadow:
         0 0 0 3px rgba(37, 137, 216, 0.12);
 }
+
 /* =========================================================
    7. 下拉選單
    ========================================================= */
@@ -137,12 +146,14 @@
         box-shadow 0.2s ease,
         background-color 0.2s ease;
 }
+
 .department-search-row select:focus {
     border-color: #2589d8;
     background-color: #fafdff;
     box-shadow:
         0 0 0 3px rgba(37, 137, 216, 0.12);
 }
+
 /* =========================================================
    8. 學測檢定科目區
    ========================================================= */
@@ -153,6 +164,7 @@
     border-radius: 7px;
     background-color: #f7fbff;
 }
+
 .department-requirement-title {
     display: flex;
     align-items: center;
@@ -162,16 +174,19 @@
     font-size: 17px;
     font-weight: 700;
 }
+
 .department-requirement-title i {
     color: #2589d8;
     font-size: 18px;
 }
+
 .department-requirement-hint {
     margin: 0 0 17px;
     color: #71859a;
     font-size: 13px;
     line-height: 1.5;
 }
+
 /* =========================================================
    9. 單一檢定科目
    ========================================================= */
@@ -190,15 +205,18 @@
         background-color 0.2s ease,
         box-shadow 0.2s ease;
 }
+
 .requirement-row:last-child {
     margin-bottom: 0;
 }
+
 .requirement-row:hover {
     border-color: #9fc8e6;
     background-color: #fbfdff;
     box-shadow:
         0 2px 7px rgba(20, 70, 110, 0.06);
 }
+
 /* =========================================================
    10. 科目名稱
    ========================================================= */
@@ -209,6 +227,7 @@
     font-size: 15px;
     font-weight: 700;
 }
+
 /* =========================================================
    11. Radio
    ========================================================= */
@@ -221,6 +240,7 @@
     font-size: 14px;
     cursor: pointer;
 }
+
 .requirement-row input[type="radio"] {
     width: 15px;
     height: 15px;
@@ -228,6 +248,7 @@
     accent-color: #2589d8;
     cursor: pointer;
 }
+
 /* =========================================================
    12. 查詢按鈕
    ========================================================= */
@@ -240,6 +261,7 @@
     padding-top: 20px;
     border-top: 1px solid #dbe7f1;
 }
+
 .department-search-primary-button,
 .department-search-secondary-button {
     display: inline-flex;
@@ -260,6 +282,7 @@
         color 0.2s ease,
         box-shadow 0.2s ease;
 }
+
 /* 主要按鈕 */
 .department-search-primary-button {
     border: 1px solid #1877c9;
@@ -269,15 +292,18 @@
     box-shadow:
         0 2px 6px rgba(24, 119, 201, 0.20);
 }
+
 .department-search-primary-button:hover {
     border-color: #1266ad;
     background-color: #1266ad;
     box-shadow:
         0 4px 10px rgba(24, 119, 201, 0.25);
 }
+
 .department-search-primary-button:active {
     transform: translateY(1px);
 }
+
 /* 次要按鈕 */
 .department-search-secondary-button {
     border: 1px solid #9fb5c9;
@@ -285,11 +311,13 @@
     color: #245273;
     font-weight: 500;
 }
+
 .department-search-secondary-button:hover {
     border-color: #2589d8;
     background-color: #eef7ff;
     color: #1266ad;
 }
+
 /* =========================================================
    13. 查詢條件提示
    ========================================================= */
@@ -303,14 +331,17 @@
     font-size: 14px;
     line-height: 1.6;
 }
+
 .department-condition-message strong {
     margin-right: 4px;
     color: #173b63;
 }
+
 .department-condition-message strong i {
     margin-right: 4px;
     color: #2589d8;
 }
+
 /* =========================================================
    14. 查詢結果區
    ========================================================= */
@@ -322,6 +353,7 @@
     box-shadow:
         0 3px 12px rgba(20, 70, 110, 0.07);
 }
+
 /* =========================================================
    15. 查詢結果標題
    ========================================================= */
@@ -332,6 +364,7 @@
     gap: 15px;
     margin-bottom: 10px;
 }
+
 .department-result-title {
     display: flex;
     align-items: center;
@@ -344,9 +377,11 @@
     font-size: 20px;
     font-weight: 700;
 }
+
 .department-result-title i {
     color: #1877c9;
 }
+
 .department-result-count {
     flex-shrink: 0;
     color: #1877c9;
@@ -354,6 +389,7 @@
     font-weight: 700;
     white-space: nowrap;
 }
+
 /* =========================================================
    16. 查無資料
    ========================================================= */
@@ -369,11 +405,13 @@
     color: #536b82;
     font-size: 14px;
 }
+
 .department-empty-message i {
     flex-shrink: 0;
     color: #2589d8;
     font-size: 17px;
 }
+
 /* =========================================================
    17. 表格外層
    ========================================================= */
@@ -383,6 +421,7 @@
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
 }
+
 /* =========================================================
    18. 校系結果表格
    ========================================================= */
@@ -393,6 +432,7 @@
     border-collapse: collapse;
     font-size: 14px;
 }
+
 /* =========================================================
    19. 表頭
    ========================================================= */
@@ -405,6 +445,7 @@
     text-align: center;
     vertical-align: middle;
 }
+
 /* =========================================================
    20. 表格內容
    ========================================================= */
@@ -415,9 +456,11 @@
     color: #3d5267;
     vertical-align: middle;
 }
+
 .department-result-table tbody tr:hover td {
     background-color: #f8fbfe;
 }
+
 /* =========================================================
    21. 欄位寬度
    ========================================================= */
@@ -428,6 +471,7 @@
     text-align: center;
     white-space: nowrap;
 }
+
 /* 學校名稱 */
 .department-result-table th:nth-child(2),
 .department-result-table td:nth-child(2) {
@@ -437,6 +481,7 @@
     word-break: break-word;
     line-height: 1.5;
 }
+
 /* 學系代碼 */
 .department-result-table th:nth-child(3),
 .department-result-table td:nth-child(3) {
@@ -444,6 +489,7 @@
     text-align: center;
     white-space: nowrap;
 }
+
 /* 學系名稱 */
 .department-result-table th:nth-child(4),
 .department-result-table td:nth-child(4) {
@@ -453,6 +499,7 @@
     word-break: break-word;
     line-height: 1.5;
 }
+
 /* 招生名額 */
 .department-result-table th:nth-child(5),
 .department-result-table td:nth-child(5) {
@@ -460,6 +507,7 @@
     text-align: center;
     white-space: nowrap;
 }
+
 /* 檢定科目 */
 .department-result-table th:nth-child(6),
 .department-result-table td:nth-child(6) {
@@ -467,6 +515,7 @@
     text-align: center;
     white-space: nowrap;
 }
+
 /* =========================================================
    22. 查看詳細按鈕
    ========================================================= */
@@ -492,6 +541,7 @@
         color 0.2s ease,
         box-shadow 0.2s ease;
 }
+
 .department-detail-button:hover {
     border-color: #2589d8;
     background-color: #eef7ff;
@@ -499,21 +549,26 @@
     box-shadow:
         0 2px 5px rgba(20, 70, 110, 0.08);
 }
+
 .department-detail-button:active {
     transform: translateY(1px);
 }
+
 .department-detail-button i {
     font-size: 12px;
 }
+
 /* =========================================================
    23. 詳細資料列
    ========================================================= */
 .department-detail-row {
     background-color: #f8fafc;
 }
-.department-detail-row > td {
+
+.department-detail-row>td {
     padding: 0 !important;
 }
+
 /* =========================================================
    24. 詳細資料內容
    ========================================================= */
@@ -523,6 +578,7 @@
     border-bottom: 1px solid #e5e7eb;
     background-color: #f8fafc;
 }
+
 /* =========================================================
    25. 詳細資料標題
    ========================================================= */
@@ -535,10 +591,12 @@
     font-size: 15px;
     font-weight: 700;
 }
+
 .department-detail-title i {
     color: #2589d8;
     font-size: 17px;
 }
+
 /* =========================================================
    26. 七個檢定科目
    ========================================================= */
@@ -548,6 +606,7 @@
     gap: 8px;
     width: 100%;
 }
+
 /* =========================================================
    27. 單一檢定科目
    ========================================================= */
@@ -564,6 +623,7 @@
     border-radius: 6px;
     background-color: #ffffff;
 }
+
 /* =========================================================
    28. 科目名稱
    ========================================================= */
@@ -574,6 +634,7 @@
     font-weight: 600;
     white-space: nowrap;
 }
+
 /* =========================================================
    29. 檢定門檻
    ========================================================= */
@@ -586,6 +647,7 @@
     overflow-wrap: anywhere;
     word-break: break-word;
 }
+
 /* =========================================================
    30. 分頁
    ========================================================= */
@@ -594,9 +656,11 @@
     padding-top: 18px;
     border-top: 1px solid #d7e2ee;
 }
+
 .department-pagination-nav {
     width: 100%;
 }
+
 /* 頁碼區 */
 .department-pagination-content,
 .department-pagination-pages {
@@ -605,6 +669,7 @@
     justify-content: center;
     width: 100%;
 }
+
 /* 頁碼列表 */
 .department-pagination-list {
     display: flex;
@@ -616,6 +681,7 @@
     padding: 0;
     list-style: none;
 }
+
 /* 頁碼 */
 .department-pagination-link {
     display: inline-flex;
@@ -638,6 +704,7 @@
         color 0.2s ease,
         box-shadow 0.2s ease;
 }
+
 .department-pagination-link:hover {
     border-color: #2589d8;
     background-color: #eef7ff;
@@ -645,6 +712,7 @@
     box-shadow:
         0 2px 6px rgba(24, 119, 201, 0.12);
 }
+
 .department-pagination-link.active {
     border-color: #1877c9;
     background-color: #1877c9;
@@ -652,23 +720,26 @@
     box-shadow:
         0 2px 6px rgba(24, 119, 201, 0.25);
 }
+
 /* 上一頁 / 下一頁 */
-.department-pagination-item:first-child
-.department-pagination-link,
-.department-pagination-item:last-child
-.department-pagination-link {
+.department-pagination-item:first-child .department-pagination-link,
+.department-pagination-item:last-child .department-pagination-link {
     padding: 0 14px;
 }
+
 /* 分頁 Icon */
 .department-pagination-link i {
     font-size: 12px;
 }
+
 .department-pagination-link i.bi-chevron-left {
     margin-right: 5px;
 }
+
 .department-pagination-link i.bi-chevron-right {
     margin-left: 5px;
 }
+
 /* 省略號 */
 .department-pagination-ellipsis {
     display: inline-flex;
@@ -680,6 +751,7 @@
     font-size: 14px;
     font-weight: 600;
 }
+
 /* 共幾頁 */
 .department-pagination-total {
     width: 100%;
@@ -689,63 +761,458 @@
     font-weight: 600;
     text-align: right;
 }
+
 /* =========================================================
-   31. 響應式
+   31. 響應式設計
+   ========================================================= */
+/* =========================================================
+   31-1. Tablet
    ========================================================= */
 @media (max-width: 1100px) {
+
+    /* ----------------------------------------
+       查詢區
+       ---------------------------------------- */
+    .department-page-header {
+        padding: 23px 24px;
+    }
+
+    #departmentSearchForm {
+        padding: 23px 24px 25px;
+    }
+
+    /* ----------------------------------------
+       七個檢定科目
+       ---------------------------------------- */
     .department-requirement-grid {
         grid-template-columns:
             repeat(4, minmax(0, 1fr));
+        gap: 8px;
+    }
+
+    /* ----------------------------------------
+       結果表格
+       ---------------------------------------- */
+    .department-table-wrapper {
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+    }
+
+    .department-result-table {
+        min-width: 780px;
     }
 }
-@media (max-width: 800px) {
+
+/* =========================================================
+   31-2. 小型 Tablet
+   ========================================================= */
+@media (max-width: 850px) {
+
+    /* ----------------------------------------
+       頁面標題
+       ---------------------------------------- */
     .department-page-header {
-        padding: 22px;
+        margin-bottom: 20px;
+        padding: 20px;
     }
+
+    .department-page-header h2 {
+        font-size: 22px;
+    }
+
+    .department-page-header p {
+        font-size: 14px;
+    }
+
+    /* ----------------------------------------
+       查詢表單
+       ---------------------------------------- */
     #departmentSearchForm {
         padding: 20px;
     }
+
     .department-search-row {
         align-items: flex-start;
         flex-direction: column;
         gap: 7px;
+        margin-bottom: 16px;
     }
+
     .department-search-row label {
         width: auto;
+        font-size: 14px;
     }
+
+    /* ----------------------------------------
+       檢定科目
+       ---------------------------------------- */
+    .department-requirement-section {
+        padding: 16px;
+    }
+
     .department-requirement-grid {
         grid-template-columns:
             repeat(2, minmax(0, 1fr));
+        gap: 8px;
     }
+
+    /* ----------------------------------------
+       查詢按鈕
+       ---------------------------------------- */
+    .department-search-actions {
+        gap: 10px;
+        margin-top: 22px;
+        padding-top: 18px;
+    }
+
+    /* ----------------------------------------
+       查詢結果
+       ---------------------------------------- */
     .department-result-card {
         padding: 20px;
     }
-}
-@media (max-width: 600px) {
-    .department-page-header h2 {
-        font-size: 21px;
+
+    .department-result-header {
+        gap: 10px;
     }
+}
+
+/* =========================================================
+   31-3. Mobile
+   ========================================================= */
+@media (max-width: 600px) {
+
+    /* ----------------------------------------
+       頁面標題
+       ---------------------------------------- */
+    .department-page-header {
+        margin-bottom: 18px;
+        padding: 18px 16px;
+        border-left-width: 4px;
+    }
+
+    .department-page-header h2 {
+        gap: 7px;
+        margin-bottom: 6px;
+        font-size: 20px;
+    }
+
+    .department-page-header h2 i {
+        font-size: 20px;
+    }
+
     .department-page-header p {
+        font-size: 13px;
+        line-height: 1.6;
+    }
+
+    /* ----------------------------------------
+       查詢條件卡片
+       ---------------------------------------- */
+    .department-search-card {
+        margin-bottom: 18px;
+    }
+
+    /* ----------------------------------------
+       查詢條件標題
+       ---------------------------------------- */
+    .department-search-title {
+        padding: 14px 16px;
+        font-size: 16px;
+    }
+
+    /* ----------------------------------------
+       查詢表單
+       ---------------------------------------- */
+    #departmentSearchForm {
+        padding: 18px 16px 20px;
+    }
+
+    .department-search-row {
+        margin-bottom: 15px;
+    }
+
+    .department-search-row label {
         font-size: 14px;
     }
-    .department-search-title {
-        padding: 15px 18px;
+
+    /* ----------------------------------------
+       Input / Select
+       ---------------------------------------- */
+    .department-search-row input[type="text"],
+    .department-search-row select {
+        width: 100%;
+        min-height: 44px;
+        font-size: 16px;
     }
+
+    /* ----------------------------------------
+       學測檢定科目
+       ---------------------------------------- */
+    .department-requirement-section {
+        margin-top: 20px;
+        padding: 14px;
+        border-radius: 6px;
+    }
+
+    .department-requirement-title {
+        gap: 7px;
+        font-size: 16px;
+    }
+
+    .department-requirement-title i {
+        font-size: 17px;
+    }
+
+    .department-requirement-hint {
+        margin-bottom: 13px;
+        font-size: 12px;
+        line-height: 1.6;
+    }
+
+    /* ----------------------------------------
+       單一檢定科目
+       ---------------------------------------- */
+    .requirement-row {
+        min-height: 44px;
+        margin-bottom: 7px;
+        padding: 7px 10px;
+        flex-wrap: wrap;
+        gap: 4px;
+    }
+
+    .requirement-subject {
+        width: 58px;
+        font-size: 14px;
+    }
+
+    .requirement-row label {
+        margin-right: 12px;
+        gap: 5px;
+        font-size: 13px;
+    }
+
+    .requirement-row input[type="radio"] {
+        width: 16px;
+        height: 16px;
+    }
+
+    /* ----------------------------------------
+       查詢按鈕
+       ---------------------------------------- */
     .department-search-actions {
         flex-direction: column;
+        gap: 9px;
+        margin-top: 20px;
+        padding-top: 16px;
     }
+
     .department-search-primary-button,
     .department-search-secondary-button {
         width: 100%;
+        min-height: 44px;
+        padding: 0 16px;
     }
-    .department-requirement-grid {
-        grid-template-columns: 1fr;
+
+    /* ----------------------------------------
+       查詢條件提示
+       ---------------------------------------- */
+    .department-condition-message {
+        margin-bottom: 18px;
+        padding: 11px 12px;
+        font-size: 13px;
+        line-height: 1.7;
     }
+
+    /* ----------------------------------------
+       查詢結果區
+       ---------------------------------------- */
+    .department-result-card {
+        padding: 16px;
+    }
+
     .department-result-header {
         align-items: flex-start;
         flex-direction: column;
+        gap: 5px;
+        margin-bottom: 8px;
     }
+
     .department-result-title {
         width: 100%;
+        padding-bottom: 7px;
+        font-size: 18px;
+    }
+
+    .department-result-count {
+        font-size: 13px;
+    }
+
+    /* ----------------------------------------
+       表格
+       ---------------------------------------- */
+    .department-table-wrapper {
+        margin-top: 8px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+    }
+
+    .department-result-table {
+        min-width: 780px;
+        font-size: 13px;
+    }
+
+    .department-result-table th {
+        padding: 10px 8px;
+    }
+
+    .department-result-table td {
+        padding: 10px 8px;
+    }
+
+    /* ----------------------------------------
+       查看詳細按鈕
+       ---------------------------------------- */
+    .department-detail-button {
+        min-height: 36px;
+        padding: 6px 10px;
+        font-size: 12px;
+    }
+
+    /* ----------------------------------------
+       詳細資料
+       ---------------------------------------- */
+    .department-detail-content {
+        padding: 15px;
+    }
+
+    .department-detail-title {
+        margin-bottom: 11px;
+        font-size: 14px;
+    }
+
+    /* ----------------------------------------
+       七個檢定科目
+       ---------------------------------------- */
+    .department-requirement-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+        gap: 7px;
+    }
+
+    .department-requirement-item {
+        min-height: 40px;
+        padding: 7px 8px;
+        gap: 5px;
+    }
+
+    .requirement-label,
+    .requirement-value {
+        font-size: 12px;
+    }
+
+    /* ----------------------------------------
+       分頁
+       ---------------------------------------- */
+    .department-pagination {
+        margin-top: 17px;
+        padding-top: 15px;
+    }
+
+    .department-pagination-list {
+        gap: 5px;
+    }
+
+    .department-pagination-link {
+        min-width: 34px;
+        height: 34px;
+        padding: 0 9px;
+        font-size: 13px;
+    }
+
+    .department-pagination-item:first-child .department-pagination-link,
+    .department-pagination-item:last-child .department-pagination-link {
+        padding: 0 10px;
+    }
+
+    .department-pagination-ellipsis {
+        min-width: 24px;
+        height: 34px;
+        font-size: 13px;
+    }
+
+    .department-pagination-total {
+        margin-top: 8px;
+        font-size: 13px;
+        text-align: center;
+    }
+}
+
+/* =========================================================
+   31-4. Very Small Mobile
+   ========================================================= */
+@media (max-width: 400px) {
+
+    /* ----------------------------------------
+       頁面標題
+       ---------------------------------------- */
+    .department-page-header {
+        padding: 16px 14px;
+    }
+
+    .department-page-header h2 {
+        font-size: 19px;
+    }
+
+    .department-page-header p {
+        font-size: 12px;
+    }
+
+    /* ----------------------------------------
+       搜尋區
+       ---------------------------------------- */
+    #departmentSearchForm {
+        padding: 16px 14px 18px;
+    }
+
+    /* ----------------------------------------
+       檢定科目
+       ---------------------------------------- */
+    .department-requirement-section {
+        padding: 12px;
+    }
+
+    .requirement-subject {
+        width: 54px;
+        font-size: 13px;
+    }
+
+    .requirement-row label {
+        margin-right: 8px;
+        font-size: 12px;
+    }
+
+    /* ----------------------------------------
+       結果表格
+       ---------------------------------------- */
+    .department-result-card {
+        padding: 14px;
+    }
+
+    .department-result-table {
+        min-width: 760px;
+    }
+
+    /* ----------------------------------------
+       分頁
+       ---------------------------------------- */
+    .department-pagination-link {
+        min-width: 32px;
+        height: 32px;
+        padding: 0 7px;
+        font-size: 12px;
     }
 }

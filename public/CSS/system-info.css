@@ -499,29 +499,61 @@
 }
 
 /* =========================================================
-   21. 響應式 - 800px
+   21. 響應式 - Tablet
    ========================================================= */
-@media (max-width: 800px) {
-    .system-info-header {
-        padding: 22px;
-    }
+@media (max-width: 850px) {
 
-    .system-info-card {
-        padding: 5px 20px;
+    /* ----------------------------------------
+       頁面標題
+       ---------------------------------------- */
+    .system-info-header {
+        margin-bottom: 20px;
+        padding: 22px 23px;
     }
 
     .system-info-header h2 {
         font-size: 22px;
     }
 
+    .system-info-header p {
+        font-size: 14px;
+    }
+
+    /* ----------------------------------------
+       主要資訊卡片
+       ---------------------------------------- */
+    .system-info-card {
+        padding: 5px 22px;
+    }
+
+    /* ----------------------------------------
+       單一資訊區塊
+       ---------------------------------------- */
+    .system-info-section {
+        padding: 20px 0;
+    }
+
+    .system-info-section h3 {
+        font-size: 16px;
+    }
+
+    .system-info-section p {
+        font-size: 14px;
+    }
+
+    /* ----------------------------------------
+       頁面底部操作區
+       ---------------------------------------- */
     .system-info-actions {
         align-items: stretch;
         flex-direction: column;
+        gap: 14px;
+        padding: 17px 18px;
     }
 
     .system-info-actions-text {
-        justify-content: center;
-        text-align: center;
+        justify-content: flex-start;
+        font-size: 13px;
     }
 
     .system-info-action-buttons {
@@ -533,64 +565,314 @@
     .system-info-secondary-button {
         flex: 1;
     }
-}
 
-/* =========================================================
-   22. 響應式 - 600px
-   ========================================================= */
-@media (max-width: 600px) {
-    .system-info-header {
-        margin-bottom: 20px;
+    /* ----------------------------------------
+       聯絡資訊
+       ---------------------------------------- */
+    .contact-card {
+        gap: 14px;
         padding: 20px;
     }
 
+    .contact-item {
+        gap: 15px;
+        padding: 17px;
+    }
+
+    .contact-icon {
+        width: 44px;
+        height: 44px;
+        font-size: 20px;
+    }
+
+    .contact-content h3 {
+        font-size: 16px;
+    }
+
+    .contact-content p {
+        font-size: 14px;
+    }
+
+    .contact-phone {
+        font-size: 20px !important;
+    }
+}
+
+/* =========================================================
+   22. 響應式 - Mobile
+   ========================================================= */
+@media (max-width: 600px) {
+
+    /* ----------------------------------------
+       頁面標題
+       ---------------------------------------- */
+    .system-info-header {
+        margin-bottom: 18px;
+        padding: 18px 16px;
+        border-left-width: 4px;
+    }
+
     .system-info-header h2 {
+        gap: 7px;
+        margin-bottom: 6px;
         font-size: 20px;
     }
 
     .system-info-header h2 i {
-        font-size: 20px;
+        font-size: 19px;
     }
 
     .system-info-header p {
-        font-size: 14px;
-    }
-
-    .system-info-card {
-        padding: 3px 16px;
-    }
-
-    .system-info-section {
-        padding: 18px 0;
-    }
-
-    .system-info-section h3 {
-        font-size: 16px;
-    }
-
-    .system-info-section p {
         font-size: 13px;
         line-height: 1.7;
     }
 
+    /* ----------------------------------------
+       主要資訊卡片
+       ---------------------------------------- */
+    .system-info-card {
+        padding: 2px 15px;
+        border-radius: 6px;
+    }
+
+    /* ----------------------------------------
+       單一資訊區塊
+       ---------------------------------------- */
+    .system-info-section {
+        padding: 17px 0;
+    }
+
+    .system-info-section h3 {
+        align-items: flex-start;
+        gap: 8px;
+        margin-bottom: 8px;
+        font-size: 15px;
+        line-height: 1.5;
+    }
+
+    .system-info-section p {
+        margin-bottom: 7px;
+        font-size: 13px;
+        line-height: 1.75;
+    }
+
+    /* ----------------------------------------
+       編號
+       ---------------------------------------- */
+    .system-info-number {
+        width: 25px;
+        height: 25px;
+        font-size: 12px;
+    }
+
+    /* ----------------------------------------
+       資訊 / Warning / Error
+       ---------------------------------------- */
     .system-info-highlight,
     .system-info-warning,
     .system-info-error,
     .system-info-empty {
-        padding: 12px 13px;
+        align-items: flex-start;
+        gap: 8px;
+        margin-top: 10px;
+        padding: 11px 12px;
+        font-size: 13px;
+        line-height: 1.7;
     }
 
+    .system-info-highlight i,
+    .system-info-warning>i,
+    .system-info-error>i {
+        font-size: 16px;
+    }
+
+    /* ----------------------------------------
+       尚無資料
+       ---------------------------------------- */
+    .system-info-empty {
+        gap: 10px;
+    }
+
+    .system-info-empty>i {
+        font-size: 18px;
+    }
+
+    .system-info-empty strong {
+        font-size: 15px;
+    }
+
+    .system-info-empty p {
+        font-size: 13px;
+    }
+
+    /* ----------------------------------------
+       頁面底部操作區
+       ---------------------------------------- */
     .system-info-actions {
-        padding: 16px;
+        align-items: stretch;
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 18px;
+        padding: 14px;
+    }
+
+    .system-info-actions-text {
+        justify-content: flex-start;
+        font-size: 13px;
+        line-height: 1.7;
     }
 
     .system-info-action-buttons {
+        width: 100%;
         flex-direction: column;
+        gap: 8px;
     }
 
     .system-info-primary-button,
     .system-info-secondary-button {
         width: 100%;
-        flex: none;
+        min-height: 44px;
+        padding: 0 16px;
+        font-size: 14px;
+    }
+
+    /* ----------------------------------------
+       一般條列資訊
+       ---------------------------------------- */
+    .system-info-list {
+        margin-top: 8px;
+        padding-left: 20px;
+        font-size: 13px;
+        line-height: 1.75;
+    }
+
+    .system-info-list li {
+        margin-bottom: 4px;
+    }
+
+    /* ----------------------------------------
+       聯絡資訊
+       ---------------------------------------- */
+    .contact-card {
+        gap: 10px;
+        padding: 14px;
+        border-radius: 7px;
+    }
+
+    .contact-item {
+        align-items: flex-start;
+        gap: 12px;
+        padding: 14px;
+        border-radius: 7px;
+    }
+
+    .contact-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 7px;
+        font-size: 18px;
+    }
+
+    .contact-content {
+        min-width: 0;
+    }
+
+    .contact-content h3 {
+        margin-bottom: 6px;
+        font-size: 15px;
+    }
+
+    .contact-content p {
+        font-size: 13px;
+        line-height: 1.7;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+    }
+
+    .contact-phone {
+        font-size: 19px !important;
+        word-break: normal;
+    }
+
+    .contact-note {
+        margin-top: 8px !important;
+        font-size: 12px !important;
+    }
+}
+
+/* =========================================================
+   23. 響應式 - Very Small Mobile
+   ========================================================= */
+@media (max-width: 400px) {
+
+    /* ----------------------------------------
+       頁面標題
+       ---------------------------------------- */
+    .system-info-header {
+        padding: 16px 14px;
+    }
+
+    .system-info-header h2 {
+        font-size: 19px;
+    }
+
+    .system-info-header p {
+        font-size: 12px;
+    }
+
+    /* ----------------------------------------
+       資訊卡片
+       ---------------------------------------- */
+    .system-info-card {
+        padding: 2px 13px;
+    }
+
+    /* ----------------------------------------
+       資訊區塊
+       ---------------------------------------- */
+    .system-info-section {
+        padding: 15px 0;
+    }
+
+    .system-info-section h3 {
+        font-size: 14px;
+    }
+
+    .system-info-section p {
+        font-size: 12px;
+    }
+
+    /* ----------------------------------------
+       聯絡資訊
+       ---------------------------------------- */
+    .contact-card {
+        padding: 11px;
+    }
+
+    .contact-item {
+        gap: 10px;
+        padding: 12px;
+    }
+
+    .contact-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 16px;
+    }
+
+    .contact-content h3 {
+        font-size: 14px;
+    }
+
+    .contact-content p {
+        font-size: 12px;
+    }
+
+    .contact-phone {
+        font-size: 18px !important;
+    }
+
+    .contact-note {
+        font-size: 11px !important;
     }
 }
