@@ -19,9 +19,12 @@ class AdminModel extends Model
         'username',
         'password',
         'name',
+        'email',
         'role',
         'status',
         'must_change_password',
+        'password_reset_token',
+        'password_reset_expires_at',
     ];
 
     protected $useTimestamps = true;

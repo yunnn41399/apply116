@@ -260,3 +260,13 @@ body {
 .admin-announcement-file:hover {
     color: #8b5cf6;
 }
+
+.refresh-captcha {
+    background-color: #ffffff !important;
+    border: 1px solid #8b5cf6 !important;
+    color: #6d28d9 !important;
+}
+
+.captcha-canvas {
+    border: 1px solid #8b5cf6 !important;
+}

@@ -15,12 +15,42 @@ class AdminAuth extends BaseController
         $this->adminModel = new AdminModel();
     }
 
+
+    // 產生驗證碼
+    private function generateCaptcha()
+    {
+        $characters = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+        $captcha = '';
+
+        for ($i = 0; $i < 4; $i++) {
+            $captcha .= $characters[
+                random_int(0, strlen($characters) - 1)
+            ];
+        }
+
+        session()->set(
+            'admin_login_captcha',
+            $captcha
+        );
+
+        return $captcha;
+    }
+
+    // 重新產生驗證碼
+    public function refreshCaptcha()
+    {
+        $captcha = $this->generateCaptcha();
+
+        return $this->response->setJSON([
+            'success' => true,
+            'captcha' => $captcha,
+        ]);
+    }
+
     // 管理員登入頁面
     public function login()
     {
-
-        // 若第一次登入未更改密碼，會跳轉到更改密碼的頁面
-        // 否則會直接進入後臺首頁
+        // 若已登入
         if (session()->get('admin_logged_in')) {
 
             if (session()->get('admin_must_change_password')) {
@@ -30,7 +60,12 @@ class AdminAuth extends BaseController
             return redirect()->to('/admin');
         }
 
-        return view('admin/login');
+        // 每次進入登入頁面都重新產生驗證碼
+        $captcha = $this->generateCaptcha();
+
+        return view('admin/login', [
+            'captcha' => $captcha,
+        ]);
     }
 
     // 處理登入
@@ -38,19 +73,67 @@ class AdminAuth extends BaseController
     {
         $username = trim($this->request->getPost('username'));
         $password = $this->request->getPost('password');
+        $captcha = strtoupper(trim($this->request->getPost('captcha')));
 
         // 基本驗證
         $rules = [
             'username' => 'required',
             'password' => 'required',
+            'captcha'  => 'required',
         ];
 
-        if (!$this->validate($rules)) {
+        $messages = [
+            'username' => [
+                'required' => '請輸入管理員帳號。',
+            ],
+
+            'password' => [
+                'required' => '請輸入管理員密碼。',
+            ],
+
+            'captcha' => [
+                'required' => '請輸入驗證碼。',
+            ],
+        ];
+
+        if (!$this->validate($rules, $messages)) {
             return redirect()
                 ->back()
                 ->withInput()
                 ->with('errors', $this->validator->getErrors());
         }
+
+
+        // 驗證 CAPTCHA
+        $sessionCaptcha =
+            session()->get(
+                'admin_login_captcha'
+            );
+
+        if (
+            !$sessionCaptcha ||
+            strtoupper($sessionCaptcha) !== $captcha
+        ) {
+
+            // 驗證失敗後清除舊驗證碼
+            session()->remove(
+                'admin_login_captcha'
+            );
+
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with(
+                    'error',
+                    '驗證碼錯誤，請重新輸入。'
+                );
+        }
+
+        // CAPTCHA 使用一次後清除
+        session()->remove(
+            'admin_login_captcha'
+        );
+
 
         // 查詢管理員
         $admin = $this->adminModel

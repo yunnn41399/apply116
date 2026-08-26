@@ -70,13 +70,65 @@
                 </div>
             </div>
 
-            <button type="submit" class="primary-button">
-                登入
-            </button>
+            <!-- CAPTCHA -->
+
+            <div class="form-group">
+
+                <label for="captcha">
+                    驗證碼：
+                </label>
+
+                <div class="captcha-wrapper">
+
+                    <input
+                        type="text"
+                        id="captcha"
+                        name="captcha"
+                        required
+                        autocomplete="off"
+                        placeholder="不分大小寫"
+                    >
+                    
+                    <canvas
+                        id="adminLoginCaptcha"
+                        width="120"
+                        height="40"
+                        data-captcha="<?= esc($captcha) ?>"
+                        data-refresh-url="<?= site_url('admin/login/refresh-captcha') ?>"
+                        title="點擊重新產生驗證碼"
+                        class="captcha-canvas"
+                    ></canvas>
+
+                    <button
+                        type="button"
+                        id="btnRefreshAdminLoginCaptcha"
+                        class="refresh-captcha"
+                    >
+                        重新產生
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="primary-button">
+                    登入
+                </button>
+            </div>
+
         </form>
+
+        <div class="form-links">
+            <a href="<?= site_url('admin/forgot-password') ?>">
+                忘記密碼
+            </a>
+        </div>
+
     </main>
 
     <script src="<?= base_url('JS/register.js') ?>"></script>
+    <script src="<?= base_url('JS/admin-login.js') ?>"></script>
 </body>
 
 </html>
