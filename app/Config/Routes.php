@@ -10,6 +10,7 @@ $routes->get('/', 'HomeController::index');
 $routes->get('admin/login', 'AdminAuth::login');
 $routes->post('admin/login', 'AdminAuth::attemptLogin');
 $routes->post('admin/logout', 'AdminAuth::logout');
+$routes->get('admin/login/refresh-captcha', 'AdminAuth::refreshCaptcha');
 
 // 管理員忘記密碼
 $routes->get('admin/forgot-password', 'AdminForgotPassword::index');
@@ -24,6 +25,7 @@ $routes->get('admin/reset-password/refresh-captcha', 'AdminResetPassword::refres
 // 第一次登入管理員帳號需更改密碼
 $routes->get('admin/change-password', 'AdminPassword::changePassword'); 
 $routes->post('admin/change-password', 'AdminPassword::updatePassword');
+$routes->get('admin/change-password/refresh-captcha', 'AdminPassword::refreshCaptcha');
 
 // 管理員管理
 $routes->get(
