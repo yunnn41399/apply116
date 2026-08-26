@@ -27,6 +27,12 @@
                 </h2>
             </div>
 
+            <?php
+                $currentPage = $pager->getCurrentPage();
+                $totalPages = $pager->getPageCount();
+                $totalItems = $pager->getTotal();
+            ?>
+
             <!-- 搜尋區域 -->
             <form method="get" action="<?= site_url('admin/candidates') ?>" style="display: flex; gap: 0.5rem; align-items: center; margin-bottom: 1.25rem; flex-wrap: wrap;">
                 <div style="position: relative; flex: 1; max-width: 350px;">
@@ -50,6 +56,13 @@
                         <i class="bi bi-x-circle"></i> 清除搜尋
                     </a>
                 <?php endif; ?>
+
+                <div style="color: #6b5b95; font-size: 0.9rem; margin-left: auto;">
+                    第 <strong><?= $currentPage ?></strong> /
+                    <strong><?= $totalPages ?></strong> 頁
+                    ｜ 共 <strong><?= $totalItems ?></strong> 筆資料
+                </div>
+                
             </form>
 
             <!-- 搜尋提示文字 -->
@@ -164,11 +177,6 @@
                 </table>
 
                 <!-- 分頁列 -->
-                <?php
-                    $currentPage = $pager->getCurrentPage();
-                    $totalPages = $pager->getPageCount();
-                ?>
-
                 <?php if ($totalPages > 1): ?>
 
                     <div class="admin-pagination">
