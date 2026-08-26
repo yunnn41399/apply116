@@ -923,3 +923,963 @@
     font-size: 14px;
     line-height: 1.6;
 }
+
+/* =========================================================
+   報名系統 - 選擇報名校系
+   查詢條件專用樣式
+   ========================================================= */
+/* =========================================================
+   1. 查詢卡片
+   ========================================================= */
+.application-department-search-card {
+    margin-bottom: 25px;
+    padding: 0;
+    overflow: hidden;
+    background-color: #ffffff;
+    border: 1px solid #d7e2ee;
+    border-radius: 7px;
+    box-shadow:
+        0 3px 12px rgba(20, 70, 110, 0.07);
+}
+
+/* =========================================================
+   2. 查詢條件標題
+   ========================================================= */
+.application-department-search-card .apply-section-title {
+    margin: 0;
+    padding: 18px 25px;
+    border-bottom: 1px solid #c9dced;
+    background: linear-gradient(135deg,
+            #0d2b4d,
+            #174f7d);
+    color: #ffffff;
+    font-size: 19px;
+}
+
+/* =========================================================
+   3. 查詢表單
+   ========================================================= */
+#applicationDepartmentSearchForm {
+    padding: 25px 28px 28px;
+}
+
+/* =========================================================
+   4. 搜尋欄位
+   ========================================================= */
+#applicationDepartmentSearchForm .department-search-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+#applicationDepartmentSearchForm .department-search-row label {
+    width: 85px;
+    flex-shrink: 0;
+    color: #173b63;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+/* =========================================================
+   5. 文字輸入
+   ========================================================= */
+#applicationDepartmentSearchForm .department-search-row input[type="text"] {
+    flex: 1;
+    min-width: 0;
+    min-height: 42px;
+    padding: 9px 13px;
+    box-sizing: border-box;
+    border: 1px solid #b8cde0;
+    border-radius: 6px;
+    background-color: #ffffff;
+    color: #173b63;
+    font-family: inherit;
+    font-size: 15px;
+    outline: none;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background-color 0.2s ease;
+}
+
+#applicationDepartmentSearchForm .department-search-row input[type="text"]::placeholder {
+    color: #9aaebe;
+}
+
+#applicationDepartmentSearchForm .department-search-row input[type="text"]:focus {
+    border-color: #2589d8;
+    background-color: #fafdff;
+    box-shadow:
+        0 0 0 3px rgba(37,
+            137,
+            216,
+            0.12);
+}
+
+/* =========================================================
+   6. 下拉選單
+   ========================================================= */
+#applicationDepartmentSearchForm .department-search-row select {
+    flex: 1;
+    min-width: 0;
+    min-height: 42px;
+    padding: 8px 38px 8px 13px;
+    box-sizing: border-box;
+    border: 1px solid #b8cde0;
+    border-radius: 6px;
+    background-color: #ffffff;
+    color: #173b63;
+    font-family: inherit;
+    font-size: 15px;
+    cursor: pointer;
+    outline: none;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background-color 0.2s ease;
+}
+
+#applicationDepartmentSearchForm .department-search-row select:focus {
+    border-color: #2589d8;
+    background-color: #fafdff;
+    box-shadow:
+        0 0 0 3px rgba(37,
+            137,
+            216,
+            0.12);
+}
+
+/* =========================================================
+   7. 學測檢定科目
+   ========================================================= */
+#applicationDepartmentSearchForm .department-requirement-section {
+    margin-top: 25px;
+    padding: 20px;
+    box-sizing: border-box;
+    border: 1px solid #d2e2ef;
+    border-radius: 7px;
+    background-color: #f7fbff;
+}
+
+#applicationDepartmentSearchForm .department-requirement-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 5px;
+    color: #173b63;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+#applicationDepartmentSearchForm .department-requirement-title i {
+    color: #2589d8;
+}
+
+#applicationDepartmentSearchForm .department-requirement-hint {
+    margin: 0 0 18px;
+    color: #71859a;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+/* =========================================================
+   8. 單一科目
+   ========================================================= */
+#applicationDepartmentSearchForm .requirement-row {
+    display: flex;
+    align-items: center;
+    min-height: 48px;
+    margin-bottom: 8px;
+    padding: 8px 12px;
+    box-sizing: border-box;
+    border: 1px solid #dbe7f1;
+    border-radius: 6px;
+    background-color: #ffffff;
+    transition:
+        border-color 0.2s ease,
+        background-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+#applicationDepartmentSearchForm .requirement-row:last-child {
+    margin-bottom: 0;
+}
+
+#applicationDepartmentSearchForm .requirement-row:hover {
+    border-color: #9fc8e6;
+    background-color: #fbfdff;
+    box-shadow:
+        0 2px 7px rgba(20,
+            70,
+            110,
+            0.06);
+}
+
+/* =========================================================
+   9. 科目名稱
+   ========================================================= */
+#applicationDepartmentSearchForm .requirement-subject {
+    width: 75px;
+    flex-shrink: 0;
+    color: #173b63;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+/* =========================================================
+   10. Radio
+   ========================================================= */
+#applicationDepartmentSearchForm .requirement-row label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-right: 22px;
+    color: #536b82;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+#applicationDepartmentSearchForm .requirement-row input[type="radio"] {
+    width: 15px;
+    height: 15px;
+    margin: 0;
+    accent-color: #2589d8;
+    cursor: pointer;
+}
+
+/* =========================================================
+   11. 查詢按鈕
+   ========================================================= */
+#applicationDepartmentSearchForm .apply-actions {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid #dbe7f1;
+}
+
+/* =========================================================
+   12. 響應式設計
+   ========================================================= */
+/* =========================================================
+   12-1. Tablet
+   ========================================================= */
+@media (max-width: 1100px) {
+
+    /* ----------------------------------------
+       報名資料標題
+       ---------------------------------------- */
+    .application-section-title {
+        gap: 10px;
+    }
+
+    .application-section-hint {
+        font-size: 12px;
+    }
+
+    /* ----------------------------------------
+       考生自動帶入資料
+       ---------------------------------------- */
+    .application-readonly-info {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    /* ----------------------------------------
+       報名基本資料
+       ---------------------------------------- */
+    .application-form-row label {
+        width: 105px;
+    }
+
+    .application-form-row input {
+        width: 360px;
+        max-width: 100%;
+    }
+
+    /* ----------------------------------------
+       我的校系清單
+       ---------------------------------------- */
+    .application-cart-actions {
+        gap: 12px;
+    }
+
+    /* ----------------------------------------
+       選擇正式報名校系
+       ---------------------------------------- */
+    .application-selection-summary {
+        padding: 15px 18px;
+    }
+
+    /* ----------------------------------------
+       表格
+       ---------------------------------------- */
+    .application-department-table,
+    .application-cart-table {
+        min-width: 1000px;
+    }
+
+    /* ----------------------------------------
+       Toast
+       ---------------------------------------- */
+    .application-toast {
+        right: 20px;
+        min-width: 300px;
+        max-width: 440px;
+    }
+
+    /* ----------------------------------------
+       最後確認
+       ---------------------------------------- */
+    .application-confirm-department-label {
+        width: 130px;
+    }
+}
+
+/* =========================================================
+   12-2. 小型 Tablet
+   ========================================================= */
+@media (max-width: 850px) {
+
+    /* ----------------------------------------
+       考生自動帶入資料
+       ---------------------------------------- */
+    .application-readonly-info {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .application-info-item {
+        padding: 13px 15px;
+    }
+
+    /* ----------------------------------------
+       報名基本資料
+       ---------------------------------------- */
+    .application-form-row {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 7px;
+        margin-bottom: 18px;
+    }
+
+    .application-form-row label {
+        width: auto;
+    }
+
+    .application-form-row input {
+        width: 100%;
+    }
+
+    /* ----------------------------------------
+       基本資料確認
+       ---------------------------------------- */
+    .application-summary-row {
+        min-height: 50px;
+    }
+
+    .application-summary-label {
+        width: 120px;
+        padding: 12px 14px;
+    }
+
+    .application-summary-value {
+        padding: 12px 14px;
+    }
+
+    /* ----------------------------------------
+       我的校系清單操作
+       ---------------------------------------- */
+    .application-cart-actions {
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: center;
+    }
+
+    .application-cart-actions .apply-primary-button,
+    .application-cart-actions .apply-secondary-button {
+        width: 100%;
+    }
+
+    .application-cart-hint {
+        text-align: left;
+    }
+
+    /* ----------------------------------------
+       選擇正式報名校系摘要
+       ---------------------------------------- */
+    .application-selection-summary {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .application-selection-summary .apply-secondary-button {
+        width: 100%;
+    }
+
+    /* ----------------------------------------
+       選校頁表格
+       ---------------------------------------- */
+    .application-department-table,
+    .application-cart-table {
+        min-width: 1000px;
+    }
+
+    .application-selection-table {
+        min-width: 700px;
+    }
+
+    /* ----------------------------------------
+       Locked Message
+       ---------------------------------------- */
+    .application-cart-locked-message {
+        align-items: flex-start;
+        padding: 11px 13px;
+        font-size: 13px;
+    }
+
+    /* ----------------------------------------
+       Toast
+       ---------------------------------------- */
+    .application-toast {
+        top: 75px;
+        right: 15px;
+        min-width: 280px;
+        max-width: 400px;
+        padding: 12px 15px;
+        font-size: 13px;
+    }
+}
+
+/* =========================================================
+   12-3. Mobile
+   ========================================================= */
+@media (max-width: 600px) {
+
+    /* ----------------------------------------
+       報名資料標題
+       ---------------------------------------- */
+    .application-section-title {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .application-section-title .apply-section-title {
+        margin-bottom: 5px;
+    }
+
+    .application-section-hint {
+        margin-bottom: 10px;
+        font-size: 12px;
+        white-space: normal;
+        line-height: 1.5;
+    }
+
+    /* ----------------------------------------
+       考生自動帶入資料
+       ---------------------------------------- */
+    .application-readonly-info {
+        grid-template-columns: 1fr;
+        gap: 9px;
+        margin-top: 15px;
+    }
+
+    .application-info-item {
+        gap: 5px;
+        padding: 12px 13px;
+    }
+
+    .application-info-label {
+        font-size: 12px;
+    }
+
+    .application-info-value {
+        font-size: 15px;
+        overflow-wrap: anywhere;
+    }
+
+    /* ----------------------------------------
+       報名基本資料
+       ---------------------------------------- */
+    .application-form-row {
+        margin-bottom: 17px;
+        gap: 6px;
+    }
+
+    .application-form-row label {
+        font-size: 14px;
+    }
+
+    .application-form-row input {
+        width: 100%;
+        min-height: 44px;
+        font-size: 16px;
+    }
+
+    /* ----------------------------------------
+       報名操作
+       ---------------------------------------- */
+    .application-actions {
+        margin-top: 24px;
+        padding-top: 16px;
+    }
+
+    /* ----------------------------------------
+       基本資料確認
+       ---------------------------------------- */
+    .application-summary {
+        margin-top: 8px;
+    }
+
+    .application-summary-row {
+        align-items: stretch;
+        flex-direction: column;
+        min-height: 0;
+    }
+
+    .application-summary-label {
+        width: 100%;
+        padding: 9px 12px;
+        font-size: 13px;
+    }
+
+    .application-summary-value {
+        padding: 10px 12px;
+        font-size: 14px;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+    }
+
+    .application-locked-message {
+        align-items: flex-start;
+        margin-top: 16px;
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+
+    /* ----------------------------------------
+       我的校系清單
+       ---------------------------------------- */
+    .application-cart-header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .application-cart-count {
+        font-size: 13px;
+    }
+
+    .application-cart-empty {
+        padding: 38px 16px;
+    }
+
+    .application-cart-empty-icon {
+        font-size: 42px;
+    }
+
+    .application-cart-empty-title {
+        font-size: 17px;
+    }
+
+    .application-cart-empty-text {
+        font-size: 13px;
+    }
+
+    /* ----------------------------------------
+       校系表格
+       ---------------------------------------- */
+    .department-table-wrapper {
+        width: 100%;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+    }
+
+    .application-cart-table,
+    .application-department-table {
+        min-width: 1000px;
+        font-size: 13px;
+    }
+
+    .application-cart-table th,
+    .application-department-table th {
+        padding: 9px 8px;
+    }
+
+    .application-cart-table td,
+    .application-department-table td {
+        padding: 9px 8px;
+    }
+
+    /* ----------------------------------------
+       查看詳細
+       ---------------------------------------- */
+    .department-detail-button {
+        min-height: 36px;
+        padding: 6px 9px;
+        font-size: 12px;
+    }
+
+    /* ----------------------------------------
+       詳細資料
+       ---------------------------------------- */
+    .department-detail-content {
+        padding: 15px;
+    }
+
+    .department-requirement-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+        gap: 7px;
+    }
+
+    .department-requirement-item {
+        min-height: 40px;
+        padding: 7px 8px;
+    }
+
+    .requirement-label,
+    .requirement-value {
+        font-size: 12px;
+    }
+
+    /* ----------------------------------------
+       選擇正式報名校系
+       ---------------------------------------- */
+    .application-selection-summary {
+        margin-bottom: 18px;
+        padding: 14px 15px;
+    }
+
+    .application-selection-summary-info {
+        gap: 9px;
+    }
+
+    .application-selection-summary-icon {
+        width: 38px;
+        height: 38px;
+        font-size: 18px;
+    }
+
+    .application-selection-summary-title {
+        font-size: 15px;
+    }
+
+    .application-selection-summary-text {
+        font-size: 12px;
+    }
+
+    .application-selection-summary-text strong {
+        font-size: 14px;
+    }
+
+    /* ----------------------------------------
+       選擇校系表格
+       ---------------------------------------- */
+    .application-selection-table {
+        min-width: 700px;
+        font-size: 13px;
+    }
+
+    .application-selection-table th,
+    .application-selection-table td {
+        padding: 9px 8px;
+    }
+
+    /* ----------------------------------------
+       Checkbox
+       ---------------------------------------- */
+    .department-selection-checkbox {
+        width: 21px;
+        height: 21px;
+    }
+
+    /* ----------------------------------------
+       校系選擇計數
+       ---------------------------------------- */
+    .application-selection-counter {
+        padding: 13px 15px;
+        font-size: 14px;
+    }
+
+    .application-selection-counter-hint {
+        font-size: 12px;
+    }
+
+    /* ----------------------------------------
+       Toast
+       ---------------------------------------- */
+    .application-toast {
+        top: 68px;
+        left: 12px;
+        right: 12px;
+        min-width: 0;
+        max-width: none;
+        width: auto;
+        padding: 12px 14px;
+        font-size: 13px;
+    }
+
+    .application-toast i {
+        font-size: 17px;
+    }
+
+    /* ----------------------------------------
+       最後確認頁
+       ---------------------------------------- */
+    .application-confirm-department-table {
+        margin-top: 8px;
+    }
+
+    .application-confirm-department-table tr {
+        height: auto;
+    }
+
+    .application-confirm-department-table td {
+        padding: 10px 11px;
+        font-size: 13px;
+    }
+
+    .application-confirm-department-label {
+        width: 82px;
+        font-size: 12px;
+    }
+
+    .application-confirm-department-value {
+        font-size: 13px;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+    }
+
+    .application-confirm-edit-hint {
+        align-items: flex-start;
+        gap: 7px;
+        margin-top: 14px;
+        padding: 10px 12px;
+        font-size: 12px;
+    }
+
+    .application-confirm-warning {
+        gap: 9px;
+        margin-top: 16px;
+        padding: 12px 13px;
+    }
+
+    .application-confirm-warning>i {
+        font-size: 17px;
+    }
+
+    .application-confirm-warning strong {
+        font-size: 14px;
+    }
+
+    .application-confirm-warning p {
+        font-size: 13px;
+        line-height: 1.7;
+    }
+
+    .application-confirm-agreement {
+        margin-top: 16px;
+        padding: 12px 13px;
+    }
+
+    .application-confirm-agreement label {
+        align-items: flex-start;
+        gap: 8px;
+        font-size: 13px;
+        line-height: 1.6;
+    }
+
+    .application-confirm-agreement input[type="checkbox"] {
+        width: 20px;
+        height: 20px;
+        margin-top: 2px;
+    }
+
+    /* ----------------------------------------
+       報名狀態查詢
+       ---------------------------------------- */
+    .application-status-confirmed,
+    .application-status-draft {
+        gap: 9px;
+        margin-bottom: 18px;
+        padding: 13px 14px;
+    }
+
+    .application-status-confirmed-icon {
+        font-size: 19px;
+    }
+
+    .application-status-confirmed-content strong,
+    .application-status-draft-content strong {
+        font-size: 14px;
+    }
+
+    .application-status-confirmed-content p,
+    .application-status-draft-content p {
+        font-size: 13px;
+        line-height: 1.7;
+    }
+
+    .application-status-time {
+        font-size: 12px;
+    }
+
+    .application-status-draft-icon {
+        width: 34px;
+        height: 34px;
+        font-size: 19px;
+    }
+
+    .application-status-no-department {
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+
+    .application-status-empty {
+        gap: 10px;
+        padding: 14px 15px;
+    }
+
+    .application-status-empty-icon {
+        width: 38px;
+        height: 38px;
+        font-size: 18px;
+    }
+
+    .application-status-empty-title {
+        font-size: 15px;
+    }
+
+    .application-status-empty-text {
+        font-size: 13px;
+    }
+
+    /* ----------------------------------------
+       選校頁搜尋條件
+       ---------------------------------------- */
+    #applicationDepartmentSearchForm {
+        padding: 18px 16px 20px;
+    }
+
+    #applicationDepartmentSearchForm .department-search-row {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 7px;
+        margin-bottom: 15px;
+    }
+
+    #applicationDepartmentSearchForm .department-search-row label {
+        width: auto;
+        font-size: 14px;
+    }
+
+    #applicationDepartmentSearchForm .department-search-row input[type="text"],
+    #applicationDepartmentSearchForm .department-search-row select {
+        width: 100%;
+        min-height: 44px;
+        font-size: 16px;
+    }
+
+    #applicationDepartmentSearchForm .department-requirement-section {
+        margin-top: 20px;
+        padding: 14px;
+    }
+
+    #applicationDepartmentSearchForm .requirement-row {
+        min-height: 44px;
+        flex-wrap: wrap;
+        gap: 4px;
+        padding: 7px 10px;
+    }
+
+    #applicationDepartmentSearchForm .requirement-subject {
+        width: 58px;
+        font-size: 14px;
+    }
+
+    #applicationDepartmentSearchForm .requirement-row label {
+        margin-right: 10px;
+        gap: 5px;
+        font-size: 13px;
+    }
+
+    #applicationDepartmentSearchForm .requirement-row input[type="radio"] {
+        width: 16px;
+        height: 16px;
+    }
+
+    /* ----------------------------------------
+       選校頁標題
+       ---------------------------------------- */
+    .application-department-search-card .apply-section-title {
+        padding: 15px 17px;
+        font-size: 17px;
+    }
+}
+
+/* =========================================================
+   12-4. Very Small Mobile
+   ========================================================= */
+@media (max-width: 400px) {
+
+    /* ----------------------------------------
+       考生資訊
+       ---------------------------------------- */
+    .application-info-item {
+        padding: 11px 12px;
+    }
+
+    .application-info-value {
+        font-size: 14px;
+    }
+
+    /* ----------------------------------------
+       校系詳細資料
+       ---------------------------------------- */
+    .department-requirement-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* ----------------------------------------
+       最後確認
+       ---------------------------------------- */
+    .application-confirm-department-label {
+        width: 74px;
+    }
+
+    .application-confirm-department-table td {
+        padding: 9px 10px;
+        font-size: 12px;
+    }
+
+    .application-confirm-warning p {
+        font-size: 12px;
+    }
+
+    /* ----------------------------------------
+       狀態查詢
+       ---------------------------------------- */
+    .application-status-confirmed,
+    .application-status-draft {
+        padding: 11px 12px;
+    }
+
+    .application-status-empty {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    /* ----------------------------------------
+       Toast
+       ---------------------------------------- */
+    .application-toast {
+        left: 10px;
+        right: 10px;
+        padding: 11px 12px;
+        font-size: 12px;
+    }
+}

@@ -8,15 +8,15 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 64px;
+    z-index: 1000;
     display: flex;
     align-items: center;
+    width: 100%;
+    height: 64px;
     background-color: #0d2b4d;
     border-bottom: 3px solid #2589d8;
     box-shadow:
         0 2px 8px rgba(0, 40, 80, 0.18);
-    z-index: 1000;
 }
 
 /* =========================================================
@@ -26,6 +26,7 @@
     flex-shrink: 0;
     margin: 0;
     padding-left: 32px;
+    padding-right: 20px;
 }
 
 .home-header-title a {
@@ -38,19 +39,30 @@
 }
 
 /* =========================================================
-   3. 主要導覽
+   3. 主要導覽列
    ========================================================= */
 .home-nav {
     display: flex;
     align-items: center;
-    gap: 4px;
-    margin-left: 35px;
+    flex: 1;
     min-width: 0;
+    margin-left: 15px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
 }
 
+.home-nav::-webkit-scrollbar {
+    display: none;
+}
+
+/* =========================================================
+   4. 導覽列連結
+   ========================================================= */
 .home-nav-link {
     display: inline-flex;
     align-items: center;
+    flex-shrink: 0;
     height: 64px;
     padding: 0 15px;
     border-bottom: 3px solid transparent;
@@ -60,9 +72,9 @@
     text-decoration: none;
     white-space: nowrap;
     transition:
-        background-color 0.2s,
-        color 0.2s,
-        border-color 0.2s;
+        background-color 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
 }
 
 .home-nav-link:hover {
@@ -79,24 +91,25 @@
 }
 
 /* =========================================================
-   4. Header 右側考生操作
+   5. Header 右側考生操作
    ========================================================= */
 .home-header-right {
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin-left: auto;
-    margin-right: 25px;
     flex-shrink: 0;
+    gap: 10px;
+    margin-left: 12px;
+    margin-right: 25px;
 }
 
 /* =========================================================
-   5. 考生登入
+   6. 考生註冊按鈕
    ========================================================= */
 .home-login-button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
     padding: 7px 14px;
     border: 1px solid #ffffff;
     border-radius: 5px;
@@ -108,9 +121,9 @@
     text-decoration: none;
     white-space: nowrap;
     transition:
-        background-color 0.2s,
-        color 0.2s,
-        border-color 0.2s;
+        background-color 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
 }
 
 .home-login-button:hover {
@@ -120,12 +133,13 @@
 }
 
 /* =========================================================
-   6. 考生註冊
+   7. 考生登入按鈕
    ========================================================= */
 .home-register-button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
     padding: 7px 15px;
     border: 1px solid #2589d8;
     border-radius: 5px;
@@ -137,8 +151,8 @@
     text-decoration: none;
     white-space: nowrap;
     transition:
-        background-color 0.2s,
-        border-color 0.2s;
+        background-color 0.2s ease,
+        border-color 0.2s ease;
 }
 
 .home-register-button:hover {
@@ -147,37 +161,39 @@
 }
 
 /* =========================================================
-   7. 首頁主要內容
+   8. 首頁主要區域
    ========================================================= */
 .home-main {
-    width: 100%;
+    min-height: 100vh;
+    margin-left: 235px;
     padding-top: 64px;
 }
 
 /* =========================================================
-   Sidebar
+   9. Sidebar
    ========================================================= */
-/* =========================================================
-   1. Sidebar 本體
-   ========================================================= */
+/* ---------------------------------------------------------
+   9-1. Sidebar 本體
+   --------------------------------------------------------- */
 .home-sidebar {
     position: fixed;
     top: 64px;
     left: 0;
     bottom: 0;
+    z-index: 900;
     width: 235px;
     padding: 18px 12px;
+    box-sizing: border-box;
     overflow-y: auto;
     background-color: #ffffff;
     border-right: 1px solid #d7e2ee;
     box-shadow:
         2px 0 8px rgba(20, 70, 110, 0.06);
-    z-index: 900;
 }
 
-/* =========================================================
-   2. Sidebar 首頁連結
-   ========================================================= */
+/* ---------------------------------------------------------
+   9-2. Sidebar 一般連結
+   --------------------------------------------------------- */
 .home-sidebar-link {
     display: flex;
     align-items: center;
@@ -185,21 +201,25 @@
     width: 100%;
     min-height: 44px;
     padding: 10px 13px;
+    box-sizing: border-box;
     border-radius: 5px;
     color: #263f59;
     font-size: 15px;
     font-weight: 600;
     text-decoration: none;
     transition:
-        background-color 0.2s,
-        color 0.2s;
+        background-color 0.2s ease,
+        color 0.2s ease;
 }
 
-.home-sidebar-link i {
+.home-sidebar-link>i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 20px;
+    flex-shrink: 0;
     color: #1877c9;
-    font-size: 16px;
-    text-align: center;
+    font-size: 17px;
 }
 
 .home-sidebar-link:hover {
@@ -213,16 +233,122 @@
     font-weight: 700;
 }
 
-/* =========================================================
-   3. Sidebar 分類
-   ========================================================= */
+/* ---------------------------------------------------------
+   9-3. Sidebar 分類
+   --------------------------------------------------------- */
 .home-sidebar-group {
     margin-top: 4px;
 }
 
-/* =========================================================
-   4. 分類展開按鈕
-   ========================================================= */
+/* ---------------------------------------------------------
+   9-4. 訊息公告專用標題列
+   --------------------------------------------------------- */
+.home-sidebar-toggle-wrapper {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+    min-height: 44px;
+    border-radius: 5px;
+    background-color: transparent;
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+}
+
+/* ---------------------------------------------------------
+   9-5. 訊息公告左側首頁連結
+   --------------------------------------------------------- */
+.home-sidebar-toggle-link {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    min-width: 0;
+    padding: 10px 13px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    color: #263f59;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+}
+
+.home-sidebar-toggle-link .home-sidebar-toggle-content {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-width: 0;
+}
+
+.home-sidebar-toggle-link .home-sidebar-toggle-content>i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    flex-shrink: 0;
+    color: #1877c9;
+    font-size: 16px;
+}
+
+.home-sidebar-toggle-wrapper:hover {
+    background-color: #eef7ff;
+}
+
+.home-sidebar-toggle-wrapper:hover .home-sidebar-toggle-link {
+    color: #1266ad;
+}
+
+.home-sidebar-toggle-link.active {
+    background-color: #eaf4fc;
+    color: #1266ad;
+    font-weight: 700;
+}
+
+.home-sidebar-toggle-link.active .home-sidebar-toggle-content>i {
+    color: #1877c9;
+}
+
+/* ---------------------------------------------------------
+   9-6. 訊息公告右側箭頭按鈕
+   --------------------------------------------------------- */
+.home-sidebar-toggle-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    flex-shrink: 0;
+    padding: 0;
+    border: none;
+    border-radius: 5px;
+    background-color: transparent;
+    color: #71859a;
+    font-family: inherit;
+    cursor: pointer;
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+}
+
+.home-sidebar-toggle-link.active+.home-sidebar-toggle-button {
+    background-color: #eaf4fc;
+    color: #1877c9;
+}
+
+.home-sidebar-toggle-button:hover {
+    background-color: #eef7ff;
+    color: #1877c9;
+}
+
+.home-sidebar-toggle-link.active+.home-sidebar-toggle-button:hover {
+    background-color: #eaf4fc;
+    color: #1266ad;
+}
+
+/* ---------------------------------------------------------
+   9-7. 一般分類展開按鈕
+   --------------------------------------------------------- */
 .home-sidebar-toggle {
     display: flex;
     align-items: center;
@@ -230,6 +356,7 @@
     width: 100%;
     min-height: 44px;
     padding: 10px 13px;
+    box-sizing: border-box;
     border: none;
     border-radius: 5px;
     background-color: transparent;
@@ -240,8 +367,8 @@
     text-align: left;
     cursor: pointer;
     transition:
-        background-color 0.2s,
-        color 0.2s;
+        background-color 0.2s ease,
+        color 0.2s ease;
 }
 
 .home-sidebar-toggle:hover {
@@ -249,40 +376,76 @@
     color: #1266ad;
 }
 
-/* =========================================================
-   5. 分類左側內容
-   ========================================================= */
 .home-sidebar-toggle-content {
     display: flex;
     align-items: center;
     gap: 11px;
+    min-width: 0;
 }
 
 .home-sidebar-toggle-content>i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 20px;
+    flex-shrink: 0;
     color: #1877c9;
     font-size: 16px;
-    text-align: center;
 }
 
-/* =========================================================
-   6. 展開箭頭
-   ========================================================= */
-.home-sidebar-arrow {
-    color: #71859a;
-    font-size: 12px;
-    transition:
-        transform 0.2s,
-        color 0.2s;
+.home-sidebar-toggle.active {
+    background-color: #eaf4fc;
+    color: #1266ad;
+    font-weight: 700;
 }
 
-.home-sidebar-toggle:hover .home-sidebar-arrow {
+.home-sidebar-toggle.active .home-sidebar-toggle-content>i {
     color: #1877c9;
 }
 
-/* =========================================================
-   7. 子選單
-   ========================================================= */
+/* ---------------------------------------------------------
+   9-8. 分類箭頭
+   --------------------------------------------------------- */
+.home-sidebar-arrow {
+    flex-shrink: 0;
+    color: #71859a;
+    font-size: 13px;
+    transition:
+        transform 0.2s ease,
+        color 0.2s ease;
+}
+
+.home-sidebar-toggle:hover .home-sidebar-arrow,
+.home-sidebar-toggle-button:hover .home-sidebar-arrow {
+    color: #1877c9;
+}
+
+.home-sidebar-toggle.active .home-sidebar-arrow {
+    color: #1877c9;
+}
+
+/* ---------------------------------------------------------
+   9-9. 分類展開狀態
+   --------------------------------------------------------- */
+.home-sidebar-group.open .home-sidebar-arrow {
+    transform: rotate(180deg);
+}
+
+.home-sidebar-group.open .home-sidebar-toggle {
+    color: #1266ad;
+}
+
+.home-sidebar-group.open .home-sidebar-toggle .home-sidebar-toggle-content>i {
+    color: #1877c9;
+}
+
+.home-sidebar-group.open .home-sidebar-toggle .home-sidebar-arrow {
+    color: #1877c9;
+}
+
+/* ---------------------------------------------------------
+   9-10. 子選單
+   --------------------------------------------------------- */
 .home-sidebar-submenu {
     max-height: 0;
     overflow: hidden;
@@ -293,27 +456,20 @@
         opacity 0.2s ease;
 }
 
-/* =========================================================
-   8. 子選單展開
-   ========================================================= */
+/* ---------------------------------------------------------
+   9-11. 子選單展開
+   --------------------------------------------------------- */
 .home-sidebar-group.open .home-sidebar-submenu {
     max-height: 300px;
     opacity: 1;
 }
 
-/* =========================================================
-   9. 展開時箭頭旋轉
-   ========================================================= */
-.home-sidebar-group.open .home-sidebar-arrow {
-    transform: rotate(180deg);
-}
-
-/* =========================================================
-   10. 子選單連結
-   ========================================================= */
+/* ---------------------------------------------------------
+   9-12. 子選單連結
+   --------------------------------------------------------- */
 .home-sidebar-sublink {
-    display: block;
     position: relative;
+    display: block;
     margin: 2px 0;
     padding: 8px 12px 8px 38px;
     border-radius: 5px;
@@ -322,10 +478,13 @@
     font-weight: 500;
     text-decoration: none;
     transition:
-        background-color 0.2s,
-        color 0.2s;
+        background-color 0.2s ease,
+        color 0.2s ease;
 }
 
+/* ---------------------------------------------------------
+   9-13. 子選單圓點
+   --------------------------------------------------------- */
 .home-sidebar-sublink::before {
     content: "";
     position: absolute;
@@ -337,7 +496,7 @@
     background-color: #9fb5c9;
     transform: translateY(-50%);
     transition:
-        background-color 0.2s;
+        background-color 0.2s ease;
 }
 
 .home-sidebar-sublink:hover {
@@ -349,9 +508,19 @@
     background-color: #2589d8;
 }
 
-/* =========================================================
-   11. Sidebar 滾動條
-   ========================================================= */
+.home-sidebar-sublink.active {
+    background-color: #eaf4fc;
+    color: #1266ad;
+    font-weight: 700;
+}
+
+.home-sidebar-sublink.active::before {
+    background-color: #2589d8;
+}
+
+/* ---------------------------------------------------------
+   9-14. Sidebar 滾動條
+   --------------------------------------------------------- */
 .home-sidebar::-webkit-scrollbar {
     width: 6px;
 }
@@ -370,20 +539,226 @@
 }
 
 /* =========================================================
-   Main Content
-   ========================================================= */
-.home-main {
-    margin-left: 235px;
-    padding-top: 64px;
-    min-height: 100vh;
-}
-
-/* =========================================================
-   首頁主要內容容器
+   10. 首頁內容容器
    ========================================================= */
 .home-content {
     width: 92%;
     max-width: 1200px;
     margin: 0 auto;
     padding: 35px 0 60px;
+}
+
+/* =========================================================
+   11. Tablet
+   ========================================================= */
+@media (max-width: 1100px) {
+
+    /* ----------------------------------------
+       Header
+       ---------------------------------------- */
+    .home-header-title {
+        padding-left: 22px;
+        padding-right: 12px;
+    }
+
+    .home-header-title a {
+        font-size: 21px;
+    }
+
+    .home-nav {
+        margin-left: 8px;
+    }
+
+    .home-nav-link {
+        padding: 0 12px;
+        font-size: 14px;
+    }
+
+    .home-header-right {
+        gap: 7px;
+        margin-right: 15px;
+    }
+
+    .home-login-button,
+    .home-register-button {
+        padding: 6px 11px;
+        font-size: 13px;
+    }
+
+    /* ----------------------------------------
+       Sidebar
+       ---------------------------------------- */
+    .home-sidebar {
+        width: 210px;
+    }
+
+    .home-main {
+        margin-left: 210px;
+    }
+
+    /* ----------------------------------------
+       內容
+       ---------------------------------------- */
+    .home-content {
+        width: 94%;
+        padding-top: 30px;
+    }
+}
+
+/* =========================================================
+   12. 小型 Tablet / 大手機
+   ========================================================= */
+@media (max-width: 850px) {
+
+    /* ----------------------------------------
+       Header
+       ---------------------------------------- */
+    .home-header {
+        height: 60px;
+    }
+
+    .home-header-title {
+        padding-left: 18px;
+        padding-right: 10px;
+    }
+
+    .home-header-title a {
+        font-size: 20px;
+    }
+
+    .home-nav-link {
+        height: 60px;
+        padding: 0 10px;
+        font-size: 13px;
+    }
+
+    .home-header-right {
+        margin-left: 8px;
+        margin-right: 10px;
+    }
+
+    .home-login-button,
+    .home-register-button {
+        padding: 5px 9px;
+        font-size: 12px;
+    }
+
+    /* ----------------------------------------
+       Sidebar
+       ---------------------------------------- */
+    .home-sidebar {
+        top: 60px;
+        width: 195px;
+        padding: 15px 10px;
+    }
+
+    .home-main {
+        margin-left: 195px;
+        padding-top: 60px;
+    }
+}
+
+/* =========================================================
+   13. Mobile
+   ========================================================= */
+@media (max-width: 600px) {
+
+    /* ----------------------------------------
+       Header
+       ---------------------------------------- */
+    .home-header {
+        height: 58px;
+        border-bottom-width: 2px;
+    }
+
+    /* ----------------------------------------
+       網站名稱
+       ---------------------------------------- */
+    .home-header-title {
+        padding-left: 14px;
+        padding-right: 8px;
+    }
+
+    .home-header-title a {
+        font-size: 18px;
+        letter-spacing: 0.5px;
+    }
+
+    /* ----------------------------------------
+       Navbar
+       ---------------------------------------- */
+    .home-nav {
+        margin-left: 4px;
+        overflow-x: auto;
+    }
+
+    .home-nav-link {
+        height: 58px;
+        padding: 0 10px;
+        font-size: 13px;
+    }
+
+    /* ----------------------------------------
+       Header 右側
+       ---------------------------------------- */
+    .home-header-right {
+        gap: 5px;
+        margin-left: 5px;
+        margin-right: 8px;
+    }
+
+    .home-login-button,
+    .home-register-button {
+        padding: 5px 8px;
+        font-size: 12px;
+    }
+
+    /* ----------------------------------------
+       Sidebar
+       ---------------------------------------- */
+    .home-sidebar {
+        display: none;
+    }
+
+    /* ----------------------------------------
+       Main
+       ---------------------------------------- */
+    .home-main {
+        width: 100%;
+        margin-left: 0;
+        padding-top: 58px;
+    }
+
+    /* ----------------------------------------
+       Content
+       ---------------------------------------- */
+    .home-content {
+        width: calc(100% - 24px);
+        max-width: none;
+        padding: 24px 0 40px;
+    }
+}
+
+/* =========================================================
+   14. Very Small Mobile
+   ========================================================= */
+@media (max-width: 400px) {
+    .home-header-title a {
+        font-size: 17px;
+    }
+
+    .home-nav-link {
+        padding: 0 8px;
+        font-size: 12px;
+    }
+
+    .home-header-right {
+        margin-right: 5px;
+    }
+
+    .home-login-button,
+    .home-register-button {
+        padding: 4px 7px;
+        font-size: 11px;
+    }
 }

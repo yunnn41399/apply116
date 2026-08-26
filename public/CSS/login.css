@@ -163,21 +163,181 @@
 }
 
 /* ========================================
-   8. 手機版 (待修改)
+   8. Tablet
    ======================================== */
-@media (max-width: 600px) {
+@media (max-width: 850px) {
+
+    /* ----------------------------------------
+       密碼欄位
+       ---------------------------------------- */
+    .password-wrapper {
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .password-wrapper input {
+        width: 100%;
+    }
+
+    /* ----------------------------------------
+       驗證碼
+       ---------------------------------------- */
     .captcha-wrapper {
-        align-items: flex-start;
-        flex-direction: column;
+        gap: 9px;
+    }
+
+    .captcha-wrapper input {
+        width: 150px;
     }
 
     .captcha-canvas {
+        width: 150px;
+        height: 48px;
+    }
+
+    /* ----------------------------------------
+       密碼規則
+       ---------------------------------------- */
+    .password-rules {
+        width: 100%;
+        max-width: 320px;
+    }
+}
+
+/* ========================================
+   9. Mobile
+   ======================================== */
+@media (max-width: 600px) {
+
+    /* ----------------------------------------
+       密碼欄位
+       ---------------------------------------- */
+    .password-wrapper {
+        display: flex;
+        width: 100%;
+        max-width: none;
+    }
+
+    .password-wrapper input {
+        width: 100%;
+        min-height: 44px;
+        padding-right: 44px;
+        font-size: 16px;
+    }
+
+    /* ----------------------------------------
+       顯示 / 隱藏密碼
+       ---------------------------------------- */
+    .password-toggle {
+        right: 5px;
+        width: 34px;
+        height: 34px;
+        font-size: 18px;
+    }
+
+    /* ----------------------------------------
+       驗證碼區
+       ---------------------------------------- */
+    .captcha-group {
+        margin-top: 4px;
+    }
+
+    .captcha-wrapper {
+        align-items: stretch;
+        flex-direction: column;
+        gap: 9px;
+        width: 100%;
+    }
+
+    /* ----------------------------------------
+       驗證碼輸入框
+       ---------------------------------------- */
+    .captcha-wrapper input {
+        width: 100%;
+        min-height: 44px;
+        padding: 10px 12px;
+        font-size: 16px;
+    }
+
+    /* ----------------------------------------
+       驗證碼 Canvas
+       ---------------------------------------- */
+    .captcha-canvas {
+        display: block;
         width: 160px;
+        max-width: 100%;
         height: 50px;
     }
 
+    /* ----------------------------------------
+       重新產生驗證碼
+       ---------------------------------------- */
+    .refresh-captcha {
+        width: fit-content;
+        min-height: 42px;
+        padding: 8px 13px;
+        font-size: 14px;
+    }
+
+    /* ----------------------------------------
+       密碼規則
+       ---------------------------------------- */
     .password-rules {
         width: 100%;
-        max-width: 300px;
+        max-width: none;
+        margin-top: 9px;
+        padding: 11px 12px;
+    }
+
+    .password-rules p {
+        margin-bottom: 7px;
+        font-size: 14px;
+    }
+
+    .password-rule {
+        margin: 5px 0;
+        font-size: 13px;
+        line-height: 1.5;
+    }
+
+    .rule-icon {
+        width: 19px;
+    }
+
+    /* ----------------------------------------
+       密碼是否一致
+       ---------------------------------------- */
+    .password-match {
+        margin-top: 7px;
+        font-size: 13px;
+        line-height: 1.5;
+    }
+}
+
+/* ========================================
+   10. Very Small Mobile
+   ======================================== */
+@media (max-width: 380px) {
+    .captcha-canvas {
+        width: 150px;
+        height: 48px;
+    }
+
+    .refresh-captcha {
+        min-height: 40px;
+        padding: 7px 11px;
+        font-size: 13px;
+    }
+
+    .password-rules {
+        padding: 10px 11px;
+    }
+
+    .password-rules p {
+        font-size: 13px;
+    }
+
+    .password-rule {
+        font-size: 12px;
     }
 }
