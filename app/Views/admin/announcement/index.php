@@ -38,6 +38,64 @@
                 </div>
             <?php endif; ?>
 
+            <?php
+                $currentPage = $pager->getCurrentPage();
+                $totalPages = $pager->getPageCount();
+                $totalItems = $pager->getTotal();
+            ?>
+
+            <!-- 搜尋區域 -->
+            <form method="get" action="<?= site_url('admin/announcement') ?>"
+                style="display: flex; gap: 0.5rem; align-items: center; margin-bottom: 1.25rem; flex-wrap: wrap;">
+
+                <div style="position: relative; flex: 1; max-width: 350px;">
+                    <i class="bi bi-search"
+                        style="position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%); color: #8b5cf6;">
+                    </i>
+
+                    <input
+                        type="text"
+                        id="keyword"
+                        name="keyword"
+                        value="<?= esc($keyword ?? '') ?>"
+                        placeholder="搜尋公告標題"
+                        style="width: 100%; padding: 0.5rem 0.75rem 0.5rem 2.25rem; border: 1px solid #ddd6fe; border-radius: 0.375rem; outline: none; font-size: 0.95rem;"
+                    >
+                </div>
+
+                <button
+                    type="submit"
+                    class="primary-button"
+                    style="padding: 0.5rem 1rem; font-size: 0.95rem;">
+                    搜尋
+                </button>
+
+                <?php if (!empty($keyword)): ?>
+                    <a
+                        href="<?= site_url('admin/announcement') ?>"
+                        class="secondary-button"
+                        style="text-decoration: none; padding: 0.5rem 0.8rem; font-size: 0.95rem;">
+                        <i class="bi bi-x-circle"></i> 清除搜尋
+                    </a>
+                <?php endif; ?>
+
+                <div style="color: #6b5b95; font-size: 0.9rem; margin-left: auto;">
+                    第 <strong><?= $currentPage ?></strong> /
+                    <strong><?= $totalPages ?></strong> 頁
+                    ｜ 共 <strong><?= $totalItems ?></strong> 筆資料
+                </div>
+
+            </form>
+
+            <!-- 搜尋提示文字 -->
+            <?php if (!empty($keyword)): ?>
+                <div style="margin-bottom: 1rem; font-size: 0.9rem; color: #6b5b95;">
+                    <i class="bi bi-info-circle"></i>
+                    搜尋關鍵字：<strong><?= esc($keyword) ?></strong>
+                </div>
+            <?php endif; ?>
+
+
             <!-- 公告資料表格 -->
             <table class="admin-table">
                 <thead>
@@ -153,11 +211,6 @@
             </table>
 
             <!-- 分頁列 -->
-            <?php
-                $currentPage = $pager->getCurrentPage();
-                $totalPages = $pager->getPageCount();
-            ?>
-
             <?php if ($totalPages > 1): ?>
 
                 <div class="admin-pagination">

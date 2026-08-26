@@ -31,6 +31,9 @@ class Announcement extends BaseController
     // 後臺公告列表
     public function adminIndex()
     {
+        // 取得搜尋關鍵字
+        $keyword = trim($this->request->getGet('keyword'));
+
         // 取得排序欄位
         $sort = $this->request->getGet('sort');
 
@@ -59,6 +62,13 @@ class Announcement extends BaseController
         // 建立查詢
         $builder = $this->announcementModel;
 
+        // 搜尋
+        if ($keyword !== '') {
+            $builder->like('title', $keyword);
+        }
+
+
+        // 排序
         // 發佈狀態特殊處理
         if ($sort === 'status') {
 
@@ -89,13 +99,16 @@ class Announcement extends BaseController
             $builder->orderBy($sort, $direction);
         }
 
+        // 分頁
         $announcements = $builder->paginate(10);
 
+        // 傳送資料給 View
         return view('admin/announcement/index', [
             'announcements' => $announcements,
-            'sort' => $sort,
-            'direction' => $direction,
-            'pager' => $this->announcementModel->pager
+            'keyword'       => $keyword,
+            'sort'          => $sort,
+            'direction'     => $direction,
+            'pager'         => $this->announcementModel->pager
         ]);
     }
 
