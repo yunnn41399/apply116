@@ -444,39 +444,31 @@ class AdminManagement extends BaseController
                 );
         }
 
-        // 防止最後一個啟用中的 super_admin 被降級或停用
-        if ($admin['role'] === 'super_admin') {
+        // 防止修改後系統沒有任何啟用中的最高管理員
+        if ($admin['role'] === 'super_admin' && $admin['status'] === 'active') {
 
-            // 計算目前有幾個啟用中的最高管理員
-            $superAdminCount = $this->adminModel
-                ->where('role', 'super_admin')
-                ->where('status', 'active')
-                ->countAllResults();
+            // 目前管理員如果要被降級或停用
+            $willLoseSuperAdminStatus =
+                $role !== 'super_admin' || $status !== 'active';
 
+            if ($willLoseSuperAdminStatus) {
 
-            // 如果這是最後一個啟用中的 super_admin
-            if ($superAdminCount <= 1) {
+                // 排除目前正在修改的管理員
+                $otherActiveSuperAdminCount = $this->adminModel
+                    ->where('role', 'super_admin')
+                    ->where('status', 'active')
+                    ->where('id !=', $id)
+                    ->countAllResults();
 
-                // 不允許降級
-                if ($role !== 'super_admin') {
+                // 修改後不能沒有任何啟用中的最高管理員
+                if ($otherActiveSuperAdminCount === 0) {
+
                     return redirect()
                         ->back()
                         ->withInput()
                         ->with(
                             'error',
-                            '系統至少需要一位啟用中的最高管理員，無法將最後一位最高管理員降為一般管理員。'
-                        );
-                }
-
-
-                // 不允許停用
-                if ($status !== 'active') {
-                    return redirect()
-                        ->back()
-                        ->withInput()
-                        ->with(
-                            'error',
-                            '系統至少需要一位啟用中的最高管理員，無法停用最後一位最高管理員。'
+                            '系統至少需要一位啟用中的最高管理員，無法將最後一位最高管理員降為一般管理員或停用。'
                         );
                 }
             }
