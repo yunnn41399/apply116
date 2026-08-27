@@ -123,6 +123,7 @@ $routes->group('admin', ['filter' => 'adminAuth'], function ($routes) {
 // 前台公告
 $routes->get('/announcement', 'Announcement::index');
 $routes->get('/announcement/(:num)', 'Announcement::detail/$1');
+$routes->get('announcement/category/(:num)', 'Announcement::category/$1');
 
 // 考生註冊
 $routes->get('/register', 'Register::index');

@@ -28,6 +28,38 @@ class Announcement extends BaseController
         ]);
     }
 
+    public function category($category)
+    {
+        $categories = [
+            1 => '簡章訊息事項',
+            2 => '招生試務',
+            3 => '甄選資訊',
+            4 => '會議簡報',
+            5 => '其他事項',
+            6 => '系統公告',
+            7 => '師資保送甄試',
+            8 => '醫事人員養成計畫',
+        ];
+
+        if (!isset($categories[$category])) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+
+        $categoryName = $categories[$category];
+
+        $announcements = $this->announcementModel
+            ->where('category', $categoryName)
+            ->where('status', 'published')
+            ->orderBy('publish_date', 'DESC')
+            ->paginate(10);
+
+        return view('announcement/index', [
+            'announcements' => $announcements,
+            'category'      => $categoryName,
+            'pager'         => $this->announcementModel->pager
+        ]);
+    }
+
     // 後臺公告列表
     public function adminIndex()
     {

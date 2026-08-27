@@ -45,28 +45,28 @@ $isRelatedOther =
             </button>
         </div>
         <div class="home-sidebar-submenu">
-            <a href="#" class="home-sidebar-sublink">
+            <a href="<?= site_url('announcement/category/1') ?>" class="home-sidebar-sublink">
                 簡章訊息事項
             </a>
-            <a href="#" class="home-sidebar-sublink">
+            <a href="<?= site_url('announcement/category/2') ?>" class="home-sidebar-sublink">
                 招生試務
             </a>
-            <a href="#" class="home-sidebar-sublink">
+            <a href="<?= site_url('announcement/category/3') ?>" class="home-sidebar-sublink">
                 甄選資訊
             </a>
-            <a href="#" class="home-sidebar-sublink">
+            <a href="<?= site_url('announcement/category/4') ?>" class="home-sidebar-sublink">
                 會議簡報
             </a>
-            <a href="#" class="home-sidebar-sublink">
+            <a href="<?= site_url('announcement/category/5') ?>" class="home-sidebar-sublink">
                 其他事項
             </a>
-            <a href="#" class="home-sidebar-sublink">
+            <a href="<?= site_url('announcement/category/6') ?>" class="home-sidebar-sublink">
                 系統公告
             </a>
-            <a href="#" class="home-sidebar-sublink">
+            <a href="<?= site_url('announcement/category/7') ?>" class="home-sidebar-sublink">
                 師資保送甄試
             </a>
-            <a href="#" class="home-sidebar-sublink">
+            <a href="<?= site_url('announcement/category/8') ?>" class="home-sidebar-sublink">
                 醫事人員養成計畫
             </a>
         </div>
