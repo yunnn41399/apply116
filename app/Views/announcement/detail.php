@@ -51,8 +51,8 @@
                 <!-- 文末附件區塊（直接取用 Controller 傳過來的 $attachments 陣列） -->
                 <?php if (!empty($attachments)): ?>
                     <div class="mt-4" style="margin-top: 24px; padding-top: 16px; border-top: 1px dashed #e2e8f0;">
-                        <h5 style="font-size: 1.05rem; font-weight: 600; color: #334155;">附件下載：</h5>
-                        <ul style="padding-left: 20px; margin-top: 8px;">
+                        <h5 style="font-size: 1.05rem; font-weight: 600; color: #334155; margin: 1rem 0">附件下載：</h5>
+                        <ul style="padding-left: 0px; margin-top: 8px; list-style: none;">
                             <?php foreach ($attachments as $file): ?>
                                 <?php if (!empty($file['path'])): ?>
                                     <li style="margin-bottom: 6px;">
