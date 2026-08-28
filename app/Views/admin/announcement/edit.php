@@ -116,11 +116,19 @@
                     </label>
 
                     <?php if (!empty($announcement['attachment'])): ?>
-                        <div style="margin-bottom: 0.3rem; font-size: 0.9rem; color: #6d28d9;">
-                            <i class="bi bi-file-earmark-check"></i> 目前附件：
-                            <a href="<?= base_url($announcement['attachment']) ?>" target="_blank" class="admin-announcement-file">
-                                點此預覽舊檔
-                            </a>
+                        <div style="margin-bottom: 0.3rem; font-size: 0.9rem; color: #6d28d9; display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+                            <span>
+                                <i class="bi bi-file-earmark-check"></i> 目前附件：
+                                <a href="<?= base_url($announcement['attachment']) ?>" target="_blank" class="admin-announcement-file">
+                                    點此預覽舊檔
+                                </a>
+                            </span>
+
+                            <!-- 新增：刪除舊附件勾選框 -->
+                            <label style="color: #ef4444; font-size: 0.85rem; cursor: pointer; display: flex; align-items: center; gap: 0.2rem; background-color: #fef2f2; padding: 0.2rem 0.5rem; border-radius: 0.25rem; border: 1px solid #fecaca;">
+                                <input type="checkbox" name="delete_attachment" value="1" style="accent-color: #ef4444;">
+                                <i class="bi bi-trash"></i> 刪除此附件
+                            </label>
                         </div>
                     <?php endif; ?>
 
@@ -193,28 +201,53 @@
     <!-- 變更偵測與提示語句指令碼 -->
     <script>
         let isFormDirty = false;
+
         const form = document.getElementById('editForm');
         const btnBack = document.getElementById('btnBack');
+        const deleteAttachment = document.getElementById('delete_attachment');
 
-        // 監聽表單內部輸入項，只要有修改就標記為已變更
+        // 監聽表單內部輸入項
         form.addEventListener('change', () => {
             isFormDirty = true;
         });
+
         form.addEventListener('input', () => {
             isFormDirty = true;
         });
+
+        // 刪除附件確認
+        if (deleteAttachment) {
+            deleteAttachment.addEventListener('change', () => {
+
+                if (deleteAttachment.checked) {
+
+                    const confirmDelete = confirm(
+                        '確定要刪除目前的附件嗎？\n\n儲存公告後，舊附件將會被永久刪除。'
+                    );
+
+                    if (!confirmDelete) {
+                        deleteAttachment.checked = false;
+                    }
+                }
+            });
+        }
 
         // 正常提交表單時不需要跳出警告
         form.addEventListener('submit', () => {
             isFormDirty = false;
         });
 
-        // 點擊「返回」按鈕時判斷
+        // 點擊返回按鈕時判斷
         btnBack.addEventListener('click', (e) => {
+
             if (isFormDirty) {
-                const confirmLeave = confirm('若返回公告列表，將放棄當前的編輯，確定要離開嗎？');
+
+                const confirmLeave = confirm(
+                    '若返回公告列表，將放棄當前的編輯，確定要離開嗎？'
+                );
+
                 if (!confirmLeave) {
-                    e.preventDefault(); // 使用者選擇取消，停留在原頁面
+                    e.preventDefault();
                 }
             }
         });

@@ -410,6 +410,16 @@ class Announcement extends BaseController
         // 預設保留舊附件
         $attachmentPath = $announcement['attachment'] ?? null;
 
+        // 1. 檢查是否勾選刪除舊附件
+        $deleteAttachment = $this->request->getPost('delete_attachment');
+        if ($deleteAttachment === '1') {
+            if (!empty($attachmentPath) && file_exists(FCPATH . $attachmentPath)) {
+                unlink(FCPATH . $attachmentPath); // 刪除實體檔案
+            }
+            $attachmentPath = null; // 清空路徑
+        }
+
+        // 2. 處理新檔案上傳
         $file = $this->request->getFile('attachment');
 
         if ($file && $file->isValid() && !$file->hasMoved()) {
@@ -421,10 +431,8 @@ class Announcement extends BaseController
                 mkdir($uploadPath, 0777, true);
             }
 
-            // 如果有舊檔案，先刪除
-            if (!empty($attachmentPath) &&
-                file_exists(FCPATH . $attachmentPath)) {
-
+            // 若原本有舊檔案（且剛才沒被刪除），則刪除
+            if (!empty($attachmentPath) && file_exists(FCPATH . $attachmentPath)) {
                 unlink(FCPATH . $attachmentPath);
             }
 
