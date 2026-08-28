@@ -4,14 +4,20 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\AnnouncementModel;
+use App\Services\HomepagePageService;
+use App\Services\HomepageMarqueeService;
 
 class Announcement extends BaseController
 {
     protected $announcementModel;
+    protected $homepagePageService;
+    protected $homepageMarqueeService;
 
     public function __construct()
     {
         $this->announcementModel = new AnnouncementModel();
+        $this->homepagePageService = new HomepagePageService();
+        $this->homepageMarqueeService = new HomepageMarqueeService();
     }
 
     // 前台公告列表
@@ -47,16 +53,51 @@ class Announcement extends BaseController
 
         $categoryName = $categories[$category];
 
+        // 查詢該類別且已發布的公告
         $announcements = $this->announcementModel
             ->where('category', $categoryName)
             ->where('status', 'published')
             ->orderBy('publish_date', 'DESC')
             ->paginate(10);
 
-        return view('announcement/index', [
+        // 1. 取得 Navbar 頁面設定
+        $navbarPages = [];
+        $pages = $this->homepagePageService->getPagesByLocation('navbar');
+        foreach ($pages as $page) {
+            $state = $this->homepagePageService->getPageState($page['page_key']);
+            if ($state !== null) {
+                $navbarPages[] = $state;
+            }
+        }
+
+        // 2. 取得 Sidebar 頁面與群組設定
+        $sidebarPages = [];
+        $sPages = $this->homepagePageService->getPagesByLocation('sidebar');
+        foreach ($sPages as $page) {
+            $state = $this->homepagePageService->getPageState($page['page_key']);
+            if ($state !== null) {
+                $sidebarPages[] = $state;
+            }
+        }
+
+        // 個別取得側邊欄群組狀態（招生資訊與相關網站）
+        $sidebarGroups = [
+            'admission' => $this->homepagePageService->getGroupState('admission'),
+            'related'   => $this->homepagePageService->getGroupState('related'),
+        ];
+
+        // 3. 取得首頁跑馬燈
+        $marquee = $this->homepageMarqueeService->getVisibleMarquee();
+
+        return view('announcement/category', [
             'announcements' => $announcements,
             'category'      => $categoryName,
-            'pager'         => $this->announcementModel->pager
+            'categoryId'    => $category,
+            'pager'         => $this->announcementModel->pager,
+            'navbarPages'   => $navbarPages,
+            'sidebarPages'  => $sidebarPages,
+            'sidebarGroups' => $sidebarGroups,
+            'marquee'       => $marquee,
         ]);
     }
 
@@ -479,38 +520,48 @@ class Announcement extends BaseController
     }
 
     // 公告詳細內容與外部跳轉
-    public function detail($id)
+    public function detail($id = null)
     {
         $announcement = $this->announcementModel->find($id);
 
-        if (!$announcement) {
-            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound(
-                '找不到此公告'
-            );
+        if (!$announcement || $announcement['status'] !== 'published') {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
 
-        // 超連結公告：直接跳轉到外部網址
-        if ($announcement['type'] === '超連結') {
-            return redirect()->to($announcement['external_url']);
-        }
-
-        // 純檔案公告：直接開啟檔案
-        if ($announcement['type'] === '純檔案') {
-
-            if (empty($announcement['attachment'])) {
-                throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound(
-                    '此公告沒有附件檔案'
-                );
+        // 1. 取得 Navbar 頁面設定
+        $navbarPages = [];
+        $pages = $this->homepagePageService->getPagesByLocation('navbar');
+        foreach ($pages as $page) {
+            $state = $this->homepagePageService->getPageState($page['page_key']);
+            if ($state !== null) {
+                $navbarPages[] = $state;
             }
-
-            return redirect()->to(
-                base_url($announcement['attachment'])
-            );
         }
 
-        // 純文字公告：顯示詳細頁面
+        // 2. 取得 Sidebar 頁面與群組設定
+        $sidebarPages = [];
+        $sPages = $this->homepagePageService->getPagesByLocation('sidebar');
+        foreach ($sPages as $page) {
+            $state = $this->homepagePageService->getPageState($page['page_key']);
+            if ($state !== null) {
+                $sidebarPages[] = $state;
+            }
+        }
+
+        $sidebarGroups = [
+            'admission' => $this->homepagePageService->getGroupState('admission'),
+            'related'   => $this->homepagePageService->getGroupState('related'),
+        ];
+
+        // 3. 取得首頁跑馬燈
+        $marquee = $this->homepageMarqueeService->getVisibleMarquee();
+
         return view('announcement/detail', [
-            'announcement' => $announcement
+            'announcement'  => $announcement,
+            'navbarPages'   => $navbarPages,
+            'sidebarPages'  => $sidebarPages,
+            'sidebarGroups' => $sidebarGroups,
+            'marquee'       => $marquee,
         ]);
     }
 }
