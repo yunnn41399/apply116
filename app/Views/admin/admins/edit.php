@@ -13,9 +13,6 @@
 
 <body>
 
-    <!-- 頂部導覽列 -->
-    <?php include APPPATH . 'Views/admin/header.php'; ?>
-
     <!-- 主要內容區 -->
     <main class="admin-announcement-container">
         <section class="apply-content-card" style="padding: 2rem; max-width: 800px; margin: 0 auto;">
