@@ -48,16 +48,46 @@
                     <?= nl2br(esc($announcement['content'] ?? '')) ?>
                 </div>
 
-                <!-- 文末附件區塊 -->
-                <?php if (!empty($announcement['attachment'])): ?>
+                <!-- 文末附件區塊（支援向下相容舊資料與自訂檔名） -->
+                <?php 
+                    $attachments = [];
+                    if (!empty($announcement['attachment'])) {
+                        $decoded = json_decode($announcement['attachment'], true);
+                        if (is_array($decoded)) {
+                            foreach ($decoded as $item) {
+                                if (is_string($item)) {
+                                    $attachments[] = [
+                                        'path' => $item,
+                                        'custom_name' => basename($item)
+                                    ];
+                                } else {
+                                    $attachments[] = $item;
+                                }
+                            }
+                        } else {
+                            $attachments[] = [
+                                'path' => $announcement['attachment'],
+                                'custom_name' => basename($announcement['attachment'])
+                            ];
+                        }
+                    }
+                ?>
+
+                <?php if (!empty($attachments)): ?>
                     <div style="margin-top: 28px; padding-top: 16px; border-top: 1px dashed #cbd5e1;">
-                        <h3 style="font-size: 1rem; color: #334155; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
-                            <i class="bi bi-paperclip"></i> 相關附件
+                        <h3 style="font-size: 1rem; color: #334155; margin-bottom: 12px; display: flex; align-items: center; gap: 6px;">
+                            <i class="bi bi-paperclip"></i> 相關附件（<?= count($attachments) ?>）
                         </h3>
-                        <a href="<?= base_url($announcement['attachment']) ?>" target="_blank" download style="display: inline-flex; align-items: center; gap: 6px; color: #2563eb; text-decoration: none; font-weight: 500;">
-                            <i class="bi bi-file-earmark-arrow-down"></i>
-                            點此下載 / 檢視附件
-                        </a>
+                        <div style="display: flex; flex-direction: column; gap: 8px;">
+                            <?php foreach ($attachments as $item): ?>
+                                <div>
+                                    <a href="<?= base_url($item['path']) ?>" target="_blank" download style="display: inline-flex; align-items: center; gap: 6px; color: #2563eb; text-decoration: none; font-weight: 500; word-break: break-all;">
+                                        <i class="bi bi-file-earmark-arrow-down"></i>
+                                        <?= esc($item['custom_name']) ?>
+                                    </a>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
                     </div>
                 <?php endif; ?>
 

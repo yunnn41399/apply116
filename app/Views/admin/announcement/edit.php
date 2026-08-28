@@ -109,39 +109,87 @@
                     ><?= old('content', $announcement['content']) ?></textarea>
                 </div>
 
-                <!-- 附件上傳 -->
-                <div style="display: flex; flex-direction: column; gap: 0.4rem; padding: 1rem; background-color: #fcfaff; border: 1px dashed #ddd6fe; border-radius: 0.375rem;">
-                    <label for="attachment" style="font-weight: 600; color: #4c1d95; font-size: 0.95rem;">
-                        <i class="bi bi-paperclip"></i> 附件上傳
+                <!-- 附件上傳區塊 -->
+                <div style="display: flex; flex-direction: column; gap: 0.6rem; padding: 1rem; background-color: #fcfaff; border: 1px dashed #ddd6fe; border-radius: 0.375rem;">
+                    <label for="attachments" style="font-weight: 600; color: #4c1d95; font-size: 0.95rem;">
+                        <i class="bi bi-paperclip"></i> 附件上傳與顯示名稱設定
                     </label>
 
-                    <?php if (!empty($announcement['attachment'])): ?>
-                        <div style="margin-bottom: 0.3rem; font-size: 0.9rem; color: #6d28d9; display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
-                            <span>
-                                <i class="bi bi-file-earmark-check"></i> 目前附件：
-                                <a href="<?= base_url($announcement['attachment']) ?>" target="_blank" class="admin-announcement-file">
-                                    點此預覽舊檔
-                                </a>
-                            </span>
+                    <?php 
+                        // 解析 JSON 格式的多附件資料
+                        $oldAttachments = [];
+                        if (!empty($announcement['attachment'])) {
+                            $decoded = json_decode($announcement['attachment'], true);
+                            if (is_array($decoded)) {
+                                foreach ($decoded as $item) {
+                                    // 相容舊資料格式（純字串路徑）
+                                    if (is_string($item)) {
+                                        $oldAttachments[] = [
+                                            'path' => $item,
+                                            'custom_name' => basename($item)
+                                        ];
+                                    } else {
+                                        $oldAttachments[] = $item;
+                                    }
+                                }
+                            } else {
+                                // 相容最早期的純字串資料
+                                $oldAttachments[] = [
+                                    'path' => $announcement['attachment'],
+                                    'custom_name' => basename($announcement['attachment'])
+                                ];
+                            }
+                        }
+                    ?>
 
-                            <!-- 新增：刪除舊附件勾選框 -->
-                            <label style="color: #ef4444; font-size: 0.85rem; cursor: pointer; display: flex; align-items: center; gap: 0.2rem; background-color: #fef2f2; padding: 0.2rem 0.5rem; border-radius: 0.25rem; border: 1px solid #fecaca;">
-                                <input type="checkbox" name="delete_attachment" value="1" style="accent-color: #ef4444;">
-                                <i class="bi bi-trash"></i> 刪除此附件
-                            </label>
+                    <!-- 目前已有附件列表 -->
+                    <?php if (!empty($oldAttachments)): ?>
+                        <div style="font-size: 0.9rem; color: #6d28d9; margin-bottom: 0.5rem;">
+                            <div style="font-weight: 600; margin-bottom: 0.3rem;">
+                                <i class="bi bi-file-earmark-check"></i> 目前附件與自訂顯示名稱：
+                            </div>
+                            <div style="display: flex; flex-direction: column; gap: 0.6rem;">
+                                <?php foreach ($oldAttachments as $index => $item): ?>
+                                    <div style="display: flex; align-items: center; gap: 0.5rem; background-color: #fff; padding: 0.5rem; border: 1px solid #ddd6fe; border-radius: 0.25rem;">
+                                        <!-- 隱藏欄位：帶入實體路徑 -->
+                                        <input type="hidden" name="existing_attachments_path[]" value="<?= esc($item['path']) ?>">
+                                        
+                                        <!-- 輸入框：修改自訂檔名 -->
+                                        <input 
+                                            type="text" 
+                                            name="existing_attachments_name[]" 
+                                            value="<?= esc($item['custom_name']) ?>" 
+                                            placeholder="請輸入前台顯示檔名"
+                                            style="flex: 1; padding: 0.3rem 0.5rem; border: 1px solid #cbd5e1; border-radius: 0.25rem; font-size: 0.875rem;"
+                                        >
+
+                                        <a href="<?= base_url($item['path']) ?>" target="_blank" class="admin-announcement-file" style="font-size: 0.85rem; white-space: nowrap;">
+                                            預覽
+                                        </a>
+
+                                        <!-- 刪除勾選 -->
+                                        <label style="color: #ef4444; font-size: 0.85rem; cursor: pointer; display: flex; align-items: center; gap: 0.2rem; background-color: #fef2f2; padding: 0.2rem 0.5rem; border-radius: 0.25rem; border: 1px solid #fecaca; white-space: nowrap;">
+                                            <input type="checkbox" name="delete_attachments[]" value="<?= esc($item['path']) ?>" style="accent-color: #ef4444;">
+                                            <i class="bi bi-trash"></i> 刪除
+                                        </label>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
                         </div>
                     <?php endif; ?>
 
+                    <!-- 上傳新檔案 -->
                     <input
                         type="file"
-                        id="attachment"
-                        name="attachment"
+                        id="attachments"
+                        name="attachments[]"
+                        multiple
                         class="custom-file-input"
                         accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.zip,.rar,.png,.jpg,.jpeg"
                         style="font-size: 0.9rem; color: #4c1d95;"
                     >
-                    <span style="color: #6b5b95; font-size: 0.85rem; margin-top: 0.2rem;">
-                        （支援 PDF、Word、Excel、PPT、圖片及壓縮檔，單一檔案上限 10MB）
+                    <span style="color: #6b5b95; font-size: 0.85rem;">
+                        （可選擇多個檔案。新上傳的檔案若未修改名稱，前台預設會顯示原始檔案檔名）
                     </span>
                 </div>
 
