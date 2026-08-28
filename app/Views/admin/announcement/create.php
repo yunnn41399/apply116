@@ -108,23 +108,32 @@
                     ><?= old('content') ?></textarea>
                 </div>
 
-                <!-- 附件上傳 -->
-                <div style="display: flex; flex-direction: column; gap: 0.4rem; padding: 1rem; background-color: #fcfaff; border: 1px dashed #ddd6fe; border-radius: 0.375rem;">
-                    <label for="attachment" style="font-weight: 600; color: #4c1d95; font-size: 0.95rem;">
+                <!-- 附件上傳區塊（支援多檔、自訂檔名編輯與刪除） -->
+                <div style="display: flex; flex-direction: column; gap: 0.6rem; padding: 1rem; background-color: #fcfaff; border: 1px dashed #ddd6fe; border-radius: 0.375rem;">
+                    <label for="attachments" style="font-weight: 600; color: #4c1d95; font-size: 0.95rem;">
                         <i class="bi bi-paperclip"></i> 附件上傳
                     </label>
 
                     <input
                         type="file"
-                        id="attachment"
-                        name="attachment"
+                        id="attachments"
+                        name="attachments[]"
+                        multiple
                         class="custom-file-input"
                         accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.zip,.rar,.png,.jpg,.jpeg"
                         style="font-size: 0.9rem; color: #4c1d95;"
                     >
-                    <span style="color: #6b5b95; font-size: 0.85rem; margin-top: 0.2rem;">
-                        （支援 PDF、Word、Excel、PPT、圖片及壓縮檔，單一檔案上限 10MB）
+                    <span style="color: #6b5b95; font-size: 0.85rem;">
+                        （可選擇一個或多個檔案，單一檔案上限 10MB）
                     </span>
+
+                    <!-- 動態生成選擇檔案後的顯示名稱修改與刪除清單 -->
+                    <div id="fileListContainer" style="display: none; margin-top: 0.5rem;">
+                        <div style="font-size: 0.875rem; color: #6d28d9; font-weight: 600; margin-bottom: 0.4rem;">
+                            <i class="bi bi-paperclip"></i> 已選擇的附件清單：
+                        </div>
+                        <div id="fileList" style="display: flex; flex-direction: column; gap: 0.5rem;"></div>
+                    </div>
                 </div>
 
                 <!-- 外部網址 -->
@@ -163,31 +172,93 @@
         Apply116 後臺管理系統
     </footer>
 
-    <!-- 變更偵測與提示語句指令碼 -->
     <script>
         let isFormDirty = false;
         const form = document.getElementById('createForm');
         const btnBack = document.getElementById('btnBack');
+        const attachmentsInput = document.getElementById('attachments');
+        const fileListContainer = document.getElementById('fileListContainer');
+        const fileList = document.getElementById('fileList');
 
-        // 監聽表單內部輸入項，只要有修改就標記為已變更
-        form.addEventListener('change', () => {
-            isFormDirty = true;
-        });
-        form.addEventListener('input', () => {
-            isFormDirty = true;
+        // 使用 DataTransfer 來即時維護與更新 <input type="file"> 的檔案陣列
+        let dt = new DataTransfer();
+
+        attachmentsInput.addEventListener('change', function () {
+            // 將新選取的檔案加入 DataTransfer 清單中
+            for (let i = 0; i < this.files.length; i++) {
+                dt.items.add(this.files[i]);
+            }
+
+            // 更新 input 檔案清單
+            this.files = dt.files;
+
+            renderFileList();
         });
 
-        // 正常提交表單時不需要跳出警告
-        form.addEventListener('submit', () => {
-            isFormDirty = false;
-        });
+        // 渲染列表 (包含名稱輸入框與刪除按鈕)
+        function renderFileList() {
+            fileList.innerHTML = '';
 
-        // 點擊「返回」按鈕時判斷
+            if (dt.files.length > 0) {
+                fileListContainer.style.display = 'block';
+
+                Array.from(dt.files).forEach((file, index) => {
+                    const row = document.createElement('div');
+                    row.style.cssText = 'display: flex; align-items: center; gap: 0.5rem; background: #fff; padding: 0.5rem; border: 1px solid #ddd6fe; border-radius: 0.25rem;';
+
+                    // 檔名輸入框
+                    const input = document.createElement('input');
+                    input.type = 'text';
+                    input.name = 'custom_attachment_names[]';
+                    input.value = file.name; // 預設帶入原檔名
+                    input.placeholder = '前台顯示名稱';
+                    input.style.cssText = 'flex: 1; padding: 0.3rem 0.5rem; border: 1px solid #cbd5e1; border-radius: 0.25rem; font-size: 0.9rem;';
+
+                    // 刪除按鈕
+                    const deleteBtn = document.createElement('button');
+                    deleteBtn.type = 'button';
+                    deleteBtn.innerHTML = '<i class="bi bi-trash"></i> 移除';
+                    deleteBtn.style.cssText = 'color: #ef4444; font-size: 0.85rem; cursor: pointer; background-color: #fef2f2; padding: 0.3rem 0.6rem; border-radius: 0.25rem; border: 1px solid #fecaca; white-space: nowrap; font-weight: 500;';
+
+                    // 點擊移除指定的檔案
+                    deleteBtn.addEventListener('click', () => {
+                        removeFile(index);
+                    });
+
+                    row.appendChild(input);
+                    row.appendChild(deleteBtn);
+                    fileList.appendChild(row);
+                });
+            } else {
+                fileListContainer.style.display = 'none';
+            }
+        }
+
+        // 從 DataTransfer 清單中移除檔案
+        function removeFile(index) {
+            const newDt = new DataTransfer();
+
+            for (let i = 0; i < dt.files.length; i++) {
+                if (i !== index) {
+                    newDt.items.add(dt.files[i]);
+                }
+            }
+
+            dt = newDt; // 更新 DataTransfer 物件
+            attachmentsInput.files = dt.files; // 將新的檔案清單同步回 input
+
+            renderFileList(); // 重新渲染頁面
+        }
+
+        form.addEventListener('change', () => { isFormDirty = true; });
+        form.addEventListener('input', () => { isFormDirty = true; });
+        form.addEventListener('submit', () => { isFormDirty = false; });
+
         btnBack.addEventListener('click', (e) => {
             if (isFormDirty) {
                 const confirmLeave = confirm('若返回公告列表，將放棄當前的編輯，確定要離開嗎？');
                 if (!confirmLeave) {
-                    e.preventDefault(); // 使用者選擇取消，停留在原頁面
+                    e.preventDefault();
                 }
             }
         });

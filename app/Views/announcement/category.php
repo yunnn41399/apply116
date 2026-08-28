@@ -81,10 +81,23 @@
                                 </span>
                             </div>
 
-                            <!-- 右側：標題（過長自動獨佔一列並換行） -->
+                            <!-- 右側：標題（純檔案類型解析第一個附件路徑） -->
                             <div class="announcement-title-box">
-                                <?php if ($announcement['type'] === '純檔案' && !empty($announcement['attachment'])): ?>
-                                    <a href="<?= base_url($announcement['attachment']) ?>" target="_blank" rel="noopener noreferrer">
+                                <?php 
+                                    $fileUrl = '#';
+                                    if ($announcement['type'] === '純檔案' && !empty($announcement['attachment'])) {
+                                        $clean = str_replace('\\', '/', $announcement['attachment']);
+                                        $decoded = json_decode($clean, true);
+                                        if (is_array($decoded) && isset($decoded[0]['path'])) {
+                                            $fileUrl = base_url($decoded[0]['path']);
+                                        } else {
+                                            $fileUrl = base_url($clean);
+                                        }
+                                    }
+                                ?>
+
+                                <?php if ($announcement['type'] === '純檔案'): ?>
+                                    <a href="<?= $fileUrl ?>" target="_blank" rel="noopener noreferrer">
                                         <i class="bi bi-file-earmark-arrow-down"></i>
                                         <?= esc($announcement['title']) ?>
                                     </a>
