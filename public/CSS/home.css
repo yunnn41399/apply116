@@ -1,6 +1,7 @@
 /* =========================================================
    Apply 116 - 首頁樣式
    ========================================================= */
+
 /* =========================================================
    1. Header
    ========================================================= */
@@ -15,8 +16,7 @@
     height: 64px;
     background-color: #0d2b4d;
     border-bottom: 3px solid #2589d8;
-    box-shadow:
-        0 2px 8px rgba(0, 40, 80, 0.18);
+    box-shadow: 0 2px 8px rgba(0, 40, 80, 0.18);
 }
 
 /* =========================================================
@@ -71,22 +71,17 @@
     font-weight: 600;
     text-decoration: none;
     white-space: nowrap;
-    transition:
-        background-color 0.2s ease,
-        color 0.2s ease,
-        border-color 0.2s ease;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
 .home-nav-link:hover {
-    background-color:
-        rgba(37, 137, 216, 0.15);
+    background-color: rgba(37, 137, 216, 0.15);
     color: #ffffff;
 }
 
 .home-nav-link.active {
     border-bottom-color: #66b8f0;
-    background-color:
-        rgba(37, 137, 216, 0.18);
+    background-color: rgba(37, 137, 216, 0.18);
     color: #ffffff;
 }
 
@@ -120,10 +115,7 @@
     font-weight: 500;
     text-decoration: none;
     white-space: nowrap;
-    transition:
-        background-color 0.2s ease,
-        color 0.2s ease,
-        border-color 0.2s ease;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
 .home-login-button:hover {
@@ -150,9 +142,7 @@
     font-weight: 600;
     text-decoration: none;
     white-space: nowrap;
-    transition:
-        background-color 0.2s ease,
-        border-color 0.2s ease;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .home-register-button:hover {
@@ -172,9 +162,6 @@
 /* =========================================================
    9. Sidebar
    ========================================================= */
-/* ---------------------------------------------------------
-   9-1. Sidebar 本體
-   --------------------------------------------------------- */
 .home-sidebar {
     position: fixed;
     top: 64px;
@@ -187,13 +174,9 @@
     overflow-y: auto;
     background-color: #ffffff;
     border-right: 1px solid #d7e2ee;
-    box-shadow:
-        2px 0 8px rgba(20, 70, 110, 0.06);
+    box-shadow: 2px 0 8px rgba(20, 70, 110, 0.06);
 }
 
-/* ---------------------------------------------------------
-   9-2. Sidebar 一般連結
-   --------------------------------------------------------- */
 .home-sidebar-link {
     display: flex;
     align-items: center;
@@ -207,9 +190,7 @@
     font-size: 15px;
     font-weight: 600;
     text-decoration: none;
-    transition:
-        background-color 0.2s ease,
-        color 0.2s ease;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .home-sidebar-link>i {
@@ -233,16 +214,10 @@
     font-weight: 700;
 }
 
-/* ---------------------------------------------------------
-   9-3. Sidebar 分類
-   --------------------------------------------------------- */
 .home-sidebar-group {
     margin-top: 4px;
 }
 
-/* ---------------------------------------------------------
-   9-4. 訊息公告專用標題列
-   --------------------------------------------------------- */
 .home-sidebar-toggle-wrapper {
     display: flex;
     align-items: stretch;
@@ -250,14 +225,9 @@
     min-height: 44px;
     border-radius: 5px;
     background-color: transparent;
-    transition:
-        background-color 0.2s ease,
-        color 0.2s ease;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-/* ---------------------------------------------------------
-   9-5. 訊息公告左側首頁連結
-   --------------------------------------------------------- */
 .home-sidebar-toggle-link {
     display: flex;
     align-items: center;
@@ -270,9 +240,7 @@
     font-size: 15px;
     font-weight: 600;
     text-decoration: none;
-    transition:
-        background-color 0.2s ease,
-        color 0.2s ease;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .home-sidebar-toggle-link .home-sidebar-toggle-content {
@@ -310,9 +278,6 @@
     color: #1877c9;
 }
 
-/* ---------------------------------------------------------
-   9-6. 訊息公告右側箭頭按鈕
-   --------------------------------------------------------- */
 .home-sidebar-toggle-button {
     display: flex;
     align-items: center;
@@ -326,9 +291,7 @@
     color: #71859a;
     font-family: inherit;
     cursor: pointer;
-    transition:
-        background-color 0.2s ease,
-        color 0.2s ease;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .home-sidebar-toggle-link.active+.home-sidebar-toggle-button {
@@ -346,9 +309,6 @@
     color: #1266ad;
 }
 
-/* ---------------------------------------------------------
-   9-7. 一般分類展開按鈕
-   --------------------------------------------------------- */
 .home-sidebar-toggle {
     display: flex;
     align-items: center;
@@ -366,9 +326,7 @@
     font-weight: 600;
     text-align: left;
     cursor: pointer;
-    transition:
-        background-color 0.2s ease,
-        color 0.2s ease;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .home-sidebar-toggle:hover {
@@ -403,16 +361,11 @@
     color: #1877c9;
 }
 
-/* ---------------------------------------------------------
-   9-8. 分類箭頭
-   --------------------------------------------------------- */
 .home-sidebar-arrow {
     flex-shrink: 0;
     color: #71859a;
     font-size: 13px;
-    transition:
-        transform 0.2s ease,
-        color 0.2s ease;
+    transition: transform 0.2s ease, color 0.2s ease;
 }
 
 .home-sidebar-toggle:hover .home-sidebar-arrow,
@@ -424,9 +377,6 @@
     color: #1877c9;
 }
 
-/* ---------------------------------------------------------
-   9-9. 分類展開狀態
-   --------------------------------------------------------- */
 .home-sidebar-group.open .home-sidebar-arrow {
     transform: rotate(180deg);
 }
@@ -443,30 +393,19 @@
     color: #1877c9;
 }
 
-/* ---------------------------------------------------------
-   9-10. 子選單
-   --------------------------------------------------------- */
 .home-sidebar-submenu {
     max-height: 0;
     overflow: hidden;
     margin-left: 14px;
     opacity: 0;
-    transition:
-        max-height 0.25s ease,
-        opacity 0.2s ease;
+    transition: max-height 0.25s ease, opacity 0.2s ease;
 }
 
-/* ---------------------------------------------------------
-   9-11. 子選單展開
-   --------------------------------------------------------- */
 .home-sidebar-group.open .home-sidebar-submenu {
     max-height: 300px;
     opacity: 1;
 }
 
-/* ---------------------------------------------------------
-   9-12. 子選單連結
-   --------------------------------------------------------- */
 .home-sidebar-sublink {
     position: relative;
     display: block;
@@ -477,14 +416,9 @@
     font-size: 14px;
     font-weight: 500;
     text-decoration: none;
-    transition:
-        background-color 0.2s ease,
-        color 0.2s ease;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-/* ---------------------------------------------------------
-   9-13. 子選單圓點
-   --------------------------------------------------------- */
 .home-sidebar-sublink::before {
     content: "";
     position: absolute;
@@ -495,8 +429,7 @@
     border-radius: 50%;
     background-color: #9fb5c9;
     transform: translateY(-50%);
-    transition:
-        background-color 0.2s ease;
+    transition: background-color 0.2s ease;
 }
 
 .home-sidebar-sublink:hover {
@@ -518,9 +451,6 @@
     background-color: #2589d8;
 }
 
-/* ---------------------------------------------------------
-   9-14. Sidebar 滾動條
-   --------------------------------------------------------- */
 .home-sidebar::-webkit-scrollbar {
     width: 6px;
 }
@@ -549,13 +479,156 @@
 }
 
 /* =========================================================
-   11. Tablet
+   11. 首頁跑馬燈（右至左無縫滑動）
+   ========================================================= */
+.home-marquee-wrapper {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+    white-space: nowrap;
+}
+
+.home-marquee-content {
+    display: inline-block;
+    white-space: nowrap;
+    padding-left: 100%;
+    animation: marquee-slide 15s linear infinite;
+}
+
+.home-marquee-wrapper:hover .home-marquee-content {
+    animation-play-state: paused;
+}
+
+@keyframes marquee-slide {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+    100% {
+        transform: translate3d(-100%, 0, 0);
+    }
+}
+
+/* =========================================================
+   12. 公告項目配置（左側雙行:日期/分類，右側/下排:標題）
+   ========================================================= */
+.announcement-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid #e8f0f8;
+    transition: background-color 0.2s ease;
+}
+
+.announcement-row:last-child {
+    border-bottom: none;
+}
+
+.announcement-row:hover {
+    background-color: #f7fbff;
+}
+
+/* 左側邊欄：固定寬度放置日期與類別 */
+.announcement-left-meta {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 140px;
+    flex-shrink: 0;
+    gap: 3px;
+}
+
+.announcement-meta-date {
+    font-size: 14px;
+    font-weight: 600;
+    color: #536b82;
+}
+
+.announcement-meta-category {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1877c9;
+}
+
+/* 右側標題：彈性伸展，若太長會自動移至下一行獨佔換行 */
+.announcement-title-box {
+    flex: 1 1 320px;
+    padding-left: 10px;
+    word-break: break-word;
+}
+
+.announcement-title-box a {
+    color: #173b63;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    line-height: 1.5;
+    transition: color 0.2s ease;
+}
+
+.announcement-title-box a:hover {
+    color: #1877c9;
+    text-decoration: underline;
+}
+
+.announcement-title-box a i {
+    margin-right: 5px;
+    color: #1877c9;
+}
+
+/* =========================================================
+   13. 分頁器 (Pagination)
+   ========================================================= */
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 25px;
+}
+
+.pagination-container a,
+.pagination-container span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 36px;
+    height: 36px;
+    padding: 0 12px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid #d7e2ee;
+    background-color: #ffffff;
+    color: #263f59;
+    transition: all 0.2s ease;
+}
+
+.pagination-container a:hover {
+    border-color: #1877c9;
+    color: #1877c9;
+    background-color: #eef7ff;
+}
+
+.pagination-container .active,
+.pagination-container li.active a {
+    background-color: #1877c9;
+    color: #ffffff;
+    border-color: #1877c9;
+}
+
+.pagination-container .disabled {
+    color: #9fb5c9;
+    border-color: #eef2f6;
+    background-color: #f8fafc;
+    cursor: not-allowed;
+}
+
+/* =========================================================
+   14. 響應式 - Tablet
    ========================================================= */
 @media (max-width: 1100px) {
-
-    /* ----------------------------------------
-       Header
-       ---------------------------------------- */
     .home-header-title {
         padding-left: 22px;
         padding-right: 12px;
@@ -585,9 +658,6 @@
         font-size: 13px;
     }
 
-    /* ----------------------------------------
-       Sidebar
-       ---------------------------------------- */
     .home-sidebar {
         width: 210px;
     }
@@ -596,9 +666,6 @@
         margin-left: 210px;
     }
 
-    /* ----------------------------------------
-       內容
-       ---------------------------------------- */
     .home-content {
         width: 94%;
         padding-top: 30px;
@@ -606,13 +673,9 @@
 }
 
 /* =========================================================
-   12. 小型 Tablet / 大手機
+   15. 響應式 - 小型 Tablet / 大手機
    ========================================================= */
 @media (max-width: 850px) {
-
-    /* ----------------------------------------
-       Header
-       ---------------------------------------- */
     .home-header {
         height: 60px;
     }
@@ -643,9 +706,6 @@
         font-size: 12px;
     }
 
-    /* ----------------------------------------
-       Sidebar
-       ---------------------------------------- */
     .home-sidebar {
         top: 60px;
         width: 195px;
@@ -659,21 +719,14 @@
 }
 
 /* =========================================================
-   13. Mobile
+   16. 響應式 - Mobile
    ========================================================= */
 @media (max-width: 600px) {
-
-    /* ----------------------------------------
-       Header
-       ---------------------------------------- */
     .home-header {
         height: 58px;
         border-bottom-width: 2px;
     }
 
-    /* ----------------------------------------
-       網站名稱
-       ---------------------------------------- */
     .home-header-title {
         padding-left: 14px;
         padding-right: 8px;
@@ -684,9 +737,6 @@
         letter-spacing: 0.5px;
     }
 
-    /* ----------------------------------------
-       Navbar
-       ---------------------------------------- */
     .home-nav {
         margin-left: 4px;
         overflow-x: auto;
@@ -698,9 +748,6 @@
         font-size: 13px;
     }
 
-    /* ----------------------------------------
-       Header 右側
-       ---------------------------------------- */
     .home-header-right {
         gap: 5px;
         margin-left: 5px;
@@ -713,34 +760,36 @@
         font-size: 12px;
     }
 
-    /* ----------------------------------------
-       Sidebar
-       ---------------------------------------- */
     .home-sidebar {
         display: none;
     }
 
-    /* ----------------------------------------
-       Main
-       ---------------------------------------- */
     .home-main {
         width: 100%;
         margin-left: 0;
         padding-top: 58px;
     }
 
-    /* ----------------------------------------
-       Content
-       ---------------------------------------- */
     .home-content {
         width: calc(100% - 24px);
         max-width: none;
         padding: 24px 0 40px;
     }
+
+    .announcement-left-meta {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-bottom: 6px;
+    }
+
+    .announcement-title-box {
+        padding-left: 0;
+    }
 }
 
 /* =========================================================
-   14. Very Small Mobile
+   17. 響應式 - Very Small Mobile
    ========================================================= */
 @media (max-width: 400px) {
     .home-header-title a {
