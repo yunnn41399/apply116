@@ -28,17 +28,25 @@
                 </p>
             </section>
             <section class="system-info-card">
-                <div class="system-info-empty">
-                    <i class="bi bi-info-circle"></i>
-                    <div class="system-info-empty-content">
-                        <strong>
-                            <?= esc($emptyMessage) ?>
-                        </strong>
-                        <p>
-                            <?= esc($emptyHint) ?>
-                        </p>
+                <?php if (isset($pageState) && $pageState['status'] !== 'open' && !empty($pageState['message'])): ?>
+                    <!-- 頁面尚未開放或已結束時顯示後臺設定的提醒文字 -->
+                    <div class="system-info-empty">
+                        <i class="bi bi-info-circle"></i>
+                        <div class="system-info-empty-content">
+                            <strong>系統提醒</strong>
+                            <p><?= esc($pageState['message']) ?></p>
+                        </div>
                     </div>
-                </div>
+                <?php else: ?>
+                    <!-- 頁面開放時顯示的原本內容 -->
+                    <div class="system-info-empty">
+                        <i class="bi bi-info-circle"></i>
+                        <div class="system-info-empty-content">
+                            <strong><?= esc($emptyMessage ?? '系統尚未開放') ?></strong>
+                            <p><?= esc($emptyHint ?? '目前尚無資料。') ?></p>
+                        </div>
+                    </div>
+                <?php endif; ?>
             </section>
         </div>
     </main>

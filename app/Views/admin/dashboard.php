@@ -70,7 +70,7 @@
                 <div class="apply-card-description">查詢考生報名資料</div>
             </a>
 
-            <a href="#" class="apply-card">
+            <a href="<?= site_url('admin/homepage-pages') ?>" class="apply-card">
                 <div class="apply-card-icon">
                     <i class="bi bi-layout-text-window-reverse"></i>
                 </div>
