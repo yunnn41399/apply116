@@ -38,8 +38,21 @@
                 </h1>
 
                 <!-- 元資料：日期與分類 -->
-                <div style="display: flex; gap: 12px; align-items: center; color: #64748b; font-size: 0.9rem; border-bottom: 1px solid #e2e8f0; padding-bottom: 16px; margin-bottom: 20px;">
+                <div style="display: flex; gap: 12px; align-items: center; color: #64748b; font-size: 0.9rem; border-bottom: 1px solid #e2e8f0; padding-bottom: 16px; margin-bottom: 20px; flex-wrap: wrap;">
                     <span><i class="bi bi-calendar3"></i> 發布日期：<?= esc(date('Y/m/d', strtotime($announcement['publish_date'] ?? 'now'))) ?></span>
+                    
+                    <!-- 判斷是否有更新日期 (更新時間晚於發布時間 60 秒以上) -->
+                    <?php 
+                        $publishTime = strtotime($announcement['publish_date'] ?? '');
+                        $updatedTime = strtotime($announcement['updated_at'] ?? '');
+                        $isUpdated   = ($updatedTime && $publishTime && ($updatedTime - $publishTime > 60));
+                    ?>
+
+                    <?php if ($isUpdated): ?>
+                        <span>•</span>
+                        <span style="color: #ea580c; font-weight: 500;"><i class="bi bi-clock-history"></i> 更新日期：<?= esc(date('Y/m/d', $updatedTime)) ?></span>
+                    <?php endif; ?>
+
                     <span>•</span>
                     <span><i class="bi bi-tag"></i> 分類：<?= esc($announcement['category']) ?></span>
                 </div>
