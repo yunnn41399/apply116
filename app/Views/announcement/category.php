@@ -72,11 +72,19 @@
                 <section class="system-info-card" style="padding: 0; overflow: hidden;">
                     <?php foreach ($announcements as $announcement): ?>
                         <div class="announcement-row">
-                            <!-- 左側：第一列日期，第二列公告類別 -->
+                            <!-- 左側：第一列更新標籤，第二列原先發佈日期，第三列公告類別 -->
                             <div class="announcement-left-meta">
+                                <!-- 若有更新，顯示更新標籤在上面 -->
+                                <?php if (!empty($announcement['updated_at']) && !empty($announcement['publish_date']) && strtotime($announcement['updated_at']) > strtotime($announcement['publish_date'])): ?>
+                                    <span class="announcement-badge-updated">更新！</span>
+                                <?php endif; ?>
+
+                                <!-- 原先發佈日期 -->
                                 <span class="announcement-meta-date">
                                     <?= esc(date('Y/m/d', strtotime($announcement['publish_date']))) ?>
                                 </span>
+
+                                <!-- 公告類別 -->
                                 <span class="announcement-meta-category">
                                     <?= esc($announcement['category']) ?>
                                 </span>
