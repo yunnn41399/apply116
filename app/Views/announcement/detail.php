@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="<?= base_url('CSS/common.css') ?>">
     <link rel="stylesheet" href="<?= base_url('CSS/home.css') ?>">
     <link rel="stylesheet" href="<?= base_url('CSS/system-info.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('CSS/apply.css') ?>">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 </head>
 <body>
@@ -14,7 +15,7 @@
     <?= $this->include('Layout/sidebar') ?>
 
     <main class="home-main">
-        <div class="home-content">
+        <div class="home-content" style="padding-bottom: 20px">
             
             <!-- 動態跑馬燈 -->
             <?php if (!empty($marquee)): ?>
@@ -74,6 +75,14 @@
                     <i class="bi bi-arrow-left"></i> 返回公告列表
                 </a>
             </div>
+
+            <footer class="apply-footer">
+                服務時間：平日(周一至周五)：上午8:00~12:00；下午13:00~17:00。例假日及國定假日暫停服務。
+                <br>
+                621301嘉義縣民雄鄉大學路一段168號 (05)2721799
+                <br>
+                Copyright by CAC. All rights reserved.
+            </footer>
 
         </div>
     </main>
