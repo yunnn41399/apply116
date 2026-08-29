@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= esc($category) ?> - 訊息公告</title>
+    <title>Apply116 - <?= esc($category) ?></title>
     <link rel="stylesheet" href="<?= base_url('CSS/common.css') ?>">
     <link rel="stylesheet" href="<?= base_url('CSS/home.css') ?>">
     <link rel="stylesheet" href="<?= base_url('CSS/system-info.css') ?>">
