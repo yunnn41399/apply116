@@ -162,7 +162,7 @@ class Announcement extends BaseController
         $announcements = $this->announcementModel
             ->where('category', $categoryName)
             ->where('status', 'published')
-            ->orderBy('publish_date', 'DESC')
+            ->orderBy('updated_at', 'DESC')
             ->paginate(10);
 
         // Navbar
@@ -557,7 +557,13 @@ class Announcement extends BaseController
             }
         }
 
-        $publishDate = ($status === 'published') ? date('Y-m-d H:i:s') : null;
+        if (!empty($announcement['publish_date'])) {
+            $publishDate = $announcement['publish_date'];
+        } elseif ($status === 'published') {
+            $publishDate = date('Y-m-d H:i:s');
+        } else {
+            $publishDate = null;
+        }
 
         $data = [
             'title'        => trim($this->request->getPost('title')),
