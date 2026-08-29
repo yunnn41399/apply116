@@ -27,7 +27,7 @@ class HomeController extends BaseController
         // 取得發布狀態的公告並進行分頁
         $announcements = $this->announcementModel
             ->where('status', 'published')
-            ->orderBy('publish_date', 'DESC')
+            ->orderBy('updated_at', 'DESC')
             ->paginate($perPage);
 
         // 取得 Navbar 頁面設定
