@@ -14,13 +14,13 @@
 # ENVIRONMENT
 #--------------------------------------------------------------------
 
-# CI_ENVIRONMENT = production
+CI_ENVIRONMENT = development
 
 #--------------------------------------------------------------------
 # APP
 #--------------------------------------------------------------------
 
-# app.baseURL = ''
+app.baseURL = 'http://localhost:8080/'
 # If you have trouble with `.`, you could also use `_`.
 # app_baseURL = ''
 # app.forceGlobalSecureRequests = false
@@ -29,6 +29,9 @@
 #--------------------------------------------------------------------
 # DATABASE
 #--------------------------------------------------------------------
+# 本專案使用 SQLite3，資料庫檔案會由 Database.php
+# 自動設定為 writable/apply116.sqlite
+# 因此不需要在此設定 database.default.database。
 
 # database.default.hostname = localhost
 # database.default.database = ci4
@@ -67,3 +70,21 @@
 #--------------------------------------------------------------------
 
 # logger.threshold = 4
+
+#--------------------------------------------------------------------
+# PROJECT SETTINGS
+#--------------------------------------------------------------------
+
+# Default administrator
+ADMIN_DEFAULT_USERNAME = <請填入預設最高管理員帳號>
+ADMIN_DEFAULT_PASSWORD = <請填入預設最高管理員密碼>
+ADMIN_DEFAULT_EMAIL = "<請填入預設最高管理員電子信箱>"
+
+# Email settings for password reset
+email.fromName = "Apply116 後臺管理"
+email.protocol = smtp
+email.SMTPHost = smtp.gmail.com
+email.SMTPUser = "<請填入忘記密碼功能使用的寄件信箱>"
+email.SMTPPass = "<請填入該 Gmail 帳號的 Google App Password>"
+email.SMTPPort = 587
+email.SMTPCrypto = tls
