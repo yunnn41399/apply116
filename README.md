@@ -99,7 +99,7 @@ git clone https://github.com/yunnn41399/apply116.git
 進入專案目錄：
 
 ```bash
-cd <專案資料夾名稱>
+cd apply116
 ```
 
 ---
@@ -393,7 +393,7 @@ php spark serve
 成功啟動後，開啟：
 
 ```text
-http://localhost:8080/
+http://localhost:8080
 ```
 
 即可進入網站。
@@ -406,7 +406,7 @@ http://localhost:8080/
 
 ```bash
 git clone https://github.com/yunnn41399/apply116.git
-cd <專案資料夾名稱>
+cd apply116
 
 composer install
 
