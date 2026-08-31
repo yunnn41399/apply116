@@ -50,6 +50,14 @@ class AdminAuth extends BaseController
     // 管理員登入頁面
     public function login()
     {
+        // 進入管理員登入頁時，自動清除考生 Session
+        session()->remove([
+            'candidate_id',
+            'exam_number',
+            'candidate_name',
+            'isLoggedIn',
+        ]);
+
         // 若已登入
         if (session()->get('admin_logged_in')) {
 
@@ -166,6 +174,14 @@ class AdminAuth extends BaseController
 
         // 登入成功後重新產生 Session ID
         session()->regenerate();
+
+        // 先清除可能殘留的考生 Session
+        session()->remove([
+            'candidate_id',
+            'exam_number',
+            'candidate_name',
+            'isLoggedIn',
+        ]);
 
         // 建立管理員登入 Session
         session()->set([

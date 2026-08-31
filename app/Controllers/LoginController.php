@@ -7,6 +7,16 @@ class LoginController extends BaseController
 {
     public function index()
     {
+        // 進入考生登入頁時，自動清除管理員 Session（避免兩者身分衝突）
+        session()->remove([
+            'admin_logged_in',
+            'admin_id',
+            'admin_username',
+            'admin_name',
+            'admin_role',
+            'admin_must_change_password',
+        ]);
+
         // 產生 4 位數英數驗證碼
         $captcha = strtoupper(substr(str_shuffle('ABCDEFGHJKLMNPQRSTUVWXYZ23456789'), 0, 4));
         // 將驗證碼存入 Session
@@ -68,6 +78,17 @@ class LoginController extends BaseController
             return redirect()->back()
                 ->with('error', '驗證碼錯誤。');
         }
+        
+        // 驗證成功，登入考生前先清除可能殘留的管理員 Session
+        session()->remove([
+            'admin_logged_in',
+            'admin_id',
+            'admin_username',
+            'admin_name',
+            'admin_role',
+            'admin_must_change_password',
+        ]);
+
         //登入成功
         session()->set([
             'candidate_id' => $candidate['id'],
@@ -75,6 +96,7 @@ class LoginController extends BaseController
             'candidate_name' => $candidate['name'],
             'isLoggedIn' => true,
         ]);
+        
         session()->remove('captcha');
         return redirect()->to('/apply');
     }
