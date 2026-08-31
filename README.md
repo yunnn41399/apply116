@@ -372,14 +372,14 @@ email.SMTPCrypto = tls
 
 **請勿將實際 Gmail 密碼或 Google App Password 上傳至 GitHub。**
 
-- **Google App Password 取得方式：**
-1. 登入你拿來寄信的 Gmail。
-2. 進入 Google 帳戶的「安全性」。
-3. 確認該帳號已開啟 兩步驟驗證。
-4. 找「[應用程式密碼](https://myaccount.google.com/apppasswords)」。  
-5. 建立一組新的應用程式密碼，例如名稱可以填：Apply116。
-6. Google 會產生一組 16 位元的應用程式密碼。
-7. 複製 16 位元的應用程式密碼後，刪除中間的空格，貼到 `email.SMTPPass = ` 的後方。
+> **Google App Password 取得方式：**
+> 1. 登入負責寄送後臺管理員忘記密碼信件的 Gmail 帳號。
+> 2. 進入該 Google 帳戶的「安全性」。
+> 3. 確認該帳號已開啟 兩步驟驗證。
+> 4. 找「[應用程式密碼](https://myaccount.google.com/apppasswords)」。  
+> 5. 建立一組新的應用程式密碼，例如名稱可以填：Apply116。
+> 6. Google 會產生一組 16 位元的應用程式密碼。
+> 7. 複製 16 位元的應用程式密碼後，刪除中間的空格，貼到 `email.SMTPPass = ` 的後方。
 ---
 
 # 啟動網站
