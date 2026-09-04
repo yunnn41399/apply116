@@ -28,7 +28,7 @@
             報名資料
         </a>
 
-        <a href="#" class="apply-nav-link">
+        <a href="<?= site_url('admin/homepage-pages') ?>" class="apply-nav-link <?= url_is('admin/homepage-pages*') ? 'active' : '' ?>">
             首頁管理
         </a>
     </nav>

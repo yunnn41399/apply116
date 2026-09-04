@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apply 116 - 訊息公告</title>
+    <title>Apply116 - <?= esc($category) ?></title>
     <link rel="stylesheet" href="<?= base_url('CSS/common.css') ?>">
     <link rel="stylesheet" href="<?= base_url('CSS/home.css') ?>">
     <link rel="stylesheet" href="<?= base_url('CSS/system-info.css') ?>">
@@ -20,11 +20,11 @@
             <!-- 頁面標題區塊 -->
             <section class="system-info-header">
                 <h2>
-                    <i class="bi bi-megaphone"></i>
-                    訊息公告
+                    <i class="bi bi-tag"></i>
+                    <?= esc($category) ?>
                 </h2>
                 <p>
-                    提供最新招生訊息、重要日程及相關公告事項，請考生密切注意。
+                    提供分類「<?= esc($category) ?>」相關最新消息與重要公告。
                 </p>
             </section>
 
@@ -61,7 +61,7 @@
                 <div class="system-info-empty">
                     <i class="bi bi-info-circle"></i>
                     <div class="system-info-empty-content">
-                        <strong>目前沒有公告</strong>
+                        <strong>目前沒有「<?= esc($category) ?>」相關公告</strong>
                         <p>最新公告事項將會在此處發布，請隨時留意。</p>
                     </div>
                 </div>
@@ -131,7 +131,7 @@
 
                         <!-- 上一頁 -->
                         <?php if ($currentPage > 1): ?>
-                            <a href="<?= site_url('?page=' . ($currentPage - 1)) ?>">
+                            <a href="<?= site_url('announcement/category/' . $categoryId . '?page=' . ($currentPage - 1)) ?>">
                                 &lt;
                             </a>
                         <?php endif; ?>
@@ -165,7 +165,7 @@
                             <?php elseif ($p == $currentPage): ?>
                                 <span class="active"><?= $p ?></span>
                             <?php else: ?>
-                                <a href="<?= site_url('?page=' . $p) ?>">
+                                <a href="<?= site_url('announcement/category/' . $categoryId . '?page=' . $p) ?>">
                                     <?= $p ?>
                                 </a>
                             <?php endif; ?>
@@ -173,7 +173,7 @@
 
                         <!-- 下一頁 -->
                         <?php if ($currentPage < $totalPages): ?>
-                            <a href="<?= site_url('?page=' . ($currentPage + 1)) ?>">
+                            <a href="<?= site_url('announcement/category/' . $categoryId . '?page=' . ($currentPage + 1)) ?>">
                                 &gt;
                             </a>
                         <?php endif; ?>
@@ -190,6 +190,7 @@
                 <br>
                 Copyright by CAC. All rights reserved.
             </footer>
+
         </div>
     </main>
     <script src="<?= base_url('JS/sidebar.js') ?>"></script>

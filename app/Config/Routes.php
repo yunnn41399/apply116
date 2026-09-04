@@ -117,12 +117,29 @@ $routes->group('admin', ['filter' => 'adminAuth'], function ($routes) {
     $routes->post('announcement/edit/(:num)', 'Announcement::edit/$1');
 
     $routes->post('announcement/delete/(:num)', 'Announcement::delete/$1');
+
+
+    // 首頁管理
+    $routes->get('homepage-pages', 'HomepagePageManagement::index');
+    $routes->get('homepage-pages/edit/(:num)', 'HomepagePageManagement::edit/$1');
+    $routes->post('homepage-pages/update/(:num)', 'HomepagePageManagement::update/$1');
+
+    $routes->get('homepage-page-groups/edit/(:num)', 'HomepagePageGroupManagement::edit/$1');
+    $routes->post('homepage-page-groups/update/(:num)', 'HomepagePageGroupManagement::update/$1');
+
+    // 跑馬燈管理
+    $routes->get('homepage-marquees', 'HomepageMarqueeManagement::index');
+    $routes->get('homepage-marquees/create','HomepageMarqueeManagement::create');
+    $routes->post('homepage-marquees/store', 'HomepageMarqueeManagement::store');
+    $routes->get('homepage-marquee/edit/(:num)', 'HomepagePageManagement::marqueeEdit/$1');
+    $routes->post('homepage-marquee/update/(:num)', 'HomepagePageManagement::marqueeUpdate/$1');
 });
 
 
 // 前台公告
 $routes->get('/announcement', 'Announcement::index');
 $routes->get('/announcement/(:num)', 'Announcement::detail/$1');
+$routes->get('announcement/category/(:num)', 'Announcement::category/$1');
 
 // 考生註冊
 $routes->get('/register', 'Register::index');
