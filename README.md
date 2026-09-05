@@ -498,16 +498,13 @@ apply116/
 # 注意事項
 
 1. 第一次 Clone 專案後，需要自行建立 `.env`。
-2. `.env` 不得提交至 GitHub。
-3. 本專案使用 SQLite3，資料庫檔案位於 `writable/apply116.sqlite`。
-4. 第一次建立本機環境時，需要執行 Migration。
-5. 第一次建立本機環境時，需要依需求執行各 Seeder。
-6. 校系查詢功能需要啟用 PHP `zip` Extension。
-7. 使用公告附件上傳功能前，需要將 `php.ini` 的 `upload_max_filesize` 設定為 `10M`，並將 `post_max_size` 設定為 `12M`。
-8. 使用忘記密碼功能前，需要正確設定 Gmail SMTP 及 Google App Password。
-9. `vendor/` 不需要提交至 GitHub，Clone 後執行 `composer install` 即可重新建立。
-10. 使用 GitHub 協作時，修改程式前建議先執行 `git pull`。
-11. 若 `git pull` 後發生 Merge Conflict，請先處理衝突並確認程式可以正常執行，再進行 Commit 及 Push。
+2. 本專案使用 SQLite3，資料庫檔案位於 `writable/apply116.sqlite`。
+3. 第一次建立本機環境時，需要執行 Migration。
+4. 第一次建立本機環境時，需要依需求執行各 Seeder。
+5. 校系查詢功能需要啟用 PHP `zip` Extension。
+6. 使用公告附件上傳功能前，需要將 `php.ini` 的 `upload_max_filesize` 設定為 `10M`，並將 `post_max_size` 設定為 `12M`。
+7. 使用忘記密碼功能前，需要正確設定 Gmail SMTP 及 Google App Password。
+8. Clone 專案後，請執行 `composer install` 即可建立 `vendor/`。
 
 ---
 
