@@ -458,14 +458,14 @@ apply116/
 │   ├── CSS/
 │   ├── JS/
 │   └── uploads/
+│       └──announcements/
 │
 ├── system/
 │
 ├── writable/
 │   ├── cache/
 │   ├── logs/
-│   ├── session/
-│   └── uploads/
+│   └── session/
 │
 ├── tests/
 │
@@ -489,6 +489,7 @@ apply116/
 | `app/Services/`            | 系統功能服務及共用邏輯        |
 | `app/Views/`               | 網頁畫面               |
 | `public/`                  | 網站公開資源             |
+| `public/uploads/announcements/` | 儲存後臺上傳的公告附件檔案 |
 | `system/`                  | CodeIgniter 4 核心系統 |
 | `writable/`                | 系統執行時產生及寫入的資料      |
 | `tests/`                   | 測試相關檔案             |
