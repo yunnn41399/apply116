@@ -29,6 +29,7 @@ class DepartmentModel extends Model
     protected array $castHandlers = [];
     // Dates
     protected $useTimestamps = false;
+
     // Validation
     protected $validationRules = [];
     protected $validationMessages = [];
